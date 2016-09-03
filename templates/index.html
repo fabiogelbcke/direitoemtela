@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div>
+    <div class="navbar w-nav" data-animation="over-right" data-collapse="tiny" data-duration="400" data-ix="navbar">
+      <div class="header-content w-container">
+        <a class="logo w-nav-brand" href="index.html"><img class="logo-home" height="44" src="{% static 'images/DETWHITE.png'%}">
+        </a>
+        <nav class="nav-menu w-nav-menu" role="navigation"><a class="nav-link w-nav-link" href="index.html">INÍCIO</a><a class="nav-link w-nav-link" href="category-page.html">VÍDEO-AULAS</a><a class="nav-link w-nav-link" href="about.html">Quem somos?</a><a class="close-x w-hidden-main w-hidden-medium w-hidden-small" href="#">×</a>
+        </nav>
+        <div class="menu-button w-clearfix w-hidden-main w-hidden-medium w-hidden-small w-nav-button">
+          <div class="menu-icon w-icon-nav-menu"></div>
+          <div class="menu-link">MENU</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-section">
+      <div class="hero-content w-container">
+        <div class="hero-heading" data-ix="hero-text">Direito ao alcance de todos.</div>
+        <div class="hero-subheading" data-ix="hero-text-2">O Direito em tela traz a universidade para dentro do seu computador</div>
+        <div>
+          <div class="w-form">
+            <form class="search-form" data-ix="hero-button" data-name="Email Form 2" id="email-form-2" name="email-form-2">
+              <div class="search-row w-row">
+                <div class="search-bar-column w-col w-col-11 w-col-small-11">
+                  <div class="search-bar-div">
+                    <a class="mobile-search-button w-button" href="#"></a>
+                    <input class="search-input w-input" data-name="query" id="query" maxlength="256" name="query" placeholder="Procure por aulas ou assuntos" type="text">
+                  </div>
+                </div>
+                <div class="search-button-column w-col w-col-1 w-col-small-1">
+                  <input class="button hidden-mobile w-button" data-wait="Please wait..." type="submit" value="Buscar">
+                </div>
+              </div>
+            </form>
+            <div class="w-form-done">
+              <div>Thank you! Your submission has been received!</div>
+            </div>
+            <div class="w-form-fail">
+              <div>Oops! Something went wrong while submitting the form</div>
+            </div>
+          </div>
+        </div><a class="button w-button" data-ix="hero-button" href="#Latest-post">Ver Catálogo de Cursos</a>
+      </div>
+    </div>
+    <div class="bottom-padding main-section" id="posts">
+      <div class="hidden w-container" id="Latest-post">
+        <div class="section-heading">
+          <h2 class="section-title">Cursos Populares</h2>
+          <div class="med-divider"></div>
+        </div>
+        <div>
+          <div class="popular-video"></div>
+          <div class="popular-video"></div>
+        </div>
+      </div>
+      <div class="w-container">
+        <div class="section-heading">
+          <h2 class="section-title">Cursos Completos</h2>
+          <div class="med-divider"></div>
+        </div>
+        <div class="w-dyn-list">
+          <div class="w-clearfix w-dyn-items w-row">
+            <div class="blog-thumbnail w-col w-col-4 w-dyn-item">
+              <a class="thumbnail-wrapper w-inline-block" data-ix="blog-thumbnail">
+                <div class="image-wrapper">
+                  <div class="thumbnail-image"></div>
+                </div>
+                <div class="thumbnail-text">
+                  <div class="blog-title"></div>
+                  <div class="preview-text"></div>
+                </div>
+                <div class="thumb-details w-clearfix"><img class="author-img">
+                  <div class="author-title"></div>
+                  <div class="thumbnail-date"></div>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="w-dyn-empty">
+            <p>No items found.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endblock %}
