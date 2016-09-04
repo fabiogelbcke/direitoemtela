@@ -28,7 +28,24 @@
 {% block hiddencontent %}
 {% endblock %}
 <body>
-{% block content %}
+  {% block content %}
+  {% block header %}
+  <div class="navbar w-nav" data-animation="over-right" data-collapse="tiny" data-duration="400" data-ix="navbar">
+      <div class="header-content w-container">
+        <a class="logo w-nav-brand" href="index.html"><img class="logo-home" height="44" src="{% static 'images/DETWHITE.png'%}">
+        </a>
+        <nav class="nav-menu w-nav-menu"
+        role="navigation"><a class="nav-link w-nav-link"
+        href="{% url 'index' %}">INÍCIO</a><a class="nav-link w-nav-link"
+        href="{% url 'categories' %}">VÍDEO-AULAS</a><a class="nav-link w-nav-link" href="{% url 'about' %}">Quem somos?</a><a class="close-x w-hidden-main w-hidden-medium w-hidden-small" href="#">×</a>
+        </nav>
+        <div class="menu-button w-clearfix w-hidden-main w-hidden-medium w-hidden-small w-nav-button">
+          <div class="menu-icon w-icon-nav-menu"></div>
+          <div class="menu-link">MENU</div>
+        </div>
+      </div>
+    </div>
+  {% endblock %}
 {% endblock %}
 {% block footer %}
     <div class="dark main-section">
@@ -42,12 +59,6 @@
             <input class="field w-input" data-name="Email" id="email" maxlength="256" name="email" placeholder="Qual é seu endereço de email?" required="required" type="email">
             <input class="submit-button w-button" data-wait="Please wait..." type="submit" value="Enviar">
           </form>
-          <div class="success-message w-form-done">
-            <p>Thank you! Your submission has been received!</p>
-          </div>
-          <div class="w-form-fail">
-            <p>Oops! Something went wrong while submitting the form</p>
-          </div>
         </div>
       </div>
       <div class="footer-section">
@@ -55,7 +66,7 @@
           <div class="w-row">
             <div class="logo-footer w-col w-col-4 w-col-small-4"><img class="logo-home" height="44" src="{% static 'images/DETWHITE.png'%}">
             </div>
-            <div class="footer-links w-col w-col-8 w-col-small-8"><a class="footer-link" href="index.html">Início</a><a class="footer-link" href="categories.html">Video-aulas</a><a class="footer-link" href="about.html">sobre</a>
+            <div class="footer-links w-col w-col-8 w-col-small-8"><a class="footer-link" href="{% url 'index' %}">Início</a><a class="footer-link" href="{% url 'categories' %}">Video-aulas</a><a class="footer-link" href="{% url 'about' %}">Sobre</a>
             </div>
           </div>
         </div>

@@ -8,7 +8,6 @@ helpcenter/.DS_Store
 **/*.json
 **/*.pyc
 *pyc
-migrations/
 media/
 static/
 **/*~
@@ -20,3 +19,4 @@ keys*
 testfiles/
 non-git/
 *#*
+devstatic/

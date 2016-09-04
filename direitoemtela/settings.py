@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 import keys
+from easy_thumbnails.conf import Settings as thumbnail_settings
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -45,7 +46,10 @@ INSTALLED_APPS = (
     'compressor',
     'main',
     'search',
-    'videos'
+    'videos',
+    'categories',
+    'easy_thumbnails',
+    'image_cropping',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -79,9 +83,15 @@ TEMPLATE_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
     os.path.join(SITE_ROOT, 'templates'),
-    os.path.join(SITE_ROOT, 'glusers/templates'),
     os.path.join(SITE_ROOT, 'main/templates'),
     os.path.join(SITE_ROOT, 'search/templates'),
+)
+
+STATICFILES_DIRS = (
+    # Put strings here, like "/home/html/static" or "C:/www/django/static".
+    # Always use forward slashes, even on Windows.
+    # cant contain static_root
+    os.path.join(SITE_ROOT, 'devstatic/'),
 )
 
 TEMPLATE_LOADERS = (
@@ -99,6 +109,11 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'django.contrib.messages.context_processors.messages'
 )
+
+THUMBNAIL_PROCESSORS = (
+    'image_cropping.thumbnail_processors.crop_corners',
+) + thumbnail_settings.THUMBNAIL_PROCESSORS
+
 WSGI_APPLICATION = 'direitoemtela.wsgi.application'
 
 
@@ -130,6 +145,9 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+GEOIP_DATABASE = os.path.join(SITE_ROOT, 'geoip/GeoLiteCity.dat')
+GEOIPV6_DATABASE = os.path.join(SITE_ROOT, 'geoip/GeoLiteCityv6.dat')
 
 
 # Static files (CSS, JavaScript, Images)
