@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<!-- This site was created in Webflow. http://www.webflow.com-->
+<!-- Last Published: Fri Sep 16 2016 03:48:22 GMT+0000 (UTC) -->
+<html data-wf-page="57db55e63ef63fcd4307969c" data-wf-site="570ad3630dd2dc033a7a9cf9">
+<head>
+<div style="position:absolute">{% load staticfiles %}</div>
+  <meta charset="utf-8">
+  <title>Direito em Tela</title>
+  <meta content="Direito em Tela" property="og:title">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta content="Webflow" name="generator">
+  <link href="{% static 'css/normalize.css'%}" rel="stylesheet" type="text/css">
+  <link href="{% static 'css/webflow.css'%}" rel="stylesheet" type="text/css">
+  <link href="{% static 'css/direitoemtela.webflow.css'%}" rel="stylesheet" type="text/css">
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
+  <script type="text/javascript">
+    WebFont.load({
+      google: {
+        families: ["Lora:regular,italic,700","Oxygen:300,regular,700"]
+      }
+    });
+  </script>
+  <script src="{% static 'js/modernizr.js'%}" type="text/javascript"></script>
+  <link href="https://daks2k3a4ib2z.cloudfront.net/img/favicon.ico" rel="shortcut icon" type="image/x-icon">
+  <link href="https://daks2k3a4ib2z.cloudfront.net/img/webclip.png" rel="apple-touch-icon">
+</head>
+<body>
+  <div class="whole-page-div">
+    <div class="landing-page-content"><img class="logo-landing-page" height="250" src="{% static 'images/detvert.png'%}" width="250">
+      <h1 class="centered-text hidden-mobile">Em breve um novo e melhor<br>site para você</h1>
+      <h1 class="centered-text hidden-main">Em breve um<br>novo e melhor<br>site para você</h1>
+      <h3 class="centered-text hidden-mobile">Inscreva-se para receber todas as novidades <br>do Direito em Tela</h3>
+      <h3 class="centered-text hidden-main">Inscreva-se para receber <br>todas as novidades <br>do Direito em Tela</h3>
+      <div class="w-form">
+        <form class="subscribe-form" data-name="Email Form" id="email-form" name="email-form">
+          <input class="subscribe-input w-input" data-name="email" id="email-2" maxlength="256" name="email" placeholder="Digite seu email" required="required" type="email">
+          <input class="button subscribe-button w-button" data-ix="bang-loading-gavel" data-wait="Please wait..." type="submit" value="Inscrever-me">
+        </form>
+        <div class="w-form-done"></div>
+        <div class="w-form-fail">
+          <div>Oops! Something went wrong while submitting the form</div>
+        </div>
+      </div>
+      <h3 class="centered-text subscription-success">Você foi inscrito com sucesso!</h3>
+      <div class="loading-gavel"><img class="gavel-stand-img" src="{% static 'images/gavel2.png'%}" width="80"><img class="gavel-img" src="{% static 'images/gavel.png'%}" width="90">
+      </div>
+    </div>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js" type="text/javascript"></script>
+  <script src="{% static 'js/webflow.js'%}" type="text/javascript"></script>
+  <!--[if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
+</body>
+</html>

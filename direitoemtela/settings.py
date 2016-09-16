@@ -48,6 +48,7 @@ INSTALLED_APPS = (
     'search',
     'videos',
     'categories',
+    'mailing',
     'easy_thumbnails',
     'image_cropping',
 )
