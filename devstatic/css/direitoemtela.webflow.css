@@ -249,7 +249,8 @@ img {
 }
 
 .button.subscribe-button {
-  padding-right: 42px;
+  min-width: 120px;
+  padding-right: 16px;
   padding-left: 16px;
 }
 
@@ -1975,6 +1976,7 @@ img {
   background-image: linear-gradient(273deg, rgba(0, 0, 0, .21), transparent), url('../images/o-LAW-facebook-2.jpg');
   background-position: 0px 0px, 0px 0px;
   background-size: auto, cover;
+  background-attachment: scroll, fixed;
 }
 
 .whole-page-row {
@@ -1988,7 +1990,8 @@ img {
   display: -ms-flexbox;
   display: flex;
   width: 50%;
-  padding-bottom: 50px;
+  padding-top: 70px;
+  padding-bottom: 100px;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -webkit-flex-direction: column;
@@ -2039,6 +2042,8 @@ img {
 }
 
 .logo-landing-page {
+  width: 200px;
+  height: 200px;
   margin-bottom: 25px;
 }
 
@@ -2069,6 +2074,12 @@ img {
   -webkit-flex: 0 auto;
   -ms-flex: 0 auto;
   flex: 0 auto;
+}
+
+.error-msg {
+  display: none;
+  margin-top: -27px;
+  color: #d13d0e;
 }
 
 html.w-mod-js *[data-ix="navbar"] {
@@ -2118,6 +2129,11 @@ html.w-mod-js *[data-ix="view-more"] {
     padding-bottom: 11px;
     font-size: 19px;
     text-align: center;
+  }
+  .button.subscribe-button {
+    min-height: 0px;
+    min-width: 120px;
+    padding-right: 16px;
   }
   .main-section {
     padding: 0px 10px;
@@ -2308,11 +2324,16 @@ html.w-mod-js *[data-ix="view-more"] {
     text-align: left;
   }
   .whole-page-div {
-    padding-right: 2%;
-    background-position: 0px 0px, -603px 0px;
+    padding-right: 0%;
+    background-image: -webkit-linear-gradient(177deg, rgba(0, 0, 0, .21), transparent), url('../images/bglandingmobile.jpg');
+    background-image: linear-gradient(273deg, rgba(0, 0, 0, .21), transparent), url('../images/bglandingmobile.jpg');
+    background-position: 0px 0px, 0px 50%;
+    background-size: auto, cover;
+    background-attachment: scroll, fixed;
   }
   .landing-page-content {
-    padding-bottom: 222px;
+    width: 70%;
+    padding-bottom: 96px;
   }
   .subscribe-input {
     min-width: 284px;
@@ -2498,14 +2519,26 @@ html.w-mod-js *[data-ix="view-more"] {
     font-size: 14px;
     font-weight: 700;
   }
+  .whole-page-div {
+    padding-right: 0%;
+    background-attachment: scroll, fixed;
+  }
+  .landing-page-content {
+    width: 70%;
+  }
   .centered-text.hidden-main {
     display: block;
+    min-width: 321px;
   }
   .centered-text.hidden-mobile {
     display: none;
   }
   .subscribe-input {
     min-width: 197px;
+  }
+  .logo-landing-page {
+    width: 180px;
+    height: 180px;
   }
 }
 
@@ -2572,6 +2605,10 @@ html.w-mod-js *[data-ix="view-more"] {
   }
   .button.subscribe-button {
     min-height: 41px;
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 auto;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
   }
   .main-section {
     padding-right: 15px;
@@ -3023,13 +3060,31 @@ html.w-mod-js *[data-ix="view-more"] {
     display: none;
   }
   .whole-page-div {
+    min-height: 720px;
+    padding-right: 0%;
     -webkit-box-pack: center;
     -webkit-justify-content: center;
     -ms-flex-pack: center;
     justify-content: center;
-    background-image: -webkit-linear-gradient(177deg, rgba(0, 0, 0, .21), transparent), url('../images/o-LAW-facebook-2.jpg');
-    background-image: linear-gradient(273deg, rgba(0, 0, 0, .21), transparent), url('../images/o-LAW-facebook-2.jpg');
-    background-position: 0px 0px, -1038px 0px;
+    background-image: -webkit-linear-gradient(177deg, rgba(0, 0, 0, .21), transparent), url('../images/bglandingmobile.jpg');
+    background-image: linear-gradient(273deg, rgba(0, 0, 0, .21), transparent), url('../images/bglandingmobile.jpg');
+    background-position: 0px 0px, 50% 1px;
+    background-attachment: scroll, scroll;
+  }
+  .landing-page-content {
+    width: 100%;
+    min-height: 640px;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+  }
+  .centered-text.hidden-main {
+    margin-bottom: 16px;
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 auto;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
   }
   .subscribe-form {
     min-height: 80px;
@@ -3043,6 +3098,23 @@ html.w-mod-js *[data-ix="view-more"] {
     min-height: 49px;
     min-width: 285px;
     margin-right: auto;
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 auto;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+  }
+  .logo-landing-page {
+    width: 150px;
+    height: 150px;
+    min-height: 150px;
+    min-width: 150px;
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 auto;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+  }
+  .error-msg {
+    margin-top: -4px;
   }
 }
 
