@@ -9,7 +9,6 @@ helpcenter/.DS_Store
 **/*.pyc
 *pyc
 media/
-static/
 **/*~
 **/*#
 profile_images/
