@@ -32,6 +32,15 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = ['local.det.com', 'direitoemtela.com.br',]
 
+EMAIL_HOST = 'smtp.sendgrid.net'
+
+EMAIL_HOST_USER = 'direitoemtela'
+
+EMAIL_HOST_PASSWORD = keys.EMAIL_HOST_PASSWORD
+
+EMAIL_PORT = 587
+
+EMAIL_USE_TLS = True
 
 # Application definition
 
