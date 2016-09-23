@@ -16,7 +16,7 @@ def add_to_list(request):
             MailingEmail.objects.create(email=email)
         template = loader.get_template('email-mailing-list.html')
         content = template.render(Context({}))
-        subject = 'O Direito em Tela te agradece por se cadastrar!'
+        subject = 'Direito em Tela - Obrigado por se cadastrar!'
         msg = EmailMultiAlternatives(subject=subject,
                                      from_email='Equipe Direito em Tela <contato@direitoemtela.com.br>',
                                      to=[email,])
