@@ -37,7 +37,7 @@
         <nav class="nav-menu w-nav-menu"
         role="navigation"><a class="nav-link w-nav-link"
         href="{% url 'index' %}">INÍCIO</a><a class="nav-link w-nav-link"
-        href="{% url 'categories' %}">VÍDEO-AULAS</a><a class="nav-link w-nav-link" href="{% url 'about' %}">Quem somos?</a><a class="close-x w-hidden-main w-hidden-medium w-hidden-small" href="#">×</a>
+        href="{% url 'categories' %}">VÍDEO-AULAS</a><a class="nav-link w-nav-link" href="{% url 'about' %}">Quem somos</a><a class="close-x w-hidden-main w-hidden-medium w-hidden-small" href="#">×</a>
         </nav>
         <div class="menu-button w-clearfix w-hidden-main w-hidden-medium w-hidden-small w-nav-button">
           <div class="menu-icon w-icon-nav-menu"></div>
@@ -54,8 +54,9 @@
           <h2 class="white">Receba as novas aulas diretamente em seu email!</h2>
           <div class="med-divider"></div>
         </div>
-        <div class="form-wrapper w-form">
-          <form class="w-clearfix" data-name="Email Form" id="email-form" name="email-form">
+        <div class="form-wrapper">
+          <form action="{% url 'add_to_mailing_list' %}" method="POST" class="w-clearfix" data-name="Email Form" id="email-form" name="email-form">
+			{% csrf_token %}
             <input class="field w-input" data-name="Email" id="email" maxlength="256" name="email" placeholder="Qual é seu endereço de email?" required="required" type="email">
             <input class="submit-button w-button" data-wait="Please wait..." type="submit" value="Enviar">
           </form>
@@ -77,7 +78,7 @@
 {% block js %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js" type="text/javascript"></script>
 <script src="{% static 'js/webflow.js'%}" type="text/javascript"></script>
-  </div>
+
   
   <!--[if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
 {% endblock %}

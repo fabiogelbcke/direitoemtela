@@ -6,5 +6,7 @@ urlpatterns = patterns('',
                        url(r'^temas$', TemplateView.as_view(template_name='categories.html'), name='categories'),
                        url(r'^category/(?P<category_id>\d+)/(?P<page>\d+)/$',
                            views.CategoryView.as_view(), name='category_page'),
+                       url(r'^category/(?P<category_id>\d+)$',
+                           views.CategoryView.as_view(), name='category_page'),
                            
 )
