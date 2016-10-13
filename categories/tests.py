@@ -8,10 +8,10 @@ from django.core.exceptions import ValidationError
 class VideoCategorySaveTestCase(TestCase):
 
     def setUp(self):
-        video1 = Video(name='video1')
-        video2 = Video(name='video2')
-        video3 = Video(name='video3')
-        video4 = Video(name='video4')
+        video1 = Video(title='video1')
+        video2 = Video(title='video2')
+        video3 = Video(title='video3')
+        video4 = Video(title='video4')
         video1.save()
         video2.save()
         video3.save()
@@ -28,7 +28,7 @@ class VideoCategorySaveTestCase(TestCase):
         self.assertEqual(category.name, 'category')
         self.assertEqual(category2.name, 'category2')
         for counter, video in enumerate(videos):
-            self.assertEqual(video.name,
+            self.assertEqual(video.title,
                              'video' + str(counter + 1))
 
     def test_adds_correct_position_in_order(self):
@@ -39,8 +39,8 @@ class VideoCategorySaveTestCase(TestCase):
                 video=video,
                 category=category)
         for i in range(4):
-            name = 'video' + str(i + 1)
-            vidcat = VideoCategory.objects.get(video__name=name)
+            title = 'video' + str(i + 1)
+            vidcat = VideoCategory.objects.get(video__title=title)
             self.assertEqual(vidcat.position, i + 1)
 
 

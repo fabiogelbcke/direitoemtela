@@ -14,6 +14,8 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 import os
 import keys
 from easy_thumbnails.conf import Settings as thumbnail_settings
+import logging
+logging.basicConfig(filename='debug.log',level=logging.DEBUG)
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -61,6 +63,7 @@ INSTALLED_APPS = (
     'mailing',
     'easy_thumbnails',
     'image_cropping',
+    'autoupdate',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -75,6 +78,8 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
     'easy_timezones.middleware.EasyTimezoneMiddleware',
 )
+
+APPEND_SLASH = True
 
 ROOT_URLCONF = 'direitoemtela.urls'
 
@@ -156,6 +161,11 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+YOUTUBE_API_SERVICE_NAME = 'youtube'
+YOUTUBE_API_VERSION = 'v3'
+YT_CHANNEL_ID = 'UCOEfipXIvMmAHgg8XPcBtag'
+YT_KEY = keys.YT_KEY
 
 GEOIP_DATABASE = os.path.join(SITE_ROOT, 'geoip/GeoLiteCity.dat')
 GEOIPV6_DATABASE = os.path.join(SITE_ROOT, 'geoip/GeoLiteCityv6.dat')

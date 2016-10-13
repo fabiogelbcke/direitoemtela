@@ -5,7 +5,7 @@ from django.core.exceptions import ValidationError
 class VideoCategoryManager(models.Manager):
     def create_object(self, video, category,
                       position=None):
-        category_count = self.filter(category=category).count() + 1
+        """category_count = self.filter(category=category).count() + 1
         if position is None or position >= category_count:
             position = category_count
         elif position <= 0:
@@ -15,7 +15,7 @@ class VideoCategoryManager(models.Manager):
                                      position__gte=position)
             for obj in pos_change:
                 obj.position += 1
-                obj.save()
+                obj.save()"""
         vidcat = self.create(video=video,
                              category=category,
                              position=position)

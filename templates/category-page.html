@@ -3,7 +3,7 @@
 <!-- Last Published: Thu Sep 01 2016 23:21:55 GMT+0000 (UTC) -->
 <html data-wf-page="5797fc2f4cab51ad690c9d82" data-wf-site="570ad3630dd2dc033a7a9cf9">
 <head>
-<div style="position:absolute">{% load staticfiles %}</div>
+<div style="position:absolute">{% load staticfiles %}{% load cropping %}</div>
   <meta charset="utf-8">
   <title>Category Page</title>
   <meta content="Category Page" property="og:title">
@@ -40,7 +40,7 @@
     </div>
     <div class="category inner-hero">
       <div class="container">
-        <h1 class="hero-header">Direito Civil</h1>
+        <h1 class="hero-header">{{category.name}}</h1>
         <h1 class="category-subtitle hero-header">Parte Geral</h1>
       </div>
     </div>
@@ -48,231 +48,39 @@
       <div class="mid-section-container w-container">
         <div class="video-header">
           <div>
-            <div class="category-header-text"><span class="yellow-text bold-text">132</span> Vídeos em Direito Civil - Parte Geral</div>
+            <div class="category-header-text"><span class="yellow-text bold-text">{{total_videos}}</span> Vídeos em Direito Civil - Parte Geral</div>
           </div>
-          <div class="category-header-text">Página <span class="yellow-text bold-text">1</span> de <span class="yellow-text bold-text">20</span>
+          <div class="category-header-text">Página <span class="yellow-text bold-text">{{ page_obj.number }}</span> de <span class="yellow-text bold-text">{{ paginator.num_pages }}</span>
           </div>
         </div>
         <div class="hidden-mobile hidden-tablet videos-container">
+		  {% for video in videos %}
           <div class="video-div" data-ix="show-video-description">
-            <div class="video-thumbnail-div"><img class="video-thumbnail-image" src="{% static 'images/thumbnail karen.png'%}">
+            <div class="video-thumbnail-div"><img class="video-thumbnail-image" src="{% cropped_thumbnail video 'thumbnail_ratio' %}">
             </div>
             <div class="video-description-div">
               <div class="title-div">
-                <div class="lesson-number">33</div>
-                <div class="video-title">Negócios Jurídicos sem Prazo</div>
+                <div class="lesson-number">{{ forloop.counter|add:starting_index}}</div>
+                <div class="video-title">{{video.title}}</div>
               </div>
               <div class="separator"></div>
               <div class="description-div">
-                <div class="video-page-description">Nessa aula a prof. Sefora explica &nbsp;o Art. 134 do Código Civil que determina que os negócios jurídicos sem prazo são exequíveis desde logo, exceto se a execução do negócio depender de tempo ou tiver que ser feita em lugar diverso.</div>
+                <div class="video-page-description">{{video.description}}
+				</div>
               </div>
             </div>
           </div>
-          <div class="video-div" data-ix="show-video-description">
-            <div class="video-thumbnail-div"><img class="video-thumbnail-image" src="{% static 'images/thumbnail karen.png'%}">
-            </div>
-            <div class="video-description-div">
-              <div class="title-div">
-                <div class="lesson-number">33</div>
-                <div class="video-title">Negócios Jurídicos sem Prazo</div>
-              </div>
-              <div class="separator"></div>
-              <div class="description-div">
-                <div class="video-page-description">Nessa aula a prof. Sefora explica &nbsp;o Art. 134 do Código Civil que determina que os negócios jurídicos sem prazo são exequíveis desde logo, exceto se a execução do negócio depender de tempo ou tiver que ser feita em lugar diverso.</div>
-              </div>
-            </div>
-          </div>
-          <div class="video-div" data-ix="show-video-description">
-            <div class="video-thumbnail-div"><img class="video-thumbnail-image" src="{% static 'images/thumbnail karen.png'%}">
-            </div>
-            <div class="video-description-div">
-              <div class="title-div">
-                <div class="lesson-number">33</div>
-                <div class="video-title">Negócios Jurídicos sem Prazo</div>
-              </div>
-              <div class="separator"></div>
-              <div class="description-div">
-                <div class="video-page-description">Nessa aula a prof. Sefora explica &nbsp;o Art. 134 do Código Civil que determina que os negócios jurídicos sem prazo são exequíveis desde logo, exceto se a execução do negócio depender de tempo ou tiver que ser feita em lugar diverso.</div>
-              </div>
-            </div>
-          </div>
-          <div class="video-div" data-ix="show-video-description">
-            <div class="video-thumbnail-div"><img class="video-thumbnail-image" src="{% static 'images/thumbnail karen.png'%}">
-            </div>
-            <div class="video-description-div">
-              <div class="title-div">
-                <div class="lesson-number">33</div>
-                <div class="video-title">Negócios Jurídicos sem Prazo</div>
-              </div>
-              <div class="separator"></div>
-              <div class="description-div">
-                <div class="video-page-description">Nessa aula a prof. Sefora explica &nbsp;o Art. 134 do Código Civil que determina que os negócios jurídicos sem prazo são exequíveis desde logo, exceto se a execução do negócio depender de tempo ou tiver que ser feita em lugar diverso.</div>
-              </div>
-            </div>
-          </div>
-          <div class="video-div" data-ix="show-video-description">
-            <div class="video-thumbnail-div"><img class="video-thumbnail-image" src="{% static 'images/thumbnail karen.png'%}">
-            </div>
-            <div class="video-description-div">
-              <div class="title-div">
-                <div class="lesson-number">33</div>
-                <div class="video-title">Negócios Jurídicos sem Prazo</div>
-              </div>
-              <div class="separator"></div>
-              <div class="description-div">
-                <div class="video-page-description">Nessa aula a prof. Sefora explica &nbsp;o Art. 134 do Código Civil que determina que os negócios jurídicos sem prazo são exequíveis desde logo, exceto se a execução do negócio depender de tempo ou tiver que ser feita em lugar diverso.</div>
-              </div>
-            </div>
-          </div>
-          <div class="video-div" data-ix="show-video-description">
-            <div class="video-thumbnail-div"><img class="video-thumbnail-image" src="{% static 'images/thumbnail karen.png'%}">
-            </div>
-            <div class="video-description-div">
-              <div class="title-div">
-                <div class="lesson-number">33</div>
-                <div class="video-title">Negócios Jurídicos sem Prazo</div>
-              </div>
-              <div class="separator"></div>
-              <div class="description-div">
-                <div class="video-page-description">Nessa aula a prof. Sefora explica &nbsp;o Art. 134 do Código Civil que determina que os negócios jurídicos sem prazo são exequíveis desde logo, exceto se a execução do negócio depender de tempo ou tiver que ser feita em lugar diverso.</div>
-              </div>
-            </div>
-          </div>
-          <div class="video-div" data-ix="show-video-description">
-            <div class="video-thumbnail-div"><img class="video-thumbnail-image" src="{% static 'images/thumbnail karen.png'%}">
-            </div>
-            <div class="video-description-div">
-              <div class="title-div">
-                <div class="lesson-number">33</div>
-                <div class="video-title">Negócios Jurídicos sem Prazo</div>
-              </div>
-              <div class="separator"></div>
-              <div class="description-div">
-                <div class="video-page-description">Nessa aula a prof. Sefora explica &nbsp;o Art. 134 do Código Civil que determina que os negócios jurídicos sem prazo são exequíveis desde logo, exceto se a execução do negócio depender de tempo ou tiver que ser feita em lugar diverso.</div>
-              </div>
-            </div>
-          </div>
-          <div class="video-div" data-ix="show-video-description">
-            <div class="video-thumbnail-div"><img class="video-thumbnail-image" src="{% static 'images/thumbnail karen.png'%}">
-            </div>
-            <div class="video-description-div">
-              <div class="title-div">
-                <div class="lesson-number">33</div>
-                <div class="video-title">Negócios Jurídicos sem Prazo</div>
-              </div>
-              <div class="separator"></div>
-              <div class="description-div">
-                <div class="video-page-description">Nessa aula a prof. Sefora explica &nbsp;o Art. 134 do Código Civil que determina que os negócios jurídicos sem prazo são exequíveis desde logo, exceto se a execução do negócio depender de tempo ou tiver que ser feita em lugar diverso.</div>
-              </div>
-            </div>
-          </div>
-          <div class="video-div" data-ix="show-video-description">
-            <div class="video-thumbnail-div"><img class="video-thumbnail-image" src="{% static 'images/thumbnail karen.png'%}">
-            </div>
-            <div class="video-description-div">
-              <div class="title-div">
-                <div class="lesson-number">33</div>
-                <div class="video-title">Negócios Jurídicos sem Prazo</div>
-              </div>
-              <div class="separator"></div>
-              <div class="description-div">
-                <div class="video-page-description">Nessa aula a prof. Sefora explica &nbsp;o Art. 134 do Código Civil que determina que os negócios jurídicos sem prazo são exequíveis desde logo, exceto se a execução do negócio depender de tempo ou tiver que ser feita em lugar diverso.</div>
-              </div>
-            </div>
-          </div>
-          <div class="video-div" data-ix="show-video-description">
-            <div class="video-thumbnail-div"><img class="video-thumbnail-image" src="{% static 'images/thumbnail karen.png'%}">
-            </div>
-            <div class="video-description-div">
-              <div class="title-div">
-                <div class="lesson-number">33</div>
-                <div class="video-title">Negócios Jurídicos sem Prazo</div>
-              </div>
-              <div class="separator"></div>
-              <div class="description-div">
-                <div class="video-page-description">Nessa aula a prof. Sefora explica &nbsp;o Art. 134 do Código Civil que determina que os negócios jurídicos sem prazo são exequíveis desde logo, exceto se a execução do negócio depender de tempo ou tiver que ser feita em lugar diverso.</div>
-              </div>
-            </div>
-          </div>
-          <div class="video-div" data-ix="show-video-description">
-            <div class="video-thumbnail-div"><img class="video-thumbnail-image" src="{% static 'images/thumbnail karen.png'%}">
-            </div>
-            <div class="video-description-div">
-              <div class="title-div">
-                <div class="lesson-number">33</div>
-                <div class="video-title">Negócios Jurídicos sem Prazo</div>
-              </div>
-              <div class="separator"></div>
-              <div class="description-div">
-                <div class="video-page-description">Nessa aula a prof. Sefora explica &nbsp;o Art. 134 do Código Civil que determina que os negócios jurídicos sem prazo são exequíveis desde logo, exceto se a execução do negócio depender de tempo ou tiver que ser feita em lugar diverso.</div>
-              </div>
-            </div>
-          </div>
-          <div class="video-div" data-ix="show-video-description">
-            <div class="video-thumbnail-div"><img class="video-thumbnail-image" src="{% static 'images/thumbnail karen.png'%}">
-            </div>
-            <div class="video-description-div">
-              <div class="title-div">
-                <div class="lesson-number">33</div>
-                <div class="video-title">Negócios Jurídicos sem Prazo</div>
-              </div>
-              <div class="separator"></div>
-              <div class="description-div">
-                <div class="video-page-description">Nessa aula a prof. Sefora explica &nbsp;o Art. 134 do Código Civil que determina que os negócios jurídicos sem prazo são exequíveis desde logo, exceto se a execução do negócio depender de tempo ou tiver que ser feita em lugar diverso.</div>
-              </div>
-            </div>
-          </div>
-          <div class="video-div" data-ix="show-video-description">
-            <div class="video-thumbnail-div"><img class="video-thumbnail-image" src="{% static 'images/thumbnail karen.png'%}">
-            </div>
-            <div class="video-description-div">
-              <div class="title-div">
-                <div class="lesson-number">33</div>
-                <div class="video-title">Negócios Jurídicos sem Prazo</div>
-              </div>
-              <div class="separator"></div>
-              <div class="description-div">
-                <div class="video-page-description">Nessa aula a prof. Sefora explica &nbsp;o Art. 134 do Código Civil que determina que os negócios jurídicos sem prazo são exequíveis desde logo, exceto se a execução do negócio depender de tempo ou tiver que ser feita em lugar diverso.</div>
-              </div>
-            </div>
-          </div>
-          <div class="video-div" data-ix="show-video-description">
-            <div class="video-thumbnail-div"><img class="video-thumbnail-image" src="{% static 'images/thumbnail karen.png'%}">
-            </div>
-            <div class="video-description-div">
-              <div class="title-div">
-                <div class="lesson-number">33</div>
-                <div class="video-title">Negócios Jurídicos sem Prazo</div>
-              </div>
-              <div class="separator"></div>
-              <div class="description-div">
-                <div class="video-page-description">Nessa aula a prof. Sefora explica &nbsp;o Art. 134 do Código Civil que determina que os negócios jurídicos sem prazo são exequíveis desde logo, exceto se a execução do negócio depender de tempo ou tiver que ser feita em lugar diverso.</div>
-              </div>
-            </div>
-          </div>
-          <div class="video-div" data-ix="show-video-description">
-            <div class="video-thumbnail-div"><img class="video-thumbnail-image" src="{% static 'images/thumbnail karen.png'%}">
-            </div>
-            <div class="video-description-div">
-              <div class="title-div">
-                <div class="lesson-number">33</div>
-                <div class="video-title">Negócios Jurídicos sem Prazo</div>
-              </div>
-              <div class="separator"></div>
-              <div class="description-div">
-                <div class="video-page-description">Nessa aula a prof. Sefora explica &nbsp;o Art. 134 do Código Civil que determina que os negócios jurídicos sem prazo são exequíveis desde logo, exceto se a execução do negócio depender de tempo ou tiver que ser feita em lugar diverso.</div>
-              </div>
-            </div>
-          </div>
+		  {% endfor %}
         </div>
         <div class="hidden-main videos-container">
+		  {% for video in videos %}
           <div class="video-div" data-ix="show-video-description-2">
             <div class="video-thumbnail-div"><img class="video-thumbnail-image" src="{% static 'images/thumbnail karen.png'%}">
             </div>
             <div class="video-description-div">
               <div class="title-div">
                 <div class="lesson-number">33</div>
-                <div class="video-title">Negócios Jurídicos sem Prazo</div>
+                <div class="video-title">em Prazo</div>
               </div>
               <div class="separator"></div>
               <div class="description-div">
@@ -280,203 +88,9 @@
               </div><a class="button w-button watch-button" href="#">Assistir Vídeo</a>
             </div>
           </div>
-          <div class="video-div" data-ix="show-video-description-2">
-            <div class="video-thumbnail-div"><img class="video-thumbnail-image" src="{% static 'images/thumbnail karen.png'%}">
-            </div>
-            <div class="video-description-div">
-              <div class="title-div">
-                <div class="lesson-number">33</div>
-                <div class="video-title">Negócios Jurídicos sem Prazo</div>
-              </div>
-              <div class="separator"></div>
-              <div class="description-div">
-                <div class="video-page-description">Nessa aula a prof. Sefora explica &nbsp;o Art. 134 do Código Civil que determina que os negócios jurídicos sem prazo são exequíveis desde logo, exceto se a execução do negócio depender de tempo ou tiver que ser feita em lugar diverso.</div>
-              </div><a class="button w-button watch-button" href="#">Assistir Vídeo</a>
-            </div>
-          </div>
-          <div class="video-div" data-ix="show-video-description-2">
-            <div class="video-thumbnail-div"><img class="video-thumbnail-image" src="{% static 'images/thumbnail karen.png'%}">
-            </div>
-            <div class="video-description-div">
-              <div class="title-div">
-                <div class="lesson-number">33</div>
-                <div class="video-title">Negócios Jurídicos sem Prazo</div>
-              </div>
-              <div class="separator"></div>
-              <div class="description-div">
-                <div class="video-page-description">Nessa aula a prof. Sefora explica &nbsp;o Art. 134 do Código Civil que determina que os negócios jurídicos sem prazo são exequíveis desde logo, exceto se a execução do negócio depender de tempo ou tiver que ser feita em lugar diverso.</div>
-              </div><a class="button w-button watch-button" href="#">Assistir Vídeo</a>
-            </div>
-          </div>
-          <div class="video-div" data-ix="show-video-description-2">
-            <div class="video-thumbnail-div"><img class="video-thumbnail-image" src="{% static 'images/thumbnail karen.png'%}">
-            </div>
-            <div class="video-description-div">
-              <div class="title-div">
-                <div class="lesson-number">33</div>
-                <div class="video-title">Negócios Jurídicos sem Prazo</div>
-              </div>
-              <div class="separator"></div>
-              <div class="description-div">
-                <div class="video-page-description">Nessa aula a prof. Sefora explica &nbsp;o Art. 134 do Código Civil que determina que os negócios jurídicos sem prazo são exequíveis desde logo, exceto se a execução do negócio depender de tempo ou tiver que ser feita em lugar diverso.</div>
-              </div><a class="button w-button watch-button" href="#">Assistir Vídeo</a>
-            </div>
-          </div>
-          <div class="video-div" data-ix="show-video-description-2">
-            <div class="video-thumbnail-div"><img class="video-thumbnail-image" src="{% static 'images/thumbnail karen.png'%}">
-            </div>
-            <div class="video-description-div">
-              <div class="title-div">
-                <div class="lesson-number">33</div>
-                <div class="video-title">Negócios Jurídicos sem Prazo</div>
-              </div>
-              <div class="separator"></div>
-              <div class="description-div">
-                <div class="video-page-description">Nessa aula a prof. Sefora explica &nbsp;o Art. 134 do Código Civil que determina que os negócios jurídicos sem prazo são exequíveis desde logo, exceto se a execução do negócio depender de tempo ou tiver que ser feita em lugar diverso.</div>
-              </div><a class="button w-button watch-button" href="#">Assistir Vídeo</a>
-            </div>
-          </div>
-          <div class="video-div" data-ix="show-video-description-2">
-            <div class="video-thumbnail-div"><img class="video-thumbnail-image" src="{% static 'images/thumbnail karen.png'%}">
-            </div>
-            <div class="video-description-div">
-              <div class="title-div">
-                <div class="lesson-number">33</div>
-                <div class="video-title">Negócios Jurídicos sem Prazo</div>
-              </div>
-              <div class="separator"></div>
-              <div class="description-div">
-                <div class="video-page-description">Nessa aula a prof. Sefora explica &nbsp;o Art. 134 do Código Civil que determina que os negócios jurídicos sem prazo são exequíveis desde logo, exceto se a execução do negócio depender de tempo ou tiver que ser feita em lugar diverso.</div>
-              </div><a class="button w-button watch-button" href="#">Assistir Vídeo</a>
-            </div>
-          </div>
-          <div class="video-div" data-ix="show-video-description-2">
-            <div class="video-thumbnail-div"><img class="video-thumbnail-image" src="{% static 'images/thumbnail karen.png'%}">
-            </div>
-            <div class="video-description-div">
-              <div class="title-div">
-                <div class="lesson-number">33</div>
-                <div class="video-title">Negócios Jurídicos sem Prazo</div>
-              </div>
-              <div class="separator"></div>
-              <div class="description-div">
-                <div class="video-page-description">Nessa aula a prof. Sefora explica &nbsp;o Art. 134 do Código Civil que determina que os negócios jurídicos sem prazo são exequíveis desde logo, exceto se a execução do negócio depender de tempo ou tiver que ser feita em lugar diverso.</div>
-              </div><a class="button w-button watch-button" href="#">Assistir Vídeo</a>
-            </div>
-          </div>
-          <div class="video-div" data-ix="show-video-description-2">
-            <div class="video-thumbnail-div"><img class="video-thumbnail-image" src="{% static 'images/thumbnail karen.png'%}">
-            </div>
-            <div class="video-description-div">
-              <div class="title-div">
-                <div class="lesson-number">33</div>
-                <div class="video-title">Negócios Jurídicos sem Prazo</div>
-              </div>
-              <div class="separator"></div>
-              <div class="description-div">
-                <div class="video-page-description">Nessa aula a prof. Sefora explica &nbsp;o Art. 134 do Código Civil que determina que os negócios jurídicos sem prazo são exequíveis desde logo, exceto se a execução do negócio depender de tempo ou tiver que ser feita em lugar diverso.</div>
-              </div><a class="button w-button watch-button" href="#">Assistir Vídeo</a>
-            </div>
-          </div>
-          <div class="video-div" data-ix="show-video-description-2">
-            <div class="video-thumbnail-div"><img class="video-thumbnail-image" src="{% static 'images/thumbnail karen.png'%}">
-            </div>
-            <div class="video-description-div">
-              <div class="title-div">
-                <div class="lesson-number">33</div>
-                <div class="video-title">Negócios Jurídicos sem Prazo</div>
-              </div>
-              <div class="separator"></div>
-              <div class="description-div">
-                <div class="video-page-description">Nessa aula a prof. Sefora explica &nbsp;o Art. 134 do Código Civil que determina que os negócios jurídicos sem prazo são exequíveis desde logo, exceto se a execução do negócio depender de tempo ou tiver que ser feita em lugar diverso.</div>
-              </div><a class="button w-button watch-button" href="#">Assistir Vídeo</a>
-            </div>
-          </div>
-          <div class="video-div" data-ix="show-video-description-2">
-            <div class="video-thumbnail-div"><img class="video-thumbnail-image" src="{% static 'images/thumbnail karen.png'%}">
-            </div>
-            <div class="video-description-div">
-              <div class="title-div">
-                <div class="lesson-number">33</div>
-                <div class="video-title">Negócios Jurídicos sem Prazo</div>
-              </div>
-              <div class="separator"></div>
-              <div class="description-div">
-                <div class="video-page-description">Nessa aula a prof. Sefora explica &nbsp;o Art. 134 do Código Civil que determina que os negócios jurídicos sem prazo são exequíveis desde logo, exceto se a execução do negócio depender de tempo ou tiver que ser feita em lugar diverso.</div>
-              </div><a class="button w-button watch-button" href="#">Assistir Vídeo</a>
-            </div>
-          </div>
-          <div class="video-div" data-ix="show-video-description-2">
-            <div class="video-thumbnail-div"><img class="video-thumbnail-image" src="{% static 'images/thumbnail karen.png'%}">
-            </div>
-            <div class="video-description-div">
-              <div class="title-div">
-                <div class="lesson-number">33</div>
-                <div class="video-title">Negócios Jurídicos sem Prazo</div>
-              </div>
-              <div class="separator"></div>
-              <div class="description-div">
-                <div class="video-page-description">Nessa aula a prof. Sefora explica &nbsp;o Art. 134 do Código Civil que determina que os negócios jurídicos sem prazo são exequíveis desde logo, exceto se a execução do negócio depender de tempo ou tiver que ser feita em lugar diverso.</div>
-              </div><a class="button w-button watch-button" href="#">Assistir Vídeo</a>
-            </div>
-          </div>
-          <div class="video-div" data-ix="show-video-description-2">
-            <div class="video-thumbnail-div"><img class="video-thumbnail-image" src="{% static 'images/thumbnail karen.png'%}">
-            </div>
-            <div class="video-description-div">
-              <div class="title-div">
-                <div class="lesson-number">33</div>
-                <div class="video-title">Negócios Jurídicos sem Prazo</div>
-              </div>
-              <div class="separator"></div>
-              <div class="description-div">
-                <div class="video-page-description">Nessa aula a prof. Sefora explica &nbsp;o Art. 134 do Código Civil que determina que os negócios jurídicos sem prazo são exequíveis desde logo, exceto se a execução do negócio depender de tempo ou tiver que ser feita em lugar diverso.</div>
-              </div><a class="button w-button watch-button" href="#">Assistir Vídeo</a>
-            </div>
-          </div>
-          <div class="video-div" data-ix="show-video-description-2">
-            <div class="video-thumbnail-div"><img class="video-thumbnail-image" src="{% static 'images/thumbnail karen.png'%}">
-            </div>
-            <div class="video-description-div">
-              <div class="title-div">
-                <div class="lesson-number">33</div>
-                <div class="video-title">Negócios Jurídicos sem Prazo</div>
-              </div>
-              <div class="separator"></div>
-              <div class="description-div">
-                <div class="video-page-description">Nessa aula a prof. Sefora explica &nbsp;o Art. 134 do Código Civil que determina que os negócios jurídicos sem prazo são exequíveis desde logo, exceto se a execução do negócio depender de tempo ou tiver que ser feita em lugar diverso.</div>
-              </div><a class="button w-button watch-button" href="#">Assistir Vídeo</a>
-            </div>
-          </div>
-          <div class="video-div" data-ix="show-video-description-2">
-            <div class="video-thumbnail-div"><img class="video-thumbnail-image" src="{% static 'images/thumbnail karen.png'%}">
-            </div>
-            <div class="video-description-div">
-              <div class="title-div">
-                <div class="lesson-number">33</div>
-                <div class="video-title">Negócios Jurídicos sem Prazo</div>
-              </div>
-              <div class="separator"></div>
-              <div class="description-div">
-                <div class="video-page-description">Nessa aula a prof. Sefora explica &nbsp;o Art. 134 do Código Civil que determina que os negócios jurídicos sem prazo são exequíveis desde logo, exceto se a execução do negócio depender de tempo ou tiver que ser feita em lugar diverso.</div>
-              </div><a class="button w-button watch-button" href="#">Assistir Vídeo</a>
-            </div>
-          </div>
-          <div class="video-div" data-ix="show-video-description-2">
-            <div class="video-thumbnail-div"><img class="video-thumbnail-image" src="{% static 'images/thumbnail karen.png'%}">
-            </div>
-            <div class="video-description-div">
-              <div class="title-div">
-                <div class="lesson-number">33</div>
-                <div class="video-title">Negócios Jurídicos sem Prazo</div>
-              </div>
-              <div class="separator"></div>
-              <div class="description-div">
-                <div class="video-page-description">Nessa aula a prof. Sefora explica &nbsp;o Art. 134 do Código Civil que determina que os negócios jurídicos sem prazo são exequíveis desde logo, exceto se a execução do negócio depender de tempo ou tiver que ser feita em lugar diverso.</div>
-              </div><a class="button w-button watch-button" href="#">Assistir Vídeo</a>
-            </div>
-          </div>
+		  {% endfor %}
         </div>
+		{% if page_obj.has_other_pages %}
         <div class="page-navigator">
           <a class="button page-button w-inline-block" href="#">
             <div>Página Anterior</div>
@@ -487,6 +101,7 @@
             <div>Próxima Página</div>
           </a>
         </div>
+		{% endif %}
       </div>
     </div>
     <div class="dark main-section">
