@@ -8,8 +8,8 @@ class VideoCategoryInline(admin.TabularInline):
     
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('name', 'yt_id', 'featured')
-    fields = ['name', 'yt_id', 'featured', 'professor']
+    list_display = ('title', 'yt_id', 'featured')
+    fields = ['title', 'yt_id', 'featured', 'professor']
     inlines = [VideoCategoryInline,]
 
 class ProfessorAdmin(ImageCroppingMixin, admin.ModelAdmin):

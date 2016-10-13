@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load staticfiles %}
+{% load staticfiles %}{% load cropping %}
 {% block content %}
 <div>
   {% block header %}
@@ -14,21 +14,28 @@
     <div class="categories-div mid-section-container w-container">
       <div class="w-dyn-list">
         <div class="w-clearfix w-dyn-items w-row">
+		  {% for category in categories %}
           <div class="blog-thumbnail w-col w-col-4 w-dyn-item">
-            <a class="thumbnail-wrapper w-inline-block" data-ix="blog-thumbnail">
+            <a class="thumbnail-wrapper w-inline-block" data-ix="blog-thumbnail" href="{% url 'category_page' category_id=category.id %}">
               <div class="image-wrapper">
-                <div class="thumbnail-image"></div>
+                <div class="thumbnail-image" style="background-image: url('{% cropped_thumbnail category 'thumbnail_ratio' %}')"></div>
               </div>
               <div class="thumbnail-text">
-                <div class="blog-title"></div>
-                <div class="preview-text"></div>
+                <div class="blog-title">{{category.title}}</div>
+                <div class="preview-text">{{category.description}}</div>
               </div>
-              <div class="thumb-details w-clearfix"><img class="author-img">
-                <div class="author-title"></div>
+              <div class="thumb-details w-clearfix">
+				{% if category.professor %}
+				{% with category.professor as professor %}
+				<img class="author-img" src="{% cropped_thumbnail professor 'profile_ratio' %}">
+                <div class="author-title">{{professor.name}}</div>
                 <div class="thumbnail-date"></div>
+				{% endwith %}
+				{% endif %}
               </div>
             </a>
           </div>
+		  {% endfor %}
         </div>
       </div>
     </div>

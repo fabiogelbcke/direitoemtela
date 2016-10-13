@@ -24,3 +24,11 @@ class CategoryView(ListView):
         context['starting_index'] = (context['page_obj'].number - 1) * 15
         return context
 # Create your views here.
+
+class CategoriesListView(ListView):
+    model = Category
+    template_name = 'categories.html'
+    context_object_name = 'categories'
+
+    def get_queryset(self):
+        return Category.objects.all()

@@ -32,7 +32,8 @@ class Category(models.Model):
     videos = models.ManyToManyField(Video,
                                     through='VideoCategory',
                                     related_name='categories')
-    name = models.CharField(max_length=100, blank=True)
+    title = models.CharField(max_length=100, blank=True)
+    description = models.CharField(max_length=300, blank=True)
     yt_id = models.CharField(max_length=100, blank=True)
     featured = models.BooleanField(default=False)
     professor = models.ForeignKey(Professor,

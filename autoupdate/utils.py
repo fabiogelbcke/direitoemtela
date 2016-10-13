@@ -153,7 +153,7 @@ def add_videos_to_category(pl_id, video_ids, youtube):
     page_token = None
     while True:
         if Category.objects.filter(yt_id=pl_id[0]).exists() is False:
-            Category.objects.create(name=pl_id[1],
+            Category.objects.create(title=pl_id[1],
                                     yt_id=pl_id[0])
         category = Category.objects.get(yt_id=pl_id[0])
         response = youtube.playlistItems().list(
