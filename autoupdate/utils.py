@@ -138,10 +138,12 @@ def create_new_videos(videos_info):
                 tempimg.write(block)
             video.thumbnail = files.File(tempimg)
             video.save()
-            ratio_coords = [int(x) for x in video.thumbnail_ratio.split(',')]
-            ratio_coords[2] -= ratio_coords[0]
-            ratio_coords[0] = 0
-            video.thumbnail_ratio = ','.join([str(x) for x in ratio_coords])
+            # make thumbnail be "cut" in the right ratio for the video thumbnails
+            ratio = 275.0/154.0
+            t_width = int(min(video.thumbnail.width, video.thumbnail.height * ratio))
+            t_height = int(min(video.thumbnail.height * ratio, video.thumbnail.height))
+            t_ratio = '0,0,' + str(t_width) + ',' + str(t_height)
+            video.thumbnail_ratio = t_ratio
             video.save()
         for video_tag in video_info['tags']:
             tag = Tag.objects.create(video=video,
