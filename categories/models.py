@@ -22,6 +22,9 @@ class Professor(models.Model):
     profile_image = ImageCropField(upload_to=get_image_path, blank=True,
                                    default='logodefault.png')
     profile_ratio = ImageRatioField('profile_image', '320x320')
+
+    def __unicode__(self):
+        return self.name
                                    
 
 class Category(models.Model):
