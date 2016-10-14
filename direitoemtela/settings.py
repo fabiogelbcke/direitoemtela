@@ -14,8 +14,6 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 import os
 import keys
 from easy_thumbnails.conf import Settings as thumbnail_settings
-import logging
-logging.basicConfig(filename='debug.log',level=logging.DEBUG)
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
