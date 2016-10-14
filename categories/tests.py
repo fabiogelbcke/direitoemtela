@@ -16,17 +16,17 @@ class VideoCategorySaveTestCase(TestCase):
         video2.save()
         video3.save()
         video4.save()
-        category = Category(name='category')
+        category = Category(title='category')
         category.save()
-        category2 = Category(name='category2')
+        category2 = Category(title='category2')
         category2.save()
 
     def test_loads_correctly(self):
         videos = Video.objects.all()
         category = Category.objects.first()
         category2 = Category.objects.last()
-        self.assertEqual(category.name, 'category')
-        self.assertEqual(category2.name, 'category2')
+        self.assertEqual(category.title, 'category')
+        self.assertEqual(category2.title, 'category2')
         for counter, video in enumerate(videos):
             self.assertEqual(video.title,
                              'video' + str(counter + 1))

@@ -100,6 +100,7 @@ def get_category_ids():
         maxResults=50
     ).execute()
     category_ids = [[item['id'], item['snippet']['title']] for item  in response['items']]
+    category_ids.reverse()
     return category_ids
 
 def clean_video_title(yt_title):
