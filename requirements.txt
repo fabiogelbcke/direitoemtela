@@ -19,3 +19,4 @@ numpy==1.8.0
 pygeoip==0.3.2
 wsgiref==0.1.2
 shortuuid==0.4.2
+google-api-python-client==1.5.3
