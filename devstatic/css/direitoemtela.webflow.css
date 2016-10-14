@@ -1408,6 +1408,11 @@ img {
   display: -ms-flexbox;
   display: flex;
   min-height: 40vh;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
@@ -1569,6 +1574,7 @@ img {
 .video-page-description {
   overflow: visible;
   padding: 1px 11px;
+  color: #4d565d;
   text-align: justify;
 }
 
@@ -2920,7 +2926,7 @@ html.w-mod-js *[data-ix="view-more"] {
     padding-bottom: 1px;
     padding-left: 10px;
     background-color: transparent;
-    background-image: url('../images/Search-icon small.png');
+    background-image: url('../images/Search-icon-small.png');
     background-position: 50% 50%;
     background-size: contain;
     background-repeat: no-repeat;

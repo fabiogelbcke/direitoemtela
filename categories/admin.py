@@ -7,7 +7,7 @@ class VideoCategoryInline(admin.TabularInline):
     ordering = ['position']
     
 
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(ImageCroppingMixin, admin.ModelAdmin):
     list_display = ('title', 'yt_id', 'featured')
     fields = ['title', 'yt_id', 'featured', 'professor']
     inlines = [VideoCategoryInline,]

@@ -8,5 +8,7 @@ urlpatterns = patterns('',
                            views.CategoryView.as_view(), name='category_page'),
                        url(r'^category/(?P<category_id>\d+)$',
                            views.CategoryView.as_view(), name='category_page'),
+                       url(r'^category/(?P<category_id>\d+)/(?P<video_index>\d+)$',
+                           views.CategoryVideoView.as_view(), name='category_video'),
                            
 )

@@ -7,7 +7,7 @@
   {% endblock %}
     <div class="category inner-hero">
       <div class="container">
-        <h1 class="hero-header">{{category.name}}</h1>
+        <h1 class="hero-header">{{category.title}}</h1>
         <h1 class="category-subtitle hero-header">Parte Geral</h1>
       </div>
     </div>
@@ -22,12 +22,13 @@
         </div>
         <div class="hidden-mobile hidden-tablet videos-container">
 		  {% for video in videos %}
-          <a class="video-div" data-ix="show-video-description" href="{% url 'index' %}">
+		  {% with forloop.counter|add:starting_index as video_index %}
+          <a class="video-div" data-ix="show-video-description" href="{% url 'category_video' category_id=category.id video_index=video_index%}">
             <div class="video-thumbnail-div"><img class="video-thumbnail-image" src="{% cropped_thumbnail video 'thumbnail_ratio' %}">
             </div>
             <div class="video-description-div">
               <div class="title-div">
-                <div class="lesson-number">{{ forloop.counter|add:starting_index}}</div>
+                <div class="lesson-number">{{video_index}}</div>
                 <div class="video-title">{{video.title}}</div>
               </div>
               <div class="separator"></div>
@@ -37,6 +38,7 @@
               </div>
             </div>
           </a>
+		  {% endwith %}
 		  {% endfor %}
         </div>
         <div class="hidden-main videos-container">

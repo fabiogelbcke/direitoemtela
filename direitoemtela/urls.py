@@ -23,6 +23,7 @@ urlpatterns = patterns('',
                        url(r'^', include('main.urls')),
                        url(r'^', include('categories.urls')),
                        url(r'^', include('mailing.urls')),
+                       url(r'^', include('videos.urls')),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += staticfiles_urlpatterns()
