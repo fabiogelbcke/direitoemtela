@@ -44,7 +44,7 @@ class Category(models.Model):
     thumbnail_ratio = ImageRatioField('thumbnail', '592x300')
 
     def __unicode__(self):
-        return self.name
+        return self.title
 
 
 class VideoCategory(models.Model):
