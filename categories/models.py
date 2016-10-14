@@ -35,7 +35,7 @@ class Category(models.Model):
     title = models.CharField(max_length=100, blank=True)
     description = models.CharField(max_length=300, blank=True)
     yt_id = models.CharField(max_length=100, blank=True)
-    featured = models.BooleanField(default=False)
+    featured = models.BooleanField(default=False, blank=True)
     professor = models.ForeignKey(Professor,
                                   related_name='categories',
                                   null=True)
