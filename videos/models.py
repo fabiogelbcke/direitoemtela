@@ -20,6 +20,7 @@ class Video(models.Model):
     thumbnail = ImageCropField(upload_to=get_thumbnail_path, blank=True,
                                    default='logodefault.png')
     thumbnail_ratio = ImageRatioField('thumbnail', '1600x900')
+    yt_lesson_number = models.CharField(max_length=4, blank=True)
 
     def __unicode__(self):
         return self.title

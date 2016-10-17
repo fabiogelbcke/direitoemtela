@@ -57,6 +57,7 @@ class VideoCategory(models.Model):
     video = models.ForeignKey(Video)
     category = models.ForeignKey(Category)
     position = models.IntegerField(validators=[MinValueValidator(0),])
+    yt_position = models.CharField(max_length=4, blank=True)
     objects = VideoCategoryManager()
 
     def save(self, *args, **kwargs):
