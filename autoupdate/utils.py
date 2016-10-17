@@ -189,9 +189,9 @@ def add_videos_to_categories(category_info, video_ids):
 
 def get_new_videos():
     video_ids = get_new_video_ids()
-    videos_info = get_videos_info(video_ids)
-    create_new_videos(videos_info)
-    category_ids = get_category_ids()
-    add_videos_to_categories(category_ids, video_ids)
-
-    
+    if video_ids:
+        videos_info = get_videos_info(video_ids)
+        create_new_videos(videos_info)
+        category_ids = get_category_ids()
+        add_videos_to_categories(category_ids, video_ids)
+    return len(video_ids)
