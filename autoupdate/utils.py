@@ -6,7 +6,6 @@ from oauth2client.tools import argparser
 from apiclient.discovery import build
 from videos.models import Video, Tag
 from categories.models import Category, VideoCategory, Professor
-import logging
 from datetime import datetime
 from django.utils import timezone
 import requests
@@ -17,7 +16,6 @@ import re
 
 
 def get_new_video_ids():
-    logging.basicConfig(filename='debug.log',level=logging.DEBUG)
     youtube = build(
         settings.YOUTUBE_API_SERVICE_NAME,
         settings.YOUTUBE_API_VERSION,
