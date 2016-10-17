@@ -17,7 +17,7 @@
           <div class="left-alignment-big stats-column w-col w-col-4 w-col-stack">
             <div class="website-stat-box"><img class="stats-image" src="{% static 'images/eyes-icon-0.png'%}">
               <div class="stat-text-box">
-                <h1 class="stat-number">2.000.000</h1>
+                <h1 class="stat-number">{{total_views}}</h1>
                 <div class="stat-subtext">visualizações</div>
               </div>
             </div>
@@ -25,7 +25,7 @@
           <div class="stats-column w-col w-col-4 w-col-stack">
             <div class="website-stat-box"><img class="stats-image" src="{% static 'images/youtube-subscriber-icon.png'%}">
               <div class="stat-text-box">
-                <h1 class="stat-number">20.000</h1>
+                <h1 class="stat-number">{{subscribers}}</h1>
                 <div class="stat-subtext">inscritos</div>
               </div>
             </div>
@@ -33,7 +33,7 @@
           <div class="right-alignment-big stats-column w-col w-col-4 w-col-stack">
             <div class="website-stat-box"><img class="stats-image" src="{% static 'images/video_icon_cut.png'%}">
               <div class="stat-text-box">
-                <h1 class="stat-number">275</h1>
+                <h1 class="stat-number">{{total_videos}}</h1>
                 <div class="stat-subtext">vídeos</div>
               </div>
             </div>

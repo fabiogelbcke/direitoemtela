@@ -1197,8 +1197,8 @@ img {
   display: -ms-flexbox;
   display: flex;
   overflow: visible;
-  width: 257px;
-  height: 294px;
+  width: 220px;
+  height: 250px;
   margin: 25px -2px;
   padding-top: 1px;
   padding-bottom: 21px;
@@ -1255,12 +1255,13 @@ img {
   bottom: 59px;
   display: block;
   width: 100%;
-  margin-bottom: 15px;
+  margin-bottom: 3px;
   -webkit-box-pack: end;
   -webkit-justify-content: flex-end;
   -ms-flex-pack: end;
   justify-content: flex-end;
-  font-size: 42px;
+  color: rgba(77, 86, 93, .99);
+  font-size: 35px;
   text-align: center;
 }
 
@@ -1280,6 +1281,7 @@ img {
 }
 
 .stat-subtext {
+  color: rgba(77, 86, 93, .99);
   font-size: 21px;
   font-weight: 700;
   text-align: center;
@@ -1331,17 +1333,17 @@ img {
 }
 
 .stats-column.right-alignment-big {
-  -webkit-box-pack: end;
-  -webkit-justify-content: flex-end;
-  -ms-flex-pack: end;
-  justify-content: flex-end;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 
 .stats-column.left-alignment-big {
-  -webkit-box-pack: start;
-  -webkit-justify-content: flex-start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 
 .hero-gradient {
@@ -1574,7 +1576,7 @@ img {
 .video-page-description {
   overflow: visible;
   padding: 1px 11px;
-  color: #4d565d;
+  color: rgba(77, 86, 93, .99);
   text-align: justify;
 }
 
@@ -1746,6 +1748,10 @@ img {
   font-weight: 700;
 }
 
+.yellow-text.underline-on-hover:hover {
+  text-decoration: underline;
+}
+
 .video-suggestions-video-item-div {
   display: -webkit-box;
   display: -webkit-flex;
@@ -1785,7 +1791,8 @@ img {
 }
 
 .next-video-item-image {
-  min-width: 58px;
+  max-width: 62px;
+  min-width: 62px;
   margin-right: 6px;
   margin-bottom: 0px;
   margin-left: 3px;
