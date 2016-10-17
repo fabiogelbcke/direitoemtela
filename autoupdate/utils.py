@@ -142,8 +142,11 @@ def create_new_videos(videos_info):
             # make thumbnail be "cut" in the right ratio for the video thumbnails
             ratio = 275.0/154.0
             t_width = int(min(video.thumbnail.width, video.thumbnail.height * ratio))
-            t_height = int(min(video.thumbnail.height * ratio, video.thumbnail.height))
-            t_ratio = '0,0,' + str(t_width) + ',' + str(t_height)
+            t_height = int(min(video.thumbnail.width / ratio, video.thumbnail.height))
+            #center the cut
+            y_origin = video.thumbnail.height/2 - t_height/2
+            y_end = y_origin + t_height
+            t_ratio = '0,' + str(y_origin) + str(t_width) + ',' + str(y_end)
             video.thumbnail_ratio = t_ratio
             video.save()
         for video_tag in video_info['tags']:

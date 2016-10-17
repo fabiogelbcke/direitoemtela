@@ -62,6 +62,7 @@ INSTALLED_APPS = (
     'easy_thumbnails',
     'image_cropping',
     'autoupdate',
+    'hitcount'
 )
 
 MIDDLEWARE_CLASSES = (

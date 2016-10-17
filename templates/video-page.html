@@ -27,8 +27,8 @@
         </div>
         <div class="video-row w-row">
           <div class="w-col w-col-8 w-col-medium-8">
-            <div class="w-embed w-video" style="padding-top: 56.17021276595745%;">
-              <iframe class="embedly-embed" src="https://cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2FH7YKs4lO29k%3Ffeature%3Doembed&amp;url=http%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DH7YKs4lO29k&amp;image={% cropped_thumbnail video 'thumbnail_ratio' %}&amp;key=c4e54deccf4d4ec997a64902e9a30300&amp;type=text%2Fhtml&amp;schema=youtube" scrolling="no" frameborder="0" allowfullscreen=""></iframe>
+            <div class="w-embed w-video" style="">
+			  <div onclick="play();" id="vidwrap" style="height:315px;width:560px;background-image: url('{% static 'images/play-button.png' %}'), url('{% cropped_thumbnail video 'thumbnail_ratio' %}'); background-repeat: no-repeat, no-repeat; background-position: center, center;-webkit-background-size:  cover;-moz-background-size: cover;-o-background-size: cover;background-size: 200px 200px,cover;overflow:hidden;cursor:pointer; padding-top:0px;"></div>
             </div>
             <div class="video-tabs w-tabs" data-duration-in="300" data-duration-out="100">
               <div class="tabs-menu-line-underneath w-tab-menu">
@@ -71,4 +71,9 @@
         </div>
       </div>
     </div>
+	{% endblock %}
+
+	{% block js %}
+	{{block.super}}
+	<script type="text/javascript">function play(){document.getElementById('vidwrap').innerHTML = '<iframe width="560" height="315" src="http://www.youtube.com/embed/{{video.yt_id}}?autoplay=1" frameborder="0"></iframe>';}</script>
 	{% endblock %}

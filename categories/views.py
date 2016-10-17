@@ -5,6 +5,7 @@ from videos.models import Video
 from .models import Category
 from django.shortcuts import get_object_or_404
 from django.http import Http404
+from hitcount.views import HitCountDetailView
 
 
 class CategoryView(ListView):
@@ -37,10 +38,11 @@ class CategoriesListView(ListView):
     def get_queryset(self):
         return Category.objects.all()
 
-class CategoryVideoView(DetailView):
+class CategoryVideoView(HitCountDetailView):
     template_name = 'video-page.html'
     context_object_name = 'video'
     model = Video
+    count_hit = True
 
     def get_object(self):
         category_id = int(self.kwargs['category_id'])
