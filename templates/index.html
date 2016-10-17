@@ -10,8 +10,9 @@
         <div class="hero-heading" data-ix="hero-text">Direito ao alcance de todos.</div>
         <div class="hero-subheading" data-ix="hero-text-2">O Direito em tela traz a universidade para dentro do seu computador</div>
         <div>
-          <div class="w-form">
-            <form class="search-form" data-ix="hero-button" data-name="Email Form 2" id="email-form-2" name="email-form-2">
+          <div class="">
+            <form method="POST" action="{% url 'search_results' %}" class="search-form" data-ix="hero-button" data-name="Email Form 2" id="email-form-2" name="email-form-2">
+			  {% csrf_token %}
               <div class="search-row w-row">
                 <div class="search-bar-column w-col w-col-11 w-col-small-11">
                   <div class="search-bar-div">
@@ -24,14 +25,8 @@
                 </div>
               </div>
             </form>
-            <div class="w-form-done">
-              <div>Thank you! Your submission has been received!</div>
-            </div>
-            <div class="w-form-fail">
-              <div>Oops! Something went wrong while submitting the form</div>
-            </div>
           </div>
-        </div><a class="button w-button" data-ix="hero-button" href="#Latest-post">Ver Catálogo de Cursos</a>
+        </div><a class="button w-button" data-ix="hero-button" href="#Latest-post">Ver todos os Videos</a>
       </div>
     </div>
     <div class="bottom-padding main-section" id="posts">
@@ -47,7 +42,7 @@
       </div>
       <div class="w-container">
         <div class="section-heading">
-          <h2 class="section-title">Cursos Completos</h2>
+          <h2 class="section-title">Assuntos mais Procurados</h2>
           <div class="med-divider"></div>
         </div>
         <div class="w-dyn-list">
