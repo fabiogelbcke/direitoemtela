@@ -3,7 +3,7 @@ from django.views.generic import TemplateView
 from categories.models import Category
 from apiclient.discovery import build
 from django.conf import settings
-
+from django.views.decorators.cache import cache_page
 # Create your views here.
 
 class IndexView(TemplateView):
