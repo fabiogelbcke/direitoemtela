@@ -48,8 +48,8 @@
 					{{professor.description|safe}}
 				  </div>
 				  {% endwith %}
-				  {% else %}
-				  {% with video.professor|default_if_none:video.categories.first.professor as professor %}
+				  {% elif video.professor %}
+				  {% with video.professor as professor %}
 				  <div class="professor-name-block"><img class="professor-image" height="100" src="{% cropped_thumbnail professor 'profile_ratio' max_size="100x100" %}" width="100">
                     <h1 class="professor-name">{{professor.name}}</h1>
                     <div class="professor-name-underline"></div>
@@ -58,6 +58,20 @@
 					{{professor.description|safe}}
 				  </div>
 				  {% endwith %}
+          {% elif video.categories.first %}
+          {% with video.categories.first as category %}
+          {% with category.professor as professor %}
+          {% if professor %}
+          <div class="professor-name-block"><img class="professor-image" height="100" src="{% cropped_thumbnail professor 'profile_ratio' max_size="100x100" %}" width="100">
+                    <h1 class="professor-name">{{professor.name}}</h1>
+                    <div class="professor-name-underline"></div>
+                  </div>
+                  <div class="professor-description-block">
+          {{professor.description|safe}}
+          </div>
+          {% endif %}
+          {% endwith %}
+          {% endwith %}
 				  {% endif %}
 				</div>
                 <div class="w-tab-pane" data-w-tab="Tab 3">
