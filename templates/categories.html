@@ -27,10 +27,14 @@
               <div class="thumb-details w-clearfix">
 				{% if category.professor %}
 				{% with category.professor as professor %}
-				<img class="author-img" src="{% cropped_thumbnail professor 'profile_ratio' %}">
-                <div class="author-title">{{professor.name}}</div>
-                <div class="thumbnail-date"></div>
+  				<img class="author-img" src="{% cropped_thumbnail professor 'profile_ratio' %}">
+          <div class="author-title">{{professor.name}}</div>
+          <div class="thumbnail-date"></div>
 				{% endwith %}
+        {% else %}
+          <img class="author-img" src="https://s3-sa-east-1.amazonaws.com/detfiles/martelinho.png">
+          <div class="author-title">Diversos</div>
+          <div class="thumbnail-date"></div>
 				{% endif %}
               </div>
             </a>
