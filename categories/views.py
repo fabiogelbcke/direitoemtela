@@ -36,7 +36,7 @@ class CategoriesListView(ListView):
     context_object_name = 'categories'
 
     def get_queryset(self):
-        return Category.objects.all()
+        return Category.objects.filter(hidden=False)
 
 class CategoryVideoView(HitCountDetailView):
     template_name = 'video-page.html'

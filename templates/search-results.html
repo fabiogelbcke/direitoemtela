@@ -23,7 +23,7 @@
             </div>
             <div class="video-description-div">
               <div class="title-div">
-                <div class="video-title video-title-wide">{{video.title}}</div>
+                <div class="video-title video-title-wide video-title-main">{{video.title}}</div>
               </div>
               <div class="separator"></div>
               <div class="description-div">
@@ -94,23 +94,24 @@
     }
 
     $(".video-title-main").each(function(){
-      if ($(this).text().length <= 25)
+      if ($(this).text().length <= 27)
       {
         $(this).css('font-size', '20px');
+        $(this).css('padding-top', '15px')
       }
-      else if (($(this).text().length <= 40 && longestWordLength($(this).text()) < 10) || $(this).text().length <= 34)
+      else if (($(this).text().length <= 45 && longestWordLength($(this).text()) < 12) || $(this).text().length <= 39)
       {
         $(this).css('font-size', '17px')
       }
-      else if ($(this).text().length <= 40)
+      else if ($(this).text().length <= 45)
         $(this).css('font-size', '15px')
-      else if ($(this).text().length <= 55 && longestWordLength($(this).text()) < 10)
+      else if ($(this).text().length <= 60 && longestWordLength($(this).text()) < 12)
       {
         $(this).css('font-size', '15px')
         $(this).css('line-height', '18px')
-        $(this).css('padding-top', '7px')
+        $(this).css('padding-top', '10px')
       }
-      else if ($(this).text().length <= 50)
+      else if ($(this).text().length <= 55)
         $(this).css('font-size', '14px')
       else
       {
