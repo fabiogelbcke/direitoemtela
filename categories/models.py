@@ -46,6 +46,7 @@ class Category(models.Model):
     thumbnail = ImageCropField(upload_to=get_thumbnail_path, blank=True,
                                default='logodefault.png')
     thumbnail_ratio = ImageRatioField('thumbnail', '592x300')
+    hidden = models.BooleanField(default=False)
 
     def __unicode__(self):
         return self.title
