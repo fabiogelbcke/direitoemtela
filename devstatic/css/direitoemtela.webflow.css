@@ -74,6 +74,11 @@ a:hover {
   text-decoration: none;
 }
 
+li {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
 img {
   display: inline-block;
   max-width: 100%;
@@ -257,6 +262,7 @@ img {
 .main-section {
   height: 100%;
   min-height: 1px;
+  margin-top: 0px;
   padding: 0px;
   border-radius: 0px;
   background-color: #f7f7f7;
@@ -429,6 +435,7 @@ img {
   font-family: Gotham, sans-serif;
   color: #efefef;
   font-weight: 500;
+  text-align: center;
 }
 
 .form-wrapper {
@@ -438,6 +445,7 @@ img {
 }
 
 .field {
+  display: block;
   width: 75%;
   height: 50px;
   float: left;
@@ -449,6 +457,7 @@ img {
 }
 
 .submit-button {
+  display: block;
   width: 25%;
   height: 50px;
   border-top-right-radius: 3px;
@@ -1293,9 +1302,29 @@ img {
 }
 
 .professor-name {
-  padding-top: 10px;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  display: inline-block;
+  margin-top: 89px;
+  margin-bottom: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 119px;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  -webkit-box-ordinal-group: 2;
+  -webkit-order: 1;
+  -ms-flex-order: 1;
+  order: 1;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
   font-family: Gotham, sans-serif;
-  color: #444;
+  color: #4d565d;
   font-size: 29px;
   line-height: 30px;
 }
@@ -1522,7 +1551,7 @@ img {
   position: static;
   display: inline-block;
   margin-top: 24px;
-  margin-bottom: 24px;
+  margin-bottom: 22px;
   padding-right: 7px;
   padding-left: 7px;
   -webkit-box-flex: 0;
@@ -1577,6 +1606,7 @@ img {
   overflow: visible;
   padding: 1px 11px;
   color: rgba(77, 86, 93, .99);
+  font-size: 14px;
   text-align: justify;
 }
 
@@ -1759,7 +1789,7 @@ img {
   display: flex;
   overflow: auto;
   width: 100%;
-  padding: 9px 5px;
+  padding: 11px 5px;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
   -webkit-flex-direction: row;
@@ -2093,6 +2123,74 @@ img {
   display: none;
   margin-top: -27px;
   color: #d13d0e;
+}
+
+.professor-tab {
+  padding-top: 22px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.professor-image {
+  margin-bottom: 0px;
+  border: 3px solid #c78b23;
+  border-radius: 82px;
+}
+
+.professor-name-block {
+  display: block;
+}
+
+.professor-name-underline {
+  position: absolute;
+  left: 0px;
+  top: 1px;
+  right: 0px;
+  height: 0px;
+  margin: 118px 20px 0px 58px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  border: 1px solid #c78b23;
+}
+
+.professor-description-block {
+  margin-top: 20px;
+}
+
+.professor-resume-list {
+  padding-top: 0px;
+}
+
+.professor-resume-item {
+  font-size: 15px;
+}
+
+.professor-description {
+  font-size: 15px;
+}
+
+.article-div {
+  height: 24px;
+  padding-top: 2px;
+  font-size: 15px;
+  font-weight: 400;
+  text-align: center;
+}
+
+.spinner {
+  display: none;
+}
+
+.mailing-form {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 
 html.w-mod-js *[data-ix="navbar"] {
@@ -2475,6 +2573,13 @@ html.w-mod-js *[data-ix="view-more"] {
     font-size: 16px;
     line-height: 26px;
   }
+  .professor-name {
+    position: static;
+    margin-top: 18px;
+    padding-right: 1px;
+    padding-left: 1px;
+    font-size: 25px;
+  }
   .stats-column.right-alignment-big {
     -webkit-box-pack: center;
     -webkit-justify-content: center;
@@ -2532,6 +2637,10 @@ html.w-mod-js *[data-ix="view-more"] {
     font-size: 14px;
     font-weight: 700;
   }
+  .video-tile {
+    font-size: 25px;
+    line-height: 28px;
+  }
   .whole-page-div {
     padding-right: 0%;
     background-attachment: scroll, fixed;
@@ -2552,6 +2661,9 @@ html.w-mod-js *[data-ix="view-more"] {
   .logo-landing-page {
     width: 180px;
     height: 180px;
+  }
+  .professor-name-underline {
+    display: none;
   }
 }
 
@@ -2860,6 +2972,14 @@ html.w-mod-js *[data-ix="view-more"] {
     margin-bottom: 2px;
     font-size: 34px;
   }
+  .professor-name {
+    position: static;
+    display: inline-block;
+    margin-top: 0px;
+    padding-top: 7px;
+    padding-left: 0px;
+    font-size: 20px;
+  }
   .stats-column {
     display: -webkit-box;
     display: -webkit-flex;
@@ -2967,7 +3087,7 @@ html.w-mod-js *[data-ix="view-more"] {
     font-size: 14px;
   }
   .video-suggestions-column {
-    display: block;
+    display: none;
     overflow: visible;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
@@ -2987,7 +3107,8 @@ html.w-mod-js *[data-ix="view-more"] {
     flex-direction: column;
   }
   .video-tile {
-    font-size: 25px;
+    font-size: 19px;
+    line-height: 30px;
     text-align: center;
   }
   .tab-title {
@@ -3128,6 +3249,14 @@ html.w-mod-js *[data-ix="view-more"] {
   }
   .error-msg {
     margin-top: -4px;
+  }
+  .professor-tab {
+    padding-right: 5px;
+    padding-left: 5px;
+  }
+  .professor-name-underline {
+    display: none;
+    overflow: visible;
   }
 }
 

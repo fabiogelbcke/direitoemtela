@@ -36,18 +36,41 @@
                   <div>Descrição</div>
                 </a>
                 <a class="tab-title w-inline-block w-tab-link" data-w-tab="Tab 2">
-                  <div>Materiais de Estudo</div>
+                  <div>Professor</div>
                 </a>
                 <a class="tab-title w-inline-block w-tab-link" data-w-tab="Tab 3">
-                  <div>Professor</div>
+                  <div>Materiais de Estudo</div>
                 </a>
               </div>
               <div class="w-tab-content">
                 <div class="description-tab w--tab-active w-tab-pane" data-w-tab="Tab 1">
                   <p class="video-page-description">{{video.description}}</p>
                 </div>
-                <div class="w-tab-pane" data-w-tab="Tab 2"></div>
-                <div class="w-tab-pane" data-w-tab="Tab 3"></div>
+                <div class="professor-tab w-tab-pane" data-w-tab="Tab 2">
+				  {% if category and category.professor %}
+				  {% with category.professor as professor %}
+				  <div class="professor-name-block"><img class="professor-image" height="100" src="{% cropped_thumbnail professor 'profile_ratio' max_size="100x100" %}" width="100">
+                    <h1 class="professor-name">{{professor.name}}</h1>
+                    <div class="professor-name-underline"></div>
+                  </div>
+                  <div class="professor-description-block">
+					{{professor.description|safe}}
+				  </div>
+				  {% endwith %}
+				  {% elif video.professor %}
+				  {% with video.professor as professor %}
+				  <div class="professor-name-block"><img class="professor-image" height="100" src="{% cropped_thumbnail professor 'profile_ratio' max_size="100x100" %}" width="100">
+                    <h1 class="professor-name">{{professor.name}}</h1>
+                    <div class="professor-name-underline"></div>
+                  </div>
+                  <div class="professor-description-block">
+					{{professor.description|safe}}
+				  </div>
+				  {% endwith %}
+				  {% endif %}
+				</div>
+                <div class="w-tab-pane" data-w-tab="Tab 3">
+				</div>
               </div>
             </div>
           </div>
