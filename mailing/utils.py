@@ -32,7 +32,7 @@ def send_to_everyone(template_name):
     for x in MailingEmail.objects.all():
         template = loader.get_template(template_name)
         content = template.render(Context({}))
-        subject = 'Correção: Lançamento do site Direito em Tela!'
+        subject = 'O site Direito em Tela está no ar!'
         msg = EmailMultiAlternatives(subject=subject,
                                      from_email='Equipe Direito em Tela <contato@direitoemtela.com.br>',
                                      to=[x.email,])
