@@ -28,7 +28,7 @@
         <div class="hidden-mobile hidden-tablet videos-container">
 		  {% for video in videos %}
 		  {% with forloop.counter|add:starting_index as video_index %}
-          <a class="video-div" data-ix="show-video-description" href="oi">
+          <a class="video-div" data-ix="show-video-description" href="{% url 'video_page' slug=video.id %}">
             <div class="video-thumbnail-div"><img class="video-thumbnail-image" src="{% cropped_thumbnail video 'thumbnail_ratio' max_size="275x155" %}">
             </div>
             <div class="video-description-div">

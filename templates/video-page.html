@@ -23,7 +23,9 @@
       <div class="video-container w-container" id="video-container">
         <div class="video-page-title-div">
           <h1 class="video-tile">{{video.title}}</h1>
+		  {% if category %}
           <div class="video-page-subtitle">Aula <span class="yellow-text">{{video_index}}</span> de <span class="yellow-text">{{videos_in_category}}</span> em <a href="{% url 'category_page' category_id=category.id %}"><strong class="yellow-text">{{category.title}} - {{category.description}}</strong></a>.</div>
+		  {% endif %}
         </div>
         <div class="video-row w-row">
           <div class="w-col w-col-8 w-col-medium-8">
@@ -76,17 +78,24 @@
           </div>
           <div class="video-suggestions-column w-col w-col-4 w-col-medium-4">
             <div class="video-suggestions-title-div">
-              <div class="video-suggestions-title">Direito do Trabalho</div>
-              <div class="video-suggestions-subtitle">Parte Geral</div>
+			  {% if category %}
+              <div class="video-suggestions-title">{{category.title}}</div>
+              <div class="video-suggestions-subtitle"></div>
+			  {% else %}
+			  <div class="video-suggestions-title">Para Assistir em Seguida</div>
+              <div class="video-suggestions-subtitle">Listas de reprodução a que esse vídeo pertence</div>
+			  {% endif %}
             </div>
             <div class="yellow-separator"></div>
+			{% if category %}
             <div class="video-suggestions-videos-div">
               <div class="grey-text video-suggestions-subtitle">Próximos vídeos</div>
             </div>
+			{% endif %}
             <div class="scroll-div">
 			  {% for suggestion in suggestions %}
 			  {% with video_index|add:forloop.counter as suggestion_index %}
-              <div class="straight-separator"></div><a class="video-suggestions-video-item-div w-inline-block" href="{% url 'category_video' category_id=category.id video_index=suggestion_index %}"><h1 class="next-video-item-number">{{suggestion_index}}</h1><img class="next-video-item-image" src="{% cropped_thumbnail suggestion 'thumbnail_ratio' %}" width="100"><div class="next-vide-item-text">{{suggestion.title}}</div></a>
+              <div class="straight-separator"></div><a class="video-suggestions-video-item-div w-inline-block" {% if category %}href="{% url 'category_video' category_id=category.id video_index=suggestion_index %}"{% else %}href="{% url 'category_page' category_id=suggestion.id %}"{% endif %} ><h1 class="next-video-item-number">{{suggestion_index}}</h1><img class="next-video-item-image" src="{% cropped_thumbnail suggestion 'thumbnail_ratio' %}" width="100"><div class="next-vide-item-text">{{suggestion.title}}</div></a>
 			  {% endwith %}
 			  {% endfor %}
             </div>

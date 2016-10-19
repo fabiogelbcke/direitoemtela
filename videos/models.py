@@ -21,6 +21,8 @@ class Video(models.Model):
                                    default='logodefault.png')
     thumbnail_ratio = ImageRatioField('thumbnail', '1600x900')
     yt_lesson_number = models.CharField(max_length=4, blank=True)
+    professor = models.ForeignKey('categories.Professor',
+                                    related_name='videos', null=True)
 
     def __unicode__(self):
         return self.title

@@ -10,5 +10,10 @@ class VideoView(HitCountDetailView):
     context_object_name = 'video'
     template_name = 'video-page.html'
     count_hit = True
+
+    def get_context_data(self, **kwargs):
+        context = super(VideoView, self).get_context_data(**kwargs)
+        context['suggestions'] = self.object.categories.all()
+        return context
 # Create your views here.
 
