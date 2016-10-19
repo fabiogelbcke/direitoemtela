@@ -19,7 +19,8 @@
         <div class="video-row w-row">
           <div class="w-col w-col-8 w-col-medium-8">
             <div class="w-embed w-video" style="">
-			  <div onclick="play();" id="vidwrap" style="height:315px;width:560px;background-image: url('{% static 'images/play-button.png' %}'), url('{% cropped_thumbnail video 'thumbnail_ratio' %}'); background-repeat: no-repeat, no-repeat; background-position: center, center;-webkit-background-size:  cover;-moz-background-size: cover;-o-background-size: cover;background-size: 200px 200px,cover;overflow:hidden;cursor:pointer; padding-top:0px;"></div>
+			        <div onclick="play();" id="vidwrap" style="height:348px;width:615px;max-width:90vw; background-image: url('{% static 'images/play-button.png' %}'), url('{% cropped_thumbnail video 'thumbnail_ratio' %}'); background-repeat: no-repeat, no-repeat; background-position: center, center;-webkit-background-size:  cover;-moz-background-size: cover;-o-background-size: cover;background-size: 200px 200px,cover;overflow:hidden;cursor:pointer; padding-top:0px;">
+              </div>
             </div>
             <div class="video-tabs w-tabs" data-duration-in="300" data-duration-out="100">
               <div class="tabs-menu-line-underneath w-tab-menu">
@@ -38,44 +39,44 @@
                   <p class="video-page-description">{{video.description}}</p>
                 </div>
                 <div class="professor-tab w-tab-pane" data-w-tab="Tab 2">
-				  {% if category and category.professor %}
-				  {% with category.professor as professor %}
-				  <div class="professor-name-block"><img class="professor-image" height="100" src="{% cropped_thumbnail professor 'profile_ratio' max_size="100x100" %}" width="100">
+      				  {% if category and category.professor %}
+      				  {% with category.professor as professor %}
+        				  <div class="professor-name-block"><img class="professor-image" height="100" src="{% cropped_thumbnail professor 'profile_ratio' max_size="100x100" %}" width="100">
                     <h1 class="professor-name">{{professor.name}}</h1>
                     <div class="professor-name-underline"></div>
                   </div>
                   <div class="professor-description-block">
-					{{professor.description|safe}}
-				  </div>
-				  {% endwith %}
-				  {% elif video.professor %}
-				  {% with video.professor as professor %}
-				  <div class="professor-name-block"><img class="professor-image" height="100" src="{% cropped_thumbnail professor 'profile_ratio' max_size="100x100" %}" width="100">
+          					{{professor.description|safe}}
+        				  </div>
+        				  {% endwith %}
+        				  {% elif video.professor %}
+        				  {% with video.professor as professor %}
+        				  <div class="professor-name-block"><img class="professor-image" height="100" src="{% cropped_thumbnail professor 'profile_ratio' max_size="100x100" %}" width="100">
                     <h1 class="professor-name">{{professor.name}}</h1>
                     <div class="professor-name-underline"></div>
                   </div>
                   <div class="professor-description-block">
-					{{professor.description|safe}}
-				  </div>
-				  {% endwith %}
-          {% elif video.categories.first %}
-          {% with video.categories.first as category %}
-          {% with category.professor as professor %}
-          {% if professor %}
-          <div class="professor-name-block"><img class="professor-image" height="100" src="{% cropped_thumbnail professor 'profile_ratio' max_size="100x100" %}" width="100">
+        					{{professor.description|safe}}
+        				  </div>
+        				  {% endwith %}
+                  {% elif video.categories.first %}
+                  {% with video.categories.first as category %}
+                  {% with category.professor as professor %}
+                  {% if professor %}
+                  <div class="professor-name-block"><img class="professor-image" height="100" src="{% cropped_thumbnail professor 'profile_ratio' max_size="100x100" %}" width="100">
                     <h1 class="professor-name">{{professor.name}}</h1>
                     <div class="professor-name-underline"></div>
                   </div>
                   <div class="professor-description-block">
-          {{professor.description|safe}}
-          </div>
-          {% endif %}
-          {% endwith %}
-          {% endwith %}
-				  {% endif %}
-				</div>
+                  {{professor.description|safe}}
+                  </div>
+                  {% endif %}
+                  {% endwith %}
+                  {% endwith %}
+        				  {% endif %}
+        				</div>
                 <div class="w-tab-pane" data-w-tab="Tab 3">
-				</div>
+        				</div>
               </div>
             </div>
           </div>
@@ -113,7 +114,7 @@
 	<script src="http://www.youtube.com/player_api"></script>
 	<script type="text/javascript">
 	  function play(){
-	  document.getElementById('vidwrap').innerHTML = '<iframe width="560" height="315" src="http://www.youtube.com/embed/{{video.yt_id}}?autoplay=1" frameborder="0"></iframe>'
+	  document.getElementById('vidwrap').innerHTML = '<iframe width="560" height="400" src="http://www.youtube.com/embed/{{video.yt_id}}?autoplay=1" frameborder="0"></iframe>'
 	  ;}
 	  	function onPlayerStateChange(event) {        
     if(event.data === 0) {          
