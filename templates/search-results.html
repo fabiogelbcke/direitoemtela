@@ -5,17 +5,7 @@
   {% block header %}
   {{block.super}}
   {% endblock %}
-  <div class="navbar w-hidden-main w-hidden-medium w-hidden-small w-hidden-tiny w-nav" data-animation="default" data-collapse="medium" data-contain="1" data-duration="400">
-      <div class="w-container">
-        <a class="logo w-nav-brand" href="#"></a>
-        <nav class="w-nav-menu" role="navigation"><a class="w-nav-link" href="#">Home</a><a class="w-nav-link" href="#">About</a><a class="w-nav-link" href="#">Contact</a>
-        </nav>
-        <div class="w-nav-button">
-          <div class="w-icon-nav-menu"></div>
-        </div>
-      </div>
-    </div>
-  </div>
+  
   <div class="top-bar-plain"></div>
   <div class="thick-separator"></div>
   <div>
@@ -38,12 +28,31 @@
               <div class="separator"></div>
               <div class="description-div">
                 <div class="video-page-description">{{video.description}}
-				</div>
+				      </div>
               </div>
             </div>
           </a>
 		  {% endwith %}
 		  {% endfor %}
+        </div>
+        <div class="hidden-main videos-container">
+      {% for video in videos %}
+          <div class="video-div" data-ix="show-video-description-2">
+            <div class="video-thumbnail-div"><img class="video-thumbnail-image" src="{% cropped_thumbnail video 'thumbnail_ratio' %}">
+            </div>
+            <div class="video-description-div">
+              <div class="title-div">
+                <div class="lesson-number">{{ forloop.counter|add:starting_index}}</div>
+                <div class="video-title">{{video.title}}</div>
+              </div>
+              <div class="separator"></div>
+              <div class="description-div">
+                <div class="video-page-description">{{video.description}}
+              </div>
+              </div><a class="button w-button watch-button" href="{% url 'video_page' slug=video.id %}">Assistir Vídeo</a>
+            </div>
+          </div>
+      {% endfor %}
         </div>
 				{% if page_obj.has_other_pages %}
         <div class="page-navigator">
@@ -73,18 +82,41 @@
   {{block.super}}
 
   <script>
-    $(".video-title").each(function(){
-      if ($(this).text().length <= 12)
+   function longestWordLength(string) {
+      var str = string.split(" ");
+      var longest = 0;
+      for (var i = 0; i < str.length; i++) {
+        if (longest < str[i].length) {
+          longest = str[i].length;
+        }
+      }
+      return longest;
+    }
+
+    $(".video-title-main").each(function(){
+      if ($(this).text().length <= 25)
       {
         $(this).css('font-size', '20px');
       }
-      else if ($(this).text().length <= 40)
+      else if (($(this).text().length <= 40 && longestWordLength($(this).text()) < 10) || $(this).text().length <= 34)
       {
         $(this).css('font-size', '17px')
       }
+      else if ($(this).text().length <= 40)
+        $(this).css('font-size', '15px')
+      else if ($(this).text().length <= 55 && longestWordLength($(this).text()) < 10)
+      {
+        $(this).css('font-size', '15px')
+        $(this).css('line-height', '18px')
+        $(this).css('padding-top', '7px')
+      }
+      else if ($(this).text().length <= 50)
+        $(this).css('font-size', '14px')
       else
       {
         $(this).css('font-size', '13px')
+        $(this).css('line-height', '18px')
+        $(this).css('padding-top', '5px')
       }
     });
   </script>

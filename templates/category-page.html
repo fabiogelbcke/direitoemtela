@@ -29,7 +29,7 @@
             <div class="video-description-div">
               <div class="title-div">
                 <div class="lesson-number">{{video_index}}</div>
-                <div class="video-title">{{video.title}}</div>
+                <div class="video-title video-title-main">{{video.title}}</div>
               </div>
               <div class="separator"></div>
               <div class="description-div">
@@ -88,25 +88,24 @@
 	{{block.super}}
 
 	<script>
-function longestWordLength(string) {
-    var str = string.split(" ");
-    var longest = 0;
-    for (var i = 0; i < str.length; i++) {
+    function longestWordLength(string) {
+      var str = string.split(" ");
+      var longest = 0;
+      for (var i = 0; i < str.length; i++) {
         if (longest < str[i].length) {
-            longest = str[i].length;
+          longest = str[i].length;
         }
+      }
+      return longest;
     }
-    return longest;
-}
 
-	  $(".video-title").each(function(){
+	  $(".video-title-main").each(function(){
   	  if ($(this).text().length <= 25)
 	   	{
 		  	$(this).css('font-size', '20px');
 		  }
       else if (($(this).text().length <= 40 && longestWordLength($(this).text()) < 10) || $(this).text().length <= 34)
       {
-
         $(this).css('font-size', '17px')
       }
       else if ($(this).text().length <= 40)

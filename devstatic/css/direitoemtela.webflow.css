@@ -2414,6 +2414,9 @@ html.w-mod-js *[data-ix="view-more"] {
   .video-title {
     padding-top: 7px;
     padding-bottom: 7px;
+    -webkit-align-self: flex-start;
+    -ms-flex-item-align: start;
+    align-self: flex-start;
     font-size: 17px;
   }
   .video-page-description {
@@ -3069,6 +3072,9 @@ html.w-mod-js *[data-ix="view-more"] {
     display: flex;
     margin-top: 5px;
   }
+  .video-div {
+    min-height: 200px;
+  }
   .video-header {
     padding-bottom: 9px;
     -webkit-box-orient: vertical;
@@ -3080,6 +3086,15 @@ html.w-mod-js *[data-ix="view-more"] {
     -webkit-align-items: center;
     -ms-flex-align: center;
     align-items: center;
+  }
+  .lesson-number {
+    padding-top: 11px;
+    font-size: 43px;
+  }
+  .video-title {
+    -webkit-align-self: center;
+    -ms-flex-item-align: center;
+    align-self: center;
   }
   .video-page-description {
     padding-right: 0px;

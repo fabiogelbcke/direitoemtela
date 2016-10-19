@@ -45,6 +45,17 @@
         </div>
       </div>
     </div>
+    <div class="navbar w-hidden-main w-hidden-medium w-hidden-small w-hidden-tiny w-nav" data-animation="default" data-collapse="medium" data-contain="1" data-duration="400">
+      <div class="w-container">
+        <a class="logo w-nav-brand" href="#"></a>
+        <nav class="w-nav-menu" role="navigation"><a class="w-nav-link" href="{% url 'index' %}">Início</a><a class="w-nav-link" href="{% url 'categories' %}">Aulas</a><a class="w-nav-link" href="{% url 'about' %}">Quem somos</a>
+        </nav>
+        <div class="w-nav-button">
+          <div class="w-icon-nav-menu"></div>
+        </div>
+      </div>
+    </div>
+  </div>
   {% endblock %}
 {% endblock %}
 {% block footer %}
