@@ -20,6 +20,9 @@ DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
 
 THUMBNAIL_DEFAULT_STORAGE = DEFAULT_FILE_STORAGE
 
+DEBUG = FALSE
+
+
 #CACHES = {
 #    'default': {
 #        'BACKEND': 'redis_cache.RedisCache',
