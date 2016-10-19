@@ -1585,6 +1585,10 @@ img {
   display: inline-block;
   max-width: 242px;
   padding: 9px 7px;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
   color: #4e4949;
   font-size: 17px;
   line-height: 22px;
