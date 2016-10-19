@@ -22,6 +22,8 @@ THUMBNAIL_DEFAULT_STORAGE = DEFAULT_FILE_STORAGE
 
 DEBUG = False
 
+ALLOWED_HOSTS = ['direitoemtela.com.br', 'www.direitoemtela.com.br', '52.67.110.163']
+
 
 #CACHES = {
 #    'default': {
