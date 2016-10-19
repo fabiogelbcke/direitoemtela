@@ -11,9 +11,8 @@ from django.utils import timezone
 import requests
 import tempfile
 import re
-
-
-
+from django.http import HttpResponse
+from django.contrib.admin.views.decorators import staff_member_required
 
 def get_new_video_ids():
     youtube = build(
@@ -193,3 +192,20 @@ def get_new_videos():
         category_ids = get_category_ids()
         add_videos_to_categories(category_ids, video_ids)
     return len(video_ids)
+
+@staff_member_required
+def get_video_by_id(request):
+    video_id = request.POST.get('video_id', None)
+    if video_id:
+        try:
+            video_ids=[video_id]
+            videos_info = get_videos_info(video_ids)
+            create_new_videos(videos_info)
+            category_ids = get_category_ids()
+            add_videos_to_categories(category_ids, video_ids)
+            return HttpResponse('Video adicionado')
+        except:
+            return HttpResponse('Deu ruim')
+    else:
+        return HttpResponse('Deu ruim')    
+        
