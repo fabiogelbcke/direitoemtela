@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.db.models import Q
 from videos.models import Video, Tag
 from django.views.generic import ListView
@@ -25,3 +25,7 @@ class SearchResultsView(ListView):
         context['starting_index'] = (context['page_obj'].number - 1) * 15
         return context
 # Create your views here.
+
+def get_search_page(request):
+    query = request.GET.get('query', '')
+    return redirect('search_results_page', query=query)

@@ -11,7 +11,7 @@
         <div class="hero-subheading" data-ix="hero-text-2">O Direito em tela traz a universidade para dentro do seu computador</div>
         <div>
           <div class="">
-            <form method="POST" class="search-form" data-ix="hero-button" data-name="Email Form 2" id="email-form-2" name="email-form-2">
+            <form method="GET" action="{% url 'get_search_page' %}" class="search-form" data-ix="hero-button" data-name="Email Form 2" id="email-form-2" name="email-form-2">
 			  {% csrf_token %}
               <div class="search-row w-row">
                 <div class="search-bar-column w-col w-col-11 w-col-small-11">
@@ -26,7 +26,7 @@
               </div>
             </form>
           </div>
-        </div><a class="button w-button" data-ix="hero-button" href="#Latest-post">Ver todos os Videos</a>
+        </div><a class="button w-button" data-ix="hero-button" href="{% url 'categories' %}">Ver todos os Videos</a>
       </div>
     </div>
     <div class="bottom-padding main-section" id="posts">

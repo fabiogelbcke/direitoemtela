@@ -98,5 +98,16 @@
 
 	{% block js %}
 	{{block.super}}
-	<script type="text/javascript">function play(){document.getElementById('vidwrap').innerHTML = '<iframe width="560" height="315" src="http://www.youtube.com/embed/{{video.yt_id}}?autoplay=1" frameborder="0"></iframe>';}</script>
+	<script src="http://www.youtube.com/player_api"></script>
+	<script type="text/javascript">
+	  function play(){
+	  document.getElementById('vidwrap').innerHTML = '<iframe width="560" height="315" src="http://www.youtube.com/embed/{{video.yt_id}}?autoplay=1" frameborder="0"></iframe>'
+	  ;}
+	  	function onPlayerStateChange(event) {        
+    if(event.data === 0) {          
+    alert('done');
+    }
+    };
+	</script>
+
 	{% endblock %}
