@@ -28,13 +28,15 @@ def add_to_list(request):
         return HttpResponseBadRequest('Por favor digite um email válido')
 
 
-def send_to_everyone(template_name, subject):
-    emails = [x.email for x in MailingEmail.objects.all()]
-    template = loader.get_template('email-mailing-list.html')
-    content = template.render(Context({}))
-    msg = EmailMultiAlternatives(subject=subject,
-                                 from_email='Equipe Direito em Tela <contato@direitoemtela.com.br>',
-                                 to=emails)
-    msg.attach_alternative(content, 'text/html')
-    msg.send()
-    
+def send_to_everyone(template_name):
+    for x in MailingEmail.objects.all():
+        template = loader.get_template(template_name)
+        content = template.render(Context({}))
+        subject = 'Correção: Lançamento do site Direito em Tela!'
+        msg = EmailMultiAlternatives(subject=subject,
+                                     from_email='Equipe Direito em Tela <contato@direitoemtela.com.br>',
+                                     to=[x.email,])
+        msg.attach_alternative(content, 'text/html')
+        msg.send()
+        
+        
