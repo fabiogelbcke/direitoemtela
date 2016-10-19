@@ -14,11 +14,11 @@ class IndexView(TemplateView):
         context['featured_categories'] = Category.objects.filter(featured=True)
         return context
 
-    def dispatch(self, request, *args, **kwargs):
-        if not request.user.is_authenticated():
-            return redirect('under_construction')
-        else:
-            return super(IndexView, self).dispatch(request, *args, **kwargs)
+    #def dispatch(self, request, *args, **kwargs):
+    #    if not request.user.is_authenticated():
+    #        return redirect('under_construction')
+    #    else:
+    #        return super(IndexView, self).dispatch(request, *args, **kwargs)
 
 class AboutView(TemplateView):
     template_name = 'about.html'
