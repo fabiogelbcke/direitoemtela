@@ -68,3 +68,25 @@
       </div>
     </div>
 {% endblock %}
+
+{% block js %}
+  {{block.super}}
+
+  <script>
+    $(".video-title").each(function(){
+      if ($(this).text().length <= 12)
+      {
+        $(this).css('font-size', '20px');
+      }
+      else if ($(this).text().length <= 40)
+      {
+        $(this).css('font-size', '17px')
+      }
+      else
+      {
+        $(this).css('font-size', '13px')
+      }
+    });
+  </script>
+  
+{% endblock %}
