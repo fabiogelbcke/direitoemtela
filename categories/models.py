@@ -41,7 +41,8 @@ class Category(models.Model):
     featured = models.BooleanField(default=False, blank=True)
     professor = models.ForeignKey(Professor,
                                   related_name='categories',
-                                  null=True)
+                                  null=True,
+                                  blank=True)
     thumbnail = ImageCropField(upload_to=get_thumbnail_path, blank=True,
                                default='logodefault.png')
     thumbnail_ratio = ImageRatioField('thumbnail', '592x300')

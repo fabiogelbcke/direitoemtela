@@ -59,8 +59,8 @@
 					{{professor.description|safe}}
 				  </div>
 				  {% endwith %}
-				  {% elif video.professor %}
-				  {% with video.professor as professor %}
+				  {% else %}
+				  {% with video.professor|default_if_none:video.categories.first.professor as professor %}
 				  <div class="professor-name-block"><img class="professor-image" height="100" src="{% cropped_thumbnail professor 'profile_ratio' max_size="100x100" %}" width="100">
                     <h1 class="professor-name">{{professor.name}}</h1>
                     <div class="professor-name-underline"></div>
