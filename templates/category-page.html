@@ -8,7 +8,7 @@
     <div class="category inner-hero">
       <div class="container">
         <h1 class="hero-header">{{category.title}}</h1>
-        <h1 class="category-subtitle hero-header">Parte Geral</h1>
+        <h1 class="category-subtitle hero-header"></h1>
       </div>
     </div>
     <div class="main-section" id="posts">
@@ -43,12 +43,13 @@
         </div>
         <div class="hidden-main videos-container">
 		  {% for video in videos %}
+		  	  {% with forloop.counter|add:starting_index as video_index %}
           <div class="video-div" data-ix="show-video-description-2">
             <div class="video-thumbnail-div"><img class="video-thumbnail-image" src="{% cropped_thumbnail video 'thumbnail_ratio' %}">
             </div>
             <div class="video-description-div">
               <div class="title-div">
-                <div class="lesson-number">{{ forloop.counter|add:starting_index}}</div>
+                <div class="lesson-number">{{ video_index}}</div>
                 <div class="video-title">{{video.title}}</div>
               </div>
               <div class="separator"></div>
@@ -58,6 +59,7 @@
               </div><a class="button w-button watch-button" href="{% url 'category_video' category_id=category.id video_index=video_index %}">Assistir Vídeo</a>
             </div>
           </div>
+		  {% endwith %}
 		  {% endfor %}
         </div>
 		{% if page_obj.has_other_pages %}
