@@ -23,7 +23,7 @@
         <div class="hidden-mobile hidden-tablet videos-container">
 		  {% for video in videos %}
 		  {% with forloop.counter|add:starting_index as video_index %}
-          <a class="video-div" data-ix="show-video-description" href="{% url 'category_video' category_id=category.id video_index=video_index%}">
+          <a class="video-div" data-ix="show-video-description" href="{% url 'category_video' category_id=category.id video_index=video_index %}">
             <div class="video-thumbnail-div"><img class="video-thumbnail-image" src="{% cropped_thumbnail video 'thumbnail_ratio' %}">
             </div>
             <div class="video-description-div">
@@ -55,7 +55,7 @@
               <div class="description-div">
                 <div class="video-page-description">{{video.description}}
 				</div>
-              </div><a class="button w-button watch-button" href="{% cropped_thumbnail video 'thumbnail_ratio' %}">Assistir Vídeo</a>
+              </div><a class="button w-button watch-button" href="{% url 'category_video' category_id=category.id video_index=video_index %}">Assistir Vídeo</a>
             </div>
           </div>
 		  {% endfor %}
