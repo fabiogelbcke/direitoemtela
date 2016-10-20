@@ -55,7 +55,7 @@
               <div class="description-div">
                 <div class="video-page-description">{{video.description}}
 				</div>
-              </div><a class="button w-button watch-button" href="#">Assistir Vídeo</a>
+              </div><a class="button w-button watch-button" href="{% cropped_thumbnail video 'thumbnail_ratio' %}">Assistir Vídeo</a>
             </div>
           </div>
 		  {% endfor %}
