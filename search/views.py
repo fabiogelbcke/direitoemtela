@@ -11,6 +11,8 @@ class SearchResultsView(ListView):
 
     def get_queryset(self):
         query = self.kwargs['query']
+        if query == 'Todos os Videos':
+            return Video.objects.all()
         tags = Tag.objects.filter(name__icontains=query)
         qs = Video.objects.filter(Q(title__icontains=query)
                                     | Q(description__icontains=query)
@@ -27,5 +29,7 @@ class SearchResultsView(ListView):
 # Create your views here.
 
 def get_search_page(request):
-    query = request.GET.get('query', '')
+    query = request.GET.get('query', 'Todos os Videos')
+    if not query:
+        query = 'Todos os Videos'
     return redirect('search_results_page', query=query)
