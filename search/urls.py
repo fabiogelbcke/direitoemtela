@@ -3,12 +3,12 @@ import views
 
 urlpatterns = patterns('',
                        url(
-                           r'^search/(?P<query>\w+)/(?P<page>\d+)/$',
+                           r'^search/(?P<query>[\w\s]+)/(?P<page>\d+)/$',
                            views.SearchResultsView.as_view(),
                            name='search_results_page'
                        ),
                        url(
-                           r'^search/(?P<query>\w+)/$',
+                           r'^search/(?P<query>[\w\s]+)/$',
                            views.SearchResultsView.as_view(),
                            name='search_results_page'
                        ),
