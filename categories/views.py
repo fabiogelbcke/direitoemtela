@@ -71,4 +71,5 @@ class CategoryVideoView(HitCountDetailView):
         context['video_index'] = video_index
         context['suggestions'] = suggestions
         context['videos_in_category'] = category_videos.count()
+        context['skip_automatically'] = video_index < category_videos.count()
         return context

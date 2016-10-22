@@ -18,7 +18,7 @@
         </div>
         <div class="video-row w-row">
           <div class="w-col w-col-8 w-col-medium-8">
-            <div class="w-embed w-video" style="">
+            <div class="w-embed w-video" style="height:348px;">
 			        <div onclick="play();" id="vidwrap" style="height:348px;width:615px;max-width:90vw; background-image: url('{% static 'images/play-button.png' %}'), url('{% cropped_thumbnail video 'thumbnail_ratio' %}'); background-repeat: no-repeat, no-repeat; background-position: center, center;-webkit-background-size:  cover;-moz-background-size: cover;-o-background-size: cover;background-size: 200px 200px,cover;overflow:hidden;cursor:pointer; padding-top:0px;">
               </div>
             </div>
@@ -112,9 +112,43 @@
 	{% block js %}
 	{{block.super}}
 	<script type="text/javascript">
+	  var tag = document.createElement('script');
+
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+	  var player;
+	  
 	  function play(){
-	  document.getElementById('vidwrap').innerHTML = '<iframe width="560" height="400" src="https://www.youtube.com/embed/{{video.yt_id}}?autoplay=1" frameborder="0"></iframe>';
-  }
+      player = new YT.Player('vidwrap', {
+              height: '348',
+              width: '615',
+      videoId: '{{video.yt_id}}',
+	  playerVars: {
+      modestbranding: true,
+	  rel: 0
+	  },
+
+              events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+              }
+            });
+        }
+
+	  function onPlayerReady(event) {
+            event.target.playVideo();
+      }
+	  function onPlayerStateChange(event) {        
+            if(event.data === 0) {          
+	        {% if skip_automatically %}
+	  setTimeout(function(){
+	  window.location.href = "{% url 'category_video' category_id=category.id video_index=video_index|add:1 %}";
+}, 2000);
+	        {% endif %}
+            }
+      }
 	</script>
 
 	{% endblock %}
