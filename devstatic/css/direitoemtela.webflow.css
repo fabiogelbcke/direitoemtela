@@ -1329,6 +1329,10 @@ img {
   line-height: 30px;
 }
 
+.professor-name.about-page {
+  position: static;
+}
+
 .upper-section {
   padding-top: 83px;
   padding-bottom: 83px;
