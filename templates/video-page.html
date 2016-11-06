@@ -151,9 +151,12 @@
       }
 	  function countdownNextVideo(time)
 	  {
-	  if (timer == 0 && skip == 1)
+	  if (timer == 0)
 	  {
-	  window.location.href = "{% url 'category_video' category_id=category.id video_index=video_index|add:1 %}";
+	    if (skip == 1)
+	    {
+     	    window.location.href = "{% url 'category_video' category_id=category.id video_index=video_index|add:1 %}";
+	    }
 	  }
 	  else
 	  {
