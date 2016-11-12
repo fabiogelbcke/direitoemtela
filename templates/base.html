@@ -94,18 +94,18 @@
 <script src="{% static 'js/jquery.form.js' %}"></script>
 <script>
   $("#mailing-form").ajaxForm({
-    success:function(data){
-      $("#mailing-success-msg").show();
-      $("#mailing-email-input").hide();
-      $("#mailing-submit").hide();
-      $(".spinner").hide();
-    },
-    error:function(data){
-      $("#mailing-error-msg").show();
-      $("#mailing-email-input").show();
-      $("#mailing-submit").show();
-      $(".spinner").hide();  
-    }
+      success:function(data){
+	  $("#mailing-success-msg").show();
+	  $("#mailing-email-input").hide();
+	  $("#mailing-submit").hide();
+	  $(".spinner").hide();
+      },
+      error:function(data){
+	  $("#mailing-error-msg").show();
+	  $("#mailing-email-input").show();
+	  $("#mailing-submit").show();
+	  $(".spinner").hide();  
+      }
   });
 </script>
 <script>
