@@ -32,6 +32,8 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = ['local.det.com', 'direitoemtela.com.br',]
 
+ADMINS = [('Fabio', 'fabio@direitoemtela.com.br'),]
+
 EMAIL_HOST = 'smtp.sendgrid.net'
 
 EMAIL_HOST_USER = 'direitoemtela'
