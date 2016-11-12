@@ -166,6 +166,7 @@
 		     setTimeout(countdownNextVideo, 1000);
 		 }
 	 }
+	 {% endif %}
 	 
 	 function onPlayerStateChange(event) {        
              if(event.data === 0) {          
@@ -186,7 +187,6 @@
 	     player.playVideo();
 	     skip = 0;
 	 });
-	 {% endif %}
 	</script>
 
 	{% endblock %}
