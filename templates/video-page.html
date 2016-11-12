@@ -2,189 +2,191 @@
 {% load staticfiles %}{% load cropping %}
 {% block content %}
 <div class="header-background">
-  {% block header %}
-  {{block.super}}
-  {% endblock %}
-  <div class="top-bar-plain"></div>
-  <div class="thick-separator"></div>
-  <div>
-    <div class="main-section" id="posts">
-      <div class="video-container w-container" id="video-container">
-        <div class="video-page-title-div">
-          <h1 class="video-tile">{{video.title}}</h1>
-		  {% if category %}
-          <div class="video-page-subtitle">Aula <span class="yellow-text">{{video_index}}</span> de <span class="yellow-text">{{videos_in_category}}</span> em <a href="{% url 'category_page' category_id=category.id %}"><strong class="yellow-text">{{category.title}} - {{category.description}}</strong></a>.</div>
-		  {% endif %}
-        </div>
-        <div class="video-row w-row">
-          <div class="w-col w-col-8 w-col-medium-8">
-            <div class="w-embed w-video" style="height:348px;">
-			  <div onclick="play();" id="vidwrap" style="height:348px;width:615px;max-width:90vw; background-image: url('{% static 'images/play-button.png' %}'), url('{% cropped_thumbnail video 'thumbnail_ratio' %}'); background-repeat: no-repeat, no-repeat; background-position: center, center;-webkit-background-size:  cover;-moz-background-size: cover;-o-background-size: cover;background-size: 200px 200px,cover;overflow:hidden;cursor:pointer; padding-top:0px;">
+    {% block header %}
+    {{block.super}}
+    {% endblock %}
+    <div class="top-bar-plain"></div>
+    <div class="thick-separator"></div>
+    <div>
+	<div class="main-section" id="posts">
+	    <div class="video-container w-container" id="video-container">
+		<div class="video-page-title-div">
+		    <h1 class="video-tile">{{video.title}}</h1>
+		    {% if category %}
+		    <div class="video-page-subtitle">Aula <span class="yellow-text">{{video_index}}</span> de <span class="yellow-text">{{videos_in_category}}</span> em <a href="{% url 'category_page' category_id=category.id %}"><strong class="yellow-text">{{category.title}} - {{category.description}}</strong></a>.</div>
+		    {% endif %}
+		</div>
+		<div class="video-row w-row">
+		    <div class="w-col w-col-8 w-col-medium-8">
+			<div class="w-embed w-video" style="height:348px;">
+			    <div onclick="play();" id="vidwrap" style="height:348px;width:615px;max-width:90vw; background-image: url('{% static 'images/play-button.png' %}'), url('{% cropped_thumbnail video 'thumbnail_ratio' %}'); background-repeat: no-repeat, no-repeat; background-position: center, center;-webkit-background-size:  cover;-moz-background-size: cover;-o-background-size: cover;background-size: 200px 200px,cover;overflow:hidden;cursor:pointer; padding-top:0px;">
 
-              </div>
-			  <div id="ytvideo"></div>
-			  <div id="countdowndiv" class="next-lesson-countdown">
+			    </div>
+			    <div id="ytvideo"></div>
+			    <div id="countdowndiv" class="next-lesson-countdown">
 				<h1 class="countdown-text">Próxima aula em</h1>
 				<h1 id="countdown" class="countdown-timer">5</h1><a id="cancel-skip-button" class="button w-button" href="#">Assistir a essa aula novamente</a>
-              </div>
-            </div>
-            <div class="video-tabs w-tabs" data-duration-in="300" data-duration-out="100">
-              <div class="tabs-menu-line-underneath w-tab-menu">
-                <a class="tab-title w--current w-inline-block w-tab-link" data-w-tab="Tab 1">
-                  <div>Descrição</div>
-                </a>
-                <a class="tab-title w-inline-block w-tab-link" data-w-tab="Tab 2">
-                  <div>Professor</div>
-                </a>
-                <a class="tab-title w-inline-block w-tab-link" data-w-tab="Tab 3">
-                  <div>Materiais de Estudo</div>
-                </a>
-              </div>
-              <div class="w-tab-content">
-                <div class="description-tab w--tab-active w-tab-pane" data-w-tab="Tab 1">
-                  <p class="video-page-description">{{video.description}}</p>
-                </div>
-                <div class="professor-tab w-tab-pane" data-w-tab="Tab 2">
-      				  {% if category and category.professor %}
-      				  {% with category.professor as professor %}
-        				  <div class="professor-name-block"><img class="professor-image" height="100" src="{% cropped_thumbnail professor 'profile_ratio' max_size="100x100" %}" width="100">
-                    <h1 class="professor-name">{{professor.name}}</h1>
-                    <div class="professor-name-underline"></div>
-                  </div>
-                  <div class="professor-description-block">
-          					{{professor.description|safe}}
-        				  </div>
-        				  {% endwith %}
-        				  {% elif video.professor %}
-        				  {% with video.professor as professor %}
-        				  <div class="professor-name-block"><img class="professor-image" height="100" src="{% cropped_thumbnail professor 'profile_ratio' max_size="100x100" %}" width="100">
-                    <h1 class="professor-name">{{professor.name}}</h1>
-                    <div class="professor-name-underline"></div>
-                  </div>
-                  <div class="professor-description-block">
-        					{{professor.description|safe}}
-        				  </div>
-        				  {% endwith %}
-                  {% elif video.categories.first %}
-                  {% with video.categories.first as category %}
-                  {% with category.professor as professor %}
-                  {% if professor %}
-                  <div class="professor-name-block"><img class="professor-image" height="100" src="{% cropped_thumbnail professor 'profile_ratio' max_size="100x100" %}" width="100">
-                    <h1 class="professor-name">{{professor.name}}</h1>
-                    <div class="professor-name-underline"></div>
-                  </div>
-                  <div class="professor-description-block">
-                  {{professor.description|safe}}
-                  </div>
-                  {% endif %}
-                  {% endwith %}
-                  {% endwith %}
-        				  {% endif %}
-        				</div>
-                <div class="w-tab-pane" data-w-tab="Tab 3">
-				  <h1> Em breve!</h1>
-        		</div>
-              </div>
-            </div>
-          </div>
-          <div class="video-suggestions-column w-col w-col-4 w-col-medium-4">
-            <div class="video-suggestions-title-div">
-			  {% if category %}
-              <div class="video-suggestions-title">{{category.title}}</div>
-              <div class="video-suggestions-subtitle"></div>
-			  {% else %}
-			  <div class="video-suggestions-title">Para Assistir em Seguida</div>
-              <div class="video-suggestions-subtitle">Listas de reprodução a que esse vídeo pertence</div>
-			  {% endif %}
-            </div>
-            <div class="yellow-separator"></div>
+			    </div>
+			</div>
+			<div class="video-tabs w-tabs" data-duration-in="300" data-duration-out="100">
+			    <div class="tabs-menu-line-underneath w-tab-menu">
+				<a class="tab-title w--current w-inline-block w-tab-link" data-w-tab="Tab 1">
+				    <div>Descrição</div>
+				</a>
+				<a class="tab-title w-inline-block w-tab-link" data-w-tab="Tab 2">
+				    <div>Professor</div>
+				</a>
+				<a class="tab-title w-inline-block w-tab-link" data-w-tab="Tab 3">
+				    <div>Materiais de Estudo</div>
+				</a>
+			    </div>
+			    <div class="w-tab-content">
+				<div class="description-tab w--tab-active w-tab-pane" data-w-tab="Tab 1">
+				    <p class="video-page-description">{{video.description}}</p>
+				</div>
+				<div class="professor-tab w-tab-pane" data-w-tab="Tab 2">
+      				    {% if category and category.professor %}
+      				    {% with category.professor as professor %}
+        			    <div class="professor-name-block"><img class="professor-image" height="100" src="{% cropped_thumbnail professor 'profile_ratio' max_size="100x100" %}" width="100">
+					<h1 class="professor-name">{{professor.name}}</h1>
+					<div class="professor-name-underline"></div>
+				    </div>
+				    <div class="professor-description-block">
+          				{{professor.description|safe}}
+        			    </div>
+        			    {% endwith %}
+        			    {% elif video.professor %}
+        			    {% with video.professor as professor %}
+        			    <div class="professor-name-block"><img class="professor-image" height="100" src="{% cropped_thumbnail professor 'profile_ratio' max_size="100x100" %}" width="100">
+					<h1 class="professor-name">{{professor.name}}</h1>
+					<div class="professor-name-underline"></div>
+				    </div>
+				    <div class="professor-description-block">
+        				{{professor.description|safe}}
+        			    </div>
+        			    {% endwith %}
+				    {% elif video.categories.first %}
+				    {% with video.categories.first as category %}
+				    {% with category.professor as professor %}
+				    {% if professor %}
+				    <div class="professor-name-block"><img class="professor-image" height="100" src="{% cropped_thumbnail professor 'profile_ratio' max_size="100x100" %}" width="100">
+					<h1 class="professor-name">{{professor.name}}</h1>
+					<div class="professor-name-underline"></div>
+				    </div>
+				    <div class="professor-description-block">
+					{{professor.description|safe}}
+				    </div>
+				    {% endif %}
+				    {% endwith %}
+				    {% endwith %}
+        			    {% endif %}
+        			</div>
+				<div class="w-tab-pane" data-w-tab="Tab 3">
+				    <h1> Em breve!</h1>
+        			</div>
+			    </div>
+			</div>
+		    </div>
+		    <div class="video-suggestions-column w-col w-col-4 w-col-medium-4">
+			<div class="video-suggestions-title-div">
+			    {% if category %}
+			    <div class="video-suggestions-title">{{category.title}}</div>
+			    <div class="video-suggestions-subtitle"></div>
+			    {% else %}
+			    <div class="video-suggestions-title">Para Assistir em Seguida</div>
+			    <div class="video-suggestions-subtitle">Listas de reprodução a que esse vídeo pertence</div>
+			    {% endif %}
+			</div>
+			<div class="yellow-separator"></div>
 			{% if category %}
-            <div class="video-suggestions-videos-div">
-              <div class="grey-text video-suggestions-subtitle">Próximos vídeos</div>
-            </div>
+			<div class="video-suggestions-videos-div">
+			    <div class="grey-text video-suggestions-subtitle">Próximos vídeos</div>
+			</div>
 			{% endif %}
-            <div class="scroll-div">
-			  {% for suggestion in suggestions %}
-			  {% with video_index|add:forloop.counter as suggestion_index %}
-              <div class="straight-separator"></div><a class="video-suggestions-video-item-div w-inline-block" {% if category %}href="{% url 'category_video' category_id=category.id video_index=suggestion_index %}"{% else %}href="{% url 'category_page' category_id=suggestion.id %}"{% endif %} ><h1 class="next-video-item-number">{{suggestion_index}}</h1><img class="next-video-item-image" src="{% cropped_thumbnail suggestion 'thumbnail_ratio' %}" width="100"><div class="next-vide-item-text">{{suggestion.title}}</div></a>
-			  {% endwith %}
-			  {% endfor %}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+			<div class="scroll-div">
+			    {% for suggestion in suggestions %}
+			    {% with video_index|add:forloop.counter as suggestion_index %}
+			    <div class="straight-separator"></div><a class="video-suggestions-video-item-div w-inline-block" {% if category %}href="{% url 'category_video' category_id=category.id video_index=suggestion_index %}"{% else %}href="{% url 'category_page' category_id=suggestion.id %}"{% endif %} ><h1 class="next-video-item-number">{{suggestion_index}}</h1><img class="next-video-item-image" src="{% cropped_thumbnail suggestion 'thumbnail_ratio' %}" width="100"><div class="next-vide-item-text">{{suggestion.title}}</div></a>
+			    {% endwith %}
+			    {% endfor %}
+			</div>
+		    </div>
+		</div>
+	    </div>
+	</div>
 	{% endblock %}
 
 	{% block js %}
 	{{block.super}}
 	<script type="text/javascript">
-	  var tag = document.createElement('script');
+	 var tag = document.createElement('script');
 
-      tag.src = "https://www.youtube.com/iframe_api";
-      var firstScriptTag = document.getElementsByTagName('script')[0];
-      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+	 tag.src = "https://www.youtube.com/iframe_api";
+	 var firstScriptTag = document.getElementsByTagName('script')[0];
+	 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-	  var player;
-	  var timer;
-	  var skip;
-	  
-	  function play(){
-      player = new YT.Player('ytvideo', {
-              height: '348',
-              width: '615',
-      videoId: '{{video.yt_id}}',
-	  playerVars: {
-      modestbranding: true,
-	  rel: 0
-	  },
+	 var player;
+	 var timer;
+	 var skip;
+	 
+	 function play(){
+	     player = new YT.Player('ytvideo', {
+		 height: '348',
+		 width: '615',
+		 videoId: '{{video.yt_id}}',
+		 playerVars: {
+		     modestbranding: true,
+		     rel: 0
+		 },
 
-              events: {
-                'onReady': onPlayerReady,
-                'onStateChange': onPlayerStateChange
-              }
-            });
-        }
+		 events: {
+                     'onReady': onPlayerReady,
+                     'onStateChange': onPlayerStateChange
+		 }
+             });
+         }
 
-	  function onPlayerReady(event) {
-            event.target.playVideo();
-      }
-	  function countdownNextVideo(time)
-	  {
-	  if (timer == 0)
-	  {
-	    if (skip == 1)
-	    {
-     	    window.location.href = "{% url 'category_video' category_id=category.id video_index=video_index|add:1 %}";
-	    }
-	  }
-	  else
-	  {
-	  timer = timer - 1;
-	  $("#countdown").text(timer.toString());
-	  setTimeout(countdownNextVideo, 1000);
-	  }
-	  }
-	  
-	  function onPlayerStateChange(event) {        
-            if(event.data === 0) {          
-	  {% if skip_automatically %}
-	  $("#vidwrap").hide();
-	  $("#ytvideo").hide();
-	  $("#countdowndiv").css("display", "flex");
-	  timer = 6;
-	  skip = 1;
-	  countdownNextVideo();
-	  {% endif %}
-      }
-      }
-	  $("#cancel-skip-button").click(function(){
-	  $("#vidwrap").show();
-	  $("#ytvideo").show();
-	  $("#countdowndiv").hide();
-	  player.playVideo();
-	  skip = 0;
-	  });
+	 function onPlayerReady(event) {
+             event.target.playVideo();
+	 }
+	 {% if category %}
+	 function countdownNextVideo(time)
+	 {
+	     if (timer == 0)
+		 {
+		     if (skip == 1)
+			 {
+     			     window.location.href = "{% url 'category_video' category_id=category.id video_index=video_index|add:1 %}";
+			 }
+		 }
+	     else
+		 {
+		     timer = timer - 1;
+		     $("#countdown").text(timer.toString());
+		     setTimeout(countdownNextVideo, 1000);
+		 }
+	 }
+	 
+	 function onPlayerStateChange(event) {        
+             if(event.data === 0) {          
+		 {% if skip_automatically %}
+		 $("#vidwrap").hide();
+		 $("#ytvideo").hide();
+		 $("#countdowndiv").css("display", "flex");
+		 timer = 6;
+		 skip = 1;
+		 countdownNextVideo();
+		 {% endif %}
+	     }
+	 }
+	 $("#cancel-skip-button").click(function(){
+	     $("#vidwrap").show();
+	     $("#ytvideo").show();
+	     $("#countdowndiv").hide();
+	     player.playVideo();
+	     skip = 0;
+	 });
+	 {% endif %}
 	</script>
 
 	{% endblock %}
