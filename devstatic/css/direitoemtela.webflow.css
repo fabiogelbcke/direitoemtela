@@ -1695,6 +1695,8 @@ img {
 }
 
 .tab-title {
+  padding-right: 24px;
+  padding-left: 24px;
   background-color: transparent;
   color: #4d565d;
 }
@@ -2247,6 +2249,56 @@ img {
   opacity: 0.26;
 }
 
+.share-buttons {
+  padding: 10px 16px;
+}
+
+.social-share-button {
+  width: 60px;
+  height: 60px;
+  margin-right: 5px;
+  margin-left: 5px;
+  border-radius: 5px;
+  background-image: url('../images/facebook-share.png');
+  background-position: 0px 0px;
+  background-size: cover;
+}
+
+.social-share-button.twitter {
+  background-image: url('../images/twitter-share.png');
+}
+
+.social-share-button.google {
+  background-image: url('../images/google-share.png');
+  background-size: cover;
+}
+
+.social-share-button.linkedin {
+  background-image: url('../images/linkedin.png');
+  background-size: cover;
+}
+
+.social-share-button.whatsapp {
+  display: none;
+}
+
+.share-link-div {
+  padding-right: 16px;
+  padding-left: 16px;
+}
+
+.share-link {
+  margin-top: 0px;
+  margin-right: 14px;
+  padding: 6px 7px;
+  border: 1px solid #4d565d;
+  background-color: #d5d5d5;
+}
+
+.share-link-title {
+  margin-bottom: 2px;
+}
+
 html.w-mod-js *[data-ix="navbar"] {
   opacity: 0;
 }
@@ -2506,6 +2558,14 @@ html.w-mod-js *[data-ix="view-more"] {
   .subscribe-input {
     min-width: 284px;
   }
+  .social-share-button {
+    width: 40px;
+    height: 40px;
+  }
+  .social-share-button.whatsapp {
+    display: inline-block;
+    background-image: url('../images/whatsapp.png');
+  }
 }
 
 @media (max-width: 767px) {
@@ -2694,9 +2754,17 @@ html.w-mod-js *[data-ix="view-more"] {
     font-size: 14px;
     font-weight: 700;
   }
+  .video-suggestions-column {
+    display: none;
+  }
   .video-tile {
     font-size: 25px;
     line-height: 28px;
+  }
+  .tab-title {
+    padding-right: 17px;
+    padding-left: 17px;
+    font-size: 13px;
   }
   .whole-page-div {
     padding-right: 0%;
@@ -3191,8 +3259,12 @@ html.w-mod-js *[data-ix="view-more"] {
     display: inline-block;
     height: 100%;
     max-width: 33%;
-    padding-right: 12px;
-    padding-left: 12px;
+    padding-right: 6px;
+    padding-left: 6px;
+    -webkit-align-self: center;
+    -ms-flex-item-align: center;
+    align-self: center;
+    font-size: 12px;
     text-align: center;
   }
   .tab-title.w--current {
@@ -3208,13 +3280,25 @@ html.w-mod-js *[data-ix="view-more"] {
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
+    margin-left: -8px;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
     -webkit-box-align: center;
     -webkit-align-items: center;
     -ms-flex-align: center;
     align-items: center;
+    font-size: 14px;
   }
   .video-page-subtitle {
+    margin-top: 4px;
     font-size: 14px;
+    text-align: center;
   }
   .video-suggestions-title {
     width: 100%;
@@ -3330,6 +3414,18 @@ html.w-mod-js *[data-ix="view-more"] {
   .professor-name-underline {
     display: none;
     overflow: visible;
+  }
+  .share-buttons {
+    padding-right: 7px;
+    padding-left: 7px;
+  }
+  .social-share-button.whatsapp {
+    background-image: url('../images/whatsapp.png');
+  }
+  .share-link {
+    position: relative;
+    overflow: hidden;
+    margin-right: 0px;
   }
 }
 

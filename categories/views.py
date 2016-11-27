@@ -6,6 +6,8 @@ from .models import Category
 from django.shortcuts import get_object_or_404
 from django.http import Http404
 from hitcount.views import HitCountDetailView
+from django.core.urlresolvers import reverse
+from django.conf import settings
 
 
 class CategoryView(ListView):
@@ -39,7 +41,7 @@ class CategoriesListView(ListView):
         return Category.objects.filter(hidden=False)
 
 class CategoryVideoView(HitCountDetailView):
-    template_name = 'video-page.html'
+    template_name = 'video-page.djhtml'
     context_object_name = 'video'
     model = Video
     count_hit = True
@@ -72,4 +74,6 @@ class CategoryVideoView(HitCountDetailView):
         context['suggestions'] = suggestions
         context['videos_in_category'] = category_videos.count()
         context['skip_automatically'] = video_index < category_videos.count()
+        context['video_url'] = settings.WEBSITE_URL[:-1]
+        context['video_url'] += reverse('category_video', kwargs={'category_id': category_id, 'video_index': video_index})
         return context
