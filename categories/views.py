@@ -65,7 +65,7 @@ class CategoryVideoView(HitCountDetailView):
             raise Http404
         #video suggestions: 15 videos after the current or videos left in
         #category after the current. whichever one is less
-        suggestions = category_videos[video_index: video_index + 16]
+        suggestions = category_videos.filter(videocategory__position__gt=video_index)[:16]
         context['category'] = category
         context['video_index'] = video_index
         context['suggestions'] = suggestions
