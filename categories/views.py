@@ -51,11 +51,8 @@ class CategoryVideoView(HitCountDetailView):
         category = get_object_or_404(Category, id=category_id)
         video_index = int(self.kwargs['video_index'])
         if not 0 < video_index <= category.videos.all().count():
-            print -1
-            print video_index
-            print category.videos.all().count()
             raise Http404
-        video = category.videos.all()[video_index - 1]
+        video = category.videos.get(videocategory__position = video_index - 1)
         return video
 
     def get_context_data(self, **kwargs):
