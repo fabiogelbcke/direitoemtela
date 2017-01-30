@@ -25,6 +25,8 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['direitoemtela.com.br', 'www.direitoemtela.com.br', '52.67.110.163']
 
+WEBSITE_URL = 'https://www.direitoemtela.com.br/'
+
 
 #CACHES = {
 #    'default': {

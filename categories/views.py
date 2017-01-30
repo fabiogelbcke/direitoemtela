@@ -19,7 +19,7 @@ class CategoryView(ListView):
     def get_queryset(self):
         category_id = self.kwargs['category_id']
         category = get_object_or_404(Category, id=category_id)
-        qs = category.videos.all()
+        qs = category.videos.all().order_by('videocategory__position')
         return qs
 
     def get_context_data(self, **kwargs):

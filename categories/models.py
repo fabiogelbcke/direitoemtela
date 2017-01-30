@@ -62,6 +62,9 @@ class VideoCategory(models.Model):
     yt_position = models.CharField(max_length=4, blank=True)
     objects = VideoCategoryManager()
 
+    class Meta:
+        ordering = ('position', )
+
     def save(self, *args, **kwargs):
         position = self.position
         category_count = VideoCategory.objects.filter(category=self.category).count()
