@@ -95,36 +95,37 @@ STATIC_ROOT = os.path.join(SITE_ROOT, 'static')
 
 STATIC_URL = '/static/'
 
-TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-    os.path.join(SITE_ROOT, 'templates'),
-    os.path.join(SITE_ROOT, 'main/templates'),
-    os.path.join(SITE_ROOT, 'search/templates'),
-)
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(SITE_ROOT, 'templates'),],
+        #'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors':
+            [
+                'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
+                'django.template.context_processors.request',
+                'django.contrib.messages.context_processors.messages'
+            ],
+            'loaders':
+            [
+                'django.template.loaders.filesystem.Loader',
+                'django.template.loaders.app_directories.Loader',
+                'django.template.loaders.eggs.Loader',
+            ]
+            # ... some options here ...
+        },
+    },
+]
 
 STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # cant contain static_root
     os.path.join(SITE_ROOT, 'devstatic/'),
-)
-
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-    'django.template.loaders.eggs.Loader',
-)
-
-TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.contrib.auth.context_processors.auth',
-    'django.core.context_processors.debug',
-    'django.core.context_processors.i18n',
-    'django.core.context_processors.media',
-    'django.core.context_processors.static',
-    'django.core.context_processors.request',
-    'django.contrib.messages.context_processors.messages'
 )
 
 THUMBNAIL_PROCESSORS = (
