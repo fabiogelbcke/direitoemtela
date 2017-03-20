@@ -105,4 +105,22 @@ class VideoCategorySaveTestCase(TestCase):
                 video=video,
                 category=category,
                 position=-3)
-        
+
+    def test_changes_pos_correctly_on_delete(self):
+        category = Category.objects.first()
+        videos = Video.objects.all()
+        for video in videos:
+            vidcat = VideoCategory.objects.create_object(
+                video=video,
+                category=category)
+        for i in range(4):
+            title = 'video' + str(i + 1)
+            vidcat = VideoCategory.objects.get(video__title=title)
+            self.assertEqual(vidcat.position, i + 1)
+        vidcat = VideoCategory.objects.get(video__title='video2')
+        vidcat.delete()
+        vidcats = VideoCategory.objects.all()
+        i = 1
+        for vidcat in vidcats:
+            self.assertEqual(vidcat.position, i)
+            i += 1

@@ -103,4 +103,16 @@ class VideoCategory(models.Model):
                 VideoCategory.objects.filter(id=obj.id).update(position=obj.position + pos_diff)
         self.position = position
         super(VideoCategory, self).save(*args, **kwargs)
+
+    def delete(self):
+        position = self.position
+        bigger_positions = VideoCategory.objects.filter(
+            category=self.category,
+            position__gte=position
+            ).exclude(video=self.video)
+        for vidcat in bigger_positions:
+            vidcat.position = vidcat.position - 1
+            vidcat.save()
+        super(VideoCategory, self).delete()
+        
     
