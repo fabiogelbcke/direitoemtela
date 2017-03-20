@@ -44,6 +44,8 @@ EMAIL_PORT = 587
 
 EMAIL_USE_TLS = True
 
+AUTH_USER_MODEL = 'users.MyUser'
+
 # Application definition
 
 INSTALLED_APPS = (
@@ -64,7 +66,8 @@ INSTALLED_APPS = (
     'easy_thumbnails',
     'image_cropping',
     'autoupdate',
-    'hitcount'
+    'hitcount',
+    'users',
 )
 
 MIDDLEWARE_CLASSES = (
