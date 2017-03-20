@@ -64,6 +64,7 @@ class VideoCategory(models.Model):
 
     class Meta:
         ordering = ('position', )
+        unique_together = ('category', 'position')
 
     def save(self, *args, **kwargs):
         position = self.position
