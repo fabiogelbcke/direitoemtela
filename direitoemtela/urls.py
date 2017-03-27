@@ -25,7 +25,9 @@ urlpatterns = [
     url(r'^', include('mailing.urls')),
     url(r'^', include('videos.urls')),
     url(r'^', include('search.urls')),
+    url(r'^', include('users.urls')),
     url(r'^', include('autoupdate.urls')),
+    url('', include('social_django.urls', namespace='social')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += staticfiles_urlpatterns()

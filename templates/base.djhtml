@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<!-- This site was created in Webflow. http://www.webflow.com-->
+<!-- Last Published: Thu Sep 01 2016 23:21:55 GMT+0000 (UTC) -->
+{% block head %}
+  <html>
+    <head>
+      {% load cropping %}
+      {% load staticfiles %}
+      <meta charset="utf-8">
+      <title>Direito em Tela</title>
+      <meta content="width=device-width, initial-scale=1" name="viewport">
+      <meta content="Webflow" name="generator">
+      {% block socialtags %}
+      {% endblock %}
+      <link href="{% static 'css/normalize.css'%}" rel="stylesheet" type="text/css">
+      <link href="{% static 'css/webflow.css'%}" rel="stylesheet" type="text/css">
+      <link href="{% static 'css/direitoemtela.webflow.css'%}" rel="stylesheet" type="text/css">
+      <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
+      <script type="text/javascript">
+       WebFont.load({
+	   google: {
+               families: ["Lora:regular,italic,700","Oxygen:300,regular,700"]
+	   }
+       });
+      </script>
+      <script src="{% static 'js/modernizr.js'%}" type="text/javascript"></script>
+      <link href="https://daks2k3a4ib2z.cloudfront.net/img/favicon.ico" rel="shortcut icon" type="image/x-icon">
+      <link href="https://daks2k3a4ib2z.cloudfront.net/img/webclip.png" rel="apple-touch-icon">
+    </head>
+{% endblock %}
+<body>
+  {% block hiddencontent %}
+    {% if not user.is_authenticated %}
+      <div class="login-popup">
+	<div class="modal-wrapper">
+	  <div class="base-popup"><a class="close-popup-button" data-ix="close-login-popup" href="#">Fechar X</a>
+            <div class="social-login-div">
+              <a class="facebook-login social-login-button w-inline-block" href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}"></a>
+              <a class="google-login-button social-login-button w-inline-block" href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}"></a>
+              <a class="linkedin-login-button social-login-button w-inline-block" href="{% url 'social:begin' 'linkedin-oauth2' %}?next={{ request.path }}"></a>
+            </div>
+            <div class="division">
+              <div class="left line"></div>
+              <p class="light-grey-text">ou</p>
+              <div class="line right"></div>
+            </div>
+            <div class="login-form-block">
+              <form class="login-form" data-name="Email Form 3" id="email-form-3" name="email-form-3">
+		<input class="form-input w-input" data-name="email" id="email-3" maxlength="256" name="email" placeholder="Email" type="email">
+		<input class="form-input w-input" data-name="password" id="password" maxlength="256" name="password" placeholder="Senha" required="required" type="text">
+		<input class="button w-button" data-wait="Please wait..." type="submit" value="Entrar">
+              </form>
+              <p class="light-grey-text">Ainda não tem uma conta?</p>
+	      <a class="light-blue-link show-signup-form" data-ix="show-signup-form" href="#">Clique aqui para cadastrar-se</a>
+            </div>
+            <div class="signup-form-block">
+              <form class="login-form" data-name="Email Form 4" id="email-form-4" name="email-form-4">
+		<div class="div-block-4">
+		  <input class="form-input name-input w-input" data-name="first_name" id="first_name" maxlength="256" name="first_name" placeholder="Nome" type="text">
+		  <div class="gap"></div>
+		  <input class="form-input name-input w-input" data-name="last_name" id="last_name" maxlength="256" name="last_name" placeholder="Sobrenome" type="text">
+		</div>
+		<input class="form-input w-input" data-name="email" id="email-5" maxlength="256" name="email" placeholder="Email" required="required" type="email">
+		<input class="form-input w-input" data-name="password" id="password-2" maxlength="256" name="password" placeholder="Senha" required="required" type="password">
+		<input class="form-input w-input" data-name="password_confirmation" id="password_confirmation" maxlength="256" name="password_confirmation" placeholder="Confirme a Senha" required="required" type="email">
+		<input class="button w-button" data-wait="Please wait..." type="submit" value="Cadastrar-se">
+              </form>
+              <p class="light-grey-text">Já tem uma conta?</p><a class="light-blue-link show-login-form" data-ix="show-login-form" href="#">Clique aqui para entrar</a>
+            </div>
+	  </div>
+	</div>
+      </div>
+    {% endif %}
+  {% endblock %}
+  {% block content %}
+  {% block header %}
+  <div class="navbar w-nav" data-animation="over-right" data-collapse="tiny" data-duration="400" data-ix="navbar">
+      <div class="header-content w-container">
+        <a class="logo w-nav-brand" href="{% url 'index' %}"><img class="logo-home" height="44" src="{% static 'images/DETWHITE.png'%}">
+        </a>
+        <nav class="nav-menu w-nav-menu" role="navigation">
+	  {% if user.is_authenticated %}
+	    <div class="account-dropdown w-dropdown" data-delay="0">
+              <div class="account-dropdown-toggle w-dropdown-toggle"><img class="account-image" height="45" src="{% cropped_thumbnail user 'profile_ratio' height=45 %}" width="45">
+		<div class="account-dropdown-text">{{user.first_name|upper}}</div>
+		<div class="account-dropdown-icon w-icon-dropdown-toggle"></div>
+              </div>
+              <nav class="account-dropdown-list w-dropdown-list"><a class="account-dropdown-link w-dropdown-link" href="#">Meus Cursos</a><a class="account-dropdown-link w-dropdown-link" href="#">Conta</a><a class="account-dropdown-link w-dropdown-link" href="{% url 'logout' %}">Sair</a>
+              </nav>
+            </div>
+	  {% endif %}
+	  <a class="nav-link w-nav-link" href="{% url 'index' %}">INÍCIO</a>
+	  <a class="nav-link w-nav-link" href="{% url 'categories' %}">VÍDEO-AULAS</a>
+	  <a class="nav-link w-nav-link" href="{% url 'about' %}">Quem somos</a>
+	  {% if not user.is_authenticated %}
+	    <a class="button login-button w-button" data-ix="show-login-popup" href="#">Entrar</a>
+	  {% endif %}
+	  <a class="close-x w-hidden-main w-hidden-medium w-hidden-small" href="#">×</a>
+        </nav>
+        <div class="menu-button w-clearfix w-hidden-main w-hidden-medium w-hidden-small w-nav-button">
+          <div class="menu-icon w-icon-nav-menu"></div>
+          <div class="menu-link">MENU</div>
+        </div>
+      </div>
+    </div>
+    <div class="navbar w-hidden-main w-hidden-medium w-hidden-small w-hidden-tiny w-nav" data-animation="default" data-collapse="medium" data-contain="1" data-duration="400">
+      <div class="w-container">
+        <a class="logo w-nav-brand" href="#"></a>
+        <nav class="w-nav-menu" role="navigation"><a class="w-nav-link" href="{% url 'index' %}">Início</a><a class="w-nav-link" href="{% url 'categories' %}">Aulas</a><a class="w-nav-link" href="{% url 'about' %}">Quem somos</a>
+        </nav>
+        <div class="w-nav-button">
+          <div class="w-icon-nav-menu"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock %}
+{% endblock %}
+{% block footer %}
+    <div class="dark main-section">
+      <div class="w-container">
+        <div class="section-heading">
+          <h2 class="white">Receba as novas aulas diretamente em seu email!</h2>
+		  <div class="med-divider"></div>
+        </div>
+		<h2 class="hidden white" id="mailing-success-msg">Email cadastrado com sucesso!</h2>
+        <div class="form-wrapper">
+          <form action="{% url 'add_to_mailing_list' %}" method="POST" class="w-clearfix mailing-form" data-name="Email Form" id="mailing-form" name="email-form">
+			{% csrf_token %}
+            <input class="field w-input" data-name="Email" id="mailing-email-input" maxlength="256" name="email" placeholder="Qual é seu endereço de email?" required="required" type="email">
+            <input class="submit-button w-button" data-ix="mailing-spinner" data-wait="Please wait..." type="submit" value="Enviar" id="mailing-submit">
+			<h3 class="hidden white" id="mailing-error-msg">Email inválido!</h3><img class="spinner" src="{% static 'images/default-2.svg'%}">
+          </form>
+        </div>
+      </div>
+      <div class="footer-section">
+        <div class="w-container">
+          <div class="w-row">
+            <div class="logo-footer w-col w-col-4 w-col-small-4"><img class="logo-home" height="44" src="{% static 'images/DETWHITE.png'%}">
+            </div>
+            <div class="footer-links w-col w-col-8 w-col-small-8"><a class="footer-link" href="{% url 'index' %}">Início</a><a class="footer-link" href="{% url 'categories' %}">Video-aulas</a><a class="footer-link" href="{% url 'about' %}">Sobre</a>
+            </div>
+          </div>
+        </div>
+      </div>
+	</div>
+{% endblock %}
+</div>
+{% block js %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js" type="text/javascript"></script>
+<script src="{% static 'js/webflow.js'%}" type="text/javascript"></script>
+<script src="{% static 'js/jquery.form.js' %}"></script>
+<script>
+  $("#mailing-form").ajaxForm({
+      success:function(data){
+	  $("#mailing-success-msg").show();
+	  $("#mailing-email-input").hide();
+	  $("#mailing-submit").hide();
+	  $(".spinner").hide();
+      },
+      error:function(data){
+	  $("#mailing-error-msg").show();
+	  $("#mailing-email-input").show();
+	  $("#mailing-submit").show();
+	  $(".spinner").hide();  
+      }
+  });
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-85106412-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+  
+  <!--[if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
+{% endblock %}
+</body>
+</html>

@@ -28,8 +28,6 @@ SECRET_KEY = keys.SECRET_KEY
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-TEMPLATE_DEBUG = True
-
 ALLOWED_HOSTS = ['local.det.com', 'direitoemtela.com.br',]
 
 ADMINS = [('Fabio', 'fabio@direitoemtela.com.br'),]
@@ -68,6 +66,7 @@ INSTALLED_APPS = (
     'autoupdate',
     'hitcount',
     'users',
+    'social_django',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -79,9 +78,75 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.security.SecurityMiddleware',
+    #'django.middleware.security.SecurityMiddleware',
     'easy_timezones.middleware.EasyTimezoneMiddleware',
 )
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.open_id.OpenIdAuth',
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.google.GoogleOpenId',
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.linkedin.LinkedinOAuth2',
+    'social_core.backends.google.GoogleOAuth',
+    'social_core.backends.twitter.TwitterOAuth',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+SOCIAL_AUTH_PIPELINE = (
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.auth_allowed',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.user.get_username',
+    'social_core.pipeline.social_auth.associate_by_email',  # <--- enable this one
+    'social_core.pipeline.user.create_user',
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details',
+    'users.reg_pipeline.get_avatar',
+)
+
+SOCIAL_AUTH_USER_MODEL = 'users.MyUser'
+
+SOCIAL_AUTH_DISCONNECT_REDIRECT_URL = '/'
+
+SOCIAL_AUTH_UID_LENGTH = 223
+
+FACEBOOK_AUTH_EXTRA_ARGUMENTS = {'display': 'touch'}
+
+SOCIAL_AUTH_PROTECTED_USER_FIELDS = ['email', 'username']
+
+#SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
+
+SOCIAL_AUTH_FACEBOOK_KEY = keys.FACEBOOK_APP_ID
+
+SOCIAL_AUTH_FACEBOOK_SECRET = keys.FACEBOOK_SECRET_KEY
+
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email',]
+
+SOCIAL_AUTH_LINKEDIN_OAUTH2_SCOPE = ['r_basicprofile', 'r_emailaddress']
+
+SOCIAL_AUTH_LINKEDIN_OAUTH2_FIELD_SELECTORS = ['email-address', 'picture-url']
+
+SOCIAL_AUTH_LINKEDIN_OAUTH2_EXTRA_DATA = [('id', 'id'),
+                                          ('firstName', 'first_name'),
+                                          ('lastName', 'last_name'),
+                                          ('emailAddresss', 'email'),
+                                          ('picture-url', 'image'),
+                                   ]
+
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+  'fields': 'id, name, email, age_range'
+}
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = keys.GOOGLE_OAUTH2_ID
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = keys.GOOGLE_OAUTH2_SECRET
+
+SOCIAL_AUTH_LINKEDIN_OAUTH2_KEY = keys.LINKEDIN_ID
+SOCIAL_AUTH_LINKEDIN_OAUTH2_SECRET = keys.LINKEDIN_SECRET
+
+LOGIN_URL = '/login/'
 
 APPEND_SLASH = True
 
@@ -111,7 +176,9 @@ TEMPLATES = [
                 'django.template.context_processors.media',
                 'django.template.context_processors.static',
                 'django.template.context_processors.request',
-                'django.contrib.messages.context_processors.messages'
+                'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
             'loaders':
             [
