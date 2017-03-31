@@ -1,0 +1,154 @@
+{% extends 'base.djhtml' %}
+{% load staticfiles %}{% load cropping %}
+{% block hiddencontent %}
+  {{block.super}}
+  <div class="payment-popup" data-ix="close-trailer">
+    <div class="modal-wrapper">
+      <div class="w-container">
+        <div class="payment-block"><a class="close-popup-button" data-ix="close-trailer" href="#">Fechar <strong>X</strong></a>
+          <h1>Heading</h1>
+          <ul>
+            <li>Acesso a todo o material do curso por tempo ilimitado</li>
+            <li>Certificado de conclusão de curso (mediante aprovação com 70% ou mais de média nas provas)</li>
+            <li>Acesso ao grupo de discussão do curso com outros alunos e com o professor</li>
+          </ul>
+          <div class="">
+            <form data-name="Email Form 2" id="email-form-2" name="email-form-2">
+              <input class="w-input" data-name="card_name" id="card_name" maxlength="256" name="card_name" placeholder="Nome do titular do cartão" required="required" type="email">
+              <input class="w-input" data-name="card_number" id="card_number" maxlength="256" name="card_number" placeholder="Número do Cartão" required="required" type="text">
+              <input class="w-button" data-wait="Please wait..." type="submit" value="Submit">
+            </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="trailer-popup" data-ix="close-trailer">
+    <div class="modal-wrapper">
+      <div class="w-container">
+        <div class="trailer-video"><a class="close-popup-button" data-ix="close-trailer" href="#">Fechar <strong>X</strong></a>
+          <div class="w-embed w-video" style="padding-top: 56.17021276595745%;">
+            <div class="embedly-embed" id="ytvideo"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+{% block content %}
+  {% block header %}
+    {{ block.super }}
+  {% endblock %}
+  <div class="top-bar-plain"></div>
+  <div class="thick-separator"></div>
+  <div class="course-description-containter w-container">
+    <div class="course-description-div">
+      <div class="course-header-div">
+        <h1 class="course-description-title">{{course.name}}</h1>
+        <div class="course-description-buttons-div"><a class="button course-description-button w-button" data-ix="show-trailer" href="#">Assistir Trailer</a><a class="button course-description-button w-button" href="#">Inscrever-se</a>
+        </div>
+      </div>
+      <div class="course-body-div">
+        <div class="course-description-row w-row">
+          <div class="w-col w-col-8">
+            <div class="course-description-block-div">
+              <h3 class="course-description-section-title">Sobre o curso</h3>
+              <div class="course-description-text-block">{{course.description}}</div>
+            </div>
+            <div class="course-description-separator"></div>
+            <div>
+              <h3 class="course-description-section-title">O que você aprenderá</h3>
+              <ul class="course-description-list">
+		{% for topic in course.topics.all %}
+                  <li>{{topic.text}}</li>
+		{% endfor %}
+              </ul>
+            </div>
+            <div class="course-description-separator"></div>
+            <div>
+              <h3 class="course-description-section-title">Conteúdo Programático</h3>
+	      {% for item in course.items.all %}
+		<div class="course-outline-item">
+		  {% if item.video %}
+		    <img class="course-outline-icon" height="45" src="{% static 'images/playicon.png'%}" width="45">
+		  {% elif item.reading %}
+		    <img class="course-outline-icon" height="45" src="{% static 'images/readingicon.png'%}" width="45">
+		  {% elif item.test %}
+		    <img class="course-outline-icon" height="45" src="{% static 'images/testicon.png'%}" width="45">
+		  {% endif %}
+                  <p class="course-outline-title">{{item.title}}</p>
+		    </div>
+	      {% endfor %}
+            </div>
+          </div>
+          <div class="w-col w-col-4">
+            <div>
+              <h3 class="course-description-section-title">Preço</h3>
+              <h1 class="course-price">R$ {{course.price}}</h1>
+            </div>
+            <div class="course-description-separator"></div>
+            <div>
+              <h3 class="course-description-section-title">Horas de Curso</h3>
+              <h1 class="course-price">{{course.hours}} horas</h1>
+            </div>
+            <div class="course-description-separator"></div>
+            <h3 class="course-description-section-title">Inclusos no curso</h3>
+            <div class="course-feature"><img class="course-feature-check-sign" height="15" src="{% static 'images/checkicon.png'%}" width="15">
+              <p class="course-feature-text">Certificado de aprovação do&nbsp;curso</p>
+            </div>
+            <div class="course-feature"><img class="course-feature-check-sign" height="15" src="{% static 'images/checkicon.png'%}" width="15">
+              <p class="course-feature-text">Video-aulas ministradas por professores universitários</p>
+            </div>
+            <div class="course-feature"><img class="course-feature-check-sign" height="15" src="{% static 'images/checkicon.png'%}" width="15">
+              <p class="course-feature-text">Material de apoio às aulas</p>
+            </div>
+            <div class="course-feature"><img class="course-feature-check-sign" height="15" src="{% static 'images/checkicon.png'%}" width="15">
+              <p class="course-feature-text">Grupo de discussão sobre o assunto</p>
+            </div>
+            <div class="course-description-separator"></div>
+            <div>
+	      {% if course.professor %}
+		{% with course.professor as professor %}
+		  <h3 class="course-description-section-title">Professor</h3><img class="professor-image small" height="65" src="{% cropped_thumbnail professor 'profile_ratio' max_size="65x65" %}" width="65">
+		  <p class="course-description-professor-name">{{professor.name}}</p>
+		  <div class="course-description-text-block">{{professor.description}}</div>
+		{% endwith %}
+	      {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="main-section whatsapp" id="posts">
+    </div>
+{% endblock %}
+{% block js %}
+  {{block.super}}
+  <script type="text/javascript">
+   var tag = document.createElement('script');
+
+   tag.src = "http://www.youtube.com/iframe_api";
+   var firstScriptTag = document.getElementsByTagName('script')[0];
+   firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+   var player;
+   
+   function onYouTubeIframeAPIReady(){
+       player = new YT.Player('ytvideo', {
+	   height: '348',
+	   width: '615',
+	   videoId: '{{course.trailer_id}}',
+	   playerVars: {
+	       modestbranding: true,
+	       rel: 0
+	   },
+
+	   events: {
+	   }
+       });
+   }
+  </script>
+{% endblock %}
