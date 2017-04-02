@@ -1,4 +1,5 @@
 {% extends 'base.djhtml' %}
+{% load staticfiles %}{% load cropping %}{% load util_tags %}
 {% block content %}
   <div class="header-background">
     {% block header %}
@@ -10,49 +11,93 @@
       <div class="main-section whatsapp" id="posts">
 	<div class="video-container w-container" id="video-container">
           <div class="center-flex video-page-title-div">
-            <h1 class="center video-tile">{{ course.title }}</h1>
-            <div class="course-video-title">{{ course_item.video }}</div>
+            <h1 class="center video-tile">{{ course.name }}</h1>
+	    {% if course_item.type == 'video' %}
+              <div class="course-video-title">{{ course_item.video }}</div>
+	    {% elif course_item.type == 'test' %}
+	      <div class="course-video-title">{{ course_item.test.title }}</div>
+	    {% endif %}
           </div>
           <div class="course-video-div">
             <div class="progress-indicator-div">
               <div class="progress-indicator">
-		{% for item in other_items %}
-		  <div>
-		    {% if item.done %}
-                      <div class="course-step done-step" data-ix="new-interaction-3"><img class="step-image" src="{% static 'images/checkicon-white.png'%}" width="35">
+		{% for item_rel in user_item_rels %}
+		  {% with item_rel.course_item as item %}
+		    <div>
+		      {% if item.done is True %}
+			<a class="course-step done-step" data-ix="new-interaction-3" href="{% url 'course_item' course_id=course.id position=item.position %}"><img class="step-image" src="{% static 'images/checkicon-white.png'%}" width="35">
+			</a>
+		      {% elif item.type == 'video' %}
+			<a class="course-step" data-ix="new-interaction-3" href="{% url 'course_item' course_id=course.id position=item.position %}"><img class="step-image" src="{% static 'images/playicon-white.png'%}" width="35">
+			</a>
+		      {% elif item.type == 'reading' %}
+			<a class="course-step" data-ix="new-interaction-3" href="{% url 'course_item' course_id=course.id position=item.position %}"><img class="step-image" src="{% static 'images/readingicon-white.png'%}" width="35">
+			</a>
+		      {% elif item.type == 'test' %}
+			<a class="course-step" data-ix="new-interaction-3" href="{% url 'course_item' course_id=course.id position=item.position %}"><img class="step-image" src="{% static 'images/testicon-white.png'%}" width="35">
+			</a>
+		      {% endif %}
+                      <div class="item-details-popup">
+			<h2 class="pop-up-title">{{item.type}}</h2>
+			<p class="pop-up-content">{{item.title}}</p>
                       </div>
-		    {% elif item.type == 'video' %}
-		      <div class="course-step" data-ix="new-interaction-3"><img class="step-image" src="{% static 'images/playicon-white.png'%}" width="35">
-		      </div>
-		    {% elif item.type == 'reading' %}
-		      <div class="course-step" data-ix="new-interaction-3"><img class="step-image" src="{% static 'images/readingicon-white.png'%}" width="35">
-		      </div>
-		    {% elif item.type == 'test' %}
-		      <div class="course-step" data-ix="new-interaction-3"><img class="step-image" src="{% static 'images/testicon-white.png'%}" width="35">
-		      </div>
-		    {% endif %}
-                    <div class="item-details-popup">
-                      <h2 class="pop-up-title">{{item.type}}</h2>
-                      <p class="pop-up-content">{{item.title}}</p>
-                    </div>
-		  </div>
+		    </div>
+		  {% endwith %}
 		{% endfor %}
               </div>
             </div>
-            <div class="video-frame">
-              <div class="w-embed w-video yt-video" style="padding-top: 56.17021276595745%;">
-		<div class="w-embed w-video" style="height:348px;">
-		  <div onclick="play();" id="vidwrap" style="height:348px;width:615px;max-width:90vw; background-image: url('{% static 'images/play-button.png' %}'), url('{% cropped_thumbnail video 'thumbnail_ratio' %}'); background-repeat: no-repeat, no-repeat; background-position: center, center;-webkit-background-size:  cover;-moz-background-size: cover;-o-background-size: cover;background-size: 200px 200px,cover;overflow:hidden;cursor:pointer; padding-top:0px;">
-
+	    {% if course_item.type == 'test' %}
+	      {% with course_item.test as test %}
+              <div class="test-div">
+		<div class="question-div">
+		  <p class="question-number">Pergunta {{question_no}} de {{test.questions.count}}</p>
+		</div>
+		<h2 class="question-title">{{question.text}}?</h2>
+		<div class="question-buttons-div">
+		  <h3 class="heading-no-margin" id="pre-answer-text">Selecione a opção correta abaixo</h3>
+		  <div class="div-block-2 hidden" id="correct-answer-div">
+                    <div class="correct-sign"><img src="{% static 'images/white-checkicon.png'%}">
+                    </div>
+                    <h3 class="heading-no-margin">Resposta Correta!</h3>
 		  </div>
-		  <div id="ytvideo"></div>
-		  <div id="countdowndiv" class="next-lesson-countdown">
-		    <h1 class="countdown-text">Próximo passo em</h1>
-		    <h1 id="countdown" class="countdown-timer">5</h1><a id="cancel-skip-button" class="button w-button" href="#">Assistir a essa aula novamente</a>
+		  <div class="div-block-2 hidden" id="incorrect-answer-div">
+                    <div class="incorrete-sign"><img class="image" src="{% static 'images/cross-42928_1280-copy-copy.png'%}">
+                    </div>
+                    <h3 class="heading-no-margin">Resposta Incorreta :(</h3>
 		  </div>
+		  <a class="button faded-button w-button" href="#" id="next-question-button">Próxima questão</a>
+		</div>
+		<div class="question-options-div">
+		  <form id="questionform" method="POST" action="{% url 'answer_question' %}" style="width:100%">
+		    {% csrf_token %}
+		    <input type="text" class="hidden" name="question_id" value="{{question.id}}">
+		    {% for alternative in question.alternatives.all %}
+		      <div>
+			<a class="hover-yellow question-option w-inline-block" href="#" id="alternative{{alternative.id}}"><h1 class="option-number">{{forloop.counter|to_char}}.</h1><p class="question-option-text">{{alternative.text}}</p></a>
+			<input class="hidden" type="submit" name="alternative_id" value="{{alternative.id}}"/>
+		      </div>
+		  {% endfor %}
+		  </form>
 		</div>
               </div>
-	    </div>
+	      {% endwith %}
+	    {% elif course_item.type == 'video' %}
+	      {% with course_item.video as video %}
+		<div class="video-frame">
+		  <div class="w-embed w-video yt-video">
+		    <div onclick="play();" id="vidwrap" style="height:50vw;min-height:150px;max-height:515px;width:100%;max-width:90vw; background-image: url('{% static 'images/play-button.png' %}'), url('{% cropped_thumbnail video 'thumbnail_ratio' %}'); background-repeat: no-repeat, no-repeat; background-position: center, center;-webkit-background-size:  cover;-moz-background-size: cover;-o-background-size: cover;background-size: 200px 200px,cover;overflow:hidden;cursor:pointer; padding-top:0px;">
+		      
+		    </div>
+		    <div id="ytvideo"></div>
+		    <div id="countdowndiv" class="next-lesson-countdown">
+		      <h1 class="countdown-text">Próximo passo em</h1>
+		      <h1 id="countdown" class="countdown-timer">5</h1><a id="cancel-skip-button" class="button w-button" href="#">Assistir a essa aula novamente</a>
+		    </div>
+		  </div>
+		</div>
+	      {% endwith %}
+	    {% endif %}
+	    {% if course_item.type == 'video' or course_item.type == 'reading' %}
             <div class="course-inner-div">
 	      <div class="video-tabs w-tabs" data-duration-in="300" data-duration-out="100">
 		<div class="tabs-menu-line-underneath w-tab-menu">
@@ -90,78 +135,113 @@
 	      </div>
 	    </div>
           </div>
+	  {% endif %}
         </div>
       </div>
     </div>
 {% endblock %}
 {% block js %}
   {{block.super}}
-  <script type="text/javascript">
-   var tag = document.createElement('script');
+  {% if course_item.type == 'video' %}
+    <script type="text/javascript">
+     var tag = document.createElement('script');
 
-   tag.src = "https://www.youtube.com/iframe_api";
-   var firstScriptTag = document.getElementsByTagName('script')[0];
-   firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+     tag.src = "https://www.youtube.com/iframe_api";
+     var firstScriptTag = document.getElementsByTagName('script')[0];
+     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-   var player;
-   
-   function play(){
-       player = new YT.Player('ytvideo', {
-	   height: '348',
-	   width: '615',
-	   videoId: '{{course_item.video.yt_id}}',
-	   playerVars: {
-	       modestbranding: true,
-	       rel: 0
-	   },
+     var player;
+     
+     function play(){
+	 player = new YT.Player('ytvideo', {
+	     height: '348',
+	     width: '615',
+	     videoId: '{{course_item.video.yt_id}}',
+	     playerVars: {
+		 modestbranding: true,
+		 rel: 0
+	     },
 
-	   events: {
-               'onReady': onPlayerReady,
-               'onStateChange': onPlayerStateChange
-	   }
-       });
-   }
+	     events: {
+		 'onReady': onPlayerReady,
+		 'onStateChange': onPlayerStateChange
+	     }
+	 });
+     }
 
-   function onPlayerReady(event) {
-       event.target.playVideo();
-   }
-   {% if skip_automatically %}
-   function countdownNextVideo(time)
-   {
-       if (timer == 0)
-	   {
-	       if (skip == 1)
-		   {
-     		       window.location.href = "{% url 'course_item' course_id=course.id course_item_pos=course_item.position|add:1 %}";
-		   }
-	   }
-       else
-	   {
-	       timer = timer - 1;
-	       $("#countdown").text(timer.toString());
-	       setTimeout(countdownNextVideo, 1000);
-	   }
-   }
-   {% endif %}
-   
-   function onPlayerStateChange(event) {        
-       if(event.data === 0) {          
-	   {% if skip_automatically %}
-	   $("#vidwrap").hide();
-	   $("#ytvideo").hide();
-	   $("#countdowndiv").css("display", "flex");
-	   timer = 6;
-	   skip = 1;
-	   countdownNextVideo();
-	   {% endif %}
-       }
-   }
-   $("#cancel-skip-button").click(function(){
-       $("#vidwrap").show();
-       $("#ytvideo").show();
-       $("#countdowndiv").hide();
-       player.playVideo();
-       skip = 0;
-   });
-  </script>
+     function onPlayerReady(event) {
+	 event.target.playVideo();
+     }
+     function countdownNextVideo(time)
+     {
+	 if (timer == 0)
+	     {
+		 if (skip == 1)
+		     {
+			 window.location.href = "{% url 'course_item' course_id=course.id position=course_item.position|add:1 %}";
+		     }
+	     }
+	 else
+	     {
+		 timer = timer - 1;
+		 $("#countdown").text(timer.toString());
+		 setTimeout(countdownNextVideo, 1000);
+	     }
+     }
+     function onPlayerStateChange(event) {        
+	 if(event.data === 0) {          
+	     $("#vidwrap").hide();
+	     $("#ytvideo").hide();
+	     $("#countdowndiv").css("display", "flex");
+	     timer = 6;
+	     skip = 1;
+	     countdownNextVideo();
+	 }
+     }
+     $("#cancel-skip-button").click(function(){
+	 $("#vidwrap").show();
+	 $("#ytvideo").show();
+	 $("#countdowndiv").hide();
+	 player.playVideo();
+	 skip = 0;
+     });
+    </script>
+
+  {% elif course_item.type == 'reading' %}
+    <script src="{% static 'js/pdfobject.js' %}"></script>
+    <script>PDFObject.embed("/pdf/sample-3pp.pdf", "#example1");</script>
+  {% elif course_item.type == 'test' %}
+    <script>
+     $(".question-option").click(function(){
+	 if (!window.submited_id)
+	     {
+		 window.submited_id = $(this).attr("id");
+		 $(this).siblings().click();
+		 $(this).addClass("selected-option");
+		 $("#questionform").removeAttr("action");
+	     }
+     });
+     $("#questionform").ajaxForm({
+	 success: function(data){
+	     $("#pre-answer-text").hide();
+	     console.log(data);
+	     console.log(window.submited_id);
+	     if (data == window.submited_id){
+		 $("#correct-answer-div").removeClass("hidden");
+	     }
+	     else{
+		 $("#incorrect-answer-div").removeClass("hidden");
+	     }
+	     $("#next-question-button").removeClass("faded-button");
+	     {% if question_no < course.questions.count %}
+	     $("#next-question-button").attr("href", "{% url 'course_item' course_id=course.id position=course_item.position question_no=question_no|add:1%}");
+	     {% endif %}
+	     $("#".concat(data)).addClass("correct-alternative");
+	 },
+	 error: function(data){
+	     
+	 }
+     });
+    </script>
+  {% endif %}
 {% endblock %}

@@ -1566,7 +1566,7 @@ img {
 }
 
 .video-container {
-  min-height: 60vh;
+  min-height: 70vh;
   padding-top: 46px;
   padding-bottom: 87px;
 }
@@ -2154,6 +2154,7 @@ img {
 
 .yt-video {
   display: block;
+  width: 100%;
 }
 
 .next-lesson-countdown {
@@ -2936,9 +2937,17 @@ img {
   color: #e9e9e9;
 }
 
+.question-option.hover-yellow.correct-alternative {
+  border-color: #2eca34;
+}
+
 .question-option.selected-option {
   background-color: #ca8c2e;
   color: #e9e9e9;
+}
+
+.question-option.selected-option.correct-alternative {
+  border-color: #2eca34;
 }
 
 .option-number {
@@ -3005,7 +3014,10 @@ img {
 }
 
 .div-block-2 {
-  display: none;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-align: center;
   -webkit-align-items: center;
   -ms-flex-align: center;
@@ -3014,6 +3026,10 @@ img {
   -webkit-flex: 0 auto;
   -ms-flex: 0 auto;
   flex: 0 auto;
+}
+
+.div-block-2.hidden {
+  display: none;
 }
 
 .div-block-2.aa {
@@ -4302,6 +4318,9 @@ html.w-mod-js *[data-ix="view-more"] {
   .professor-name-underline {
     display: none;
     overflow: visible;
+  }
+  .yt-video {
+    height: 150px;
   }
   .share-buttons {
     padding-right: 5px;

@@ -1,0 +1,186 @@
+{% extends 'base.
+<!DOCTYPE html>
+<!--  This site was created in Webflow. http://www.webflow.com -->
+<!--  Last Published: Sun Mar 26 2017 07:32:35 GMT+0000 (UTC)  -->
+<html data-wf-page="58bdeea5b7c11bfe30d98c2e" data-wf-site="570ad3630dd2dc033a7a9cf9">
+<head>
+  <meta charset="utf-8">
+  <title>Dashboard</title>
+  <meta content="Dashboard" property="og:title">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta content="Webflow" name="generator">
+  <link href="{% static 'css/normalize.css'%}" rel="stylesheet" type="text/css">
+  <link href="{% static 'css/webflow.css'%}" rel="stylesheet" type="text/css">
+  <link href="{% static 'css/direitoemtela.webflow.css'%}" rel="stylesheet" type="text/css">
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
+  <script type="text/javascript">
+    WebFont.load({
+      google: {
+        families: ["Lora:regular,italic,700","Oxygen:300,regular,700"]
+      }
+    });
+  </script>
+  <script src="{% static 'js/modernizr.js'%}" type="text/javascript"></script>
+  <link href="https://daks2k3a4ib2z.cloudfront.net/img/favicon.ico" rel="shortcut icon" type="image/x-icon">
+  <link href="https://daks2k3a4ib2z.cloudfront.net/img/webclip.png" rel="apple-touch-icon">
+</head>
+<body>
+  <div class="header-background">
+    <div class="navbar w-nav" data-animation="over-right" data-collapse="tiny" data-duration="400" data-ix="navbar">
+      <div class="header-content w-container">
+        <a class="logo w-nav-brand" href="index.html"><img class="logo-home" height="44" src="{% static 'images/DETWHITE.png'%}">
+        </a>
+        <nav class="nav-menu w-nav-menu" role="navigation">
+          <div class="account-dropdown w-dropdown" data-delay="0">
+            <div class="account-dropdown-toggle w-dropdown-toggle"><img class="account-image" height="45" src="{% static 'images/ricardorosto.png'%}" width="45">
+              <div class="account-dropdown-text">RICARDO</div>
+              <div class="account-dropdown-icon w-icon-dropdown-toggle"></div>
+            </div>
+            <nav class="account-dropdown-list w-dropdown-list"><a class="account-dropdown-link w-dropdown-link" href="#">Meus Cursos</a><a class="account-dropdown-link w-dropdown-link" href="#">Conta</a><a class="account-dropdown-link w-dropdown-link" href="#">Sair</a>
+            </nav>
+          </div><a class="nav-link w-nav-link" href="category-page.html">VÍDEO-AULAS</a><a class="nav-link w-nav-link" href="about.html">Cursos</a><a class="button login-button w-button" data-ix="show-login-popup" href="#">Entrar</a><a class="close-x w-hidden-main w-hidden-medium w-hidden-small" href="#">×</a>
+        </nav>
+        <div class="menu-button w-clearfix w-hidden-main w-hidden-medium w-hidden-small w-nav-button">
+          <div class="menu-icon w-icon-nav-menu"></div>
+          <div class="menu-link">MENU</div>
+        </div>
+      </div>
+    </div>
+    <div class="navbar w-hidden-main w-hidden-medium w-hidden-small w-hidden-tiny w-nav" data-animation="default" data-collapse="medium" data-duration="400">
+      <div class="w-container">
+        <a class="logo w-nav-brand" href="#"></a>
+        <nav class="w-nav-menu" role="navigation"><a class="w-nav-link" href="#">Home</a><a class="w-nav-link" href="#">About</a><a class="w-nav-link" href="#">Contact</a>
+        </nav>
+        <div class="w-nav-button">
+          <div class="w-icon-nav-menu"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="top-bar-plain"></div>
+  <div class="thick-separator"></div>
+  <div>
+    <div class="main-section whatsapp" id="posts">
+      <div class="video-container w-container" id="video-container">
+        <div class="dashboard-header grey-box">
+          <div class="dashboard-picture-div"><img class="account-image large" height="130" src="{% static 'images/ricardorosto.png'%}" width="130">
+          </div>
+          <div class="dashboard-profile-info">
+            <h1 class="dashboard-hello">Ricardo Schubert</h1>
+            <h3 class="dashboard-city">Joinville, SC</h3>
+          </div>
+          <div class="dashboard-course-stats">
+            <ul class="dashboard-stats-list">
+              <li>Cursos em Progresso: <strong>3</strong>
+              </li>
+              <li>Cursos Completados: <strong>5</strong>
+              </li>
+              <li>Horas aula completadas:&nbsp;<strong>153</strong>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="grey-box">
+          <div class="w-tabs" data-duration-in="300" data-duration-out="100">
+            <div class="large-tabs-menu w-tab-menu">
+              <a class="large tab-title w--current w-inline-block w-tab-link" data-w-tab="Tab 1">
+                <div>Cursos em Progresso</div>
+              </a>
+              <a class="large tab-title w-inline-block w-tab-link" data-w-tab="Tab 2">
+                <div>Cursos completados</div>
+              </a>
+            </div>
+            <div class="w-tab-content">
+              <div class="w--tab-active w-tab-pane" data-w-tab="Tab 1">
+                <div class="dashboard-courses">
+                  <div class="dashboard-course"><img class="dashboard-course-image" height="140" src="{% static 'images/Si6mnHfeEP2Z9T2DZ8XrAk.592x300_q85_box-0701000576_crop_detail.jpg'%}">
+                    <div class="dashboard-course-description">
+                      <h1 class="dashboard-course-title">Direito Constitucional</h1>
+                      <p class="paragraph-2">Começado em 03/01/2017</p><a class="button w-button" href="#">Continuar Curso</a>
+                    </div>
+                    <h1 class="dashboard-completion-percentage">33%</h1>
+                  </div>
+                  <div class="dashboard-course"><img class="dashboard-course-image" height="140" src="{% static 'images/ajHvJnVmCNYkEs6bJK3tKX.296x150_q85_box-033400236_crop_detail.jpg'%}">
+                    <div class="dashboard-course-description">
+                      <h1 class="dashboard-course-title">Direito do Trabalho</h1>
+                      <p>Começado em 05/01/2017</p><a class="button w-button" href="#">Continuar Curso</a>
+                    </div>
+                    <h1 class="dashboard-completion-percentage">75%</h1>
+                  </div>
+                  <div class="dashboard-course"><img class="dashboard-course-image" height="140" src="{% static 'images/Si6mnHfeEP2Z9T2DZ8XrAk.592x300_q85_box-0701000576_crop_detail.jpg'%}">
+                    <div class="dashboard-course-description">
+                      <h1 class="dashboard-course-title">Direito Constitucional</h1>
+                      <p>Começado em 03/01/2017</p><a class="button w-button" href="#">Continuar Curso</a>
+                    </div>
+                    <h1 class="dashboard-completion-percentage">33%</h1>
+                  </div>
+                </div>
+              </div>
+              <div class="about-image w-tab-pane" data-w-tab="Tab 2">
+                <div class="dashboard-courses">
+                  <div class="dashboard-course"><img class="dashboard-course-image" height="140" src="{% static 'images/Si6mnHfeEP2Z9T2DZ8XrAk.592x300_q85_box-0701000576_crop_detail.jpg'%}">
+                    <div class="dashboard-course-description">
+                      <h1 class="dashboard-course-title">Direito Constitucional</h1>
+                      <p class="paragraph">Concluído em 03/01/2017</p><a class="button w-button" href="#">Ver Certificado</a><a class="button w-button white-button" href="#">Revisar Curso</a>
+                    </div>
+                    <h1 class="dashboard-completion-percentage">100%</h1>
+                  </div>
+                  <div class="dashboard-course"><img class="dashboard-course-image" height="140" src="{% static 'images/Si6mnHfeEP2Z9T2DZ8XrAk.592x300_q85_box-0701000576_crop_detail.jpg'%}">
+                    <div class="dashboard-course-description">
+                      <h1 class="dashboard-course-title">Direito Constitucional</h1>
+                      <p>Concluído em 03/01/2017</p><a class="button w-button" href="#">Ver Certificado</a><a class="button w-button white-button" href="#">Revisar Curso</a>
+                    </div>
+                    <h1 class="dashboard-completion-percentage">100%</h1>
+                  </div>
+                  <div class="dashboard-course"><img class="dashboard-course-image" height="140" src="{% static 'images/Si6mnHfeEP2Z9T2DZ8XrAk.592x300_q85_box-0701000576_crop_detail.jpg'%}">
+                    <div class="dashboard-course-description">
+                      <h1 class="dashboard-course-title">Direito Constitucional</h1>
+                      <p>Concluído em 03/01/2017</p><a class="button w-button" href="#">Ver Certificado</a><a class="button w-button white-button" href="#">Revisar Curso</a>
+                    </div>
+                    <h1 class="dashboard-completion-percentage">100%</h1>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="dark main-section">
+      <div class="w-container">
+        <div class="section-heading">
+          <h2 class="white">Receba as novas aulas diretamente em seu email!</h2>
+          <div class="med-divider"></div>
+        </div>
+        <h2 class="hidden white" id="mailing-success-msg">Email cadastrado com sucesso!</h2>
+        <div class="form-wrapper ">
+          <form class="mailing-form" data-name="Email Form" id="email-form" name="email-form">
+            <input class="field w-input" data-name="Email" id="email" maxlength="256" name="email" placeholder="Qual é seu endereço de email?" required="required" type="email">
+            <input class="submit-button w-button" data-ix="mailing-spinner" data-wait="Please wait..." type="submit" value="Enviar">
+            <h3 class="hidden white" id="mailing-error-msg">Email inválido!</h3><img class="spinner" src="{% static 'images/default-2.svg'%}">
+          </form>
+          <div class="success-message -done">
+            <p>Thank you! Your submission has been received!</p>
+          </div>
+          <div class="-fail">
+            <p>Oops! Something went wrong while submitting the form</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-section">
+        <div class="w-container">
+          <div class="w-row">
+            <div class="logo-footer w-col w-col-4 w-col-small-4"><img class="logo-home" height="44" src="{% static 'images/DETWHITE.png'%}">
+            </div>
+            <div class="footer-links w-col w-col-8 w-col-small-8"><a class="footer-link" href="index.html">Início</a><a class="footer-link" href="categories.html">Video-aulas</a><a class="footer-link" href="about.html">sobre</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js" type="text/javascript"></script>
+  <script src="{% static 'js/webflow.js'%}" type="text/javascript"></script>
+  <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
+</body>
+</html>

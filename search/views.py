@@ -7,7 +7,7 @@ class SearchResultsView(ListView):
     model = Video
     paginate_by = 15
     context_object_name = 'videos'
-    template_name = 'search-results.html'
+    template_name = 'search-results.djhtml'
 
     def get_queryset(self):
         query = self.kwargs['query']

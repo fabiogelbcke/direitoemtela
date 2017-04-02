@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'^', include('users.urls')),
     url(r'^', include('autoupdate.urls')),
     url(r'^', include('courses.urls')),
+    url(r'^', include('coursetests.urls')),
     url('', include('social_django.urls', namespace='social')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

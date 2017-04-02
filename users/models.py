@@ -74,10 +74,12 @@ class MyUser(AbstractBaseUser):
                                    default='profiledefault.jpg')
     profile_ratio = ImageRatioField('profile_image', '320x320')
     email_confirmed = models.BooleanField(default=False)
+    course_hours = models.IntegerField(default=0)
     objects = MyUserManager()
 
     USERNAME_FIELD = 'username'
 
+    @property
     def get_full_name(self):
         # The user is identified by their email address
         return self.first_name + ' ' + self.last_name

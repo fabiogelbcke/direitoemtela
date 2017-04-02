@@ -3,8 +3,14 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from videos.models import Video
 from django.conf import settings
-
+from image_cropping import ImageRatioField, ImageCropField
+import shortuuid
+from django.utils import timezone
+from coursetests.models import CourseTest, Question
 # Create your models here.
+
+def get_thumbnail_path(instance, filename):
+    return os.path.join('coursethumbnails', str(instance.id), shortuuid.uuid())
 
 class Course(models.Model):
     name = models.CharField(blank=True, max_length=150)
@@ -18,6 +24,13 @@ class Course(models.Model):
                                   default=None)
     hidden = models.BooleanField(default=False)
     hours = models.IntegerField(default=0)
+    users = models.ManyToManyField(settings.SOCIAL_AUTH_USER_MODEL,
+                                   through='UserCourseRelationship',
+                                   related_name='courses')
+    thumbnail = ImageCropField(upload_to=get_thumbnail_path, blank=True,
+                               default='logodefault.png')
+    thumbnail_ratio = ImageRatioField('thumbnail', '592x300')
+    total_questions = models.IntegerField(default=0)
 
 class CourseTopic(models.Model):
     course = models.ForeignKey(Course, related_name='topics')
@@ -32,20 +45,27 @@ class CourseItem(models.Model):
     course = models.ForeignKey(Course, related_name='items')
     position = models.IntegerField(validators=[MinValueValidator(0),])
     #types: 1 - video, 2 - reading, 3 - test
-    item_type = models.IntegerField()
     video = models.ForeignKey(Video,
                               related_name='course_items',
                               null=True,
-                              default=None)
+                              default=None,
+                              blank=True)
     title = models.CharField(default='', max_length=150)
     users = models.ManyToManyField(settings.SOCIAL_AUTH_USER_MODEL,
                                    through='UserItemRelationship',
                                    related_name='course_items')
     #reading = models.ForeignKey(Reading, related_name='readings')
-    #test = models.ForeignKey(CourseTest, related_name='tests')
+    test = models.OneToOneField(CourseTest,
+                                related_name='course_item',
+                                default=None,
+                                null=True,
+                                blank=True)
 
     def type(self):
-        return 'video'
+        if self.video:
+            return 'video'
+        elif self.test:
+            return 'test'
 
     def save(self, *args, **kwargs):
         position = self.position
@@ -100,10 +120,17 @@ class CourseItem(models.Model):
 class UserItemRelationship(models.Model):
     user = models.ForeignKey(settings.SOCIAL_AUTH_USER_MODEL)
     course_item = models.ForeignKey(CourseItem)
-    done = models.BooleanField(default=None)
+    done = models.BooleanField(default=False)
 
 class UserCourseRelationship(models.Model):
     user = models.ForeignKey(settings.SOCIAL_AUTH_USER_MODEL)
     course = models.ForeignKey(Course)
-    percentage = models.IntegerField(default=0)
-    
+    correct_answers = models.IntegerField(default=0)
+    questions_answered = models.IntegerField(default=0)
+    completed = models.BooleanField(default=False)
+    start_date = models.DateTimeField(default=timezone.now)
+    completion_date = models.DateTimeField(null=True,
+                                           default=None)
+
+    def percentage(self):
+        return int(100 * (correct_answers/course.total_questions))
