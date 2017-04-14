@@ -2938,6 +2938,7 @@ img {
 }
 
 .question-option.hover-yellow.correct-alternative {
+  border-width: 3px;
   border-color: #2eca34;
 }
 
@@ -2947,6 +2948,7 @@ img {
 }
 
 .question-option.selected-option.correct-alternative {
+  border-width: 3px;
   border-color: #2eca34;
 }
 
@@ -2969,6 +2971,10 @@ img {
   margin-top: 10px;
   margin-bottom: 15px;
   font-size: 28px;
+}
+
+.question-title.center {
+  text-align: center;
 }
 
 .question-buttons-div {
@@ -3163,6 +3169,80 @@ img {
 .gap {
   width: 5px;
   height: 1px;
+}
+
+.test-statistics {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 50px;
+  -webkit-justify-content: space-around;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+}
+
+.statistics-graph {
+  position: relative;
+  width: 250px;
+  height: 250px;
+}
+
+.div-block-6 {
+  width: 200px;
+  height: 200px;
+}
+
+.div-block-7 {
+  border: 1px solid #000;
+}
+
+.statistics-graph-div {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.heading-2 {
+  text-align: center;
+}
+
+.test-result-heading {
+  text-align: center;
+}
+
+.center {
+  text-align: center;
+}
+
+.test-results-heading {
+  font-size: 30px;
+  text-align: center;
+}
+
+.heading-3 {
+  font-size: 30px;
+}
+
+.result-percentage {
+  position: absolute;
+  top: 100px;
+  width: 250px;
+  height: 250px;
+  margin-bottom: 0px;
+  color: rgba(77, 86, 93, .6);
+  font-size: 60px;
+  text-align: center;
 }
 
 html.w-mod-js *[data-ix="navbar"] {
@@ -3705,6 +3785,17 @@ html.w-mod-js *[data-ix="view-more"] {
   }
   .paragraph-2 {
     text-align: center;
+  }
+  .test-statistics {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
   }
 }
 
@@ -4467,6 +4558,20 @@ html.w-mod-js *[data-ix="view-more"] {
   }
   .paragraph-2 {
     text-align: center;
+  }
+  .test-statistics {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+  .result-percentage {
+    position: absolute;
+    top: 105px;
+    right: auto;
+    padding-top: 0px;
+    color: rgba(77, 86, 93, .5);
   }
 }
 

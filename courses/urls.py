@@ -2,6 +2,8 @@ from django.conf.urls import url, include
 from django.views.generic import TemplateView
 from django.views.decorators.cache import cache_page
 from .views import CourseView, dashboard_courses, CourseItemView
+from .utils import set_item_done
+
 
 urlpatterns = [
     url(r'^course/(?P<slug>\d+)$',
@@ -16,4 +18,7 @@ urlpatterns = [
     url(r'^course/(?P<course_id>\d+)/(?P<position>\d+)/(?P<question_no>\d+)$',
         CourseItemView.as_view(),
         name='course_item'),
+    url(r'^setitemdone/(?P<item_id>\d+)$',
+        set_item_done,
+        name='set_item_done'),
 ]

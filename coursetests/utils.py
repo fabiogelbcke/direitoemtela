@@ -9,6 +9,7 @@ def answer_question(request):
     user = request.user
     question_id = request.POST.get('question_id', None)
     alternative_id = request.POST.get('alternative_id', None)
+    print alternative_id
     alternative = Alternative.objects.get(id=alternative_id)
     if question_id is None or alternative_id is None:
         print 'return bad request'
@@ -17,13 +18,12 @@ def answer_question(request):
         question=question,
         correct=True
     )
-    return HttpResponse('alternative' + str(correct_alternative.id))
     uquestion = UserQuestionRelationship.objects.get(
             question=question,
             user=user
     )
     ucourse = UserCourseRelationship.objects.get(
-        course = question.test.course,
+        course = question.test.course_item.course,
         user = user
     )
     test = question.test

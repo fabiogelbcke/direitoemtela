@@ -118,6 +118,7 @@
   {% endblock %}
   {% block footer %}
     <div class="dark main-section">
+      {% if not user.is_authenticated %}
       <div class="w-container">
         <div class="section-heading">
           <h2 class="white">Receba as novas aulas diretamente em seu email!</h2>
@@ -133,6 +134,7 @@
           </form>
         </div>
       </div>
+      {% endif %}
       <div class="footer-section">
         <div class="w-container">
           <div class="w-row">

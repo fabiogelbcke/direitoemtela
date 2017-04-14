@@ -7,6 +7,7 @@ from image_cropping import ImageRatioField, ImageCropField
 import shortuuid
 from django.utils import timezone
 from coursetests.models import CourseTest, Question
+from readings.models import Reading
 # Create your models here.
 
 def get_thumbnail_path(instance, filename):
@@ -32,6 +33,14 @@ class Course(models.Model):
     thumbnail_ratio = ImageRatioField('thumbnail', '592x300')
     total_questions = models.IntegerField(default=0)
 
+    def save(self, *args, **kwargs):
+        if self.pk is not None:
+            total_questions = 0
+            for item in self.items.filter(test__isnull=False):
+                total_questions += item.test.questions.all().count()
+            self.total_questions = total_questions
+        super(Course, self).save(*args, **kwargs)
+
 class CourseTopic(models.Model):
     course = models.ForeignKey(Course, related_name='topics')
     text = models.CharField(blank=True, max_length=200)
@@ -54,7 +63,11 @@ class CourseItem(models.Model):
     users = models.ManyToManyField(settings.SOCIAL_AUTH_USER_MODEL,
                                    through='UserItemRelationship',
                                    related_name='course_items')
-    #reading = models.ForeignKey(Reading, related_name='readings')
+    reading = models.ForeignKey(Reading,
+                                related_name='course_items',
+                                blank=True,
+                                null=True,
+                                default=None)
     test = models.OneToOneField(CourseTest,
                                 related_name='course_item',
                                 default=None,
@@ -62,10 +75,12 @@ class CourseItem(models.Model):
                                 blank=True)
 
     def type(self):
-        if self.video:
+        if self.video is not None:
             return 'video'
-        elif self.test:
+        elif self.test is not None:
             return 'test'
+        elif self.reading is not None:
+            return 'reading'
 
     def save(self, *args, **kwargs):
         position = self.position
@@ -133,4 +148,6 @@ class UserCourseRelationship(models.Model):
                                            default=None)
 
     def percentage(self):
-        return int(100 * (correct_answers/course.total_questions))
+        if self.course.total_questions == 0:
+            return 0
+        return int(100 * (1.0*self.correct_answers/self.course.total_questions))

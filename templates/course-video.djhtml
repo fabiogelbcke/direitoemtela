@@ -13,9 +13,11 @@
           <div class="center-flex video-page-title-div">
             <h1 class="center video-tile">{{ course.name }}</h1>
 	    {% if course_item.type == 'video' %}
-              <div class="course-video-title">{{ course_item.video }}</div>
+              <div class="course-video-title">{{ course_item.video.title }}</div>
 	    {% elif course_item.type == 'test' %}
 	      <div class="course-video-title">{{ course_item.test.title }}</div>
+	    {% elif course_item.type == 'reading' %}
+	      <div class="course-video-title">{{ course_item.reading.title }}</div>
 	    {% endif %}
           </div>
           <div class="course-video-div">
@@ -24,7 +26,7 @@
 		{% for item_rel in user_item_rels %}
 		  {% with item_rel.course_item as item %}
 		    <div>
-		      {% if item.done is True %}
+		      {% if item_rel.done is True %}
 			<a class="course-step done-step" data-ix="new-interaction-3" href="{% url 'course_item' course_id=course.id position=item.position %}"><img class="step-image" src="{% static 'images/checkicon-white.png'%}" width="35">
 			</a>
 		      {% elif item.type == 'video' %}
@@ -48,38 +50,56 @@
             </div>
 	    {% if course_item.type == 'test' %}
 	      {% with course_item.test as test %}
-              <div class="test-div">
-		<div class="question-div">
-		  <p class="question-number">Pergunta {{question_no}} de {{test.questions.count}}</p>
-		</div>
-		<h2 class="question-title">{{question.text}}?</h2>
-		<div class="question-buttons-div">
-		  <h3 class="heading-no-margin" id="pre-answer-text">Selecione a opção correta abaixo</h3>
-		  <div class="div-block-2 hidden" id="correct-answer-div">
-                    <div class="correct-sign"><img src="{% static 'images/white-checkicon.png'%}">
-                    </div>
-                    <h3 class="heading-no-margin">Resposta Correta!</h3>
+		<div class="test-div">
+		  {% if question_no <= test.questions.count %}
+		  <div class="question-div">
+		    <p class="question-number">Pergunta {{question_no}} de {{test.questions.count}}</p>
 		  </div>
-		  <div class="div-block-2 hidden" id="incorrect-answer-div">
-                    <div class="incorrete-sign"><img class="image" src="{% static 'images/cross-42928_1280-copy-copy.png'%}">
-                    </div>
-                    <h3 class="heading-no-margin">Resposta Incorreta :(</h3>
+		  <h2 class="question-title">{{question.text}}</h2>
+		  <div class="question-buttons-div">
+		    <h3 class="heading-no-margin" id="pre-answer-text">Selecione a opção correta abaixo</h3>
+		    <div class="div-block-2 hidden" id="correct-answer-div">
+                      <div class="correct-sign"><img src="{% static 'images/white-checkicon.png'%}">
+                      </div>
+                      <h3 class="heading-no-margin">Resposta Correta!</h3>
+		    </div>
+		    <div class="div-block-2 hidden" id="incorrect-answer-div">
+                      <div class="incorrete-sign"><img class="image" src="{% static 'images/cross-42928_1280-copy-copy.png'%}">
+                      </div>
+                      <h3 class="heading-no-margin">Resposta Incorreta :(</h3>
+		    </div>
+		    <a class="button faded-button w-button" href="#" id="next-question-button">{% if question_no < test.questions.count %}Próxima questão{% else %}Concluir Teste{% endif %}</a>
 		  </div>
-		  <a class="button faded-button w-button" href="#" id="next-question-button">Próxima questão</a>
-		</div>
-		<div class="question-options-div">
-		  <form id="questionform" method="POST" action="{% url 'answer_question' %}" style="width:100%">
-		    {% csrf_token %}
-		    <input type="text" class="hidden" name="question_id" value="{{question.id}}">
-		    {% for alternative in question.alternatives.all %}
-		      <div>
-			<a class="hover-yellow question-option w-inline-block" href="#" id="alternative{{alternative.id}}"><h1 class="option-number">{{forloop.counter|to_char}}.</h1><p class="question-option-text">{{alternative.text}}</p></a>
-			<input class="hidden" type="submit" name="alternative_id" value="{{alternative.id}}"/>
+		  <div class="question-options-div">
+		    <form id="questionform" method="POST" action="{% url 'answer_question' %}" style="width:100%">
+		      {% csrf_token %}
+		      <input type="text" class="hidden" name="question_id" value="{{question.id}}">
+		      {% for alternative in question.alternatives.all %}
+			<div>
+			  <a class="hover-yellow question-option w-inline-block" href="#" id="alternative{{alternative.id}}"><h1 class="option-number">{{forloop.counter|to_char}}.</h1><p class="question-option-text">{{alternative.text}}</p></a>
+			  <input class="hidden" type="submit" name="alternative_id" value="{{alternative.id}}"/>
+			</div>
+		      {% endfor %}
+		    </form>
+		  </div>
+		  {% else %}
+		  <h2 class="center question-title">Resultado do Teste</h2>
+		  <div class="test-statistics">
+		    <div class="statistics-graph-div">
+                      <h1 class="test-results-heading">Resultado do <br>Teste</h1>
+                      <div class="statistics-graph" id="test-percentage">
+			<h1 class="result-percentage">{{test_percentage}}%</h1>
 		      </div>
-		  {% endfor %}
-		  </form>
+		    </div>
+		    <div class="statistics-graph-div">
+                      <h1 class="test-results-heading">Porcentagem do<br>curso atingida</h1>
+                      <div class="statistics-graph" id="course-percentage">
+			<h1 class="result-percentage">{{course_percentage}}%</h1>
+		      </div>
+		    </div>
+		  </div>
+		  {% endif %}
 		</div>
-              </div>
 	      {% endwith %}
 	    {% elif course_item.type == 'video' %}
 	      {% with course_item.video as video %}
@@ -96,60 +116,65 @@
 		  </div>
 		</div>
 	      {% endwith %}
+	    {% elif course_item.type == 'reading' %}
+	      <div class="reading-pdf-frame">
+		<div class="reading-pdf" id="reading-pdf"></div>
+              </div>
 	    {% endif %}
 	    {% if course_item.type == 'video' or course_item.type == 'reading' %}
-            <div class="course-inner-div">
-	      <div class="video-tabs w-tabs" data-duration-in="300" data-duration-out="100">
-		<div class="tabs-menu-line-underneath w-tab-menu">
-		  <a class="tab-title w--current w-inline-block w-tab-link" data-w-tab="Tab 1">
-		    <div>Descrição</div>
-		  </a>
-		  <a class="tab-title w-inline-block w-tab-link" data-w-tab="Tab 2">
-		    <div>Professor</div>
-		  </a>
-		  <a class="tab-title w-inline-block w-tab-link" data-w-tab="Tab 3">
-		    <div>Materiais de Estudo</div>
-		  </a>
-		</div>
-		<div class="w-tab-content">
-		  <div class="description-tab w--tab-active w-tab-pane" data-w-tab="Tab 1">
-		    <p class="video-page-description">{{course_item.description}}</p>
+              <div class="course-inner-div">
+		<div class="video-tabs w-tabs" data-duration-in="300" data-duration-out="100">
+		  <div class="tabs-menu-line-underneath w-tab-menu">
+		    <a class="tab-title w--current w-inline-block w-tab-link" data-w-tab="Tab 1">
+		      <div>Descrição</div>
+		    </a>
+		    <a class="tab-title w-inline-block w-tab-link" data-w-tab="Tab 2">
+		      <div>Professor</div>
+		    </a>
+		    <a class="tab-title w-inline-block w-tab-link" data-w-tab="Tab 3">
+		      <div>Materiais de Estudo</div>
+		    </a>
 		  </div>
-		  <div class="professor-tab w-tab-pane" data-w-tab="Tab 2">
-      		    {% if course and course.professor %}
-      		      {% with course.professor as professor %}
-        		<div class="professor-name-block"><img class="professor-image" height="100" src="{% cropped_thumbnail professor 'profile_ratio' max_size="100x100" %}" width="100">
-			  <h1 class="professor-name">{{professor.name}}</h1>
-			  <div class="professor-name-underline"></div>
-			</div>
-			<div class="professor-description-block">
-          		  {{professor.description|safe}}
-        		</div>
-        	      {% endwith %}
-		    {% endif %}
-        	  </div>
-		  <div class="w-tab-pane" data-w-tab="Tab 3">
-		    <h1> Em breve!</h1>
-        	  </div>
+		  <div class="w-tab-content">
+		    <div class="description-tab w--tab-active w-tab-pane" data-w-tab="Tab 1">
+		      <p class="video-page-description">{{course_item.description}}</p>
+		    </div>
+		    <div class="professor-tab w-tab-pane" data-w-tab="Tab 2">
+      		      {% if course and course.professor %}
+      			{% with course.professor as professor %}
+        		  <div class="professor-name-block"><img class="professor-image" height="100" src="{% cropped_thumbnail professor 'profile_ratio' max_size="100x100" %}" width="100">
+			    <h1 class="professor-name">{{professor.name}}</h1>
+			    <div class="professor-name-underline"></div>
+			  </div>
+			  <div class="professor-description-block">
+          		    {{professor.description|safe}}
+        		  </div>
+        		{% endwith %}
+		      {% endif %}
+        	    </div>
+		    <div class="w-tab-pane" data-w-tab="Tab 3">
+		      <h1> Em breve!</h1>
+        	    </div>
+		  </div>
 		</div>
 	      </div>
-	    </div>
           </div>
-	  {% endif %}
+	    {% endif %}
         </div>
       </div>
     </div>
 {% endblock %}
 {% block js %}
   {{block.super}}
-  {% if course_item.type == 'video' %}
-    <script type="text/javascript">
+  <script type="text/javascript" src="{% static 'js/jquery.cookie.js' %}"></script>
+   {% if course_item.type == 'video' %}
+  <script type="text/javascript">
      var tag = document.createElement('script');
-
+     
      tag.src = "https://www.youtube.com/iframe_api";
      var firstScriptTag = document.getElementsByTagName('script')[0];
      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
+     
      var player;
      
      function play(){
@@ -161,7 +186,7 @@
 		 modestbranding: true,
 		 rel: 0
 	     },
-
+	     
 	     events: {
 		 'onReady': onPlayerReady,
 		 'onStateChange': onPlayerStateChange
@@ -178,6 +203,7 @@
 	     {
 		 if (skip == 1)
 		     {
+			 
 			 window.location.href = "{% url 'course_item' course_id=course.id position=course_item.position|add:1 %}";
 		     }
 	     }
@@ -195,6 +221,11 @@
 	     $("#countdowndiv").css("display", "flex");
 	     timer = 6;
 	     skip = 1;
+	     $.ajax({
+		 type: "POST",
+		 url: "{% url 'set_item_done' item_id=course_item.id %}",
+		 data: {'csrfmiddlewaretoken': '{{ csrf_token }}',}
+	     });
 	     countdownNextVideo();
 	 }
      }
@@ -208,40 +239,69 @@
     </script>
 
   {% elif course_item.type == 'reading' %}
-    <script src="{% static 'js/pdfobject.js' %}"></script>
-    <script>PDFObject.embed("/pdf/sample-3pp.pdf", "#example1");</script>
-  {% elif course_item.type == 'test' %}
+    <script src="{% static 'js/pdfobject.min.js' %}"></script>
+    <script>PDFObject.embed("{{course_item.reading.reading_file.url}}", "#reading-pdf");</script>
     <script>
-     $(".question-option").click(function(){
-	 if (!window.submited_id)
-	     {
-		 window.submited_id = $(this).attr("id");
-		 $(this).siblings().click();
-		 $(this).addClass("selected-option");
-		 $("#questionform").removeAttr("action");
-	     }
-     });
-     $("#questionform").ajaxForm({
-	 success: function(data){
-	     $("#pre-answer-text").hide();
-	     console.log(data);
-	     console.log(window.submited_id);
-	     if (data == window.submited_id){
-		 $("#correct-answer-div").removeClass("hidden");
-	     }
-	     else{
-		 $("#incorrect-answer-div").removeClass("hidden");
-	     }
-	     $("#next-question-button").removeClass("faded-button");
-	     {% if question_no < course.questions.count %}
-	     $("#next-question-button").attr("href", "{% url 'course_item' course_id=course.id position=course_item.position question_no=question_no|add:1%}");
-	     {% endif %}
-	     $("#".concat(data)).addClass("correct-alternative");
-	 },
-	 error: function(data){
-	     
-	 }
+     $( document ).ready(function() {
+	 $.ajax({
+	     type: "POST",
+	     url: "{% url 'set_item_done' item_id=course_item.id %}",
+	     data: {'csrfmiddlewaretoken': '{{ csrf_token }}',}
+	 });
      });
     </script>
+  {% elif course_item.type == 'test' %}
+    {% if question %}
+      <script>
+       $(".question-option").click(function(){
+	   if (!window.submited_id)
+	       {
+		   window.submited_id = $(this).attr("id");
+		   $(this).siblings().click();
+		   $(this).addClass("selected-option");
+		   $("#questionform").removeAttr("action");
+	       }
+       });
+       $("#questionform").ajaxForm({
+	   success: function(data){
+	       $("#pre-answer-text").hide();
+	       console.log(data);
+	       console.log(window.submited_id);
+	       if (data == window.submited_id){
+		   $("#correct-answer-div").removeClass("hidden");
+	       }
+	       else{
+		   $("#incorrect-answer-div").removeClass("hidden");
+	       }
+	       $("#next-question-button").removeClass("faded-button");
+
+p	       $("#next-question-button").attr("href", "{% url 'course_item' course_id=course.id position=course_item.position question_no=question_no|add:1%}");
+	       $("#".concat(data)).addClass("correct-alternative");
+	   },
+	   error: function(data){
+	       
+	   }
+       });
+      </script>
+    {% else %}
+      <script src="{% static 'js/circle-progress.min.js' %}"></script>
+      <script>
+       $('#course-percentage').circleProgress({
+	   value: {{course_percentage|percentage_to_decimal}},
+	   size: 250,
+	   fill: {
+	       gradient: ["#3296C8", "#32FA64"]
+	   }
+       });
+       $('#test-percentage').circleProgress({
+	   value: {{test_percentage|percentage_to_decimal}},
+	   size: 250,
+	   fill: {
+	       gradient: ["red", "orange"]
+	   }
+       });
+      </script>
+
+    {% endif %}
   {% endif %}
 {% endblock %}

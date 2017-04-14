@@ -1,6 +1,10 @@
 from .models import (Course, UserItemRelationship,
                      UserCourseRelationship, CourseItem)
+from coursetests.models import UserQuestionRelationship
 from users.models import MyUser
+from django.shortcuts import get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 
 def register_to_course(user_id, course_id):
     course = Course.objects.get(id=course_id)
@@ -13,4 +17,20 @@ def register_to_course(user_id, course_id):
         UserItemRelationship.objects.create(
             user=user,
             course_item=item
+        )
+        if item.type() == 'test':
+            for question in item.test.questions.all():
+                UserQuestionRelationship.objects.create(
+                    user=user,
+                    question=question
+                )
+
+@login_required
+def set_item_done(request, item_id):
+    u_item_rel = UserItemRelationship.objects.get(
+        course_item__id=item_id,
+        user=request.user
     )
+    u_item_rel.done=True
+    u_item_rel.save()
+    return HttpResponse('good!')

@@ -4,11 +4,13 @@ from django.db import models
 
 # Create your models here.
 class CourseTest(models.Model):
+    id = models.AutoField(primary_key=True)
     title = models.CharField(default='',
                              blank=True,
                              max_length=150)
 
 class Question(models.Model):
+    id = models.AutoField(primary_key=True)
     test = models.ForeignKey(CourseTest,
                              related_name='questions')
     text = models.CharField(default='',
@@ -19,6 +21,7 @@ class Question(models.Model):
                                    related_name='questions')
 
 class Alternative(models.Model):
+    id = models.AutoField(primary_key=True)
     question = models.ForeignKey(Question,
                                  related_name='alternatives')
     correct = models.BooleanField(default=False)

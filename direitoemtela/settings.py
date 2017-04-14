@@ -68,7 +68,8 @@ INSTALLED_APPS = (
     'hitcount',
     'users',
     'social_django',
-    'coursetests', 
+    'coursetests',
+    'readings',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -243,6 +244,9 @@ YT_KEY = keys.YT_KEY
 
 GEOIP_DATABASE = os.path.join(SITE_ROOT, 'geoip/GeoLiteCity.dat')
 GEOIPV6_DATABASE = os.path.join(SITE_ROOT, 'geoip/GeoLiteCityv6.dat')
+
+READING_VALID_EXTENSIONS = ['.pdf',]
+READING_VALID_TYPES = ['application/pdf',]
 
 
 # Static files (CSS, JavaScript, Images)
