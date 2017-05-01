@@ -31,6 +31,44 @@ class CourseView(DetailView):
     template_name = 'course-page.djhtml'
     slug_field = 'id'
 
+class CourseProgressView(DetailView):
+    model = Course
+    context_object_name = 'course'
+    template_name = 'course-progress.djhtml'
+    slug_field = 'id'
+
+    def get_context_data(self, **kwargs):
+        context = super(CourseProgressView, self).get_context_data(**kwargs)
+        user = self.request.user
+        course = self.object
+        item_rels = UserItemRelationship.objects.filter(
+            user=user,
+            course_item__course=course
+            )
+        course_rel = UserCourseRelationship.objects.get(
+            user=user,
+            course=course
+            )
+        videos = item_rels.filter(
+            course_item__video__isnull=False
+        )
+        readings = item_rels.filter(
+            course_item__reading__isnull=False
+            )
+        tests = item_rels.filter(
+            course_item__test__isnull=False
+            )
+        context['item_rels'] = item_rels
+        context['course_rel'] = course_rel
+        context['videos_total'] = videos.count()
+        context['videos_done'] = videos.filter(done=True).count()
+        context['readings_total'] = readings.count()
+        context['readings_done'] = readings.filter(done=True).count()
+        context['tests_total'] = tests.count()
+        context['tests_done'] = tests.filter(done=True).count()
+        return context
+        
+
 
 @method_decorator(requires_csrf_token, name='dispatch')
 class CourseItemView(LoginRequiredMixin, DetailView):
@@ -39,9 +77,47 @@ class CourseItemView(LoginRequiredMixin, DetailView):
     template_name = 'course-video.djhtml'
 
     def get_object(self):
-        pos = self.kwargs['position']
+        position = self.kwargs['position']
         course = Course.objects.get(id=self.kwargs['course_id'])
+        total_items = course.items.all().count()
+        pos = min(int(total_items), int(position))
         return CourseItem.objects.get(position=pos, course=course)
+
+    def get_test_context(self, context, user_course_rel, **kwargs):
+        test = self.object.test
+        user = self.request.user
+        if 'question_no' in self.kwargs:
+            question_no = int(self.kwargs['question_no'])
+        else:
+            question_no = UserQuestionRelationship.objects.filter(
+                user=user,
+                question__test=test,
+                answered=True
+            ).count() + 1
+        if question_no <= test.questions.all().count():
+            context['question'] = test.questions.all()[question_no - 1]
+        else:
+            correctly_answered = UserQuestionRelationship.objects.filter(
+                user=user,
+                question__test=test,
+                answered_correctly=True
+            ).count()
+            all_questions = test.questions.all().count()
+            test_percentage = int(100.0*correctly_answered/all_questions)
+            course_percentage = user_course_rel.percentage
+            context['test_percentage'] = test_percentage
+            context['course_percentage'] = course_percentage
+        context['question_no'] = question_no
+        return context
+
+    def get_video_context(self, context, **kwargs):
+        video = self.object.video
+        complementary_materials = video.complementary_materials.all()
+        context['complementary_links'] = [m for m in complementary_materials if m.is_link()]
+        context['complementary_files'] = [m for m in complementary_materials if m.is_file()]
+        print len(context['complementary_links'])
+        print len(context['complementary_files'])
+        return context
 
     def get_context_data(self, **kwargs):
         user = self.request.user
@@ -56,38 +132,18 @@ class CourseItemView(LoginRequiredMixin, DetailView):
             course_item__position__gte=min_pos,
             course_item__position__lte=max_pos
         ).order_by('course_item__position')
+        user_course_rel = UserCourseRelationship.objects.get(
+                    course=course,
+                    user=user
+        )
+        user_course_rel.last_accessed_item = self.object
+        user_course_rel.save()
         context['user_item_rels'] = user_item_rels
         context['course'] = course
         if self.object.type() == 'test':
-            test = self.object.test
-            if 'question_no' in self.kwargs:
-                question_no = int(self.kwargs['question_no'])
-            else:
-                question_no = UserQuestionRelationship.objects.filter(
-                    user=user,
-                    question__test=test,
-                    answered=True
-                    ).count() + 1
-            if question_no <= test.questions.all().count():
-                context['question'] = test.questions.all()[question_no - 1]
-            else:
-                correctly_answered = UserQuestionRelationship.objects.filter(
-                    user=user,
-                    question__test=test,
-                    answered_correctly=True
-                ).count()
-                print correctly_answered
-                all_questions = test.questions.all().count()
-                print all_questions
-                test_percentage = int(100.0*correctly_answered/all_questions)
-                print test_percentage
-                course_percentage = UserCourseRelationship.objects.get(
-                    course=course,
-                    user=user
-                ).percentage
-                context['test_percentage'] = test_percentage
-                context['course_percentage'] = course_percentage
-            context['question_no'] = question_no
+            return self.get_test_context(context, user_course_rel, **kwargs)
+        if self.object.type() == 'video':
+            return self.get_video_context(context, **kwargs)
         return context
             
 @login_required

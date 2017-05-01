@@ -1,11 +1,17 @@
 from django.contrib import admin
-from .models import Video, Tag
+from .models import Video, Tag, ComplementaryMaterial
 from image_cropping import ImageCroppingMixin
 
-class VideoAdmin(ImageCroppingMixin, admin.ModelAdmin):
-    list_display = ('id', 'title', 'description', 'yt_id', 'date_created')
+class ComplementaryMaterialAdmin(admin.TabularInline):
+    model = ComplementaryMaterial
 
+class VideoAdmin(ImageCroppingMixin, admin.ModelAdmin):
+    model = Video
+    list_display = ('id', 'title', 'description', 'yt_id', 'date_created')
+    inlines = [ComplementaryMaterialAdmin,]
+    
 class TagAdmin(admin.ModelAdmin):
+    model = Tag
     list_display = ('video', 'name')
 
 

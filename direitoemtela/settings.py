@@ -70,6 +70,7 @@ INSTALLED_APPS = (
     'social_django',
     'coursetests',
     'readings',
+    'payments',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -241,6 +242,8 @@ YOUTUBE_API_SERVICE_NAME = 'youtube'
 YOUTUBE_API_VERSION = 'v3'
 YT_CHANNEL_ID = 'UCOEfipXIvMmAHgg8XPcBtag'
 YT_KEY = keys.YT_KEY
+
+ASAAS_API_KEY = keys.ASAAS_API_KEY
 
 GEOIP_DATABASE = os.path.join(SITE_ROOT, 'geoip/GeoLiteCity.dat')
 GEOIPV6_DATABASE = os.path.join(SITE_ROOT, 'geoip/GeoLiteCityv6.dat')

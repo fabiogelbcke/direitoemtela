@@ -576,14 +576,7 @@
     window.location = url;
   };
 
-  // Webflow.app - Designer-specific methods
-  Webflow.app = Webflow.env() ? {} : null;
-  if (Webflow.app) {
-
-    // Trigger redraw for specific elements
-    var redraw = new Event('__wf_redraw');
-    Webflow.app.redrawElement = function(i, el) { el.dispatchEvent(redraw); };
-
+  if (Webflow.env()) {
     // Webflow.location - Re-route location change to trigger an event
     Webflow.location = function(url) {
       window.dispatchEvent(new CustomEvent('__wf_location', { detail: url }));
@@ -2897,7 +2890,8 @@ Webflow.require('ix').init([
   {"slug":"show-login-form","name":"show login form","value":{"style":{},"triggers":[{"type":"click","selector":".signup-form-block","stepsA":[{"opacity":0,"transition":"opacity 404ms ease 0"},{"wait":"800ms","display":"none"}],"stepsB":[]},{"type":"click","selector":".login-form-block","stepsA":[{"wait":"800ms","opacity":0.01,"transition":"opacity 200 ease 0"},{"display":"block"},{"opacity":1,"transition":"opacity 413ms ease 0"}],"stepsB":[]},{"type":"click","selector":".base-popup","stepsA":[{"wait":"692ms","height":"365px","transition":"height 404ms ease 0"}],"stepsB":[]}]}},
   {"slug":"close-login-popup","name":"close login popup","value":{"style":{},"triggers":[{"type":"click","selector":".login-popup","stepsA":[{"display":"none"}],"stepsB":[]}]}},
   {"slug":"show-login-popup","name":"show login popup","value":{"style":{},"triggers":[{"type":"click","selector":".login-popup","stepsA":[{"display":"block"}],"stepsB":[]}]}},
-  {"slug":"close-trailer","name":"close trailer","value":{"style":{},"triggers":[{"type":"click","selector":".trailer-popup","stepsA":[{"display":"none"}],"stepsB":[]}]}},
+  {"slug":"close-trailer","name":"close trailer","value":{"style":{},"triggers":[{"type":"click","selector":".payment-popup","stepsA":[{"display":"none"}],"stepsB":[]},{"type":"click","selector":".trailer-popup","stepsA":[{"display":"none"}],"stepsB":[]}]}},
   {"slug":"show-trailer","name":"show trailer","value":{"style":{},"triggers":[{"type":"click","selector":".trailer-popup","stepsA":[{"display":"block"}],"stepsB":[]}]}},
-  {"slug":"new-interaction-3","name":"New Interaction 3","value":{"style":{},"triggers":[{"type":"hover","selector":".item-details-popup","siblings":true,"stepsA":[{"display":"block","opacity":1,"transition":"opacity 300ms ease 0"}],"stepsB":[{"display":"block","opacity":0,"transition":"opacity 300ms ease 0"}]}]}}
+  {"slug":"new-interaction-3","name":"New Interaction 3","value":{"style":{},"triggers":[{"type":"hover","selector":".item-details-popup","siblings":true,"stepsA":[{"display":"block","opacity":1,"transition":"opacity 300ms ease 0"}],"stepsB":[{"display":"block","opacity":0,"transition":"opacity 300ms ease 0"}]}]}},
+  {"slug":"show-payment-popup","name":"Show Payment Popup","value":{"style":{},"triggers":[{"type":"click","selector":".payment-popup","stepsA":[{"display":"block"}],"stepsB":[]}]}}
 ]);

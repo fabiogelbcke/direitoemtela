@@ -1,0 +1,111 @@
+{% extends 'base.djhtml' %}
+{% load staticfiles %}{% load cropping %}{% load util_tags %}
+{% block content %}
+  <div class="header-background">
+    {% block header %}
+      {{block.super}}
+    {% endblock %}
+    <div class="top-bar-plain"></div>
+    <div class="thick-separator"></div>
+    <div class="course-description-containter w-container">
+      <div class="course-description-div">
+	<div class="course-header-div">
+          <h1 class="course-description-title">{{course.name}}</h1>
+          <h2 class="heading-5">Progresso no curso</h2>
+          <div class="course-description-buttons-div">
+	    {% with course_rel.last_accessed_item.position|default_if_none:0 as last_position%}
+	      <a class="button course-description-button w-button" href="{% url 'course_item' course_id=course.id position=last_position|add:1 %}">Continuar curso</a>
+	    {% endwith %}
+          </div>
+	</div>
+	<div class="course-body-div">
+          <div class="course-progress-body-row w-row">
+            <div class="w-col w-col-6">
+              <div class="course-description-block-div">
+		<div class="course-description-block-div">
+                  <h3 class="course-description-section-title">Data de início</h3>
+                  <h2 class="course-date-text">{{course_rel.start_date.date}}</h2>
+		</div>
+		{% if course_rel.completed %}
+		  <div class="course-description-separator"></div>
+		  <div class="course-description-block-div">
+                    <h3 class="course-description-section-title">Data de Conclusão</h3>
+                    <h2 class="course-date-text">{{course_rel.completion_date.date}}</h2>
+		  </div>
+		{% endif %}
+		<div class="course-description-separator"></div>
+		<h3 class="course-description-section-title" style="margin-bottom:15px">Porcentagem atingida</h3>
+		<div class="statistics-graph-div" style="margin-bottom:25px;">
+                  <div class="statistics-graph" id="course-percentage">
+		    <h1 class="result-percentage">{{course_rel.percentage}}%</h1>
+		  </div>
+		</div>
+		<div class="course-description-separator"></div>
+		<h3 class="course-description-section-title" style="margin-bottom:10px">Acertos nas questões</h3>
+		<ul style="font-size:17px;"><li>{{course_rel.correct_answers}} questões acertadas de {{course.total_questions}} questões no curso</li><li>{{course_rel.questions_answered}} questões respondidas de {{course.total_questions}} questões no curso</li><ul>
+              </div>
+            </div>
+            <div class="w-col w-col-6">
+              <div>
+		<div class="course-description-separator hidden-main"></div>
+		<div class="course-description-block-div">
+                  <h3 class="course-description-section-title">Progresso no curso</h3>
+                  <div class="div-block-8"><img class="image-2" src="{% static 'images/playicon.png'%}" width="50">
+                    <p class="course-outline-title">Videos assistidos: {{videos_done}}/{{videos_total}}</p>
+                  </div>
+                  <div class="div-block-8"><img class="image-2" src="{% static 'images/readingicon.png'%}" width="50">
+                    <p class="course-outline-title">Leituras completadas: {{readings_done}}/{{readings_total}}</p>
+                  </div>
+                  <div class="div-block-8"><img class="image-2" src="{% static 'images/testicon.png'%}" width="50">
+                    <p class="course-outline-title">Testes resolvidos: {{tests_done}}/{{tests_total}}</p>
+                  </div>
+		</div>
+		<div class="course-description-separator"></div>
+		<h3 class="course-description-section-title">Conteúdo Programático</h3>
+		{% for item_rel in item_rels %}
+		  {% with item_rel.course_item as item %}
+	
+		    <div class="course-outline-item">
+		      <img class="course-outline-icon {% if item_rel.done %}done{% endif %}" height="45"
+			   {% if item_rel.done %}
+			   src="{% static 'images/doneicon.png'%}"
+			   {% elif item.type == 'video' %}
+			   src="{% static 'images/playicon.png'%}"
+			   {% elif item.type == 'reading' %}
+			   src="{% static 'images/readingicon.png'%}"
+			   {% elif item.type == 'test' %}
+			   src="{% static 'images/testicon.png'%}"
+			   {% endif %}
+			   width="45">
+		      <p class="course-outline-title">
+			{% if item.type == 'video' %}
+			  Video:
+			{% elif item.type == 'reading' %}
+			  Leitura:
+			{% elif item.type == 'test' %}
+			  Teste:
+			{% endif %}{{item.title}}
+		      </p>
+		    </div>
+		  {% endwith %}
+		{% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+{% endblock %}
+{% block js %}
+  {{block.super}}
+  <script src="{% static 'js/circle-progress.min.js' %}"></script>
+  <script>
+   $('#course-percentage').circleProgress({
+       value: {{course_rel.percentage|percentage_to_decimal}},
+       size: 250,
+       fill: {
+	   gradient: ["#3296C8", "#32FA64"]
+       }
+   });
+  </script>
+{% endblock %}

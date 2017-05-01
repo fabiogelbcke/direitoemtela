@@ -2,29 +2,64 @@
 {% load staticfiles %}{% load cropping %}
 {% block hiddencontent %}
   {{block.super}}
-  <div class="payment-popup" data-ix="close-trailer">
+  <div class="payment-popup">
     <div class="modal-wrapper">
       <div class="w-container">
         <div class="payment-block"><a class="close-popup-button" data-ix="close-trailer" href="#">Fechar <strong>X</strong></a>
-          <h1>Heading</h1>
-          <ul>
+          <h1 class="heading-6">Heading</h1>
+          <ul class="unordered-list">
             <li>Acesso a todo o material do curso por tempo ilimitado</li>
             <li>Certificado de conclusão de curso (mediante aprovação com 70% ou mais de média nas provas)</li>
             <li>Acesso ao grupo de discussão do curso com outros alunos e com o professor</li>
           </ul>
           <div class="">
             <form data-name="Email Form 2" id="email-form-2" name="email-form-2">
-              <input class="w-input" data-name="card_name" id="card_name" maxlength="256" name="card_name" placeholder="Nome do titular do cartão" required="required" type="email">
-              <input class="w-input" data-name="card_number" id="card_number" maxlength="256" name="card_number" placeholder="Número do Cartão" required="required" type="text">
-              <input class="w-button" data-wait="Please wait..." type="submit" value="Submit">
+              <h3 class="payment-form-head">Informações do Cartão</h3>
+              <div class="inline-input">
+                <p class="paragraph-3">Nome no Cartão</p>
+                <input class="round-text-field w-input" data-name="card_name" id="card_name" maxlength="256" name="card_name" placeholder="João Silva" required="required" type="email">
+              </div>
+              <div class="inline-input">
+                <p class="paragraph-3">Número</p>
+                <input class="round-text-field w-input" data-name="cc_number" id="cc_number" maxlength="256" name="cc_number" placeholder="0000000000000000" required="required" type="email">
+              </div>
+              <div class="div-block-9">
+                <div class="date-input inline-input">
+                  <p class="paragraph-3">Mês de Expiração</p>
+                  <input class="round-text-field w-input" data-name="expiration_date" id="expiration_date" maxlength="2" name="expiration_date" placeholder="03" required="required" type="email">
+                </div>
+                <div class="date-input inline-input">
+                  <p class="paragraph-3">Ano de Expiração</p>
+                  <input class="round-text-field w-input" data-name="cvv" id="cvv" maxlength="2" name="cvv" placeholder="21" required="required" type="email">
+                </div>
+              </div>
+              <div class="inline-input">
+                <p class="paragraph-3">Cód. Segurança</p>
+                <input class="round-text-field w-input" data-name="Cvv 2" id="cvv-2" maxlength="256" name="cvv-2" placeholder="173" required="required" type="email">
+              </div>
+              <h3 class="payment-form-head">Informações&nbsp;de Cobrança</h3>
+              <div class="inline-input">
+                <p class="paragraph-3">Telefone (Com cód. de área)</p>
+                <input class="round-text-field w-input" data-name="phone" id="phone" maxlength="256" name="phone" placeholder="47 999778888" required="required" type="email">
+              </div>
+              <div class="inline-input">
+                <p class="paragraph-3">CPF (Somente números)</p>
+                <input class="round-text-field w-input" data-name="cpf" id="cpf" maxlength="256" name="cpf" placeholder="00000000000" required="required" type="email">
+              </div>
+              <input class="button w-button" data-wait="Please wait..." type="submit" value="Confirmar">
             </form>
+            <div class="-done">
+              <div>Thank you! Your submission has been received!</div>
+            </div>
+            <div class="-fail">
+              <div>Oops! Something went wrong while submitting the form</div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="trailer-popup" data-ix="close-trailer">
+  <div class="trailer-popup">
     <div class="modal-wrapper">
       <div class="w-container">
         <div class="trailer-video"><a class="close-popup-button" data-ix="close-trailer" href="#">Fechar <strong>X</strong></a>
@@ -46,7 +81,7 @@
     <div class="course-description-div">
       <div class="course-header-div">
         <h1 class="course-description-title">{{course.name}}</h1>
-        <div class="course-description-buttons-div"><a class="button course-description-button w-button" data-ix="show-trailer" href="#">Assistir Trailer</a><a class="button course-description-button w-button" href="#">Inscrever-se</a>
+        <div class="course-description-buttons-div"><a class="button course-description-button w-button" data-ix="show-trailer" href="#">Assistir Trailer</a><a class="button course-description-button w-button" data-ix="show-payment-popup" href="#">Inscrever-se</a>
         </div>
       </div>
       <div class="course-body-div">
@@ -127,6 +162,7 @@
 {% endblock %}
 {% block js %}
   {{block.super}}
+  <script type="text/javascript" src="//assets.moip.com.br/v2/moip.min.js"></script>
   <script type="text/javascript">
    var tag = document.createElement('script');
 

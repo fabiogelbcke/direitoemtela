@@ -8,6 +8,7 @@ import shortuuid
 from django.utils import timezone
 from coursetests.models import CourseTest, Question
 from readings.models import Reading
+import os
 # Create your models here.
 
 def get_thumbnail_path(instance, filename):
@@ -145,6 +146,9 @@ class UserCourseRelationship(models.Model):
     completed = models.BooleanField(default=False)
     start_date = models.DateTimeField(default=timezone.now)
     completion_date = models.DateTimeField(null=True,
+                                           default=None)
+    last_accessed_item = models.ForeignKey(CourseItem,
+                                           null=True,
                                            default=None)
 
     def percentage(self):

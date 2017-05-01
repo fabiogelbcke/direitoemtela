@@ -69,7 +69,6 @@ class MyUser(AbstractBaseUser):
     is_admin = models.BooleanField(default=False)
     first_name = models.CharField(max_length=40)
     last_name = models.CharField(max_length=80)
-    cpf = models.CharField(max_length=14, blank=True)
     profile_image = ImageCropField(upload_to=get_image_path, blank=True,
                                    default='profiledefault.jpg')
     profile_ratio = ImageRatioField('profile_image', '320x320')

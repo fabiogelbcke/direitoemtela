@@ -6,4 +6,4 @@ class ReadingForm(forms.ModelForm):
     
     class Meta:
         model = Reading
-        fields = ['reading_file', 'name', 'description']
+        fields = ['reading_file', 'title', 'description']
