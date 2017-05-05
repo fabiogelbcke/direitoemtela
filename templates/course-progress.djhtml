@@ -13,7 +13,7 @@
           <h1 class="course-description-title">{{course.name}}</h1>
           <h2 class="heading-5">Progresso no curso</h2>
           <div class="course-description-buttons-div">
-	    {% with course_rel.last_accessed_item.position|default_if_none:0 as last_position%}
+	    {% with course_rel.last_accessed_item.position|default:0 as last_position%}
 	      <a class="button course-description-button w-button" href="{% url 'course_item' course_id=course.id position=last_position|add:1 %}">Continuar curso</a>
 	    {% endwith %}
           </div>

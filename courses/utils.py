@@ -1,14 +1,20 @@
+from django.shortcuts import get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 from .models import (Course, UserItemRelationship,
                      UserCourseRelationship, CourseItem)
 from coursetests.models import UserQuestionRelationship
 from users.models import MyUser
-from django.shortcuts import get_object_or_404
-from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+
 
 def register_to_course(user_id, course_id):
     course = Course.objects.get(id=course_id)
     user = MyUser.objects.get(id=user_id)
+    if UserCourseRelationship.objects.filter(
+            user=user,
+            course=course
+    ).exists():
+        return False
     UserCourseRelationship.objects.create(
         user=user,
         course=course

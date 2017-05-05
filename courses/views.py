@@ -1,7 +1,5 @@
 from django.shortcuts import render
 from django.views.generic.detail import DetailView
-from .models import Course, CourseItem, UserCourseRelationship, UserItemRelationship
-from coursetests.models import UserQuestionRelationship
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.utils.decorators import method_decorator
@@ -9,6 +7,9 @@ from django.http import HttpResponse
 from django.template import RequestContext, loader
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.decorators.csrf import requires_csrf_token
+from .models import Course, CourseItem, UserCourseRelationship, UserItemRelationship
+from coursetests.models import UserQuestionRelationship
+from .decorators import is_registered_to_course
 
 #get the range of items that show up on the progress bar at the
 #top of the page while doing the course
@@ -30,12 +31,23 @@ class CourseView(DetailView):
     context_object_name = 'course'
     template_name = 'course-page.djhtml'
     slug_field = 'id'
+    pk_url_kwarg = "course_id"
 
+    def get_context_data(self, **kwargs):
+        context = super(CourseView, self).get_context_data(**kwargs)
+        user = self.request.user
+        if user.is_authenticated() and hasattr(user, 'billing_info'):
+            context['billing_info'] = user.billing_info
+        return context
+
+
+@method_decorator(is_registered_to_course, 'dispatch')
 class CourseProgressView(DetailView):
     model = Course
     context_object_name = 'course'
     template_name = 'course-progress.djhtml'
-    slug_field = 'id'
+
+    pk_url_kwarg = "course_id"
 
     def get_context_data(self, **kwargs):
         context = super(CourseProgressView, self).get_context_data(**kwargs)
@@ -69,7 +81,7 @@ class CourseProgressView(DetailView):
         return context
         
 
-
+@method_decorator(is_registered_to_course, 'dispatch')
 @method_decorator(requires_csrf_token, name='dispatch')
 class CourseItemView(LoginRequiredMixin, DetailView):
     model = CourseItem

@@ -245,6 +245,8 @@ YT_KEY = keys.YT_KEY
 
 ASAAS_API_KEY = keys.ASAAS_API_KEY
 
+ASAAS_API_URL = 'https://www.asaas.com/api/v3'
+
 GEOIP_DATABASE = os.path.join(SITE_ROOT, 'geoip/GeoLiteCity.dat')
 GEOIPV6_DATABASE = os.path.join(SITE_ROOT, 'geoip/GeoLiteCityv6.dat')
 

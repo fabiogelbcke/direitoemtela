@@ -78,10 +78,12 @@ class MyUser(AbstractBaseUser):
 
     USERNAME_FIELD = 'username'
 
-    @property
     def get_full_name(self):
         # The user is identified by their email address
-        return self.first_name + ' ' + self.last_name
+        full_name = self.first_name
+        full_name += ' '
+        full_name += self.last_name
+        return full_name
 
     def get_short_name(self):
         # The user is identified by their email address

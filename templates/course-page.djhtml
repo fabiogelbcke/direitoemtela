@@ -13,47 +13,54 @@
             <li>Acesso ao grupo de discussão do curso com outros alunos e com o professor</li>
           </ul>
           <div class="">
-            <form data-name="Email Form 2" id="email-form-2" name="email-form-2">
+            <form action="{% url 'pay_course' course_id=course.id %}" method="POST" data-name="Email Form 2" id="email-form-2" name="email-form-2">
+	      {% csrf_token %}
               <h3 class="payment-form-head">Informações do Cartão</h3>
               <div class="inline-input">
                 <p class="paragraph-3">Nome no Cartão</p>
-                <input class="round-text-field w-input" data-name="card_name" id="card_name" maxlength="256" name="card_name" placeholder="João Silva" required="required" type="email">
+                <input class="round-text-field w-input" data-name="card_name" id="card_name" maxlength="256" name="card_name" placeholder="João Silva" required="required" type="text">
               </div>
               <div class="inline-input">
                 <p class="paragraph-3">Número</p>
-                <input class="round-text-field w-input" data-name="cc_number" id="cc_number" maxlength="256" name="cc_number" placeholder="0000000000000000" required="required" type="email">
+                <input class="round-text-field w-input" data-name="cc_number" id="cc_number" maxlength="256" name="cc_number" placeholder="0000000000000000" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
               </div>
               <div class="div-block-9">
                 <div class="date-input inline-input">
                   <p class="paragraph-3">Mês de Expiração</p>
-                  <input class="round-text-field w-input" data-name="expiration_date" id="expiration_date" maxlength="2" name="expiration_date" placeholder="03" required="required" type="email">
+                  <input class="round-text-field w-input" data-name="expiration_month" id="expiration_date" maxlength="2" name="expiration_month" placeholder="03" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
                 </div>
                 <div class="date-input inline-input">
                   <p class="paragraph-3">Ano de Expiração</p>
-                  <input class="round-text-field w-input" data-name="cvv" id="cvv" maxlength="2" name="cvv" placeholder="21" required="required" type="email">
+                  <input class="round-text-field w-input" data-name="cvv" id="cvv" maxlength="4" name="expiration_year" placeholder="2021" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
                 </div>
               </div>
               <div class="inline-input">
                 <p class="paragraph-3">Cód. Segurança</p>
-                <input class="round-text-field w-input" data-name="Cvv 2" id="cvv-2" maxlength="256" name="cvv-2" placeholder="173" required="required" type="email">
+                <input class="round-text-field w-input" data-name="Cvv 2" id="cvv-2" maxlength="256" name="cvv" placeholder="173" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
               </div>
               <h3 class="payment-form-head">Informações&nbsp;de Cobrança</h3>
               <div class="inline-input">
+                <p class="paragraph-3">Enderenço de cobrança (rua)</p>
+                <input class="round-text-field w-input" data-name="phone" id="phone" maxlength="256" name="address" placeholder="Rua Central" required="required" type="text" value="{{billing_info.address}}">
+              </div>
+	      <div class="inline-input">
+                <p class="paragraph-3">Número do enderenço</p>
+                <input class="round-text-field w-input" data-name="phone" id="phone" maxlength="256" name="address_no" placeholder="999" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" value="{{billing_info.address_no}}">
+              </div>
+	      <div class="inline-input">
+                <p class="paragraph-3">CEP</p>
+                <input class="round-text-field w-input" data-name="phone" id="phone" maxlength="256" name="postal_code" placeholder="999" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" value="{{billing_info.postal_code}}">
+              </div>
+	      <div class="inline-input">
                 <p class="paragraph-3">Telefone (Com cód. de área)</p>
-                <input class="round-text-field w-input" data-name="phone" id="phone" maxlength="256" name="phone" placeholder="47 999778888" required="required" type="email">
+                <input class="round-text-field w-input" data-name="phone" id="phone" maxlength="256" name="phone" placeholder="47 999778888" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" value="{{billing_info.phone}}">
               </div>
               <div class="inline-input">
                 <p class="paragraph-3">CPF (Somente números)</p>
-                <input class="round-text-field w-input" data-name="cpf" id="cpf" maxlength="256" name="cpf" placeholder="00000000000" required="required" type="email">
+                <input class="round-text-field w-input" data-name="cpf" id="cpf" maxlength="256" name="cpf" placeholder="00000000000" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" value="{{billing_info.cpf}}">
               </div>
               <input class="button w-button" data-wait="Please wait..." type="submit" value="Confirmar">
             </form>
-            <div class="-done">
-              <div>Thank you! Your submission has been received!</div>
-            </div>
-            <div class="-fail">
-              <div>Oops! Something went wrong while submitting the form</div>
-            </div>
           </div>
         </div>
       </div>

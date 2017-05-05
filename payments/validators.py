@@ -22,7 +22,15 @@ def validate_phone(phone):
 def validate_cvv(cvv):
     return (cvv.isdigit() and (len(cvv) == 3 or len(cvv) == 4))
 
-def validate_expiration_date(expiration_date):
-    if re.match('^[0-1][0-9]/[1-9][0-9]', expiration_date):
+def validate_expiration_month(expiration_date):
+    if re.match('^[0-1][0-9]$', expiration_date):
         return True
     return False
+
+def validate_expiration_year(expiration_date):
+    if re.match('^20[1-2][0-9]$', expiration_date):
+        return True
+    return False
+
+def validate_cc(cc_number):
+    return cc_number.isdigit()

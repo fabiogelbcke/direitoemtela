@@ -7,10 +7,10 @@ from .utils import set_item_done
 
 
 urlpatterns = [
-    url(r'^course/(?P<slug>\d+)$',
+    url(r'^course/(?P<course_id>\d+)$',
         CourseView.as_view(),
         name='course_page'),
-    url(r'^course/(?P<slug>\d+)/progress$',
+    url(r'^course/progress/(?P<course_id>\d+)$',
         CourseProgressView.as_view(),
         name='course_progress'),
     url(r'^dashboardcourses$',
