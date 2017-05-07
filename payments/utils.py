@@ -173,7 +173,7 @@ def make_course_payment(request, course_id):
             )
     cc_form = CreditCardForm(request.POST)
     if not cc_form.is_valid():
-        response = redirect('course_page', slug=course_id)
+        response = redirect('course_page', course_id=course_id)
         error_msg =  ('Dados do cartão inválidos.')
         response['Location'] += '?error_msg=' + quote_plus(error_msg)
         return response
@@ -191,4 +191,4 @@ def make_course_payment(request, course_id):
         response['Location'] += '?error_msg=' + quote_plus(error_msg)
         return response
     register_to_course(user.id, course.id)
-    return redirect('course_progress', slug=course_id)
+    return redirect('course_progress', course_id=course_id)

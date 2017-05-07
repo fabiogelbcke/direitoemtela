@@ -13,9 +13,14 @@
           <h1 class="course-description-title">{{course.name}}</h1>
           <h2 class="heading-5">Progresso no curso</h2>
           <div class="course-description-buttons-div">
-	    {% with course_rel.last_accessed_item.position|default:0 as last_position%}
-	      <a class="button course-description-button w-button" href="{% url 'course_item' course_id=course.id position=last_position|add:1 %}">Continuar curso</a>
-	    {% endwith %}
+	    {% if course_rel.completed %}
+	      <a class="button course-description-button w-button" href="{% url 'course_item' course_id=course.id position=1 %}">Revisar Curso</a>
+	      <a class="button course-description-button w-button" href="#">Ver Certificado</a>
+	    {% else %}
+	      {% with course_rel.last_accessed_item.position|default:0 as last_position%}
+		<a class="button course-description-button w-button" href="{% url 'course_item' course_id=course.id position=last_position|add:1 %}">Continuar curso</a>
+	      {% endwith %}
+	    {% endif %}
           </div>
 	</div>
 	<div class="course-body-div">
@@ -42,7 +47,7 @@
 		</div>
 		<div class="course-description-separator"></div>
 		<h3 class="course-description-section-title" style="margin-bottom:10px">Acertos nas questões</h3>
-		<ul style="font-size:17px;"><li>{{course_rel.correct_answers}} questões acertadas de {{course.total_questions}} questões no curso</li><li>{{course_rel.questions_answered}} questões respondidas de {{course.total_questions}} questões no curso</li><ul>
+		<ul style="font-size:17px;"><li>{{course_rel.correct_answers}} questões acertadas de {{course_rel.total_questions}} questões no curso</li><li>{{course_rel.questions_answered}} questões respondidas de {{course_rel.total_questions}} questões no curso</li><ul>
               </div>
             </div>
             <div class="w-col w-col-6">

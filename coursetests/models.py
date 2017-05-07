@@ -29,6 +29,6 @@ class Alternative(models.Model):
 
 class UserQuestionRelationship(models.Model):
     user = models.ForeignKey(settings.SOCIAL_AUTH_USER_MODEL)
-    question =  models.ForeignKey(Question)
+    question = models.ForeignKey(Question)
     answered = models.BooleanField(default=False)
     answered_correctly = models.BooleanField(default=False)

@@ -1,18 +1,20 @@
 from __future__ import unicode_literals
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
-from videos.models import Video
+from django.utils import timezone
 from django.conf import settings
+from videos.models import Video
 from image_cropping import ImageRatioField, ImageCropField
 import shortuuid
-from django.utils import timezone
-from coursetests.models import CourseTest, Question
+from coursetests.models import CourseTest
 from readings.models import Reading
 import os
-# Create your models here.
+
 
 def get_thumbnail_path(instance, filename):
-    return os.path.join('coursethumbnails', str(instance.id), shortuuid.uuid())
+    ext = filename.split('.')[-1]
+    filename = "%s.%s" % (shortuuid.uuid(), ext)
+    return os.path.join('coursethumbnails', str(instance.id), filename)
 
 class Course(models.Model):
     name = models.CharField(blank=True, max_length=150)
@@ -41,6 +43,9 @@ class Course(models.Model):
                 total_questions += item.test.questions.all().count()
             self.total_questions = total_questions
         super(Course, self).save(*args, **kwargs)
+
+    def is_registered(self, user):
+        return self.course_rels.filter(user=user).exists()
 
 class CourseTopic(models.Model):
     course = models.ForeignKey(Course, related_name='topics')
@@ -140,9 +145,10 @@ class UserItemRelationship(models.Model):
 
 class UserCourseRelationship(models.Model):
     user = models.ForeignKey(settings.SOCIAL_AUTH_USER_MODEL)
-    course = models.ForeignKey(Course)
+    course = models.ForeignKey(Course, related_name='course_rels')
     correct_answers = models.IntegerField(default=0)
     questions_answered = models.IntegerField(default=0)
+    total_questions = models.IntegerField(default=0)
     completed = models.BooleanField(default=False)
     start_date = models.DateTimeField(default=timezone.now)
     completion_date = models.DateTimeField(null=True,
@@ -152,6 +158,6 @@ class UserCourseRelationship(models.Model):
                                            default=None)
 
     def percentage(self):
-        if self.course.total_questions == 0:
+        if self.total_questions == 0:
             return 0
-        return int(100 * (1.0*self.correct_answers/self.course.total_questions))
+        return int(100 * (1.0*self.correct_answers/self.total_questions))

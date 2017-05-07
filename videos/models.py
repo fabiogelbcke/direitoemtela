@@ -7,10 +7,14 @@ import os
 import shortuuid
 
 def get_thumbnail_path(instance, filename):
-    return os.path.join('thumbnails', str(instance.id), shortuuid.uuid())
+    ext = filename.split('.')[-1]
+    filename = "%s.%s" % (shortuuid.uuid(), ext)
+    return os.path.join('thumbnails', str(instance.id), filename)
 
 def get_material_path(instance, filename):
-    return os.path.join('materials', shortuuid.uuid())
+    ext = filename.split('.')[-1]
+    filename = "%s.%s" % (shortuuid.uuid(), ext)
+    return os.path.join('materials', filename)
 
 class Video(models.Model):
     id = models.AutoField(primary_key=True)

@@ -1,12 +1,11 @@
 from __future__ import unicode_literals
-import os
-import magic
 from django.core.exceptions import ValidationError
 from django.db import models
-import uuid
 from django.conf import settings
+import os
+import magic
+import uuid
 
-# Create your models here.
 
 def validate_reading_extension(reading_file):
     ext = os.path.splitext(reading_file.name)[-1]

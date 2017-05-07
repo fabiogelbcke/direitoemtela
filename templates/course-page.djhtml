@@ -22,7 +22,7 @@
               </div>
               <div class="inline-input">
                 <p class="paragraph-3">Número</p>
-                <input class="round-text-field w-input" data-name="cc_number" id="cc_number" maxlength="256" name="cc_number" placeholder="0000000000000000" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                <input class="round-text-field w-input" data-name="cc_number" autocomplete="on" id="cc_number" maxlength="256" name="cc_number" placeholder="0000000000000000" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
               </div>
               <div class="div-block-9">
                 <div class="date-input inline-input">
@@ -88,7 +88,21 @@
     <div class="course-description-div">
       <div class="course-header-div">
         <h1 class="course-description-title">{{course.name}}</h1>
-        <div class="course-description-buttons-div"><a class="button course-description-button w-button" data-ix="show-trailer" href="#">Assistir Trailer</a><a class="button course-description-button w-button" data-ix="show-payment-popup" href="#">Inscrever-se</a>
+        <div class="course-description-buttons-div">
+	  {% if course_rel %}
+	    {% if course_rel.completed %}
+	      <a class="button course-description-button w-button" href="{% url 'course_item' course_id=course.id position=1 %}">Revisar Curso</a>
+	      <a class="button course-description-button w-button" href="#">Ver Certificado</a>
+	    {% else %}
+	      {% with course_rel.last_accessed_item.position|default:0 as last_position %}
+		<a class="button course-description-button w-button" href="{% url 'course_item' course_id=course.id position=last_position|add:1 %}">Continuar Curso</a>
+		<a class="button course-description-button w-button" href="{% url 'course_progress' course_id=course.id %}">Ver Progresso</a>
+	      {% endwith %}
+	    {% endif %}
+	  {% else %}
+	    <a class="button course-description-button w-button" data-ix="show-trailer" href="#">Assistir Trailer</a>
+	    <a class="button course-description-button w-button" data-ix="show-payment-popup" href="#">Inscrever-se</a>
+	  {% endif %}
         </div>
       </div>
       <div class="course-body-div">

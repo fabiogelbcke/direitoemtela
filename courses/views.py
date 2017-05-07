@@ -36,8 +36,12 @@ class CourseView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(CourseView, self).get_context_data(**kwargs)
         user = self.request.user
-        if user.is_authenticated() and hasattr(user, 'billing_info'):
-            context['billing_info'] = user.billing_info
+        course = self.object
+        if user.is_authenticated():
+            if hasattr(user, 'billing_info'):
+                context['billing_info'] = user.billing_info
+            if course.is_registered(user):
+                context['course_rel'] = course.course_rels.get(user=user)
         return context
 
 
@@ -46,7 +50,6 @@ class CourseProgressView(DetailView):
     model = Course
     context_object_name = 'course'
     template_name = 'course-progress.djhtml'
-
     pk_url_kwarg = "course_id"
 
     def get_context_data(self, **kwargs):
@@ -56,20 +59,20 @@ class CourseProgressView(DetailView):
         item_rels = UserItemRelationship.objects.filter(
             user=user,
             course_item__course=course
-            )
+        )
         course_rel = UserCourseRelationship.objects.get(
             user=user,
             course=course
-            )
+        )
         videos = item_rels.filter(
             course_item__video__isnull=False
         )
         readings = item_rels.filter(
             course_item__reading__isnull=False
-            )
+        )
         tests = item_rels.filter(
             course_item__test__isnull=False
-            )
+        )
         context['item_rels'] = item_rels
         context['course_rel'] = course_rel
         context['videos_total'] = videos.count()
@@ -109,13 +112,14 @@ class CourseItemView(LoginRequiredMixin, DetailView):
         if question_no <= test.questions.all().count():
             context['question'] = test.questions.all()[question_no - 1]
         else:
-            correctly_answered = UserQuestionRelationship.objects.filter(
+            all_questions = UserQuestionRelationship.objects.filter(
                 user=user,
                 question__test=test,
+            )
+            correctly_answered = all_questions.filter(
                 answered_correctly=True
             ).count()
-            all_questions = test.questions.all().count()
-            test_percentage = int(100.0*correctly_answered/all_questions)
+            test_percentage = int(100.0*correctly_answered/all_questions.count())
             course_percentage = user_course_rel.percentage
             context['test_percentage'] = test_percentage
             context['course_percentage'] = course_percentage
@@ -148,8 +152,6 @@ class CourseItemView(LoginRequiredMixin, DetailView):
                     course=course,
                     user=user
         )
-        user_course_rel.last_accessed_item = self.object
-        user_course_rel.save()
         context['user_item_rels'] = user_item_rels
         context['course'] = course
         if self.object.type() == 'test':
