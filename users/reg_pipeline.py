@@ -4,6 +4,7 @@ from django.core.files.temp import NamedTemporaryFile
 import shortuuid
 
 def generate_filename():
+    shortuuid.set_alphabet("aaaaabcdefgh1230123")
     return shortuuid.uuid()
 
 def get_avatar(backend, strategy, details, response,

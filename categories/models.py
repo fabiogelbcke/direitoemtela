@@ -10,10 +10,16 @@ import os
 # Create your models here.
 
 def get_image_path(instance, filename):
-    return os.path.join('professorphotos', str(instance.id), shortuuid.uuid())
+    ext = filename.split('.')[-1]
+    shortuuid.set_alphabet("abcdefghijklmnopqrstuvwxyz0123456789")
+    filename = "%s.%s" % (shortuuid.uuid(), ext)
+    return os.path.join('professorphotos', str(instance.id), filename)
 
 def get_thumbnail_path(instance, filename):
-    return os.path.join('categorythumbnails', str(instance.id), shortuuid.uuid())
+    ext = filename.split('.')[-1]
+    shortuuid.set_alphabet("abcdefghijklmnopqrstuvwxyz0123456789")
+    filename = "%s.%s" % (shortuuid.uuid(), ext)
+    return os.path.join('categorythumbnails', str(instance.id), filename)
 
 class Professor(models.Model):
     id = models.AutoField(primary_key=True)

@@ -12,10 +12,12 @@ from image_cropping import ImageRatioField, ImageCropField
 # Create your models here.
 def get_image_path(instance, filename):
     ext = filename.split('.')[-1]
+    shortuuid.set_alphabet("abcdefghijklmnopqrstuvwxyz0123456789")
     filename = "%s.%s" % (shortuuid.uuid(), ext)
     return os.path.join('profilephotos', str(instance.id), filename)
 
 def generate_username():
+    shortuuid.set_alphabet("abcdefghijklmnopqrstuvwxyz0123456789")
     return shortuuid.uuid()
 
 class MyUserManager(BaseUserManager):
