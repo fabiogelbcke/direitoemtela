@@ -26,7 +26,7 @@
               </li>
               <li>Cursos Completados: <strong>{{completed_courses_rels.count}}</strong>
               </li>
-              <li>Horas aula completadas:&nbsp;<strong>153</strong>
+              <li>Horas aula completadas:&nbsp;<strong>{{user.course_hours}}</strong>
               </li>
             </ul>
           </div>

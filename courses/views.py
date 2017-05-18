@@ -119,6 +119,8 @@ class CourseItemView(LoginRequiredMixin, DetailView):
             course_rel.completion_date = timezone.now()
             course_rel.certificate = create_certificate(course_rel)
             course_rel.save()
+            user.course_hours += course.hours
+            user.save()
             response = redirect('course_progress', course_id=course.id)
             response['Location'] += '?completed=true'
             return response
