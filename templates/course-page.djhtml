@@ -168,7 +168,7 @@
 		{% with course.professor as professor %}
 		  <h3 class="course-description-section-title">Professor</h3><img class="professor-image small" height="65" src="{% cropped_thumbnail professor 'profile_ratio' max_size="65x65" %}" width="65">
 		  <p class="course-description-professor-name">{{professor.name}}</p>
-		  <div class="course-description-text-block">{{professor.description}}</div>
+		  <div class="course-description-text-block">{{professor.description|safe}}</div>
 		{% endwith %}
 	      {% endif %}
             </div>
