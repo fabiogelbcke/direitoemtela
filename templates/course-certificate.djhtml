@@ -1,0 +1,68 @@
+{% extends 'base.djhtml' %}
+{% load staticfiles %}{% load cropping %}{% load util_tags %}
+{% block content %}
+  {% with certificate.user as student %}
+  <div class="header-background">
+    {% block header %}
+      {{block.super}}
+    {% endblock %}
+  <div class="top-bar-plain"></div>
+  <div class="thick-separator"></div>
+  <div class="certificate-container course-description-containter w-container">
+    <h1 class="center">Parabéns, {{student.first_name}}!</h1>
+    <p class="certificate-text">Você trabalhou duro e completou o curso <strong>{{certificate.course_name}}</strong>. Clique abaixo para compartilhar seu sucesso com seus amigos e sua família!</p>
+    <div class="share-buttons">
+      <a class="social-share-button w-button" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{website_url|urlencode}}{{request.path|urlencode}}&amp;src=sdkpreparse"></a>
+		      <a class="social-share-button twitter w-button" target = "_blank" href="https://twitter.com/intent/tweet?text=Completei%20o%20curso%20{{certificate.course_name|urlencode}}%20no%20site%20Direito%20em%20Tela!%20Confira%20meu%20certificado&url={{website_url|urlencode}}{{request.path|urlencode}}&hashtags=direitoemtela" data-size="large"></a>
+		      <a class="google social-share-button w-button" target = "_blank" href="https://plus.google.com/share?url={{website_url|urlencode}}{{request.path|urlencode}}" ></a>
+		      <a class="linkedin social-share-button w-button" target="_blank" id="facebook-share-button" href="http://www.linkedin.com/shareArticle?mini=true&url={{website_url|urlencode}}{{request.path|urlencode}}&title=Completei%20o%20curso%20{{certificate.course_name|urlencode}}%20no%20site%20Direito%20em%20Tela!%20Confira%20meu%20certificado!&source=direitoemtela.com.br"></a>
+		      <a class="social-share-button w-button whatsapp" id="facebook-share-button" href="whatsapp://send?text=Completei%20o%20curso%20{{certificate.course_name|urlencode}}%20no%20site%20Direito%20em%20Tela!%20Confira%20meu%20certificado!%20-%20{{website_url|urlencode}}{{request.path}}" data-action="share/whatsapp/share"></a>
+    </div>
+    <div class="certificate">
+      <div class="certificate-left-div">
+        <div>
+          <h1 class="certificate-title">CERTIFICADO</h1>
+          <h1 class="heading-10">de conclusão</h1>
+          <p class="certificate-text">Certificamos que</p>
+          <h1 class="certificate-big-text">{{student.get_full_name}}</h1>
+          <p class="certificate-text">completou com sucesso, e com nota suficiente para aprovação, o curso</p>
+          <h1 class="certificate-big-text">{{certificate.course_name}}</h1>
+          <p class="certificate-text">oferecido pelo Direito em Tela Instituto de Educação e equivalente a <strong>{{certificate.course_hours}} </strong>horas-aula.</p>
+        </div>
+        <div>
+          <p class="paragraph-5">Emitido em</p>
+          <h2 class="heading-12">{{certificate.completion_date.date}}</h2>
+          <p class="paragraph-5">Identificador do Certificado</p><a class="certificate-id" href="{{website_url}}{{request.path}}">{{certificate.identifier}}</a>
+        </div>
+      </div>
+      <div class="certificate-right-div"><img class="image-4" src="{% static 'images/dethorizontal.png'%}" width="248">
+        <div>
+          <div class="certificate-signature-div"><img class="assinatura" src="{% static 'images/sefora-assinatura-2.png'%}" width="223">
+            <h4 class="heading-11">Séfora Cristina Schubert</h4>
+            <p class="paragraph-4">Diretora de Conteúdo
+              <br>Professora</p>
+          </div>
+          <div class="certificate-signature-div"><img class="assinatura" src="{% static 'images/ricardo-assinatura.png'%}" width="145">
+            <h4 class="heading-11">Ricardo Pedro Inácio Schubert</h4>
+            <p class="paragraph-4">Diretor de Conteúdo
+              <br>Professor</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="share-certificate-div">
+      <p class="certificate-text">Adicione o certificado ao seu LinkedIn para mostrar a todos que você domina esse assunto!
+        <br>Basta clicar no botão e preencher as informações como indicado abaixo:</p>
+      <div class="share-buttons">
+        <a class="button-2 w-button" href="https://www.linkedin.com/profile/add?startTask=CERTIFICATION_NAME" rel="nofollow" target="_blank"></a>
+      </div>
+      <ul class="certificate-text">
+        <li>Título do Certificado: {{certificate.course_name}}</li>
+        <li>Órgão Emissor: Direito em Tela</li>
+        <li>Número da Licença: {{certificate.identifier}}</li>
+        <li>URL do Certificado: {{website_url}}{{request.path}}</li>
+      </ul>
+    </div>
+  </div>
+  {% endwith %}
+  {% endblock %}

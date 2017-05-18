@@ -1,0 +1,83 @@
+{% extends 'base.djhtml' %}
+{% load staticfiles %}{% load cropping %}
+{% block content %}
+  <div class="header-background">
+    {% block header %}
+      {{block.super}}
+    {% endblock %}
+  </div>
+  <div class="top-bar-plain"></div>
+  <div class="thick-separator"></div>
+  <div>
+    <div class="main-section whatsapp" id="posts">
+      <div class="video-container w-container" id="video-container">
+	<div class="dashboard-header grey-box">
+          <div class="dashboard-picture-div"><img class="account-image large" height="130" src="{% cropped_thumbnail user 'profile_ratio' width=130 %}" width="130">
+          </div>
+          <div class="dashboard-profile-info">
+            <h1 class="dashboard-hello">{{user.get_full_name}}</h1>
+	    {% if user.city %}
+              <h3 class="dashboard-city">Joinville, SC</h3>
+	    {% endif %}
+          </div>
+          <div class="dashboard-course-stats">
+            <ul class="dashboard-stats-list">
+              <li>Cursos em Progresso: <strong>{{ongoing_courses_rels.count}}</strong>
+              </li>
+              <li>Cursos Completados: <strong>{{completed_courses_rels.count}}</strong>
+              </li>
+              <li>Horas aula completadas:&nbsp;<strong>153</strong>
+              </li>
+            </ul>
+          </div>
+	</div>
+	<div class="grey-box">
+          <div class="w-tabs" data-duration-in="300" data-duration-out="100">
+            <div class="large-tabs-menu w-tab-menu">
+              <a class="large tab-title w--current w-inline-block w-tab-link" data-w-tab="Tab 1">
+		<div>Cursos em Progresso</div>
+              </a>
+              <a class="large tab-title w-inline-block w-tab-link" data-w-tab="Tab 2">
+		<div>Cursos completados</div>
+              </a>
+            </div>
+            <div class="w-tab-content">
+              <div class="w--tab-active w-tab-pane" data-w-tab="Tab 1">
+		<div class="dashboard-courses">
+		  {% for course_rel in ongoing_courses_rels %}
+		    {% with course_rel.course as course %}
+                    <div class="dashboard-course"><img class="dashboard-course-image" height="140" src="{% cropped_thumbnail course 'thumbnail_ratio' height=140 %}">
+                      <div class="dashboard-course-description">
+			<h1 class="dashboard-course-title">{{course.name}}</h1>
+			<p class="paragraph-2">Começado em {{course_rel.start_date.date}}</p>
+			{% with course_rel.last_accessed_item.position|default:0 as last_position%}
+			  <a class="button w-button" href="{% url 'course_item' course_id=course.id position=last_position|add:1 %}">Continuar Curso</a>
+			{% endwith %}
+                      </div>
+                      <h1 class="dashboard-completion-percentage">{{course_rel.percentage}}%</h1>
+                    </div>
+		    {% endwith %}
+		  {% endfor %}
+		</div>
+              </div>
+              <div class="about-image w-tab-pane" data-w-tab="Tab 2">
+		<div class="dashboard-courses">
+		  {% for course_rel in completed_courses_rels %}
+		    {% with course_rel.course as course %}
+                    <div class="dashboard-course"><img class="dashboard-course-image" height="140" src="{% cropped_thumbnail course 'thumbnail_ratio' height=140 %}">
+                      <div class="dashboard-course-description">
+			<h1 class="dashboard-course-title">{{course.name}}</h1>
+			<p class="paragraph">Concluído em {{course_rel.conclusion_date.date}}</p><a class="button w-button" href="{% url 'certificate_view' identifier=course_rel.certificate.identifier %}">Ver Certificado</a><a class="button w-button white-button" href="{% url 'course_progress' course_id=course.id %}">Sumário do Curso</a>
+                      </div>
+                      <h1 class="dashboard-completion-percentage">100%</h1>
+                    </div>
+		    {% endwith %}
+		  {% endfor %}
+		</div>
+              </div>
+            </div>
+          </div>
+	</div>
+      </div>
+    </div>
+{% endblock %}

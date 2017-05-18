@@ -1,0 +1,211 @@
+{% extends 'base.djhtml' %}
+{% load staticfiles %}{% load cropping %}
+{% block hiddencontent %}
+  {{block.super}}
+  <div class="payment-popup">
+    <div class="modal-wrapper">
+      <div class="w-container">
+        <div class="payment-block"><a class="close-popup-button" data-ix="close-trailer" href="#">Fechar <strong>X</strong></a>
+          <h1 class="heading-6">Heading</h1>
+          <ul class="unordered-list">
+            <li>Acesso a todo o material do curso por tempo ilimitado</li>
+            <li>Certificado de conclusão de curso (mediante aprovação com 70% ou mais de média nas provas)</li>
+            <li>Acesso ao grupo de discussão do curso com outros alunos e com o professor</li>
+          </ul>
+          <div class="">
+            <form action="{% url 'pay_course' course_id=course.id %}" method="POST" data-name="Email Form 2" id="email-form-2" name="email-form-2">
+	      {% csrf_token %}
+              <h3 class="payment-form-head">Informações do Cartão</h3>
+              <div class="inline-input">
+                <p class="paragraph-3">Nome no Cartão</p>
+                <input class="round-text-field w-input" data-name="card_name" id="card_name" maxlength="256" name="card_name" placeholder="João Silva" required="required" type="text">
+              </div>
+              <div class="inline-input">
+                <p class="paragraph-3">Número</p>
+                <input class="round-text-field w-input" data-name="cc_number" autocomplete="on" id="cc_number" maxlength="256" name="cc_number" placeholder="0000000000000000" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+              </div>
+              <div class="div-block-9">
+                <div class="date-input inline-input">
+                  <p class="paragraph-3">Mês de Expiração</p>
+                  <input class="round-text-field w-input" data-name="expiration_month" id="expiration_date" maxlength="2" name="expiration_month" placeholder="03" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                </div>
+                <div class="date-input inline-input">
+                  <p class="paragraph-3">Ano de Expiração</p>
+                  <input class="round-text-field w-input" data-name="cvv" id="cvv" maxlength="4" name="expiration_year" placeholder="2021" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                </div>
+              </div>
+              <div class="inline-input">
+                <p class="paragraph-3">Cód. Segurança</p>
+                <input class="round-text-field w-input" data-name="Cvv 2" id="cvv-2" maxlength="256" name="cvv" placeholder="173" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+              </div>
+              <h3 class="payment-form-head">Informações&nbsp;de Cobrança</h3>
+              <div class="inline-input">
+                <p class="paragraph-3">Enderenço de cobrança (rua)</p>
+                <input class="round-text-field w-input" data-name="phone" id="phone" maxlength="256" name="address" placeholder="Rua Central" required="required" type="text" value="{{billing_info.address}}">
+              </div>
+	      <div class="inline-input">
+                <p class="paragraph-3">Número do enderenço</p>
+                <input class="round-text-field w-input" data-name="phone" id="phone" maxlength="256" name="address_no" placeholder="999" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" value="{{billing_info.address_no}}">
+              </div>
+	      <div class="inline-input">
+                <p class="paragraph-3">CEP</p>
+                <input class="round-text-field w-input" data-name="phone" id="phone" maxlength="256" name="postal_code" placeholder="999" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" value="{{billing_info.postal_code}}">
+              </div>
+	      <div class="inline-input">
+                <p class="paragraph-3">Telefone (Com cód. de área)</p>
+                <input class="round-text-field w-input" data-name="phone" id="phone" maxlength="256" name="phone" placeholder="47 999778888" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" value="{{billing_info.phone}}">
+              </div>
+              <div class="inline-input">
+                <p class="paragraph-3">CPF (Somente números)</p>
+                <input class="round-text-field w-input" data-name="cpf" id="cpf" maxlength="256" name="cpf" placeholder="00000000000" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" value="{{billing_info.cpf}}">
+              </div>
+              <input class="button w-button" data-wait="Please wait..." type="submit" value="Confirmar">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="trailer-popup">
+    <div class="modal-wrapper">
+      <div class="w-container">
+        <div class="trailer-video"><a class="close-popup-button" data-ix="close-trailer" href="#">Fechar <strong>X</strong></a>
+          <div class="w-embed w-video" style="padding-top: 56.17021276595745%;">
+            <div class="embedly-embed" id="ytvideo"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+{% block content %}
+  {% block header %}
+    {{ block.super }}
+  {% endblock %}
+  <div class="top-bar-plain"></div>
+  <div class="thick-separator"></div>
+  <div class="course-description-containter w-container">
+    <div class="course-description-div">
+      <div class="course-header-div">
+        <h1 class="course-description-title">{{course.name}}</h1>
+        <div class="course-description-buttons-div">
+	  {% if course_rel %}
+	    {% if course_rel.completed %}
+	      <a class="button course-description-button w-button" href="{% url 'course_item' course_id=course.id position=1 %}">Revisar Curso</a>
+	      <a class="button course-description-button w-button" href="#">Ver Certificado</a>
+	    {% else %}
+	      {% with course_rel.last_accessed_item.position|default:0 as last_position %}
+		<a class="button course-description-button w-button" href="{% url 'course_item' course_id=course.id position=last_position|add:1 %}">Continuar Curso</a>
+		<a class="button course-description-button w-button" href="{% url 'course_progress' course_id=course.id %}">Ver Progresso</a>
+	      {% endwith %}
+	    {% endif %}
+	  {% else %}
+	    <a class="button course-description-button w-button" data-ix="show-trailer" href="#">Assistir Trailer</a>
+	    <a class="button course-description-button w-button" data-ix="show-payment-popup" href="#">Inscrever-se</a>
+	  {% endif %}
+        </div>
+      </div>
+      <div class="course-body-div">
+        <div class="course-description-row w-row">
+          <div class="w-col w-col-8">
+            <div class="course-description-block-div">
+              <h3 class="course-description-section-title">Sobre o curso</h3>
+              <div class="course-description-text-block">{{course.description}}</div>
+            </div>
+            <div class="course-description-separator"></div>
+            <div>
+              <h3 class="course-description-section-title">O que você aprenderá</h3>
+              <ul class="course-description-list">
+		{% for topic in course.topics.all %}
+                  <li>{{topic.text}}</li>
+		{% endfor %}
+              </ul>
+            </div>
+            <div class="course-description-separator"></div>
+            <div>
+              <h3 class="course-description-section-title">Conteúdo Programático</h3>
+	      {% for item in course.items.all %}
+		<div class="course-outline-item">
+		  {% if item.video %}
+		    <img class="course-outline-icon" height="45" src="{% static 'images/playicon.png'%}" width="45">
+		  {% elif item.reading %}
+		    <img class="course-outline-icon" height="45" src="{% static 'images/readingicon.png'%}" width="45">
+		  {% elif item.test %}
+		    <img class="course-outline-icon" height="45" src="{% static 'images/testicon.png'%}" width="45">
+		  {% endif %}
+                  <p class="course-outline-title">{{item.title}}</p>
+		    </div>
+	      {% endfor %}
+            </div>
+          </div>
+          <div class="w-col w-col-4">
+            <div>
+              <h3 class="course-description-section-title">Preço</h3>
+              <h1 class="course-price">R$ {{course.price}}</h1>
+            </div>
+            <div class="course-description-separator"></div>
+            <div>
+              <h3 class="course-description-section-title">Horas de Curso</h3>
+              <h1 class="course-price">{{course.hours}} horas</h1>
+            </div>
+            <div class="course-description-separator"></div>
+            <h3 class="course-description-section-title">Inclusos no curso</h3>
+            <div class="course-feature"><img class="course-feature-check-sign" height="15" src="{% static 'images/checkicon.png'%}" width="15">
+              <p class="course-feature-text">Certificado de aprovação do&nbsp;curso</p>
+            </div>
+            <div class="course-feature"><img class="course-feature-check-sign" height="15" src="{% static 'images/checkicon.png'%}" width="15">
+              <p class="course-feature-text">Video-aulas ministradas por professores universitários</p>
+            </div>
+            <div class="course-feature"><img class="course-feature-check-sign" height="15" src="{% static 'images/checkicon.png'%}" width="15">
+              <p class="course-feature-text">Material de apoio às aulas</p>
+            </div>
+            <div class="course-feature"><img class="course-feature-check-sign" height="15" src="{% static 'images/checkicon.png'%}" width="15">
+              <p class="course-feature-text">Grupo de discussão sobre o assunto</p>
+            </div>
+            <div class="course-description-separator"></div>
+            <div>
+	      {% if course.professor %}
+		{% with course.professor as professor %}
+		  <h3 class="course-description-section-title">Professor</h3><img class="professor-image small" height="65" src="{% cropped_thumbnail professor 'profile_ratio' max_size="65x65" %}" width="65">
+		  <p class="course-description-professor-name">{{professor.name}}</p>
+		  <div class="course-description-text-block">{{professor.description}}</div>
+		{% endwith %}
+	      {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="main-section whatsapp" id="posts">
+    </div>
+{% endblock %}
+{% block js %}
+  {{block.super}}
+  <script type="text/javascript" src="//assets.moip.com.br/v2/moip.min.js"></script>
+  <script type="text/javascript">
+   var tag = document.createElement('script');
+
+   tag.src = "http://www.youtube.com/iframe_api";
+   var firstScriptTag = document.getElementsByTagName('script')[0];
+   firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+   var player;
+   
+   function onYouTubeIframeAPIReady(){
+       player = new YT.Player('ytvideo', {
+	   height: '348',
+	   width: '615',
+	   videoId: '{{course.trailer_id}}',
+	   playerVars: {
+	       modestbranding: true,
+	       rel: 0
+	   },
+
+	   events: {
+	   }
+       });
+   }
+  </script>
+{% endblock %}

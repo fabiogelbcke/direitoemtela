@@ -1,14 +1,14 @@
-{% extends 'base.html' %}
+{% extends 'base.djhtml' %}
 {% load staticfiles %}{% load cropping %}
 {% block content %}
   <div>
     {% block header %}
 	{{block.super}}
-	{% endblock %}
+    {% endblock %}
     <div class="hero-section">
       <div class="hero-content w-container">
         <div class="hero-heading" data-ix="hero-text">Direito ao alcance de todos.</div>
-        <div class="hero-subheading" data-ix="hero-text-2">O Direito em tela traz a universidade para dentro do seu computador</div>
+        <div class="hero-subheading" data-ix="hero-text-2">O Direito em Tela traz a universidade para dentro do seu computador</div>
         <div>
           <div class="">
             <form method="GET" action="{% url 'get_search_page' %}" class="search-form" data-ix="hero-button" data-name="Email Form 2" id="email-form-2" name="email-form-2">
@@ -26,7 +26,7 @@
               </div>
             </form>
           </div>
-        </div><a class="button w-button" data-ix="hero-button" href="{% url 'categories' %}">Ver todos os Videos</a>
+        </div><a class="button w-button" data-ix="hero-button" href="{% url 'categories' %}">Ver todos os Assuntos</a>
       </div>
     </div>
     <div class="bottom-padding main-section" id="posts">

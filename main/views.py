@@ -7,7 +7,7 @@ from django.views.decorators.cache import cache_page
 # Create your views here.
 
 class IndexView(TemplateView):
-    template_name = 'index.html'
+    template_name = 'index.djhtml'
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
@@ -21,7 +21,7 @@ class IndexView(TemplateView):
     #        return super(IndexView, self).dispatch(request, *args, **kwargs)
 
 class AboutView(TemplateView):
-    template_name = 'about.html'
+    template_name = 'about.djhtml'
 
     def get_context_data(self, **kwargs):
         context = super(AboutView, self).get_context_data(**kwargs)

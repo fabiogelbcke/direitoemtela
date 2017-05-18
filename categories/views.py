@@ -1,13 +1,14 @@
-from django.shortcuts import render
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
-from videos.models import Video
-from .models import Category
-from django.shortcuts import get_object_or_404
+from django.core.exceptions import ObjectDoesNotExist
+from django.shortcuts import get_object_or_404, render
 from django.http import Http404
-from hitcount.views import HitCountDetailView
 from django.core.urlresolvers import reverse
 from django.conf import settings
+from videos.models import Video
+from .models import Category
+from hitcount.views import HitCountDetailView
+
 
 
 class CategoryView(ListView):
@@ -52,7 +53,10 @@ class CategoryVideoView(HitCountDetailView):
         video_index = int(self.kwargs['video_index'])
         if not 0 < video_index <= category.videos.all().count():
             raise Http404
-        video = category.videos.get(videocategory__position = video_index)
+        try:
+            video = category.videos.get(videocategory__position = video_index)
+        except ObjectDoesNotExist:
+            raise Http404
         return video
 
     def get_context_data(self, **kwargs):

@@ -1,10 +1,10 @@
-{% extends 'base.html' %}
+{% extends 'base.djhtml' %}
 {% load staticfiles %}
 {% block content %}
-<div class="header-background">
-  {% block header%}
-  {{ block.super }}
-  {% endblock %}
+  <div class="header-background">
+    {% block header%}
+      {{ block.super }}
+    {% endblock %}
     <div class="upper-section">
       <div class="main-description w-container">
         <h1 class="about-title">Quem somos?</h1>
@@ -68,4 +68,4 @@
         </div>
       </div>
     </div>
-	{% endblock %}
+{% endblock %}
