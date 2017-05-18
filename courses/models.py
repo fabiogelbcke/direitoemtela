@@ -149,15 +149,35 @@ class UserCourseRelationship(models.Model):
     correct_answers = models.IntegerField(default=0)
     questions_answered = models.IntegerField(default=0)
     total_questions = models.IntegerField(default=0)
+    passing_grade = models.IntegerField(default=70)
     completed = models.BooleanField(default=False)
+    passed = models.BooleanField(default=False)
     start_date = models.DateTimeField(default=timezone.now)
     completion_date = models.DateTimeField(null=True,
                                            default=None)
     last_accessed_item = models.ForeignKey(CourseItem,
                                            null=True,
                                            default=None)
+    certificate = models.OneToOneField('Certificate',
+                                       related_name='course_rel',
+                                       null=True,
+                                       default=None)
 
     def percentage(self):
         if self.total_questions == 0:
             return 0
         return int(100 * (1.0*self.correct_answers/self.total_questions))
+
+
+class Certificate(models.Model):
+    user = models.ForeignKey(settings.SOCIAL_AUTH_USER_MODEL,
+                             related_name='certificates')
+    course_name = models.CharField(max_length=150)
+    course_hours = models.IntegerField()
+    completion_date = models.DateTimeField(null=True,
+                                           default=timezone.now)
+    identifier = models.CharField(primary_key=True,
+                                  max_length=150,
+                                  default=shortuuid.uuid)
+    percentage = models.IntegerField()
+    

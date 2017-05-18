@@ -97,7 +97,7 @@
 		  <div class="w--tab-active w-tab-pane" data-w-tab="Tab 4">
 		    <div class="share-buttons">
 		      <a class="social-share-button w-button" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{video_url|urlencode}}&amp;src=sdkpreparse"></a>
-		      <a class="social-share-button twitter w-button" target = "_blank" href="https://twitter.com/intent/tweet?text=Video-auls:%20{{video.title|urlencode}}%20%20-%20&url={{video_url|urlencode}}&hashtags=direitoemtela" data-size="large"></a>
+		      <a class="social-share-button twitter w-button" target = "_blank" href="https://twitter.com/intent/tweet?text=Video-aula:%20{{video.title|urlencode}}%20%20-%20&url={{video_url|urlencode}}&hashtags=direitoemtela" data-size="large"></a>
 		      <a class="google social-share-button w-button" target = "_blank" href="https://plus.google.com/share?url={{video_url|urlencode}}" ></a>
 		      <a class="linkedin social-share-button w-button" target="_blank" id="facebook-share-button" href="http://www.linkedin.com/shareArticle?mini=true&url={{video_url|urlencode}}&title=Video-aula:%20{{video.title|urlencode}}&summary={{video.description|urlencode}}&source=direitoemtela.com.br"></a>
 		      <a class="social-share-button w-button whatsapp" id="facebook-share-button" href="whatsapp://send?text=Video-aula:%20{{video.title|urlencode}}%20-%20{{video_url|urlencode}}" data-action="share/whatsapp/share"></a>

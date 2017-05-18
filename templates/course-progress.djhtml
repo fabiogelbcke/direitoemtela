@@ -1,5 +1,34 @@
 {% extends 'base.djhtml' %}
 {% load staticfiles %}{% load cropping %}{% load util_tags %}
+{% block hiddencontent %}
+  {{block.super}}
+  {% if completed %}
+  <div class="completed-course-popup">
+    <div class="modal-wrapper">
+      <div class="w-container">
+        <div class="payment-block"><a class="close-popup-button" data-ix="new-interaction-4" href="#">Fechar <strong>X</strong></a>
+	  {% if course_rel.passed %}
+            <h1 class="completed-div-title">Parabéns!</h1>
+            <h2 class="completed-subtitle">Você completou o curso e atingiu nota suficiente para ser aprovado.</h2>
+	  {% else %}
+	    <h1 class="completed-div-title">Sentimos muito.</h1>
+            <h2 class="completed-subtitle">Você completou o curso mas infelizmente não atingiu nota suficiente para ser aprovado.</h2>
+	  {% endif %}
+          <div class="statistics-graph-div">
+            <div class="statistics-graph" id="final-percentage">
+	      <h1 class="result-percentage">{{course_rel.percentage}}%</h1>
+	    </div>
+          </div>
+	  {% if course_rel.passed %}
+            <h2 class="completed-subtitle">Baixe seu certificado nessa página ou na página "Meus Cursos".</h2>
+	  {% endif %}
+	  <a class="button w-button" data-ix="new-interaction-4" href="#">Continuar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+{% endblock %}
 {% block content %}
   <div class="header-background">
     {% block header %}
@@ -15,7 +44,9 @@
           <div class="course-description-buttons-div">
 	    {% if course_rel.completed %}
 	      <a class="button course-description-button w-button" href="{% url 'course_item' course_id=course.id position=1 %}">Revisar Curso</a>
-	      <a class="button course-description-button w-button" href="#">Ver Certificado</a>
+	      {% if course_rel.certificate %}
+		<a class="button course-description-button w-button" href="{% url 'certificate_view' identifier=course_rel.certificate.identifier %}">Ver Certificado</a>
+	      {% endif %}
 	    {% else %}
 	      {% with course_rel.last_accessed_item.position|default:0 as last_position%}
 		<a class="button course-description-button w-button" href="{% url 'course_item' course_id=course.id position=last_position|add:1 %}">Continuar curso</a>
@@ -110,6 +141,17 @@
        size: 250,
        fill: {
 	   gradient: ["#3296C8", "#32FA64"]
+       }
+   });
+   $('#final-percentage').circleProgress({
+       value: {{course_rel.percentage|percentage_to_decimal}},
+       size: 250,
+       fill: {
+	   {% if course_rel.passed %}
+	   gradient: ["#3296C8", "#32FA64"]
+	   {% else %}
+	   gradient: ["red", "orange"]
+	   {% endif %}
        }
    });
   </script>

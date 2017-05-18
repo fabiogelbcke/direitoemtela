@@ -1,13 +1,16 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic.detail import DetailView
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.utils.decorators import method_decorator
+from django.utils import timezone
 from django.http import HttpResponse
 from django.template import RequestContext, loader
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.decorators.csrf import requires_csrf_token
-from .models import Course, CourseItem, UserCourseRelationship, UserItemRelationship
+from .models import (Course, CourseItem, UserCourseRelationship,
+                     UserItemRelationship, Certificate)
+from .utils import create_certificate
 from coursetests.models import UserQuestionRelationship
 from .decorators import is_registered_to_course
 
@@ -73,6 +76,7 @@ class CourseProgressView(DetailView):
         tests = item_rels.filter(
             course_item__test__isnull=False
         )
+        completed = bool(self.request.GET.get('completed', False))
         context['item_rels'] = item_rels
         context['course_rel'] = course_rel
         context['videos_total'] = videos.count()
@@ -81,6 +85,7 @@ class CourseProgressView(DetailView):
         context['readings_done'] = readings.filter(done=True).count()
         context['tests_total'] = tests.count()
         context['tests_done'] = tests.filter(done=True).count()
+        context['completed'] = completed
         return context
         
 
@@ -91,13 +96,36 @@ class CourseItemView(LoginRequiredMixin, DetailView):
     context_object_name = 'course_item'
     template_name = 'course-video.djhtml'
 
+    
     def get_object(self):
         position = self.kwargs['position']
-        course = Course.objects.get(id=self.kwargs['course_id'])
+        course = get_object_or_404(Course, id=self.kwargs['course_id'])
         total_items = course.items.all().count()
         pos = min(int(total_items), int(position))
         return CourseItem.objects.get(position=pos, course=course)
 
+    
+    def dispatch(self, request, *args, **kwargs):
+        course = self.get_object().course
+        user = request.user
+        course_rel = UserCourseRelationship.objects.get(
+                    course=course,
+                    user=user
+        )
+        if (course_rel.questions_answered == course_rel.total_questions
+            and course_rel.completed == False):
+            course_rel.passed = course_rel.percentage() >= course_rel.passing_grade
+            course_rel.completed = True
+            course_rel.completion_date = timezone.now()
+            course_rel.certificate = create_certificate(course_rel)
+            course_rel.save()
+            response = redirect('course_progress', course_id=course.id)
+            response['Location'] += '?completed=true'
+            return response
+        else:
+            return super(CourseItemView, self).dispatch(request, *args, **kwargs)
+
+            
     def get_test_context(self, context, user_course_rel, **kwargs):
         test = self.object.test
         user = self.request.user
@@ -148,18 +176,19 @@ class CourseItemView(LoginRequiredMixin, DetailView):
             course_item__position__gte=min_pos,
             course_item__position__lte=max_pos
         ).order_by('course_item__position')
-        user_course_rel = UserCourseRelationship.objects.get(
+        course_rel = UserCourseRelationship.objects.get(
                     course=course,
                     user=user
         )
         context['user_item_rels'] = user_item_rels
         context['course'] = course
         if self.object.type() == 'test':
-            return self.get_test_context(context, user_course_rel, **kwargs)
+            return self.get_test_context(context, course_rel, **kwargs)
         if self.object.type() == 'video':
             return self.get_video_context(context, **kwargs)
         return context
-            
+
+    
 @login_required
 def dashboard_courses(request):
     user = request.user
@@ -176,4 +205,16 @@ def dashboard_courses(request):
         'completed_courses_rels': completed_courses_rels,
         'ongoing_courses_rels': ongoing_courses_rels,
         }, request))
-    
+
+
+class CertificateView(DetailView):
+    model = Certificate
+    pk_url_kwarg = 'identifier'
+    slug_field = 'identifier'
+    context_object_name = 'certificate'
+    template_name = 'course-certificate.djhtml'
+
+    def get_context_data(self, **kwargs):
+        context = super(CertificateView, self).get_context_data(**kwargs)
+        context['website_url'] = settings.WEBSITE_URL[:-1]
+        return context

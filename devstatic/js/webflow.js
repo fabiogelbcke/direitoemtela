@@ -2893,5 +2893,6 @@ Webflow.require('ix').init([
   {"slug":"close-trailer","name":"close trailer","value":{"style":{},"triggers":[{"type":"click","selector":".payment-popup","stepsA":[{"display":"none"}],"stepsB":[]},{"type":"click","selector":".trailer-popup","stepsA":[{"display":"none"}],"stepsB":[]}]}},
   {"slug":"show-trailer","name":"show trailer","value":{"style":{},"triggers":[{"type":"click","selector":".trailer-popup","stepsA":[{"display":"block"}],"stepsB":[]}]}},
   {"slug":"new-interaction-3","name":"New Interaction 3","value":{"style":{},"triggers":[{"type":"hover","selector":".item-details-popup","siblings":true,"stepsA":[{"display":"block","opacity":1,"transition":"opacity 300ms ease 0"}],"stepsB":[{"display":"block","opacity":0,"transition":"opacity 300ms ease 0"}]}]}},
-  {"slug":"show-payment-popup","name":"Show Payment Popup","value":{"style":{},"triggers":[{"type":"click","selector":".payment-popup","stepsA":[{"display":"block"}],"stepsB":[]}]}}
+  {"slug":"show-payment-popup","name":"Show Payment Popup","value":{"style":{},"triggers":[{"type":"click","selector":".payment-popup","stepsA":[{"display":"block"}],"stepsB":[]}]}},
+  {"slug":"new-interaction-4","name":"New Interaction 4","value":{"style":{},"triggers":[{"type":"click","selector":".completed-course-popup","stepsA":[{"display":"none"}],"stepsB":[]}]}}
 ]);

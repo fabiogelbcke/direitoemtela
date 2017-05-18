@@ -98,7 +98,7 @@
 		      </div>
 		    </div>
 		  </div>
-		  <div class="continue-course-div"><a class="button button-margin w-button" href="{% url 'course_progress' slug=course.id %}">Ver meu Progresso</a><a class="button button-margin w-button" href="#">Continuar Curso</a>
+		  <div class="continue-course-div"><a class="button button-margin w-button" href="{% url 'course_progress' course_id=course.id %}">Ver meu Progresso</a><a class="button button-margin w-button" href="#">Continuar Curso</a>
 		  </div>
 		  {% endif %}
 		</div>

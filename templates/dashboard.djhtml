@@ -50,7 +50,7 @@
                       <div class="dashboard-course-description">
 			<h1 class="dashboard-course-title">{{course.name}}</h1>
 			<p class="paragraph-2">Começado em {{course_rel.start_date.date}}</p>
-			{% with course_rel.last_accessed_item.position|default_if_none:0 as last_position%}
+			{% with course_rel.last_accessed_item.position|default:0 as last_position%}
 			  <a class="button w-button" href="{% url 'course_item' course_id=course.id position=last_position|add:1 %}">Continuar Curso</a>
 			{% endwith %}
                       </div>
@@ -67,7 +67,7 @@
                     <div class="dashboard-course"><img class="dashboard-course-image" height="140" src="{% cropped_thumbnail course 'thumbnail_ratio' height=140 %}">
                       <div class="dashboard-course-description">
 			<h1 class="dashboard-course-title">{{course.name}}</h1>
-			<p class="paragraph">Concluído em {{course_rel.conclusion_date.date}}</p><a class="button w-button" href="#">Ver Certificado</a><a class="button w-button white-button" href="#">Revisar Curso</a>
+			<p class="paragraph">Concluído em {{course_rel.conclusion_date.date}}</p><a class="button w-button" href="{% url 'certificate_view' identifier=course_rel.certificate.identifier %}">Ver Certificado</a><a class="button w-button white-button" href="{% url 'course_progress' course_id=course.id %}">Sumário do Curso</a>
                       </div>
                       <h1 class="dashboard-completion-percentage">100%</h1>
                     </div>
