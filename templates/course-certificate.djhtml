@@ -10,13 +10,15 @@
   <div class="thick-separator"></div>
   <div class="certificate-container course-description-containter w-container">
     <h1 class="center">Parabéns, {{student.first_name}}!</h1>
-    <p class="certificate-text">Você trabalhou duro e completou o curso <strong>{{certificate.course_name}}</strong>. Clique abaixo para compartilhar seu sucesso com seus amigos e sua família!</p>
-    <div class="share-buttons">
-      <a class="social-share-button w-button" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{website_url|urlencode}}{{request.path|urlencode}}&amp;src=sdkpreparse"></a>
-		      <a class="social-share-button twitter w-button" target = "_blank" href="https://twitter.com/intent/tweet?text=Completei%20o%20curso%20{{certificate.course_name|urlencode}}%20no%20site%20Direito%20em%20Tela!%20Confira%20meu%20certificado&url={{website_url|urlencode}}{{request.path|urlencode}}&hashtags=direitoemtela" data-size="large"></a>
-		      <a class="google social-share-button w-button" target = "_blank" href="https://plus.google.com/share?url={{website_url|urlencode}}{{request.path|urlencode}}" ></a>
-		      <a class="linkedin social-share-button w-button" target="_blank" id="facebook-share-button" href="http://www.linkedin.com/shareArticle?mini=true&url={{website_url|urlencode}}{{request.path|urlencode}}&title=Completei%20o%20curso%20{{certificate.course_name|urlencode}}%20no%20site%20Direito%20em%20Tela!%20Confira%20meu%20certificado!&source=direitoemtela.com.br"></a>
-		      <a class="social-share-button w-button whatsapp" id="facebook-share-button" href="whatsapp://send?text=Completei%20o%20curso%20{{certificate.course_name|urlencode}}%20no%20site%20Direito%20em%20Tela!%20Confira%20meu%20certificado!%20-%20{{website_url|urlencode}}{{request.path}}" data-action="share/whatsapp/share"></a>
+    <div class="certificate-share">
+      <p class="certificate-text heyoh">Você trabalhou duro e completou o curso <strong>{{certificate.course_name}}</strong>. Clique ao lado para compartilhar seu sucesso com seus amigos e sua família!</p>
+      <div class="share-buttons vertical-mobile">
+	<a class="social-share-button w-button" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{website_url|urlencode}}{{request.path|urlencode}}&amp;src=sdkpreparse"></a>
+	<a class="social-share-button twitter w-button" target = "_blank" href="https://twitter.com/intent/tweet?text=Completei%20o%20curso%20{{certificate.course_name|urlencode}}%20no%20site%20Direito%20em%20Tela!%20Confira%20meu%20certificado&url={{website_url|urlencode}}{{request.path|urlencode}}&hashtags=direitoemtela" data-size="large"></a>
+	<a class="google social-share-button w-button" target = "_blank" href="https://plus.google.com/share?url={{website_url|urlencode}}{{request.path|urlencode}}" ></a>
+	<a class="linkedin social-share-button w-button" target="_blank" id="facebook-share-button" href="http://www.linkedin.com/shareArticle?mini=true&url={{website_url|urlencode}}{{request.path|urlencode}}&title=Completei%20o%20curso%20{{certificate.course_name|urlencode}}%20no%20site%20Direito%20em%20Tela!%20Confira%20meu%20certificado!&source=direitoemtela.com.br"></a>
+	<a class="social-share-button w-button whatsapp" id="facebook-share-button" href="whatsapp://send?text=Completei%20o%20curso%20{{certificate.course_name|urlencode}}%20no%20site%20Direito%20em%20Tela!%20Confira%20meu%20certificado!%20-%20{{website_url|urlencode}}{{request.path}}" data-action="share/whatsapp/share"></a>
+      </div>
     </div>
     <div class="certificate">
       <div class="certificate-left-div">

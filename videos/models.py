@@ -8,11 +8,13 @@ import shortuuid
 
 def get_thumbnail_path(instance, filename):
     ext = filename.split('.')[-1]
+    shortuuid.set_alphabet("abcdefghijklmnopqrstuvwxyz0123456789")
     filename = "%s.%s" % (shortuuid.uuid(), ext)
     return os.path.join('thumbnails', str(instance.id), filename)
 
 def get_material_path(instance, filename):
     ext = filename.split('.')[-1]
+    shortuuid.set_alphabet("abcdefghijklmnopqrstuvwxyz0123456789")
     filename = "%s.%s" % (shortuuid.uuid(), ext)
     return os.path.join('materials', filename)
 

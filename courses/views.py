@@ -10,9 +10,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.decorators.csrf import requires_csrf_token
 from .models import (Course, CourseItem, UserCourseRelationship,
                      UserItemRelationship, Certificate)
-from .utils import create_certificate
+from .utils import create_certificate, render_to_pdf
 from coursetests.models import UserQuestionRelationship
 from .decorators import is_registered_to_course
+from easy_pdf.views import PDFTemplateResponseMixin
 
 #get the range of items that show up on the progress bar at the
 #top of the page while doing the course
@@ -119,6 +120,8 @@ class CourseItemView(LoginRequiredMixin, DetailView):
             course_rel.completion_date = timezone.now()
             course_rel.certificate = create_certificate(course_rel)
             course_rel.save()
+            user.course_hours += course.hours
+            user.save()
             response = redirect('course_progress', course_id=course.id)
             response['Location'] += '?completed=true'
             return response
@@ -218,3 +221,26 @@ class CertificateView(DetailView):
         context = super(CertificateView, self).get_context_data(**kwargs)
         context['website_url'] = settings.WEBSITE_URL[:-1]
         return context
+
+
+class CertificatePDFView(PDFTemplateResponseMixin, DetailView):
+    model = Certificate
+    pk_url_kwarg = 'identifier'
+    slug_field = 'identifier'
+    context_object_name = 'certificate'
+    template_name = 'certificate-pdf-template.djhtml'
+
+    def get_context_data(self, **kwargs):
+        context = super(CertificatePDFView, self).get_context_data(
+            pagesize='A4',
+            title='Hi there!',
+            **kwargs
+        )
+        return context
+
+class CertificatePDFHTML(DetailView):
+    model = Certificate
+    pk_url_kwarg = 'identifier'
+    slug_field = 'identifier'
+    context_object_name = 'certificate'
+    template_name = 'certificate-pdf-template.djhtml'

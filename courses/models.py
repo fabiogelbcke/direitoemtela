@@ -13,8 +13,13 @@ import os
 
 def get_thumbnail_path(instance, filename):
     ext = filename.split('.')[-1]
+    shortuuid.set_alphabet("abcdefghijklmnopqrstuvwxyz0123456789")
     filename = "%s.%s" % (shortuuid.uuid(), ext)
     return os.path.join('coursethumbnails', str(instance.id), filename)
+
+def certificate_identifier():
+    shortuuid.set_alphabet("abcdefghijklmnopqrstuvwxyz0123456789")
+    return shortuuid.uuid()
 
 class Course(models.Model):
     name = models.CharField(blank=True, max_length=150)
@@ -178,6 +183,6 @@ class Certificate(models.Model):
                                            default=timezone.now)
     identifier = models.CharField(primary_key=True,
                                   max_length=150,
-                                  default=shortuuid.uuid)
+                                  default=certificate_identifier)
     percentage = models.IntegerField()
     

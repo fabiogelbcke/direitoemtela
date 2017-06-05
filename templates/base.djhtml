@@ -54,7 +54,8 @@
 	      <a class="light-blue-link show-signup-form" data-ix="show-signup-form" href="#">Clique aqui para cadastrar-se</a>
             </div>
             <div class="signup-form-block">
-              <form class="login-form" data-name="Email Form 4" id="email-form-4" name="email-form-4">
+              <form class="login-form" action="{% url 'register' %}" id="registration-form" method="POST" data-name="Email Form 4" id="email-form-4" name="email-form-4">
+		{% csrf_token %}
 		<div class="div-block-4">
 		  <input class="form-input name-input w-input" data-name="first_name" id="first_name" maxlength="256" name="first_name" placeholder="Nome" type="text">
 		  <div class="gap"></div>
@@ -62,7 +63,7 @@
 		</div>
 		<input class="form-input w-input" data-name="email" id="email-5" maxlength="256" name="email" placeholder="Email" required="required" type="email">
 		<input class="form-input w-input" data-name="password" id="password-2" maxlength="256" name="password" placeholder="Senha" required="required" type="password">
-		<input class="form-input w-input" data-name="password_confirmation" id="password_confirmation" maxlength="256" name="password_confirmation" placeholder="Confirme a Senha" required="required" type="email">
+		<input class="form-input w-input" data-name="password_confirmation" id="password_confirmation" maxlength="256" name="password_confirmation" placeholder="Confirme a Senha" required="required" type="password">
 		<input rel="nofollow" class="button w-button" data-wait="Please wait..." type="submit" value="Cadastrar-se">
               </form>
               <p class="light-grey-text">Já tem uma conta?</p><a class="light-blue-link show-login-form" data-ix="show-login-form" href="#">Clique aqui para entrar</a>
@@ -167,6 +168,14 @@
 		 $("#mailing-email-input").show();
 		 $("#mailing-submit").show();
 		 $(".spinner").hide();  
+	     }
+	 });
+	 $("#registration-form").ajaxForm({
+	     success:function(data){
+		 location.reload();
+	     },
+	     error:function(data){
+		 
 	     }
 	 });
 	</script>

@@ -1,9 +1,29 @@
 # -*- coding: utf-8 -*-
-from .models import MailingEmail
+from django.conf import settings
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.core.validators import validate_email
 from django.core.mail import EmailMessage, EmailMultiAlternatives
 from django.template import loader
+import requests
+from .models import MailingEmail
+
+
+def add_to_mailchimp(email):
+    url = ('https://us12.api.mailchimp.com/3.0/lists/'
+        + settings.MAILCHIMP_USER_LIST_ID + '/members/')
+    p_type = 'ARTIST' if user.active_profile.profile_type == 1 else 'CLUB'
+    json_data = ('{"email_address": "'
+                 + email
+                 +'","status": "subscribed"}').encode('utf-8')
+    r = requests.post(
+        url,
+        auth=(
+            'ILoveBlowjobs',
+            settings.MAILCHIMP_API_KEY
+        ),
+        data=json_data
+    )
+    return r
 
 def add_to_list(request):
     email = request.POST.get('email', None)
@@ -22,19 +42,19 @@ def add_to_list(request):
                                      to=[email,])
         msg.attach_alternative(content, 'text/html')
         msg.send()
-        print 'aew'
+        add_to_mailchimp(email)
         return HttpResponse('Email Adicionado')
     else:
         return HttpResponseBadRequest('Por favor digite um email válido')
 
 
 def send_to_everyone(template_name):
+    template = loader.get_template(template_name)
+    content = template.render({})
+    subject = 'O site Direito em Tela está no ar!'
     for x in MailingEmail.objects.all():
-        template = loader.get_template(template_name)
-        content = template.render({})
-        subject = 'O site Direito em Tela está no ar!'
         msg = EmailMultiAlternatives(subject=subject,
-                                     from_email='Equipe Direito em Tela <contato@direitoemtela.com.br>',
+                                     from_email='Equipe Direito em Tela <fabio@direitoemtela.com.br>',
                                      to=[x.email,])
         msg.attach_alternative(content, 'text/html')
         msg.send()
