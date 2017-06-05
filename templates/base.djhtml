@@ -54,7 +54,8 @@
 	      <a class="light-blue-link show-signup-form" data-ix="show-signup-form" href="#">Clique aqui para cadastrar-se</a>
             </div>
             <div class="signup-form-block">
-              <form class="login-form" data-name="Email Form 4" id="email-form-4" name="email-form-4">
+              <form class="login-form" action="{% url 'register' %}" id="registration-form" method="POST" data-name="Email Form 4" id="email-form-4" name="email-form-4">
+		{% csrf_token %}
 		<div class="div-block-4">
 		  <input class="form-input name-input w-input" data-name="first_name" id="first_name" maxlength="256" name="first_name" placeholder="Nome" type="text">
 		  <div class="gap"></div>
@@ -167,6 +168,14 @@
 		 $("#mailing-email-input").show();
 		 $("#mailing-submit").show();
 		 $(".spinner").hide();  
+	     }
+	 });
+	 $("#registration-form").ajaxForm({
+	     success:function(data){
+		 location.reload();
+	     },
+	     error:function(data){
+		 
 	     }
 	 });
 	</script>

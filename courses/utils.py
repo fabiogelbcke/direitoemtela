@@ -1,11 +1,14 @@
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+from django.template.loader import get_template
 from .models import (Course, UserItemRelationship,
                      UserCourseRelationship, CourseItem,
                      Certificate)
 from coursetests.models import UserQuestionRelationship
 from users.models import MyUser
+from io import BytesIO
+from xhtml2pdf import pisa
 
 
 def register_to_course(user_id, course_id):
@@ -82,3 +85,13 @@ def create_certificate(course_rel):
         percentage=course_rel.percentage()
     )
     return certificate
+
+
+def render_to_pdf(template_src, context={}):
+    template = get_template(template_src)
+    html  = template.render(context)
+    result = BytesIO()
+    pdf = pisa.pisaDocument(BytesIO(html.encode("utf-8")), result)
+    if not pdf.err:
+        return HttpResponse(result.getvalue(), content_type='application/pdf')
+    return None

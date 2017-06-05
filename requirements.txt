@@ -64,3 +64,4 @@ social-auth-core==1.2.0
 traitlets==4.3.2
 uritemplate==0.6
 wcwidth==0.1.7
+xhtml2pdf==0.0.6
