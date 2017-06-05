@@ -247,6 +247,10 @@ ASAAS_API_KEY = keys.ASAAS_API_KEY
 
 ASAAS_API_URL = 'https://www.asaas.com/api/v3'
 
+MAILCHIMP_API_KEY = keys.MAILCHIMP_API_KEY
+
+MAILCHIMP_USER_LIST_ID = keys.MAILCHIMP_USER_LIST_ID
+
 GEOIP_DATABASE = os.path.join(SITE_ROOT, 'geoip/GeoLiteCity.dat')
 GEOIPV6_DATABASE = os.path.join(SITE_ROOT, 'geoip/GeoLiteCityv6.dat')
 
