@@ -35,9 +35,9 @@
 	<div class="modal-wrapper">
 	  <div class="base-popup"><a class="close-popup-button" data-ix="close-login-popup" href="#">Fechar X</a>
             <div class="social-login-div">
-              <a class="facebook-login social-login-button w-inline-block" href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}"></a>
-              <a class="google-login-button social-login-button w-inline-block" href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}"></a>
-              <a class="linkedin-login-button social-login-button w-inline-block" href="{% url 'social:begin' 'linkedin-oauth2' %}?next={{ request.path }}"></a>
+              <a rel="nofollow" class="facebook-login social-login-button w-inline-block" href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}"></a>
+              <a rel="nofollow" class="google-login-button social-login-button w-inline-block" href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}"></a>
+              <a rel="nofollow" class="linkedin-login-button social-login-button w-inline-block" href="{% url 'social:begin' 'linkedin-oauth2' %}?next={{ request.path }}"></a>
             </div>
             <div class="division">
               <div class="left line"></div>
@@ -48,7 +48,7 @@
               <form class="login-form" data-name="Email Form 3" id="email-form-3" name="email-form-3">
 		<input class="form-input w-input" data-name="email" id="email-3" maxlength="256" name="email" placeholder="Email" type="email">
 		<input class="form-input w-input" data-name="password" id="password" maxlength="256" name="password" placeholder="Senha" required="required" type="text">
-		<input class="button w-button" data-wait="Please wait..." type="submit" value="Entrar">
+		<input rel="nofollow" class="button w-button" data-wait="Please wait..." type="submit" value="Entrar">
               </form>
               <p class="light-grey-text">Ainda não tem uma conta?</p>
 	      <a class="light-blue-link show-signup-form" data-ix="show-signup-form" href="#">Clique aqui para cadastrar-se</a>
@@ -63,7 +63,7 @@
 		<input class="form-input w-input" data-name="email" id="email-5" maxlength="256" name="email" placeholder="Email" required="required" type="email">
 		<input class="form-input w-input" data-name="password" id="password-2" maxlength="256" name="password" placeholder="Senha" required="required" type="password">
 		<input class="form-input w-input" data-name="password_confirmation" id="password_confirmation" maxlength="256" name="password_confirmation" placeholder="Confirme a Senha" required="required" type="email">
-		<input class="button w-button" data-wait="Please wait..." type="submit" value="Cadastrar-se">
+		<input rel="nofollow" class="button w-button" data-wait="Please wait..." type="submit" value="Cadastrar-se">
               </form>
               <p class="light-grey-text">Já tem uma conta?</p><a class="light-blue-link show-login-form" data-ix="show-login-form" href="#">Clique aqui para entrar</a>
             </div>
