@@ -13,7 +13,8 @@ def add_to_mailchimp(email):
         + settings.MAILCHIMP_USER_LIST_ID + '/members/')
     json_data = ('{"email_address": "'
                  + email
-                 +'","status": "subscribed"}').encode('utf-8')
+                 +'","status": "subscribed", "merge_fields":{}}'
+    ).encode('utf-8')
     r = requests.post(
         url,
         auth=(
