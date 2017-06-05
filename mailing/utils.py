@@ -11,7 +11,6 @@ from .models import MailingEmail
 def add_to_mailchimp(email):
     url = ('https://us12.api.mailchimp.com/3.0/lists/'
         + settings.MAILCHIMP_USER_LIST_ID + '/members/')
-    p_type = 'ARTIST' if user.active_profile.profile_type == 1 else 'CLUB'
     json_data = ('{"email_address": "'
                  + email
                  +'","status": "subscribed"}').encode('utf-8')
