@@ -37,7 +37,9 @@
             <div class="social-login-div">
               <a rel="nofollow" class="facebook-login social-login-button w-inline-block" href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}"></a>
               <a rel="nofollow" class="google-login-button social-login-button w-inline-block" href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}"></a>
+	      {% if False %}
               <a rel="nofollow" class="linkedin-login-button social-login-button w-inline-block" href="{% url 'social:begin' 'linkedin-oauth2' %}?next={{ request.path }}"></a>
+	      {% endif %}
             </div>
             <div class="division">
               <div class="left line"></div>
