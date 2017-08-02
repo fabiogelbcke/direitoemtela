@@ -9,6 +9,9 @@ class CourseTest(models.Model):
                              blank=True,
                              max_length=150)
 
+    def __str__(self):
+        return self.title
+
 class Question(models.Model):
     id = models.AutoField(primary_key=True)
     test = models.ForeignKey(CourseTest,
