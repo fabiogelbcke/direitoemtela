@@ -14,7 +14,7 @@ class CourseTest(models.Model):
                            unique=True)
 
     def __str__(self):
-        return self.title
+        return self.ref
 
     class Meta:
         verbose_name = 'Teste'
