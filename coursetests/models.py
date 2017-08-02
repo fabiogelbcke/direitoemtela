@@ -8,9 +8,17 @@ class CourseTest(models.Model):
     title = models.CharField(default='',
                              blank=True,
                              max_length=150)
+    ref = models.CharField(default='',
+                           blank=True,
+                           max_length=150,
+                           unique=True)
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        verbose_name = 'Teste'
+        verbose_name_plural = 'Testes'
 
 class Question(models.Model):
     id = models.AutoField(primary_key=True)
