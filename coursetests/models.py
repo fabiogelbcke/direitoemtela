@@ -11,7 +11,7 @@ class CourseTest(models.Model):
     ref = models.CharField(default='',
                            blank=True,
                            max_length=150,
-                           unique=True)
+                           unique=False)
 
     def __str__(self):
         return self.ref

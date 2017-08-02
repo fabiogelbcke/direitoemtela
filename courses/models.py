@@ -36,7 +36,7 @@ class Course(models.Model):
     users = models.ManyToManyField(settings.SOCIAL_AUTH_USER_MODEL,
                                    through='UserCourseRelationship',
                                    related_name='courses')
-    thumbnail = ImageCropField(upload_to=get_thumbnail_path, blank=True,
+    thumbnail = models.ImageField(upload_to=get_thumbnail_path, blank=True,
                                default='logodefault.png')
     thumbnail_ratio = ImageRatioField('thumbnail', '592x300')
     total_questions = models.IntegerField(default=0)
