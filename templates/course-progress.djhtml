@@ -16,11 +16,11 @@
 	  {% endif %}
           <div class="statistics-graph-div">
             <div class="statistics-graph" id="final-percentage">
-	      <h1 class="result-percentage">{{course_rel.percentage}}%</h1>
+	      <h1 class="result-percentage" style="height:150px">{{course_rel.percentage}}%</h1>
 	    </div>
           </div>
 	  {% if course_rel.passed %}
-            <h2 class="completed-subtitle">Baixe seu certificado nessa página ou na página "Meus Cursos".</h2>
+            <h2 class="completed-subtitle">Acesse seu certificado nessa página ou na página "Meus Cursos".</h2>
 	  {% endif %}
 	  <a class="button w-button" data-ix="new-interaction-4" href="#">Continuar</a>
         </div>
@@ -44,7 +44,7 @@
           <div class="course-description-buttons-div">
 	    {% if course_rel.completed %}
 	      <a class="button course-description-button w-button" href="{% url 'course_item' course_id=course.id position=1 %}">Revisar Curso</a>
-	      {% if course_rel.certificate %}
+	      {% if course_rel.passed and course_rel.certificate %}
 		<a class="button course-description-button w-button" href="{% url 'certificate_view' identifier=course_rel.certificate.identifier %}">Ver Certificado</a>
 	      {% endif %}
 	    {% else %}
@@ -67,6 +67,11 @@
 		  <div class="course-description-block-div">
                     <h3 class="course-description-section-title">Data de Conclusão</h3>
                     <h2 class="course-date-text">{{course_rel.completion_date.date}}</h2>
+		  </div>
+		  <div class="course-description-separator"></div>
+		  <div class="course-description-block-div">
+                    <h3 class="course-description-section-title">Resultado</h3>
+                    <h2 class="course-date-text">{% if course_rel.passed %}Aprovado{% else %}Não Aprovado{% endif %}</h2>
 		  </div>
 		{% endif %}
 		<div class="course-description-separator"></div>
@@ -101,7 +106,7 @@
 		{% for item_rel in item_rels %}
 		  {% with item_rel.course_item as item %}
 	
-		    <div class="course-outline-item">
+		    <a class="course-outline-item" href="{% url 'course_item' course_id=course.id position=forloop.counter %}">
 		      <img class="course-outline-icon {% if item_rel.done %}done{% endif %}" height="45"
 			   {% if item_rel.done %}
 			   src="{% static 'images/doneicon.png'%}"
@@ -122,7 +127,11 @@
 			  Teste:
 			{% endif %}{{item.title}}
 		      </p>
-		    </div>
+		    </a>
+		    {% if forloop.counter != item_rels.count %}
+		      <div class="course-outline-item-separator">
+		      </div>
+		    {% endif %}
 		  {% endwith %}
 		{% endfor %}
           </div>

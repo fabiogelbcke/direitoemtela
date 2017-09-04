@@ -4,6 +4,7 @@ from image_cropping import ImageCroppingMixin
 
 class ComplementaryMaterialAdmin(admin.TabularInline):
     model = ComplementaryMaterial
+    
 
 class VideoAdmin(ImageCroppingMixin, admin.ModelAdmin):
     model = Video

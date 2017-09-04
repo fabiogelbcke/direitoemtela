@@ -32,17 +32,25 @@
 		      {% elif item.type == 'video' %}
 			<a class="course-step" data-ix="new-interaction-3" href="{% url 'course_item' course_id=course.id position=item.position %}"><img class="step-image" src="{% static 'images/playicon-white.png'%}" width="35">
 			</a>
+			<div class="item-details-popup">
+			  <h2 class="pop-up-title">Vídeo</h2>
+			  <p class="pop-up-content">{{item.title}}</p>
+			</div>
 		      {% elif item.type == 'reading' %}
 			<a class="course-step" data-ix="new-interaction-3" href="{% url 'course_item' course_id=course.id position=item.position %}"><img class="step-image" src="{% static 'images/readingicon-white.png'%}" width="35">
 			</a>
+			<div class="item-details-popup">
+			  <h2 class="pop-up-title">Leitura</h2>
+			  <p class="pop-up-content">{{item.title}}</p>
+			</div>
 		      {% elif item.type == 'test' %}
 			<a class="course-step" data-ix="new-interaction-3" href="{% url 'course_item' course_id=course.id position=item.position %}"><img class="step-image" src="{% static 'images/testicon-white.png'%}" width="35">
 			</a>
+			<div class="item-details-popup">
+			  <h2 class="pop-up-title">Teste</h2>
+			  <p class="pop-up-content">{{item.title}}</p>
+			</div>
 		      {% endif %}
-                      <div class="item-details-popup">
-			<h2 class="pop-up-title">{{item.type}}</h2>
-			<p class="pop-up-content">{{item.title}}</p>
-                      </div>
 		    </div>
 		  {% endwith %}
 		{% endfor %}

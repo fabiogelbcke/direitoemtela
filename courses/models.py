@@ -41,6 +41,10 @@ class Course(models.Model):
     thumbnail_ratio = ImageRatioField('thumbnail', '592x300')
     total_questions = models.IntegerField(default=0)
 
+
+    def __unicode__(self):
+        return self.name
+
     def save(self, *args, **kwargs):
         if self.pk is not None:
             total_questions = 0
@@ -52,9 +56,18 @@ class Course(models.Model):
     def is_registered(self, user):
         return self.course_rels.filter(user=user).exists()
 
+    class Meta:
+        verbose_name = 'Curso'
+        verbose_name_plural = 'Cursos'
+        
+
 class CourseTopic(models.Model):
     course = models.ForeignKey(Course, related_name='topics')
     text = models.CharField(blank=True, max_length=200)
+
+    class Meta:
+        verbose_name = 'Tema'
+        verbose_name_plural = 'Temas do Curso'
 
 class CourseItem(models.Model):
     class Meta:
@@ -143,6 +156,10 @@ class CourseItem(models.Model):
             viditem.save()
         super(CourseItem, self).delete()
 
+    class Meta:
+        verbose_name = 'Passo do Curso'
+        verbose_name_plural = 'Passos do Curso'
+
 class UserItemRelationship(models.Model):
     user = models.ForeignKey(settings.SOCIAL_AUTH_USER_MODEL)
     course_item = models.ForeignKey(CourseItem)
@@ -186,3 +203,7 @@ class Certificate(models.Model):
                                   default=certificate_identifier)
     percentage = models.IntegerField()
     
+
+    class Meta:
+        verbose_name = 'Certificado'
+        verbose_name_plural = 'Certificados'

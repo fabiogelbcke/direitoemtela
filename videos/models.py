@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from django.utils import timezone
+
 from image_cropping import ImageRatioField, ImageCropField
 import uuid
 import os
@@ -58,6 +59,9 @@ class ComplementaryMaterial(models.Model):
                                      blank=True,
                                      null=True,
                                      default=None)
+
+    def __unicode__(self):
+        return self.title
 
     def is_link(self):
         return bool(self.url)

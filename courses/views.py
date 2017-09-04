@@ -244,3 +244,11 @@ class CertificatePDFHTML(DetailView):
     slug_field = 'identifier'
     context_object_name = 'certificate'
     template_name = 'certificate-pdf-template.djhtml'
+
+class CertificatePDF(DetailView):
+    model = Certificate
+    pk_url_kwarg = 'identifier'
+    slug_field = 'identifier'
+    context_object_name = 'certificate'
+    template_name = 'attempt-certificate.djhtml'
+    

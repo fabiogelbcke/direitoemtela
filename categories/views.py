@@ -35,7 +35,7 @@ class CategoryView(ListView):
 
 class CategoriesListView(ListView):
     model = Category
-    template_name = 'categories.html'
+    template_name = 'categories.djhtml'
     context_object_name = 'categories'
 
     def get_queryset(self):

@@ -1,0 +1,116 @@
+{% extends 'base.djhtml' %}
+{% load staticfiles %}{% load cropping %}
+{% block content %}
+  <div class="header-background">
+    {% block header %}
+      {{block.super}}
+    {% endblock %}
+    
+    <div class="top-bar-plain"></div>
+    <div class="thick-separator"></div>
+    <div>
+      <div class="main-section" id="posts">
+	<div class="video-container w-container" id="video-container">
+          <div class="video-page-title-div">
+            <h1 class="centralize-text results-title video-tile">{{total_courses}} cursos encontrados para: {{query}}</h1>
+            <div class="med-divider"></div>
+          </div>
+          <div class="w-dyn-list">
+            <div class="w-clearfix w-dyn-items w-row">
+	      {% for course in courses %}
+		<div class="blog-thumbnail w-col w-col-4 w-dyn-item">
+		  <a class="thumbnail-wrapper w-inline-block" data-ix="blog-thumbnail" href="{% url 'course_page' course_id=course.id%}">
+		    <div class="image-wrapper">
+                      <div class="thumbnail-image" style="background-image: url('{% cropped_thumbnail course 'thumbnail_ratio' %}')"></div>
+		    </div>
+		    <div class="thumbnail-text">
+                      <div class="blog-title">{{course.name}}</div>
+                      <div class="preview-text">{{course.description}}</div>
+		    </div>
+		    <div class="thumb-details w-clearfix">
+		      {% if course.professor %}
+			{% with course.professor as professor %}
+  			  <img class="author-img" src="{% cropped_thumbnail professor 'profile_ratio' %}">
+			  <div class="author-title">Prof. {{professor.name}}</div>
+			  <div class="thumbnail-date">{{course.hours}} horas-aula</div>
+			{% endwith %}
+		      {% else %}
+			<img class="author-img" src="https://s3-sa-east-1.amazonaws.com/detfiles/martelinho.png">
+			<div class="author-title">Diversos</div>
+			<div class="thumbnail-date"></div>
+		      {% endif %}
+		    </div>
+		  </a>
+		</div>
+	      {% endfor %}
+            </div>
+	  </div>
+	  {% if page_obj.has_other_pages %}
+            <div class="page-navigator">
+	      {% if page_obj.has_previous %}
+		<a class="button page-button w-inline-block" href="{% url 'course_search_results_page' query=query page=page_obj.previous_page_number %}">
+		  <div>Página Anterior</div>
+		</a>
+	      {% else %}
+		<div style="min-width:150px"></div>
+	      {% endif %}
+              <div class="hidden-mobile page-buttons-div">{% for page_nbr in paginator.page_range %}<a class="button {% if page_nbr == page_obj.number %}current-page{% endif %} page-button w-button white-background" href="{% url 'course_search_results_page' query=query page=page_nbr %}">{{page_nbr}}</a>{% endfor %}
+              </div>
+	      {% if page_obj.has_next %}
+		<a class="button page-button w-inline-block" href="{% url 'course_search_results_page' query=query page=page_obj.next_page_number %}">
+		  <div>Próxima Página</div>
+		</a>
+	      {% else %}
+		<div style="min-width:150px"></div>
+	      {% endif %}
+            </div>
+	  {% endif %}
+	</div>
+      </div>
+{% endblock %}
+
+{% block js %}
+  {{block.super}}
+
+  <script>
+   function longestWordLength(string) {
+       var str = string.split(" ");
+       var longest = 0;
+       for (var i = 0; i < str.length; i++) {
+           if (longest < str[i].length) {
+               longest = str[i].length;
+           }
+       }
+       return longest;
+   }
+
+   $(".video-title-main").each(function(){
+       if ($(this).text().length <= 27)
+	   {
+               $(this).css('font-size', '20px');
+               $(this).css('padding-top', '15px')
+	   }
+       else if (($(this).text().length <= 45 && longestWordLength($(this).text()) < 12) || $(this).text().length <= 39)
+	   {
+               $(this).css('font-size', '17px')
+	   }
+       else if ($(this).text().length <= 45)
+           $(this).css('font-size', '15px')
+       else if ($(this).text().length <= 60 && longestWordLength($(this).text()) < 12)
+	   {
+               $(this).css('font-size', '15px')
+               $(this).css('line-height', '18px')
+               $(this).css('padding-top', '10px')
+	   }
+       else if ($(this).text().length <= 55)
+           $(this).css('font-size', '14px')
+       else
+	   {
+               $(this).css('font-size', '13px')
+               $(this).css('line-height', '18px')
+               $(this).css('padding-top', '5px')
+	   }
+   });
+  </script>
+  
+{% endblock %}

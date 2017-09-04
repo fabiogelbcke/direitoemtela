@@ -41,3 +41,10 @@ class Reading(models.Model):
                             default='',
                             max_length=100)
     
+
+    def __unicode__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'Leitura'
+        verbose_name_plural = 'Leituras'

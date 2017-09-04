@@ -20,7 +20,7 @@
 	<a class="social-share-button w-button whatsapp" id="facebook-share-button" href="whatsapp://send?text=Completei%20o%20curso%20{{certificate.course_name|urlencode}}%20no%20site%20Direito%20em%20Tela!%20Confira%20meu%20certificado!%20-%20{{website_url|urlencode}}{{request.path}}" data-action="share/whatsapp/share"></a>
       </div>
     </div>
-    <div class="certificate">
+    <div class="certificate" id="certificate">
       <div class="certificate-left-div">
         <div>
           <h1 class="certificate-title">CERTIFICADO</h1>
@@ -53,6 +53,7 @@
       </div>
     </div>
     <div class="share-certificate-div">
+      <a class="button w-button" onclick="printCertificate()">PRINT</a>
       <p class="certificate-text">Adicione o certificado ao seu LinkedIn para mostrar a todos que você domina esse assunto!
         <br>Basta clicar no botão e preencher as informações como indicado abaixo:</p>
       <div class="share-buttons">
@@ -67,4 +68,15 @@
     </div>
   </div>
   {% endwith %}
-  {% endblock %}
+{% endblock %}
+{% block js %}
+  {{block.super}}
+  <script src="{% static 'js/jquery.printelement.js' %}" type="text/javascript"></script>
+  <script>
+   
+  function printCertificate()
+  {
+       $("#certificate").printElement({printMode: 'popup'});
+   }
+  </script>
+{% endblock %}

@@ -16,6 +16,9 @@ class CourseTest(models.Model):
     def __str__(self):
         return self.ref
 
+    def __unicode__(self):
+        return self.ref
+
     class Meta:
         verbose_name = 'Teste'
         verbose_name_plural = 'Testes'

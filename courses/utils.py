@@ -69,7 +69,7 @@ def set_item_done(request, item_id):
     u_item_rel.save()
     user_course_rel = UserCourseRelationship.objects.get(
         course=course_item.course,
-        user=user
+        user=request.user
     )
     user_course_rel.last_accessed_item = course_item
     user_course_rel.save()
