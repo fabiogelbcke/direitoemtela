@@ -245,10 +245,14 @@ class CertificatePDFHTML(DetailView):
     context_object_name = 'certificate'
     template_name = 'certificate-pdf-template.djhtml'
 
-class CertificatePDF(DetailView):
+class CertificatePrint(DetailView):
     model = Certificate
     pk_url_kwarg = 'identifier'
     slug_field = 'identifier'
     context_object_name = 'certificate'
-    template_name = 'attempt-certificate.djhtml'
+    template_name = 'certificate-for-print.djhtml'
+
+    def get_context_data(self, **kwargs):
+        context = super(CertificatePrint, self).get_context_data(**kwargs)
+        return context
     

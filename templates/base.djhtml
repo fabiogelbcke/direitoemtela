@@ -30,7 +30,7 @@
 {% endblock %}
 <body>
   {% block hiddencontent %}
-    {% if not user.is_authenticated %}
+    {% if not user.is_authenticated and False %}
       <div class="login-popup">
 	<div class="modal-wrapper">
 	  <div class="base-popup"><a class="close-popup-button" data-ix="close-login-popup" href="#">Fechar X</a>
@@ -95,7 +95,7 @@
 	    <a class="nav-link w-nav-link" href="{% url 'index' %}">INÍCIO</a>
 	    <a class="nav-link w-nav-link" href="{% url 'categories' %}">VÍDEO-AULAS</a>
 	    <a class="nav-link w-nav-link" href="{% url 'about' %}">Quem somos</a>
-	    {% if not user.is_authenticated %}
+	    {% if not user.is_authenticated and False%}
 	      <a class="button login-button w-button" data-ix="show-login-popup" href="#">Entrar</a>
 	    {% endif %}
 	    <a class="close-x w-hidden-main w-hidden-medium w-hidden-small" href="#">×</a>

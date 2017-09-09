@@ -3,7 +3,7 @@
 {% block content %}
   <div>
     {% block header %}
-	{{block.super}}
+      {{block.super}}
     {% endblock %}
     <div class="hero-section">
       <div class="hero-content w-container">
@@ -12,7 +12,7 @@
         <div>
           <div class="">
             <form method="GET" action="{% url 'get_search_page' %}" class="search-form" data-ix="hero-button" data-name="Email Form 2" id="email-form-2" name="email-form-2">
-			  {% csrf_token %}
+	      {% csrf_token %}
               <div class="search-row w-row">
                 <div class="search-bar-column w-col w-col-11 w-col-small-11">
                   <div class="search-bar-div">
@@ -30,16 +30,38 @@
       </div>
     </div>
     <div class="bottom-padding main-section" id="posts">
-      <div class="hidden w-container" id="Latest-post">
+      {% if user.is_authenticated and user.is_beta %}
+	<div class="w-container" id="Latest-post">
         <div class="section-heading">
-          <h2 class="section-title">Cursos Populares</h2>
+          <h2 class="section-title">Cursos Completos</h2>
           <div class="med-divider"></div>
+	  <div class="w-dyn-list">
+            <div class="w-dyn-items w-row">
+	      {% for course in courses %}
+		<div class="blog-thumbnail w-col w-col-4 w-dyn-item">
+		  <a class="thumbnail-wrapper w-inline-block" data-ix="blog-thumbnail" href="{% url 'course_page' course_id=course.id %}">
+                    <div class="image-wrapper">
+                      <div class="thumbnail-image" style="background-image: url('{% cropped_thumbnail course 'thumbnail_ratio' max_size='296x150' %}')"></div>
+                    </div>
+                    <div class="thumbnail-text">
+                      <div class="blog-title">{{course.name}}</div>
+                      <div class="preview-text">{{course.short_description}}</div>
+                    </div>
+                    <div class="thumb-details">
+		      {% with course.professor as professor %}
+			<img class="author-img" src="{% cropped_thumbnail professor 'profile_ratio' max_size='30x30' %}">
+			<div class="author-title">{{professor.name}}</div>
+			<div class="thumbnail-date">{{course.hours}} horas-aula</div>
+		      {% endwith %}
+                    </div>
+		  </a>
+		</div>
+	      {% endfor %}
+            </div>
+          </div>
         </div>
-        <div>
-          <div class="popular-video"></div>
-          <div class="popular-video"></div>
-        </div>
-      </div>
+	</div>
+      {% endif %}
       <div class="w-container">
         <div class="section-heading">
           <h2 class="section-title">Assuntos mais Procurados</h2>
@@ -47,34 +69,34 @@
         </div>
         <div class="w-dyn-list">
           <div class="w-clearfix w-dyn-items w-row">
-			{% for category in featured_categories %}
-            <div class="blog-thumbnail w-col w-col-4 w-dyn-item">
-              <a class="thumbnail-wrapper w-inline-block" href="{% url 'category_page' category_id=category.id %}" data-ix="blog-thumbnail">
-                <div class="image-wrapper">
-                  <div class="thumbnail-image" style="background-image: url('{% cropped_thumbnail category 'thumbnail_ratio' max_size='296x150' %}')" ></div>
-                </div>
-                <div class="thumbnail-text">
-                  <div class="blog-title">{{category.title}}</div>
-                  <div class="preview-text">{{category.description}}</div>
-                </div>
-                <div class="thumb-details w-clearfix">
-				  {% if category.professor %}
-				  {% with category.professor as professor %}
-				    <img class="author-img" src="{% cropped_thumbnail professor 'profile_ratio' max_size='30x30' %}">
-              <div class="author-title">{{professor.name}}</div>
-            <div class="thumbnail-date"></div>
-				  {% endwith %}
-          {% else %}
-            <img class="author-img" src="https://s3-sa-east-1.amazonaws.com/detfiles/martelinho.png">
-              <div class="author-title">Diversos</div>
-            <div class="thumbnail-date"></div>
-				  {% endif %}
-                </div>
-              </a>
-            </div>
-			{% endfor %}
+	    {% for category in featured_categories %}
+              <div class="blog-thumbnail w-col w-col-4 w-dyn-item">
+		<a class="thumbnail-wrapper w-inline-block" href="{% url 'category_page' category_id=category.id %}" data-ix="blog-thumbnail">
+                  <div class="image-wrapper">
+                    <div class="thumbnail-image" style="background-image: url('{% cropped_thumbnail category 'thumbnail_ratio' max_size='296x150' %}')" ></div>
+                  </div>
+                  <div class="thumbnail-text">
+                    <div class="blog-title">{{category.title}}</div>
+                    <div class="preview-text">{{category.description}}</div>
+                  </div>
+                  <div class="thumb-details w-clearfix">
+		    {% if category.professor %}
+		      {% with category.professor as professor %}
+			<img class="author-img" src="{% cropped_thumbnail professor 'profile_ratio' max_size='30x30' %}">
+			<div class="author-title">{{professor.name}}</div>
+			<div class="thumbnail-date"></div>
+		      {% endwith %}
+		    {% else %}
+		      <img class="author-img" src="https://s3-sa-east-1.amazonaws.com/detfiles/martelinho.png">
+		      <div class="author-title">Diversos</div>
+		      <div class="thumbnail-date"></div>
+		    {% endif %}
+                  </div>
+		</a>
+              </div>
+	    {% endfor %}
           </div>
         </div>
       </div>
     </div>
-    {% endblock %}
+{% endblock %}

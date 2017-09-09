@@ -93,5 +93,10 @@ class SearchResultsView(TemplateView):
 def get_search_page(request):
     query = request.GET.get('query', 'Todos os Cursos e Vídeos')
     if not query:
-        query = 'Todos os Cursos e Vídeos'
-    return redirect('search_results_page', query=query)
+            query = 'Todos os Cursos e Vídeos'
+    user = request.user
+    if user.is_authenticated() and user.is_beta:
+        return redirect('search_results_page', query=query)
+    else:
+        return redirect('video_search_results_page',
+                        query=query)

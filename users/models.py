@@ -78,6 +78,7 @@ class MyUser(AbstractBaseUser):
     profile_ratio = ImageRatioField('profile_image', '320x320')
     email_confirmed = models.BooleanField(default=False)
     course_hours = models.IntegerField(default=0)
+    is_beta = models.BooleanField(default=False)
     objects = MyUserManager()
 
     USERNAME_FIELD = 'username'

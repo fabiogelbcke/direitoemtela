@@ -97,11 +97,18 @@
 	      {% with course_rel.last_accessed_item.position|default:0 as last_position %}
 		<a class="button course-description-button w-button" href="{% url 'course_item' course_id=course.id position=last_position|add:1 %}">Continuar Curso</a>
 		<a class="button course-description-button w-button" href="{% url 'course_progress' course_id=course.id %}">Ver Progresso</a>
+		{% if user.is_admin %}
+		  <a class="button course-description-button w-button" href="{% url 'admin_unregister_from_course' course_id=course.id %}">Desinscrever-se</a>
+		{% endif %}
 	      {% endwith %}
 	    {% endif %}
 	  {% else %}
 	    <a class="button course-description-button w-button" data-ix="show-trailer" href="#">Assistir Trailer</a>
-	    <a class="button course-description-button w-button" data-ix="show-payment-popup" href="#">Inscrever-se</a>
+	    {% if user.is_authenticated and user.is_admin %}
+	      <a class="button course-description-button w-button" href="{% url 'admin_register_to_course' course_id=course.id %}">Inscrever-se</a>
+	    {% else %}
+	      <a class="button course-description-button w-button" data-ix="show-payment-popup" href="#">Inscrever-se</a>
+	    {% endif %}
 	  {% endif %}
         </div>
       </div>

@@ -52,8 +52,8 @@
         </div>
       </div>
     </div>
+    <div class="print-div"><a class="button print-certificate w-button" href="{% url 'print_certificate' identifier=certificate.identifier%}">Imprimir Cerficado</a><a class="button print-certificate w-button" href="{% url 'print_certificate' identifier=certificate.identifier %}">Imprimir com Conteúdo</a></div>
     <div class="share-certificate-div">
-      <a class="button w-button" onclick="printCertificate()">PRINT</a>
       <p class="certificate-text">Adicione o certificado ao seu LinkedIn para mostrar a todos que você domina esse assunto!
         <br>Basta clicar no botão e preencher as informações como indicado abaixo:</p>
       <div class="share-buttons">
@@ -68,15 +68,4 @@
     </div>
   </div>
   {% endwith %}
-{% endblock %}
-{% block js %}
-  {{block.super}}
-  <script src="{% static 'js/jquery.printelement.js' %}" type="text/javascript"></script>
-  <script>
-   
-  function printCertificate()
-  {
-       $("#certificate").printElement({printMode: 'popup'});
-   }
-  </script>
 {% endblock %}

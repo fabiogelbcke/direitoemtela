@@ -1,12 +1,15 @@
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.template.loader import get_template
+
 from .models import (Course, UserItemRelationship,
                      UserCourseRelationship, CourseItem,
                      Certificate)
+
 from coursetests.models import UserQuestionRelationship
 from users.models import MyUser
+
 from io import BytesIO
 from xhtml2pdf import pisa
 
@@ -37,7 +40,7 @@ def register_to_course(user_id, course_id):
                 )
     return True
 
-def unregister_to_course(user_id, course_id):
+def unregister_from_course(user_id, course_id):
     course = Course.objects.get(id=course_id)
     user = MyUser.objects.get(id=user_id)
     UserCourseRelationship.objects.filter(
@@ -57,6 +60,25 @@ def unregister_to_course(user_id, course_id):
                     question=question,
                 ).delete()
     return True
+
+
+def admin_register_to_course(request, course_id):
+    if (request.user.is_authenticated
+        and request.user.is_admin):
+        register_to_course(request.user.id, course_id)
+        return redirect('course_page', course_id=course_id)
+    else:
+        raise Http404()
+
+    
+def admin_unregister_from_course(request, course_id):
+    if (request.user.is_authenticated
+        and request.user.is_admin):
+        unregister_from_course(request.user.id, course_id)
+        return redirect('course_page', course_id=course_id)
+    else:
+        raise Http404()
+    
 
 @login_required
 def set_item_done(request, item_id):

@@ -1,9 +1,13 @@
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
-from categories.models import Category
-from apiclient.discovery import build
 from django.conf import settings
 from django.views.decorators.cache import cache_page
+
+from categories.models import Category
+from courses.models import Course
+
+from apiclient.discovery import build
+
 # Create your views here.
 
 class IndexView(TemplateView):
@@ -12,6 +16,7 @@ class IndexView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
         context['featured_categories'] = Category.objects.filter(featured=True)
+        context['courses'] = Course.objects.all()
         return context
 
     #def dispatch(self, request, *args, **kwargs):
