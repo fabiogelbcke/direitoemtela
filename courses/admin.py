@@ -15,6 +15,7 @@ class TopicInlineAdmin(admin.TabularInline):
     
 class ItemInlineAdmin(admin.TabularInline):
     model = CourseItem
+    ordering = ('position',)
 
 
 class CourseAdmin(ImageCroppingMixin, admin.ModelAdmin):
