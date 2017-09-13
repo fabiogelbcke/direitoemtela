@@ -39,6 +39,9 @@ class Video(models.Model):
     def __unicode__(self):
         return self.title
 
+    class Meta:
+        ordering = ['title',]
+
 class Tag(models.Model):
     id = models.AutoField(primary_key=True)
     video = models.ForeignKey(Video, related_name='tags')

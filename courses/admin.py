@@ -13,19 +13,8 @@ class TopicInlineAdmin(admin.TabularInline):
     model = CourseTopic
 
     
-class CourseItemForm(forms.ModelForm):
-    video = forms.ModelChoiceField(queryset=Video.objects.order_by('title'))
-    test = forms.ModelChoiceField(queryset=CourseTest.objects.order_by('title'))
-    reading = forms.ModelChoiceField(queryset=Reading.objects.order_by('title'))
-    
-    class Meta:
-        model = CourseItem
-        exclude = []
-
-    
 class ItemInlineAdmin(admin.TabularInline):
     model = CourseItem
-    form = CourseItemForm
 
 
 class CourseAdmin(ImageCroppingMixin, admin.ModelAdmin):

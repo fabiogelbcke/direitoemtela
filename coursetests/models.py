@@ -22,6 +22,7 @@ class CourseTest(models.Model):
     class Meta:
         verbose_name = 'Teste'
         verbose_name_plural = 'Testes'
+        ordering = ['title',]
 
 class Question(models.Model):
     id = models.AutoField(primary_key=True)

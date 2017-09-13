@@ -48,3 +48,4 @@ class Reading(models.Model):
     class Meta:
         verbose_name = 'Leitura'
         verbose_name_plural = 'Leituras'
+        ordering = ['title',]
