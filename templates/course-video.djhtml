@@ -130,6 +130,9 @@
 	      <div class="reading-pdf-frame">
 		<div class="reading-pdf" id="reading-pdf"></div>
               </div>
+	      <div class="center">
+		<a class="button w-button" href="{{course_item.reading.reading_file.url}}" download>Baixar em PDF</a>
+	      </div>
 	    {% endif %}
 	    {% if course_item.type == 'video' or course_item.type == 'reading' %}
               <div class="course-inner-div">
