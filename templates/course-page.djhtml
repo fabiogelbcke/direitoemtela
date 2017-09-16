@@ -134,7 +134,7 @@
             <div class="course-description-separator"></div>
             <div>
               <h3 class="course-description-section-title">Conteúdo Programático</h3>
-	      {% for item in course.items.all %}
+	      {% for item in course_items %}
 		<div class="course-outline-item">
 		  {% if item.video %}
 		    <img class="course-outline-icon" height="45" src="{% static 'images/playicon.png'%}" width="45">
