@@ -169,7 +169,10 @@
               <p class="course-feature-text">Video-aulas ministradas por professores universitários</p>
             </div>
             <div class="course-feature"><img class="course-feature-check-sign" height="15" src="{% static 'images/checkicon.png'%}" width="15">
-              <p class="course-feature-text">Material de apoio às aulas</p>
+              <p class="course-feature-text">Slides das aulas para download</p>
+            </div>
+	    <div class="course-feature"><img class="course-feature-check-sign" height="15" src="{% static 'images/checkicon.png'%}" width="15">
+              <p class="course-feature-text">Materiais de leitura feitos espcialmente para estudo e revisão para provas</p>
             </div>
             <div class="course-feature"><img class="course-feature-check-sign" height="15" src="{% static 'images/checkicon.png'%}" width="15">
               <p class="course-feature-text">Grupo de discussão sobre o assunto</p>
