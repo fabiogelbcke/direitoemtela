@@ -2624,13 +2624,14 @@ img {
   display: -ms-flexbox;
   display: flex;
   padding: 4px 7px 4px 13px;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: start;
+  align-items: flex-start;
 }
 
 .course-feature-check-sign {
+  margin-top: 3px;
   margin-bottom: 0px;
 }
 
@@ -2656,13 +2657,13 @@ img {
 
 .payment-block {
   position: relative;
-  width: 600px;
+  width: auto;
   margin-right: auto;
   margin-left: auto;
-  padding: 25px 80px 20px;
+  padding: 25px 45px;
   border: 3px solid #c78b23;
   border-radius: 5px;
-  background-color: #d6d6d6;
+  background-color: #e9e9e9;
 }
 
 .login-popup {
@@ -3413,16 +3414,18 @@ img {
   border-radius: 5px;
 }
 
-.unordered-list {
+.course-features-list {
   padding-left: 20px;
+  text-align: left;
 }
 
 .payment-form-head {
-  margin-top: 10px;
+  margin-top: 0px;
 }
 
-.heading-6 {
-  margin-bottom: 20px;
+.payment-title {
+  margin-bottom: 5px;
+  font-size: 23px;
 }
 
 .paragraph-3 {
@@ -3433,6 +3436,10 @@ img {
   padding-left: 12px;
   color: #5c6c74;
   text-align: left;
+}
+
+.paragraph-3.hidden-main {
+  display: none;
 }
 
 .inline-input {
@@ -3766,6 +3773,72 @@ img {
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+}
+
+.collection-list {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.list-item-2 {
+  text-align: left;
+}
+
+.paragraph-6.hidden-main {
+  display: none;
+}
+
+.course-features-div {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 400px;
+  min-width: 350px;
+  padding-bottom: 0px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.payment-popup-columns {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.payment-form {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 400px;
+  min-width: 350px;
+  margin-bottom: 0px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.vertical-separator {
+  width: 1px;
+  margin: 40px 10px;
+  background-color: #b6b6b6;
 }
 
 html.w-mod-js *[data-ix="navbar"] {
@@ -5131,9 +5204,15 @@ html.w-mod-js *[data-ix="view-more"] {
     padding-top: 0px;
     color: rgba(77, 86, 93, .5);
   }
-  .heading-6 {
+  .payment-title {
     margin-top: 7px;
     margin-bottom: 20px;
+  }
+  .paragraph-3.hidden-main {
+    display: block;
+  }
+  .paragraph-3.hidden-mobile {
+    display: none;
   }
   .certificate {
     height: auto;
@@ -5191,6 +5270,12 @@ html.w-mod-js *[data-ix="view-more"] {
     -webkit-align-items: center;
     -ms-flex-align: center;
     align-items: center;
+  }
+  .paragraph-6 {
+    margin-bottom: 0px;
+  }
+  .paragraph-6.hidden-main {
+    display: block;
   }
 }
 
