@@ -70,11 +70,9 @@ class SearchResultsView(TemplateView):
         query = self.kwargs['query']
         tags = Tag.objects.filter(name__icontains=query)
         if unicode(query) == u'Todos os Cursos e Vídeos':
-            print 'oi' 
             videos = Video.objects.all()
             courses = Course.objects.all()
         else:
-            print 'boio'
             videos = Video.objects.filter(Q(title__icontains=query)
                                           | Q(description__icontains=query)
                                           | Q(tags__in=tags)).distinct()
