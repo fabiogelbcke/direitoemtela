@@ -135,12 +135,14 @@
 		<div class="course-outline-item">
 		  {% if item.video %}
 		    <img class="course-outline-icon" height="45" src="{% static 'images/playicon.png'%}" width="45">
+		    <p class="course-outline-title">Vídeo: {{item.title}}</p>
 		  {% elif item.reading %}
 		    <img class="course-outline-icon" height="45" src="{% static 'images/readingicon.png'%}" width="45">
+		    <p class="course-outline-title">Leitura: {{item.title}}</p>
 		  {% elif item.test %}
 		    <img class="course-outline-icon" height="45" src="{% static 'images/testicon.png'%}" width="45">
+		    <p class="course-outline-title">Teste: {{item.title}}</p>
 		  {% endif %}
-                  <p class="course-outline-title">{{item.title}}</p>
 		    </div>
 	      {% endfor %}
             </div>
