@@ -46,6 +46,7 @@ class CourseView(DetailView):
                 context['billing_info'] = user.billing_info
             if course.is_registered(user):
                 context['course_rel'] = course.course_rels.get(user=user)
+        context['user'] = user 
         return context
 
 
