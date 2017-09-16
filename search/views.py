@@ -68,7 +68,6 @@ class SearchResultsView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(SearchResultsView, self).get_context_data(**kwargs)
         query = self.kwargs['query']
-        print query
         tags = Tag.objects.filter(name__icontains=query)
         if unicode(query) == u'Todos os Cursos e Vídeos':
             print 'oi' 
