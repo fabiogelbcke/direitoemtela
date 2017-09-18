@@ -2,11 +2,11 @@ from django.conf.urls import url, include
 import views
 
 urlpatterns = [
-    url(
-        r'^search/videos/(?P<query>).*/(?P<page>\d+)/$',
-        views.VideoSearchResultsView.as_view(),
-        name='video_search_results_page'
-    ),
+    #url(
+    #    r'^search/videos/(?P<query>).*/(?P<page>\d+)/$',
+    #views.VideoSearchResultsView.as_view(),
+    #    name='video_search_results_page'
+    #    ),
     url(
         r'^search/videos/(?P<query>.*)/$',
         views.VideoSearchResultsView.as_view(),

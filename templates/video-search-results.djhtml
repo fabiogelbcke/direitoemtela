@@ -57,16 +57,16 @@
 	  {% if page_obj.has_other_pages %}
             <div class="page-navigator">
 	      {% if page_obj.has_previous %}
-		<a class="button page-button w-inline-block" href="{% url 'video_search_results_page' query=query page=page_obj.previous_page_number %}">
+		<a class="button page-button w-inline-block" href="{% url 'video_search_results_page' query=query  %}?page=page_obj.previous_page_number">
 		  <div>Página Anterior</div>
 		</a>
 	      {% else %}
 		<div style="min-width:150px"></div>
 	      {% endif %}
-              <div class="hidden-mobile page-buttons-div">{% for page_nbr in paginator.page_range %}<a class="button {% if page_nbr == page_obj.number %}current-page{% endif %} page-button w-button white-background" href="{% url 'video_search_results_page' query=query page=page_nbr %}">{{page_nbr}}</a>{% endfor %}
+              <div class="hidden-mobile page-buttons-div">{% for page_nbr in paginator.page_range %}<a class="button {% if page_nbr == page_obj.number %}current-page{% endif %} page-button w-button white-background" href="{% url 'video_search_results_page' query=query %}?page={{page_nbr}}">{{page_nbr}}</a>{% endfor %}
               </div>
 	      {% if page_obj.has_next %}
-		<a class="button page-button w-inline-block" href="{% url 'video_search_results_page' query=query page=page_obj.next_page_number %}">
+		<a class="button page-button w-inline-block" href="{% url 'video_search_results_page' query=query  %}?page=page_obj.next_page_number">
 		  <div>Próxima Página</div>
 		</a>
 	      {% else %}
