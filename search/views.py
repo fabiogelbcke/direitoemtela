@@ -15,15 +15,12 @@ class VideoSearchResultsView(ListView):
 
     def get_queryset(self):
         query = self.kwargs['query']
-        print 'query:'
-        print query
         if query == u'Todos os Cursos e Vídeos':
             return Video.objects.all()
         tags = Tag.objects.filter(name__icontains=query)
         qs = Video.objects.filter(Q(title__icontains=query)
                                     | Q(description__icontains=query)
                                     | Q(tags__in=tags)).distinct()
-        print qs
         return qs
 
     def get_context_data(self, **kwargs):
