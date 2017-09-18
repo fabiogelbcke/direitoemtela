@@ -19,6 +19,7 @@
 	    {% elif course_item.type == 'reading' %}
 	      <div class="course-video-title">{{ course_item.reading.title }}</div>
 	    {% endif %}
+	    <div><a class="button course-page-top w-button" href="{% url 'course_page' course_id=course.id %}">Informações do Curso</a><a class="button course-page-top w-button" href="{% url 'course_progress' course_id=course.id %}">Progresso no Curso</a></div>
           </div>
           <div class="course-video-div">
             <div class="progress-indicator-div">
