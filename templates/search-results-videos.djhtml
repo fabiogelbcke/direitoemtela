@@ -94,7 +94,7 @@
           </div>
 		  {% if page_obj.has_next %}
           <a class="button page-button w-inline-block" href="{% url 'search_results_page' query=query %}?page=page_obj.next_page_number">
-            <div>Próxima Página asudhfaid</div>
+            <div>Próxima Página</div>
           </a>
 		  {% else %}
 		  <div style="min-width:150px"></div>

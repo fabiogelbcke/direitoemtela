@@ -6,77 +6,94 @@
     <div class="modal-wrapper">
       <div class="w-container">
         <div class="payment-block"><a class="close-popup-button" data-ix="close-trailer" href="#">Fechar <strong>X</strong></a>
-          <h1 class="heading-6">Heading</h1>
-          <ul class="unordered-list">
-            <li>Acesso a todo o material do curso por tempo ilimitado</li>
-            <li>Certificado de conclusão de curso (mediante aprovação com 70% ou mais de média nas provas)</li>
-            <li>Acesso ao grupo de discussão do curso com outros alunos e com o professor</li>
-          </ul>
-          <div class="">
-            <form action="{% url 'pay_course' course_id=course.id %}" method="POST" data-name="Email Form 2" id="email-form-2" name="email-form-2">
-	      {% csrf_token %}
-              <h3 class="payment-form-head">Informações do Cartão</h3>
-              <div class="inline-input">
-                <p class="paragraph-3">Nome no Cartão</p>
-                <input class="round-text-field w-input" data-name="card_name" id="card_name" maxlength="256" name="card_name" placeholder="João Silva" required="required" type="text">
+	  <div class="payment-popup-columns">
+	    <div class="course-features-div">
+              <div>
+                <h1 class="payment-title">O que você recebe com o curso?</h1>
+                <ul class="course-features-list">
+                  <li>Acesso a todo o material do curso por tempo ilimitado</li>
+                  <li>Certificado de conclusão de curso (mediante aprovação com 70% ou mais de média nas provas)</li>
+                  <li>Material de estudo em PDF preparado especialmente para estudo independente dos vídeos e revisão para provas</li>
+                  <li>Slides das aulas dispibonibilizados para download</li>
+                  <li>Acesso ao grupo de discussão do curso com outros alunos e com o professor</li>
+                  <li>Acesso ao grupo de discussão do curso com outros alunos e com o professor</li>
+                </ul>
               </div>
-              <div class="inline-input">
-                <p class="paragraph-3">Número</p>
-                <input class="round-text-field w-input" data-name="cc_number" autocomplete="on" id="cc_number" maxlength="256" name="cc_number" placeholder="0000000000000000" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
-              </div>
-              <div class="div-block-9">
-                <div class="date-input inline-input">
-                  <p class="paragraph-3">Mês de Expiração</p>
-                  <input class="round-text-field w-input" data-name="expiration_month" id="expiration_date" maxlength="2" name="expiration_month" placeholder="03" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
-                </div>
-                <div class="date-input inline-input">
-                  <p class="paragraph-3">Ano de Expiração</p>
-                  <input class="round-text-field w-input" data-name="cvv" id="cvv" maxlength="4" name="expiration_year" placeholder="2021" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
-                </div>
-              </div>
-              <div class="inline-input">
-                <p class="paragraph-3">Cód. Segurança</p>
-                <input class="round-text-field w-input" data-name="Cvv 2" id="cvv-2" maxlength="256" name="cvv" placeholder="173" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
-              </div>
-              <h3 class="payment-form-head">Informações&nbsp;de Cobrança</h3>
-              <div class="inline-input">
-                <p class="paragraph-3">Enderenço de cobrança (rua)</p>
-                <input class="round-text-field w-input" data-name="phone" id="phone" maxlength="256" name="address" placeholder="Rua Central" required="required" type="text" value="{{billing_info.address}}">
-              </div>
-	      <div class="inline-input">
-                <p class="paragraph-3">Número do enderenço</p>
-                <input class="round-text-field w-input" data-name="phone" id="phone" maxlength="256" name="address_no" placeholder="999" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" value="{{billing_info.address_no}}">
-              </div>
-	      <div class="inline-input">
-                <p class="paragraph-3">CEP</p>
-                <input class="round-text-field w-input" data-name="phone" id="phone" maxlength="256" name="postal_code" placeholder="999" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" value="{{billing_info.postal_code}}">
-              </div>
-	      <div class="inline-input">
-                <p class="paragraph-3">Telefone (Com cód. de área)</p>
-                <input class="round-text-field w-input" data-name="phone" id="phone" maxlength="256" name="phone" placeholder="47 999778888" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" value="{{billing_info.phone}}">
-              </div>
-              <div class="inline-input">
-                <p class="paragraph-3">CPF (Somente números)</p>
-                <input class="round-text-field w-input" data-name="cpf" id="cpf" maxlength="256" name="cpf" placeholder="00000000000" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" value="{{billing_info.cpf}}">
-              </div>
-              <input class="button w-button" data-wait="Please wait..." type="submit" value="Confirmar">
-            </form>
+              <h2>Preço: R$34,00</h2>
+            </div>
+            <div class="vertical-separator"></div>
+	    <div class="payment-form ">
+              <h1 class="payment-title">Pagamento</h1>
+              <div class="">
+		<form action="{% url 'pay_course' course_id=course.id %}" method="POST" data-name="Email Form 2" id="email-form-2" name="email-form-2">
+		  {% csrf_token %}
+		  <h3 class="payment-form-head">Informações do Cartão</h3>
+		  <div class="inline-input">
+                    <p class="paragraph-3">Nome no Cartão</p>
+                    <input class="round-text-field w-input" data-name="card_name" id="card_name" maxlength="256" name="card_name" placeholder="João Silva" required="required" type="text">
+		  </div>
+		  <div class="inline-input">
+                    <p class="paragraph-3">Número</p>
+                    <input class="round-text-field w-input" data-name="cc_number" autocomplete="on" id="cc_number" maxlength="256" name="cc_number" placeholder="0000000000000000" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+		  </div>
+		  <p class="hidden-main paragraph-6">Validade</p>
+		  <div class="div-block-9">
+                    <div class="date-input inline-input">
+		      <p class="hidden-main paragraph-3">Mês</p>
+                      <p class="hidden-mobile paragraph-3">Mês de Expiração</p>
+                      <input class="round-text-field w-input" data-name="expiration_month" id="expiration_date" maxlength="2" name="expiration_month" placeholder="03" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                    </div>
+                    <div class="date-input inline-input">
+		      <p class="hidden-main paragraph-3">Ano</p>
+                      <p class="hidden-mobile paragraph-3">Ano de Expiração</p>
+                      <input class="round-text-field w-input" data-name="cvv" id="cvv" maxlength="4" name="expiration_year" placeholder="2021" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                    </div>
+		  </div>
+		  <div class="inline-input">
+                    <p class="paragraph-3">Cód. Segurança</p>
+                    <input class="round-text-field w-input" data-name="Cvv 2" id="cvv-2" maxlength="256" name="cvv" placeholder="173" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+		  </div>
+		  <h3 class="payment-form-head">Informações&nbsp;de Cobrança</h3>
+		  <div class="inline-input">
+                    <p class="paragraph-3">Enderenço de cobrança (rua)</p>
+                    <input class="round-text-field w-input" data-name="phone" id="phone" maxlength="256" name="address" placeholder="Rua Central" required="required" type="text" value="{{billing_info.address}}">
+		  </div>
+		  <div class="inline-input">
+                    <p class="paragraph-3">Número do enderenço</p>
+                    <input class="round-text-field w-input" data-name="phone" id="phone" maxlength="256" name="address_no" placeholder="999" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" value="{{billing_info.address_no}}">
+		  </div>
+		  <div class="inline-input">
+                    <p class="paragraph-3">CEP</p>
+                    <input class="round-text-field w-input" data-name="phone" id="phone" maxlength="256" name="postal_code" placeholder="999" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" value="{{billing_info.postal_code}}">
+		  </div>
+		  <div class="inline-input">
+                    <p class="paragraph-3">Telefone (Com cód. de área)</p>
+                    <input class="round-text-field w-input" data-name="phone" id="phone" maxlength="256" name="phone" placeholder="47 999778888" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" value="{{billing_info.phone}}">
+		  </div>
+		  <div class="inline-input">
+		    <p class="hidden-main paragraph-3">CPF (Só números)</p>
+                    <p class="hidden-mobile paragraph-3">CPF (Somente números)</p>
+                    <input class="round-text-field w-input" data-name="cpf" id="cpf" maxlength="256" name="cpf" placeholder="00000000000" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" value="{{billing_info.cpf}}">
+		  </div>
+		  <input class="button w-button" data-wait="Please wait..." type="submit" value="Confirmar">
+		</form>
+	      </div>
+            </div>
           </div>
-        </div>
+	</div>
       </div>
     </div>
-  </div>
-  <div class="trailer-popup">
-    <div class="modal-wrapper">
-      <div class="w-container">
-        <div class="trailer-video"><a class="close-popup-button" data-ix="close-trailer" href="#">Fechar <strong>X</strong></a>
-          <div class="w-embed w-video" style="padding-top: 56.17021276595745%;">
-            <div class="embedly-embed" id="ytvideo"></div>
+    <div class="trailer-popup">
+      <div class="modal-wrapper">
+	<div class="w-container">
+          <div class="trailer-video"><a class="close-popup-button" data-ix="close-trailer" href="#">Fechar <strong>X</strong></a>
+            <div class="w-embed w-video" style="padding-top: 56.17021276595745%;">
+              <div class="embedly-embed" id="ytvideo"></div>
+            </div>
           </div>
-        </div>
+	</div>
       </div>
     </div>
-  </div>
 {% endblock %}
 {% block content %}
   {% block header %}
@@ -94,7 +111,7 @@
 	      <a class="button course-description-button w-button" href="{% url 'course_item' course_id=course.id position=1 %}">Revisar Curso</a>
 	      <a class="button course-description-button w-button" href="#">Ver Certificado</a>
 	      {% if user.is_staff %}
-		  <a class="button course-description-button w-button" href="{% url 'admin_unregister_from_course' course_id=course.id %}">Desinscrever-se</a>
+		<a class="button course-description-button w-button" href="{% url 'admin_unregister_from_course' course_id=course.id %}">Desinscrever-se</a>
 	      {% endif %}
 	    {% else %}
 	      {% with course_rel.last_accessed_item.position|default:0 as last_position %}
@@ -109,6 +126,7 @@
 	    <a class="button course-description-button w-button" data-ix="show-trailer" href="#">Assistir Trailer</a>
 	    {% if user.is_authenticated and user.is_staff %}
 	      <a class="button course-description-button w-button" href="{% url 'admin_register_to_course' course_id=course.id %}">Inscrever-se</a>
+	      <a class="button course-description-button w-button" data-ix="show-payment-popup" href="#">Inscrever-se com pagamento</a>
 	    {% else %}
 	      <a class="button course-description-button w-button" data-ix="show-payment-popup" href="#">Inscrever-se</a>
 	    {% endif %}
@@ -146,7 +164,7 @@
 		    <img class="course-outline-icon" height="45" src="{% static 'images/testicon.png'%}" width="45">
 		    <p class="course-outline-title">Teste: {{item.title}}</p>
 		  {% endif %}
-		    </div>
+		</div>
 	      {% endfor %}
             </div>
           </div>

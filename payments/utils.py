@@ -116,7 +116,6 @@ def make_card_payment(card_data, user, course, ip_addr):
         payment,
         ip_addr
     )
-    print values
     request = Request(
         settings.ASAAS_API_URL + '/payments',
         data=values,
@@ -187,7 +186,7 @@ def make_course_payment(request, course_id):
     if payment_worked is False:
         response = redirect('course_page', slug=course_id)
         error_msg =  ('Não foi possível realizar a cobrança. Cheque '
-                      'os dados e tente novamente.')
+                      'os dados do cartão e tente novamente.')
         response['Location'] += '?error_msg=' + quote_plus(error_msg)
         return response
     register_to_course(user.id, course.id)

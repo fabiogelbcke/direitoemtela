@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.conf import settings
 from django.db import models
@@ -34,6 +35,12 @@ class Question(models.Model):
     users = models.ManyToManyField(settings.SOCIAL_AUTH_USER_MODEL,
                                    through='UserQuestionRelationship',
                                    related_name='questions')
+    incorrect = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name = 'Questão'
+        verbose_name_plural = 'Questões'
+        ordering = ['text',]
 
 class Alternative(models.Model):
     id = models.AutoField(primary_key=True)

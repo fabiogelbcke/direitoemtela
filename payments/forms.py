@@ -24,3 +24,9 @@ class CreditCardForm(forms.Form):
         max_length=4,
         validators=[validate_expiration_year,]
     )
+
+    def clean_expiration_year(self):
+        exp_year = self.cleaned_data['expiration_year']
+        if len(exp_year) == 2:
+            exp_year = '20' + exp_year
+        return exp_year
