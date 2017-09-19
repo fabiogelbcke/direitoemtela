@@ -5,6 +5,7 @@ from django.db import models
 
 # Create your models here.
 class CourseTest(models.Model):
+    
     id = models.AutoField(primary_key=True)
     title = models.CharField(default='',
                              blank=True,
@@ -26,6 +27,11 @@ class CourseTest(models.Model):
         ordering = ['title',]
 
 class Question(models.Model):
+    QUESTION_TYPE_CHOICES = (
+        ('correct', 'correta'),
+        ('incorrect', 'incorreta'),
+    )
+    
     id = models.AutoField(primary_key=True)
     test = models.ForeignKey(CourseTest,
                              related_name='questions')
@@ -35,7 +41,9 @@ class Question(models.Model):
     users = models.ManyToManyField(settings.SOCIAL_AUTH_USER_MODEL,
                                    through='UserQuestionRelationship',
                                    related_name='questions')
-    incorrect = models.BooleanField(default=False)
+    answer_type = models.CharField(max_length=15,
+                                   choices=QUESTION_TYPE_CHOICES,
+                                   default='correct')
 
     class Meta:
         verbose_name = 'Questão'
