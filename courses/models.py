@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
+from django.db.models import F
 from django.utils import timezone
 from django.conf import settings
 from videos.models import Video
