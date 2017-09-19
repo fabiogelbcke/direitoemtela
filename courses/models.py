@@ -131,14 +131,14 @@ class CourseItem(models.Model):
         if pos_diff != 0 and CourseItem.objects.filter(
                 course=self.course,
                 position__gte=position
-        ).exclude(title=self.title).exists():
+        ).exclude(id=self.pk).exists():
             #indexes between which positions will change
             obj_change_indexes = [position, old_position - pos_diff]
             pos_change = CourseItem.objects.filter(
                 course=self.course,
                 position__gte=min(obj_change_indexes),
                 position__lte=max(obj_change_indexes)
-            ).exclude(video=self.video)
+            ).exclude(id=self.pk)
             for obj in pos_change:
                 #have to call update cause it doesn't call custom save (direct SQL)
                 CourseItem.objects.filter(id=obj.id).update(position=obj.position + pos_diff)
