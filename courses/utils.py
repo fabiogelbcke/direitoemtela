@@ -45,8 +45,7 @@ def unregister_from_course(user_id, course_id):
     user = MyUser.objects.get(id=user_id)
     UserCourseRelationship.objects.filter(
         user=user,
-        course=course,
-        total_questions=course.total_questions
+        course=course
     ).delete()
     for item in course.items.all():
         UserItemRelationship.objects.filter(
