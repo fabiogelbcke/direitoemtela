@@ -150,10 +150,7 @@ class CourseItem(models.Model):
         bigger_positions = CourseItem.objects.filter(
             course=self.course,
             position__gte=position
-            ).exclude(video=self.video)
-        for viditem in bigger_positions:
-            viditem.position = viditem.position - 1
-            viditem.save()
+            ).exclude(id=self.id).update(position=F('position') - 1)
         super(CourseItem, self).delete()
 
     class Meta:
