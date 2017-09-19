@@ -77,7 +77,7 @@
   {% endblock %}
   {% block content %}
     {% block header %}
-      <div class="navbar w-nav" data-animation="over-right" data-collapse="tiny" data-duration="400" data-ix="navbar">
+      <div class="navbar w-nav" data-animation="over-right" data-collapse="tiny" data-duration="400" >
 	<div class="header-content w-container">
           <a class="logo w-nav-brand" href="{% url 'index' %}"><img class="logo-home" height="44" src="{% static 'images/DETWHITE.png'%}">
           </a>
