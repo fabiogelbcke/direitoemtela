@@ -28,4 +28,3 @@ def get_avatar(backend, strategy, details, response,
         img_temp.write(urllib2.urlopen(url).read())
         img_temp.flush()
         user.profile_image.save(generate_filename(), File(img_temp))
-        

@@ -11,7 +11,6 @@ from coursetests.models import UserQuestionRelationship
 from users.models import MyUser
 
 from io import BytesIO
-from xhtml2pdf import pisa
 
 
 def register_to_course(user_id, course_id):

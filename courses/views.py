@@ -55,7 +55,7 @@ class CourseProgressView(DetailView):
     model = Course
     context_object_name = 'course'
     template_name = 'course-progress.djhtml'
-    pk_url_kwarg = "course_id"
+    pk_url_kwarg = 'course_id'
 
     def get_context_data(self, **kwargs):
         context = super(CourseProgressView, self).get_context_data(**kwargs)
@@ -64,7 +64,7 @@ class CourseProgressView(DetailView):
         item_rels = UserItemRelationship.objects.filter(
             user=user,
             course_item__course=course
-        )
+        ).order_by('course_item__position')
         course_rel = UserCourseRelationship.objects.get(
             user=user,
             course=course
@@ -223,28 +223,6 @@ class CertificateView(DetailView):
         context['website_url'] = settings.WEBSITE_URL[:-1]
         return context
 
-
-class CertificatePDFView(PDFTemplateResponseMixin, DetailView):
-    model = Certificate
-    pk_url_kwarg = 'identifier'
-    slug_field = 'identifier'
-    context_object_name = 'certificate'
-    template_name = 'certificate-pdf-template.djhtml'
-
-    def get_context_data(self, **kwargs):
-        context = super(CertificatePDFView, self).get_context_data(
-            pagesize='A4',
-            title='Hi there!',
-            **kwargs
-        )
-        return context
-
-class CertificatePDFHTML(DetailView):
-    model = Certificate
-    pk_url_kwarg = 'identifier'
-    slug_field = 'identifier'
-    context_object_name = 'certificate'
-    template_name = 'certificate-pdf-template.djhtml'
 
 class CertificatePrint(DetailView):
     model = Certificate
