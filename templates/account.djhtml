@@ -1,0 +1,49 @@
+{% extends 'base.djhtml' %}
+{% load staticfiles %}{% load cropping %}{% load util_tags %}
+{% block content %}
+  <div class="header-background">
+    {% block header %}
+      {{block.super}}
+    {% endblock %}
+  <div class="top-bar-plain"></div>
+  <div class="thick-separator"></div>
+  <div>
+    <div class="main-section whatsapp" id="posts">
+      <div class="video-container w-container" id="video-container">
+        <h1 class="center">Minha Conta</h1>
+        <div class="center"><img class="account-image" height="150" src="{% static 'images/ricardorosto.png'%}" width="150">
+          <div>
+            <div class="account-form payment-form ">
+              <form class="profile-pic-form" data-name="Email Form 2" id="email-form-2" name="email-form-2"><input class="button crop-photo w-button" data-wait="Please wait..." type="submit" value="Trocar Foto"><input class="button crop-photo w-button" data-wait="Please wait..." type="submit" value="Cortar Foto"></form>
+            </div>
+          </div>
+          <div class="account-page-separator"></div>
+          <div class="account-form payment-form ">
+            <h3 class="payment-form-head">Informações Pessoais</h3>
+            <form data-name="Email Form 2" id="email-form-2" name="email-form-2">
+              <div class="inline-input">
+                <p class="paragraph-3">Nome</p><input class="round-text-field w-input" data-name="first_name" id="first_name" maxlength="256" name="first_name" placeholder="João" required="required" type="text"></div>
+              <div class="inline-input">
+                <p class="paragraph-3">Sobrenome</p><input class="round-text-field w-input" data-name="last_name" id="last_name" maxlength="256" name="last_name" placeholder="Pereira" required="required" type="text"></div>
+              <div class="inline-input">
+                <p class="paragraph-3">Email</p><input class="round-text-field w-input" data-name="email" id="email-2" maxlength="256" name="email" placeholder="173" required="required" type="email"></div>
+              <div class="inline-input">
+                <p class="paragraph-3">Cidade</p><input class="round-text-field w-input" data-name="city" id="city" maxlength="256" name="city" placeholder="Joinville" required="required" type="email"></div>
+              <div class="inline-input">
+                <p class="paragraph-3">Estado</p><input class="round-text-field w-input" data-name="state" id="state" maxlength="256" name="state" placeholder="SC" required="required" type="email"></div><input class="button w-button" data-wait="Please wait..." type="submit" value="Salvar"></form>
+          </div>
+          <div class="account-page-separator"></div>
+          <div class="account-form payment-form ">
+            <h3 class="payment-form-head">Trocar minha senha</h3>
+            <form data-name="Email Form 2" id="email-form-2" name="email-form-2">
+              <div class="inline-input">
+                <p class="paragraph-3">Nova Senha</p><input class="round-text-field w-input" data-name="password" id="password" maxlength="256" name="password" required="required" type="password"></div>
+              <div class="inline-input">
+                <p class="paragraph-3">Confirmar Senha</p><input class="round-text-field w-input" data-name="password_confirmation" id="password_confirmation" maxlength="256" name="password_confirmation" required="required" type="password">
+	      </div><input class="button w-button" data-wait="Please wait..." type="submit" value="Salvar">
+	    </form>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}

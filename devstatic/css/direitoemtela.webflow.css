@@ -323,6 +323,11 @@ img {
   text-align: center;
 }
 
+.button.crop-photo {
+  margin-right: 13px;
+  margin-left: 13px;
+}
+
 .main-section {
   height: 100%;
   min-height: 1px;
@@ -2758,7 +2763,7 @@ img {
 
 .course-video-title {
   max-width: 700px;
-  margin-bottom: 12px;
+  margin-bottom: 5px;
   font-size: 21px;
   font-weight: 500;
   text-align: center;
@@ -2890,9 +2895,24 @@ img {
 }
 
 .dashboard-course-description {
-  padding-top: 4px;
-  padding-right: 7px;
-  padding-left: 15px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 4px 7px 6px 15px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: stretch;
+  -webkit-align-items: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
   -webkit-align-self: stretch;
   -ms-flex-item-align: stretch;
   align-self: stretch;
@@ -2903,12 +2923,11 @@ img {
 }
 
 .dashboard-course-title {
-  width: 100%;
-  max-width: 90%;
+  max-width: 98%;
   margin-bottom: 0px;
-  padding: 2px 0px;
+  padding: 2px 0px 1px;
   font-size: 23px;
-  line-height: 34px;
+  line-height: 28px;
 }
 
 .dashboard-completion-percentage {
@@ -3177,7 +3196,7 @@ img {
   margin-top: 5px;
   margin-left: -100px;
   padding-top: 5px;
-  padding-bottom: 15px;
+  padding-bottom: 5px;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -webkit-flex-direction: column;
@@ -3191,7 +3210,8 @@ img {
 
 .pop-up-title {
   margin-top: 0px;
-  margin-bottom: 10px;
+  margin-bottom: 0px;
+  font-size: 24px;
   text-align: center;
 }
 
@@ -3311,7 +3331,7 @@ img {
   position: absolute;
   top: 100px;
   width: 250px;
-  height: 250px;
+  height: 100px;
   margin-bottom: 0px;
   color: rgba(77, 86, 93, .6);
   font-size: 60px;
@@ -3872,8 +3892,39 @@ img {
 
 .account-page-separator {
   width: 30%;
-  margin-bottom: 15px;
   border-top: 1px solid #d6d6d6;
+}
+
+.div-block-10 {
+  width: 100%;
+}
+
+.dashboard-course-date {
+  margin-bottom: 0px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.password-limit-paragraph {
+  margin-top: -8px;
+  margin-bottom: 10px;
+  color: #81878b;
+  font-size: 13px;
+}
+
+.course-step-number {
+  margin-bottom: 12px;
+  font-size: 16px;
+}
+
+.item-details-popup-step-number {
+  margin-top: 10px;
+  margin-bottom: 0px;
+  font-size: 15px;
+  font-weight: 700;
+  text-align: center;
 }
 
 html.w-mod-js *[data-ix="navbar"] {
@@ -4492,6 +4543,9 @@ html.w-mod-js *[data-ix="view-more"] {
   }
   .button.course-description-button {
     margin-bottom: 2px;
+  }
+  .button.white-button {
+    margin-left: auto;
   }
   .button.faded-button {
     margin-right: 5px;
@@ -5177,9 +5231,11 @@ html.w-mod-js *[data-ix="view-more"] {
   }
   .dashboard-course-title {
     max-width: 100%;
+    font-size: 18px;
     text-align: center;
   }
   .dashboard-completion-percentage {
+    display: none;
     -webkit-align-self: stretch;
     -ms-flex-item-align: stretch;
     align-self: stretch;
@@ -5316,6 +5372,26 @@ html.w-mod-js *[data-ix="view-more"] {
   }
   .paragraph-6.hidden-main {
     display: block;
+  }
+  .payment-form.account-form {
+    width: 90%;
+    max-width: 90%;
+    min-width: 0px;
+  }
+  .dashboard-course-date {
+    text-align: center;
+  }
+  .paragraph-8 {
+    text-align: center;
+  }
+  .full-width {
+    width: 100%;
+  }
+  .profile-pic-form {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
   }
 }
 

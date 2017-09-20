@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
@@ -106,6 +107,14 @@ class CourseItem(models.Model):
             return 'test'
         elif self.reading is not None:
             return 'reading'
+
+    def type_in_portuguese(self):
+        if self.video is not None:
+            return 'Vídeo'
+        elif self.test is not None:
+            return 'Teste'
+        elif self.reading is not None:
+            return 'Leitura'
 
     def save(self, *args, **kwargs):
         position = self.position

@@ -7,4 +7,8 @@ from .registration import register
 urlpatterns = [
     url(r'^logout$', logout_function, name='logout'),
     url(r'^register$', register, name='register'),
+    url(r'^account$',
+        TemplateView.as_view(template_name='account.djhtml'),
+        name='account'),
+                            
 ]
