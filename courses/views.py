@@ -186,6 +186,7 @@ class CourseItemView(LoginRequiredMixin, DetailView):
         )
         context['user_item_rels'] = user_item_rels
         context['course'] = course
+        context['total_steps'] = course.items.all().count()
         if self.object.type() == 'test':
             return self.get_test_context(context, course_rel, **kwargs)
         if self.object.type() == 'video':
