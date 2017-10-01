@@ -60,7 +60,7 @@
 		  </div>
 		  <h2 class="question-title">{{question.text}}</h2>
 		  <div class="question-buttons-div">
-		    <h3 class="heading-no-margin" id="pre-answer-text">Selecione a opção correta abaixo</h3>
+		    <h3 class="heading-no-margin" id="pre-answer-text">Selecione a opção {% if question.answer_type == 'correct' %}correta{% else %}incorrect{% endif %} abaixo</h3>
 		    <div class="div-block-2 hidden" id="correct-answer-div">
                       <div class="correct-sign"><img src="{% static 'images/white-checkicon.png'%}">
                       </div>
@@ -95,13 +95,13 @@
 		      </div>
 		    </div>
 		    <div class="statistics-graph-div">
-                      <h1 class="test-results-heading">Porcentagem do<br>curso atingida</h1>
+                      <h1 class="test-results-heading">Nota Parcial<br>Atingida no Curso</h1>
                       <div class="statistics-graph" id="course-percentage">
 			<h1 class="result-percentage">{{course_percentage}}%</h1>
 		      </div>
 		    </div>
 		  </div>
-		  <div class="continue-course-div"><a class="button button-margin w-button" href="{% url 'course_progress' course_id=course.id %}">Ver meu Progresso</a><a class="button button-margin w-button" href="#">Continuar Curso</a>
+		  <div class="continue-course-div"><a class="button button-margin w-button" href="{% url 'course_progress' course_id=course.id %}">Ver meu Progresso</a><a class="button button-margin w-button" href="{% url 'course_item' course_id=course.id position=course_item.position|add:1 %}">Continuar Curso</a>
 		  </div>
 		  {% endif %}
 		</div>
@@ -125,8 +125,8 @@
 	      <div class="reading-pdf-frame">
 		<div class="reading-pdf" id="reading-pdf"></div>
               </div>
-	      <div class="center">
-		<a class="button w-button" href="{{course_item.reading.reading_file.url}}" download>Baixar em PDF</a>
+	      <div class="continue-course-div">
+		<a class="button w-button button-margin" href="{{course_item.reading.reading_file.url}}" download>Baixar em PDF</a><a class="button button-margin w-button" href="{% url 'course_item' course_id=course.id position=course_item.position|add:1 %}">Próximo Passo</a>
 	      </div>
 	    {% endif %}
 	    {% if course_item.type == 'video' or course_item.type == 'reading' %}
