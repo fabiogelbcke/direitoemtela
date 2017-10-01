@@ -76,7 +76,9 @@
 			    <p class="dashboard-course-date">Concluído em {{course_rel.completion_date.date}}</p>
 			  </div>
 			  <div class="full-width">
-			    <a class="button w-button" href="{% url 'certificate_view' identifier=course_rel.certificate.identifier %}">Ver Certificado</a>
+			    {% if course_rel.passed and course_rel.certificate %}
+			      <a class="button w-button" href="{% url 'certificate_view' identifier=course_rel.certificate.identifier %}">Ver Certificado</a>
+			    {% endif %}
 			    <a class="button w-button white-button" href="{% url 'course_progress' course_id=course.id %}">Sumário do Curso</a>
 			  </div>
 			</div>

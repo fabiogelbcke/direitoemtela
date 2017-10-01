@@ -110,7 +110,9 @@
 	  {% if course_rel %}
 	    {% if course_rel.completed %}
 	      <a class="button course-description-button w-button" href="{% url 'course_item' course_id=course.id position=1 %}">Revisar Curso</a>
-	      <a class="button course-description-button w-button" href="#">Ver Certificado</a>
+	      {% if course_rel.passed and course_rel.certificate %}
+		<a class="button course-description-button w-button" href="#">Ver Certificado</a>
+	      {% endif %}
 	      {% if user.is_staff %}
 		<a class="button course-description-button w-button" href="{% url 'admin_unregister_from_course' course_id=course.id %}">Desinscrever-se</a>
 	      {% endif %}
