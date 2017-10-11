@@ -45,7 +45,7 @@
     <p class="error-logo">!</p>
     <div class="error-block-msg" id="error-block-msg">A sua senha deve ter no mínimo 8 caracteres.</div>
   </div>
-  <div style="display:none;"><a id="showsuccessblockbutton" data-ix="show-success-block">teste</a><a id="showerrorblockbutton" data-ix="show-error-block">teste</a></div>
+  <div style="display:none;"><div id="showsuccessblockbutton" data-ix="show-success-block">teste</div><div id="showerrorblockbutton" data-ix="show-error-block">teste</div></div>
   {% block hiddencontent %}
     {% if not user.is_authenticated and False %}
       <div class="login-popup">
