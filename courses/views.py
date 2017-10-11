@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic.detail import DetailView
 from django.contrib.auth.decorators import login_required
@@ -8,12 +9,15 @@ from django.http import HttpResponse
 from django.template import RequestContext, loader
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.decorators.csrf import requires_csrf_token
+
+from coursetests.models import UserQuestionRelationship
+from easy_pdf.views import PDFTemplateResponseMixin
+
+from .utils import create_certificate, render_to_pdf
+from .decorators import is_registered_to_course
 from .models import (Course, CourseItem, UserCourseRelationship,
                      UserItemRelationship, Certificate)
-from .utils import create_certificate, render_to_pdf
-from coursetests.models import UserQuestionRelationship
-from .decorators import is_registered_to_course
-from easy_pdf.views import PDFTemplateResponseMixin
+
 
 #get the range of items that show up on the progress bar at the
 #top of the page while doing the course

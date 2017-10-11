@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <!-- This site was created in Webflow. http://www.webflow.com-->
 <!-- Last Published: Thu Sep 01 2016 23:21:55 GMT+0000 (UTC) -->
-{% block head %}
-  <html>
+<html>
+  {% block head %}
     <head>
       {% load cropping %}
       {% load staticfiles %}
@@ -11,13 +11,18 @@
       <title>Direito em Tela</title>
       <meta content="width=device-width, initial-scale=1" name="viewport">
       <meta content="Webflow" name="generator">
-      {% block socialtags %}
+      {% block tags %}
       {% endblock %}
       {% compress css %}
       <link href="{% static 'css/normalize.css'%}" rel="stylesheet" type="text/css">
       <link href="{% static 'css/webflow.css'%}" rel="stylesheet" type="text/css">
       <link href="{% static 'css/direitoemtela.webflow.css'%}" rel="stylesheet" type="text/css">
       {% endcompress %}
+      <style>
+      {% block styles %}
+	
+      {% endblock %}
+      </style>
       <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
       <script type="text/javascript">
        WebFont.load({
@@ -32,6 +37,15 @@
     </head>
 {% endblock %}
 <body>
+  <div data-ix="zero-opacity-initially" class="success-notification">
+    <p class="success-icon">✔︎</p>
+    <div class="success-block-msg" id="success-block-msg">Senha Alterada!</div>
+  </div>
+  <div data-ix="zero-opacity-initially" class="error-notification">
+    <p class="error-logo">!</p>
+    <div class="error-block-msg" id="error-block-msg">A sua senha deve ter no mínimo 8 caracteres.</div>
+  </div>
+  <div style="display:none;"><a id="showsuccessblockbutton" data-ix="show-success-block">teste</a><a id="showerrorblockbutton" data-ix="show-error-block">teste</a></div>
   {% block hiddencontent %}
     {% if not user.is_authenticated and False %}
       <div class="login-popup">
