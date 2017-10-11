@@ -105,7 +105,7 @@
 		  <div class="account-dropdown-text">{{user.first_name|upper}}</div>
 		  <div class="account-dropdown-icon w-icon-dropdown-toggle"></div>
 		</div>
-		<nav class="account-dropdown-list w-dropdown-list"><a class="account-dropdown-link w-dropdown-link" href="{% url 'dashboard_courses' %}">Meus Cursos</a><a class="account-dropdown-link w-dropdown-link" href="#">Conta</a><a class="account-dropdown-link w-dropdown-link" href="{% url 'logout' %}">Sair</a>
+		<nav class="account-dropdown-list w-dropdown-list"><a class="account-dropdown-link w-dropdown-link" href="{% url 'dashboard_courses' %}">Meus Cursos</a><a class="account-dropdown-link w-dropdown-link" href="{% url 'account' %}">Conta</a><a class="account-dropdown-link w-dropdown-link" href="{% url 'logout' %}">Sair</a>
 		</nav>
               </div>
 	    {% endif %}
