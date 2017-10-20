@@ -1,0 +1,8 @@
+{% load cropping %}
+<!--<div class="next-gig-img-wrapper calendar-preview">-->
+<form id="crop-photo-form" method="POST" enctype="multipart/form-data" action="{% url 'save_cropped_photo' %}">
+  {% csrf_token %}
+<div class="center">
+	{{crop_picture_form}}
+</div>
+</form>

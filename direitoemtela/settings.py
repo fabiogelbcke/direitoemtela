@@ -244,7 +244,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-IMAGE_CROPPING_JQUERY_URL = 'https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'
+
 
 YOUTUBE_API_SERVICE_NAME = 'youtube'
 YOUTUBE_API_VERSION = 'v3'

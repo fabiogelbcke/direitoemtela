@@ -12,10 +12,18 @@
   margin:auto;
   }
 {% endblock %}
-{% block tags %}
+
+
+{% block head %}
   {{block.super}}
-  {{ profile_pic_form.media }}
+  <link href="/static/image_cropping/css/jquery.Jcrop.min.css" type="text/css" media="all" rel="stylesheet" />
+  <link href="/static/image_cropping/css/image_cropping.css" type="text/css" media="all" rel="stylesheet" />
+  <script type="text/javascript" src="/static/js/jquery-1.7.1.min.js"></script>
+  <script type="text/javascript" src="/static/image_cropping/js/jquery.Jcrop.min.js"></script>
+  <script type="text/javascript" src="/static/js/image_cropping.js"></script>
 {% endblock %}
+
+
 {% block content %}
   <div class="header-background">
     {% block header %}
@@ -27,7 +35,10 @@
     <div class="main-section whatsapp" id="posts">
       <div class="video-container w-container" id="video-container">
         <h1 class="center">Minha Conta</h1>
-        <div class="center"><img class="account-image" height="150" src="{% cropped_thumbnail user 'profile_ratio' %}" width="150">
+        <div class="center">
+	  <div id="change-photo-div">
+	    <img class="account-image" height="150" src="{% cropped_thumbnail user 'profile_ratio' %}" width="150">
+	  </div>
           <div>
             <div class="account-form payment-form">
               <form method="POST" enctype="multipart/form-data" action="{% url 'upload_new_photo' %}" id="new-photo-form">
@@ -35,9 +46,12 @@
 		<div style="height:0px;overflow:hidden;">
 		  <input type="file" name="profile_picture" id="photo-input" accept="image/*">
                 </div>
-		<div class="profile-pic-form">
+		<div class="profile-pic-form" id="picture-buttons-div">
 		  <a class="button crop-photo w-button" id="change-photo-button">Trocar Foto</a>
 		  <a class="button crop-photo w-button">Cortar Foto</a>
+		</div>
+		<div class="profile-pic-form hidden" id="save-cropped-photo-div">
+		  <a class="button crop-photo w-button" id="saved-cropped-photo-button">Salvar Foto</a>
 		</div>
 	      </form>
             </div>
@@ -76,8 +90,8 @@
     </div>
 {% endblock %}
 {% block js %}
-  {{block.super}}
-
+  <script src="{% static 'js/webflow.js'%}" type="text/javascript"></script>
+  <script src="{% static 'js/jquery.form.js' %}"></script>
   <script>
    $("#updateuserinfoform").ajaxForm({
        success:function(data){
@@ -96,7 +110,6 @@
 	   $("#showsuccessblockbutton").click()
        },
        error:function(data){
-	   console.log(data);
 	   $("#error-block-msg").text(data.content);
 	   $("#showerrorblockbutton").click()
        }
@@ -104,11 +117,25 @@
    
    $("#new-photo-form").ajaxForm({
        success:function(data){
-	   $("#success-block-msg").text(data);
-	   $("#showsuccessblockbutton").click()
+	   jsonData = JSON.parse(data);
+
+           $("#change-photo-div").html(jsonData['body']);
+	   image_cropping_start();
+	   //$("#success-block-msg").text("Foto Salva!");
+	   $("#picture-buttons-div").hide()
+	   $("#save-cropped-photo-div").show()
        },
        error:function(data){
-	   console.log(data);
+	   $("#error-block-msg").text(data.content);
+	   $("#showerrorblockbutton").click()
+       }
+   });
+
+   $("#crop-photo-form").ajaxForm({
+       success:function(data){
+	   location.reload();
+       },
+       error:function(data){
 	   $("#error-block-msg").text(data.content);
 	   $("#showerrorblockbutton").click()
        }
@@ -120,6 +147,9 @@
    
    $("#photo-input").change(function(){
        $("#new-photo-form").submit();
+   });
+   $("#saved-cropped-photo-button").click(function(){
+       $("#crop-photo-form").submit();
    });
   </script>
 {% endblock %}

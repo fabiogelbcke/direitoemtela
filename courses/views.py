@@ -11,7 +11,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.decorators.csrf import requires_csrf_token
 
 from coursetests.models import UserQuestionRelationship
-from easy_pdf.views import PDFTemplateResponseMixin
 
 from .utils import create_certificate, render_to_pdf
 from .decorators import is_registered_to_course

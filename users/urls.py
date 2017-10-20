@@ -6,7 +6,7 @@ from .auth_shenanigans import logout_function
 from .registration import register
 from .views import account_page
 from .utils import (update_user_info, change_password,
-                    upload_new_photo)
+                    upload_new_photo, save_cropped_photo)
 
 urlpatterns = [
     url(
@@ -38,5 +38,10 @@ urlpatterns = [
         r'^uploadphoto$',
         upload_new_photo,
         name='upload_new_photo'
+    ),
+    url(
+        r'^savecroppedphoto$',
+        save_cropped_photo,
+        name='save_cropped_photo'
     ),
 ]

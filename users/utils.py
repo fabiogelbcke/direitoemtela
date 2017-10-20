@@ -1,8 +1,13 @@
 # -*- coding: utf-8 -*-
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseBadRequest
+from django.template import loader
+from django.shortcuts import redirect
 
-from .forms import UserForm, ProfilePicForm
+import string
+import json
+
+from .forms import UserForm, ProfilePicForm, CropProfilePicForm
 from .models import MyUser
 from .validators import validate_password
 
@@ -44,11 +49,45 @@ def upload_new_photo(request):
         request.FILES,
         instance=user
     )
-    print request.POST
-    print request.FILES
     if pic_form.is_valid():
-        user.profile_picture = request.FILES['profile_picture']
+        user.profile_image = request.FILES['profile_picture']
         user.save()
-        print 'oi'
-        return HttpResponse('Foto Salva')
-    return HttpResponseBadRequest('Imagem Inválida')
+        template_body = loader.get_template('picture_crop.djhtml')
+        crop_picture_form = CropProfilePicForm(instance=request.user)
+        body_data = template_body.render(
+            {'crop_picture_form': crop_picture_form,},
+            request
+        )
+        template_head = loader.get_template('picture_crop_head.djhtml')
+        head_data = template_head.render(
+            {'crop_picture_form': crop_picture_form,},
+            request
+        )
+        print head_data
+        head_data = '\n'.join(
+            [x for x in head_data.split('\n') if 'jquery-' not in x]
+        )
+        return HttpResponse(json.dumps(
+            {
+                'body': body_data,
+                'head': head_data
+            }
+        ))
+    else:
+        return HttpResponseBadRequest('Imagem Inválida')
+
+
+@login_required
+def save_cropped_photo(request):
+    user = request.user
+    pic_form = CropProfilePicForm(
+        request.POST,
+        request.FILES,
+        instance=user
+    )
+    if pic_form.is_valid():
+        pic_form.save()
+        return redirect('account')
+        return HttpResponse('Foto Salva!')
+    return HttpResponseBadRequest('Houve um problema ao salvar a foto')
+    

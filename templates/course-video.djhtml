@@ -60,7 +60,7 @@
 		  </div>
 		  <h2 class="question-title">{{question.text}}</h2>
 		  <div class="question-buttons-div">
-		    <h3 class="heading-no-margin" id="pre-answer-text">Selecione a opção {% if question.answer_type == 'correct' %}correta{% else %}incorrect{% endif %} abaixo</h3>
+		    <h3 class="heading-no-margin" id="pre-answer-text">Selecione a opção {% if question.answer_type == 'correct' %}CORRETA{% else %}INCORRETA{% endif %} abaixo</h3>
 		    <div class="div-block-2 hidden" id="correct-answer-div">
                       <div class="correct-sign"><img src="{% static 'images/white-checkicon.png'%}">
                       </div>

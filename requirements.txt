@@ -65,3 +65,4 @@ traitlets==4.3.2
 uritemplate==0.6
 wcwidth==0.1.7
 xhtml2pdf==0.0.6
+html5lib==1.0b8
