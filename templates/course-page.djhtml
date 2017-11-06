@@ -234,6 +234,10 @@
               <h3 class="course-description-section-title">Horas de Curso</h3>
               <h1 class="course-price">{{course.hours}} horas</h1>
             </div>
+	    <div>
+              <h3 class="course-description-section-title">Nota para Aprovação</h3>
+              <h1 class="course-price">70%</h1>
+            </div>
             <div class="course-description-separator"></div>
             <h3 class="course-description-section-title">Inclusos no curso</h3>
             <div class="course-feature"><img class="course-feature-check-sign" height="15" src="{% static 'images/checkicon.png'%}" width="15">
