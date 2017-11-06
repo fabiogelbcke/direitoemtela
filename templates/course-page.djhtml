@@ -140,7 +140,7 @@
   <div class="trailer-popup" id="trailer-popup">
     <div class="modal-wrapper">
       <div class="w-container">
-        <div class="trailer-video"><a class="close-popup-button" data-ix="close-trailer" href="#">Fechar <strong>X</strong></a>
+        <div class="trailer-video"><a class="close-popup-button" data-ix="close-trailer" href="#" onclick="pausevideo();">Fechar <strong>X</strong></a>
           <div class="w-embed w-video" style="padding-top: 56.17021276595745%; width:60vw; max-width:870px;">
             <div class="embedly-embed" id="ytvideo"></div>
           </div>
@@ -312,6 +312,10 @@
        if (event.data === 0){
 	   $("#trailer-popup").hide();
        }
+   }
+
+   function pausevideo(){
+       player.stopVideo();
    }
   </script>
   <script>
