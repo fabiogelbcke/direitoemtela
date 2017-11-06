@@ -50,6 +50,7 @@ class CourseView(DetailView):
             if course.is_registered(user):
                 context['course_rel'] = course.course_rels.get(user=user)
         context['course_items'] = course.items.all().order_by('position')
+        context['error_msg'] = self.request.GET.get('error_msg', '')
         return context
 
 

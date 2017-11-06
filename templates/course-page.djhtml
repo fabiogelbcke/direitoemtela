@@ -2,7 +2,7 @@
 {% load staticfiles %}{% load cropping %}
 {% block hiddencontent %}
   {{block.super}}
-  <div class="payment-popup">
+  <div class="payment-popup" {% if error_msg %}style="display:block;"{% endif %}>
     <div class="modal-wrapper">
       <div class="w-container">
         <div class="payment-block"><a class="close-popup-button" data-ix="close-trailer" href="#">Fechar <strong>X</strong></a>
@@ -128,6 +128,10 @@
 		</div>
 	      </div>
             </div>
+          </div>
+	  <div id="payment-error-div" class="payment-error-div" {% if error_msg %}style="display:flex"{% else %}style="display:none"{% endif %}>
+            <h1 class="payment-error-symbol">!</h1>
+            <p class="payment-error-msg" id="payment-error-msg">{{error_msg}}</p>
           </div>
 	</div>
       </div>
@@ -302,7 +306,12 @@
        error: function(data){
 	   $(".loading-gavel").hide();
 	   $("#boleto-form").show();
+	   $("#payment-error-div").css("display", "flex");
+	   $("#payment-error-msg").html(data.responseText);
        },
    });
+   $(":submit").click(function(){
+       $(".payment-error-div").hide();
+   })
   </script>
 {% endblock %}

@@ -296,8 +296,6 @@
        $("#questionform").ajaxForm({
 	   success: function(data){
 	       $("#pre-answer-text").hide();
-	       console.log(data);
-	       console.log(window.submited_id);
 	       if (data == window.submited_id){
 		   $("#correct-answer-div").removeClass("hidden");
 	       }
