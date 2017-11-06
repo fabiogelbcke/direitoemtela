@@ -309,7 +309,9 @@
        event.target.playVideo();
    }
    function onPlayerStateChange(event){
-       $("#trailer-popup").hide()
+       if (event.data === 0){
+	   $("#trailer-popup").hide();
+       }
    }
   </script>
   <script>
