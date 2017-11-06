@@ -238,9 +238,11 @@
 	    <div class="course-feature"><img class="course-feature-check-sign" height="15" src="{% static 'images/checkicon.png'%}" width="15">
               <p class="course-feature-text">Materiais de leitura feitos especialmente para estudo e revisão para provas</p>
             </div>
-            <div class="course-feature hidden"><img class="course-feature-check-sign" height="15" src="{% static 'images/checkicon.png'%}" width="15">
+	    {% if False %}
+            <div class="course-feature "><img class="course-feature-check-sign" height="15" src="{% static 'images/checkicon.png'%}" width="15">
               <p class="course-feature-text">Grupo de discussão sobre o assunto</p>
             </div>
+	    {% endif %}
             <div class="course-description-separator"></div>
 	    <div>
               <h3 class="course-description-section-title">Preço</h3>
