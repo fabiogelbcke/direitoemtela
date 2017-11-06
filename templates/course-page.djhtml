@@ -225,21 +225,7 @@
             </div>
           </div>
           <div class="w-col w-col-4">
-            <div>
-              <h3 class="course-description-section-title">Preço</h3>
-              <h1 class="course-price">R$ {{course.price}}</h1>
-            </div>
-            <div class="course-description-separator"></div>
-            <div>
-              <h3 class="course-description-section-title">Horas de Curso</h3>
-              <h1 class="course-price">{{course.hours}} horas</h1>
-            </div>
-	    <div>
-              <h3 class="course-description-section-title">Nota para Aprovação</h3>
-              <h1 class="course-price">70%</h1>
-            </div>
-            <div class="course-description-separator"></div>
-            <h3 class="course-description-section-title">Inclusos no curso</h3>
+	    <h3 class="course-description-section-title">Inclusos no curso</h3>
             <div class="course-feature"><img class="course-feature-check-sign" height="15" src="{% static 'images/checkicon.png'%}" width="15">
               <p class="course-feature-text">Certificado de aprovação do&nbsp;curso</p>
             </div>
@@ -254,6 +240,21 @@
             </div>
             <div class="course-feature"><img class="course-feature-check-sign" height="15" src="{% static 'images/checkicon.png'%}" width="15">
               <p class="course-feature-text">Grupo de discussão sobre o assunto</p>
+            </div>
+            <div class="course-description-separator"></div>
+            <div>
+              <h3 class="course-description-section-title">Preço</h3>
+              <h1 class="course-price">R$ {{course.price}}</h1>
+            </div>
+            <div class="course-description-separator"></div>
+            <div>
+              <h3 class="course-description-section-title">Horas de Curso</h3>
+              <h1 class="course-price">{{course.hours}} horas</h1>
+            </div>
+	    <div class="course-description-separator"></div>
+	    <div>
+              <h3 class="course-description-section-title">Nota para Aprovação</h3>
+              <h1 class="course-price">70%</h1>
             </div>
             <div class="course-description-separator"></div>
             <div>
