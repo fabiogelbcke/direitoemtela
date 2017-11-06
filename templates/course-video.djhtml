@@ -27,9 +27,17 @@
               <div class="progress-indicator">
 		{% for item_rel in user_item_rels %}
 		  {% with item_rel.course_item as item %}
-		      <div>
+		    <div>
+		      {% if item_rel.course_item == course_item %}
 			{% if item_rel.done is True %}
-			  <a class="course-step done-step" data-ix="new-interaction-3" href="{% url 'course_item' course_id=course.id position=item.position %}"><img class="step-image" src="{% static 'images/checkicon-white.png'%}" width="35">
+			  <a class="course-step done-step current" data-ix="new-interaction-3" href="{% url 'course_item' course_id=course.id position=item.position %}"><img class="step-image current" src="{% cropped_thumbnail user 'profile_ratio' height=30 %}" width="30" height="30">
+			  </a>
+			{% else %}
+			  <a class="course-step current" data-ix="new-interaction-3" href="{% url 'course_item' course_id=course.id position=item.position %}"><img class="step-image current" src="{% cropped_thumbnail user 'profile_ratio' height=30 %}" width="30" height="30">
+			  </a>
+			{% endif %}
+		      {% elif item_rel.done is True %}
+			<a class="course-step done-step" data-ix="new-interaction-3" href="{% url 'course_item' course_id=course.id position=item.position %}"><img class="step-image" src="{% static 'images/checkicon-white.png'%}" width="35" height="36">
 			  </a>
 			{% elif item.type == 'video' %}
 			  <a class="course-step" data-ix="new-interaction-3" href="{% url 'course_item' course_id=course.id position=item.position %}"><img class="step-image" src="{% static 'images/playicon-white.png'%}" width="35">

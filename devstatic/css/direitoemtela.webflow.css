@@ -2732,10 +2732,10 @@ img {
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  -webkit-box-align: end;
-  -webkit-align-items: flex-end;
-  -ms-flex-align: end;
-  align-items: flex-end;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   border-right: 1px solid #e9e9e9;
   border-left: 2px solid #e9e9e9;
   border-radius: 3px;
@@ -2743,11 +2743,32 @@ img {
 }
 
 .course-step.done-step {
+  padding-right: 10px;
+  padding-left: 10px;
   background-color: #ca8c2e;
+}
+
+.course-step.done-step.current {
+  width: 60px;
+  padding: 3px 0px;
+}
+
+.course-step.current {
+  width: 60px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .step-image {
   margin-bottom: 0px;
+}
+
+.step-image.current {
+  border-radius: 500px;
 }
 
 .course-video-div {
@@ -4452,6 +4473,12 @@ html.w-mod-js *[data-ix="zero-opacity-initially"] {
   .modal-wrapper {
     padding-bottom: 80px;
   }
+  .course-step {
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
   .div-block-3 {
     position: absolute;
     z-index: 10;
@@ -5447,12 +5474,19 @@ html.w-mod-js *[data-ix="zero-opacity-initially"] {
     background-color: hsla(0, 0%, 83%, 0);
   }
   .course-step.done-step {
+    padding-right: 0px;
+    padding-left: 0px;
     border-width: 3px;
     border-color: #ca8c2e;
     background-color: rgba(202, 140, 46, 0);
   }
   .course-step.done-step.current {
-    background-color: rgba(202, 140, 46, .37);
+    width: 15px;
+    background-color: rgba(195, 134, 40, .75);
+  }
+  .course-step.current {
+    width: 15px;
+    background-color: hsla(0, 0%, 83%, .8);
   }
   .step-image {
     display: none;
