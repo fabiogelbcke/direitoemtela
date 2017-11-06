@@ -27,7 +27,7 @@ class Course(models.Model):
     name = models.CharField(blank=True, max_length=150)
     description = models.TextField(blank=True)
     price = models.DecimalField(decimal_places=2, max_digits=10)
-    trailer_url = models.CharField(blank=True, default='', max_length=300)
+    trailer_id = models.CharField(blank=True, default='', max_length=300)
     professor = models.ForeignKey('categories.Professor',
                                   related_name='courses',
                                   null=True,
