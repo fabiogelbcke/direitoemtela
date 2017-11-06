@@ -179,7 +179,7 @@
 	      {% endwith %}
 	    {% endif %}
 	  {% else %}
-	    <a class="button course-description-button w-button" data-ix="show-trailer" href="#">Assistir Trailer</a>
+	    <a class="button course-description-button w-button" data-ix="show-trailer" href="#" onclick="play();">Assistir Trailer</a>
 	    {% if user.is_authenticated and user.is_staff %}
 	      <a class="button course-description-button w-button" href="{% url 'admin_register_to_course' course_id=course.id %}">Inscrever-se</a>
 	      <a class="button course-description-button w-button" data-ix="show-payment-popup" href="#">Inscrever-se com pagamento</a>
@@ -288,7 +288,7 @@
 
    var player;
    
-   function onYouTubeIframeAPIReady(){
+   function play(){
        player = new YT.Player('ytvideo', {
 	   height: '348',
 	   width: '615',
