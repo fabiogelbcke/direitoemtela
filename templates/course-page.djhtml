@@ -287,23 +287,28 @@
    var firstScriptTag = document.getElementsByTagName('script')[0];
    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-   var player;
+   var player = null;
    
    function play(){
-       player = new YT.Player('ytvideo', {
-	   height: '348',
-	   width: '615',
-	   videoId: '{{course.trailer_id}}',
-	   playerVars: {
-	       modestbranding: true,
-	       rel: 0
-	   },
+       if (player === null){
+	   player = new YT.Player('ytvideo', {
+	       height: '348',
+	       width: '615',
+	       videoId: '{{course.trailer_id}}',
+	       playerVars: {
+		   modestbranding: true,
+		   rel: 0
+	       },
 
-	   events: {
-	       'onReady': onPlayerReady,
-	       'onStateChange': onPlayerStateChange
-	   }
-       });
+	       events: {
+		   'onReady': onPlayerReady,
+		   'onStateChange': onPlayerStateChange
+	       }
+	   });
+       }
+       else{
+	   player.playVideo();
+       }
    }
    function onPlayerReady(event) {
        event.target.playVideo();
