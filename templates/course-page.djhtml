@@ -141,7 +141,7 @@
     <div class="modal-wrapper">
       <div class="w-container">
         <div class="trailer-video"><a class="close-popup-button" data-ix="close-trailer" href="#">Fechar <strong>X</strong></a>
-          <div class="w-embed w-video" style="padding-top: 56.17021276595745%;">
+          <div class="w-embed w-video" style="padding-top: 56.17021276595745%; width:60vw;">
             <div class="embedly-embed" id="ytvideo"></div>
           </div>
         </div>
