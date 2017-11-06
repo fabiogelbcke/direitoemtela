@@ -3,12 +3,18 @@ from django.http import HttpResponseBadRequest
 from django.utils import timezone
 from django.conf import settings
 from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
+
 from urllib2 import Request, urlopen
 from urllib import quote_plus
-from .forms import BillingInfoForm, CreditCardForm
-from .models import Payment, BillingInfo, CreditCard
 from datetime import timedelta
 import json
+
+from .forms import BillingInfoForm, CreditCardForm, PromoCodeForm
+from .models import Payment, BillingInfo, CreditCard
+from .asaas_customers import create_customer
+
+
 from courses.models import Course
 from courses.utils import register_to_course
 
@@ -60,7 +66,6 @@ def get_customer_json(user):
         "addressNumber": billing_info.address_no,
         "externalReference": str(user.id),
     }
-    print json.dumps(values)
     return json.dumps(values)
 
 def get_headers():
@@ -93,10 +98,8 @@ def create_asaas_user(user):
     )
     try:
         response = urlopen(request)
-        print response
         response_body = json.loads(response.read())
     except Exception as e:
-        print e
         return None
     billing_info = user.billing_info
     billing_info.asaas_id = response_body['id']
@@ -123,9 +126,7 @@ def make_card_payment(card_data, user, course, ip_addr):
     )
     try:
         response = urlopen(request)
-        print response
         response_body = json.loads(response.read())
-        print response_body
         if response_body['status'] == 'CONFIRMED':
             card_info = response_body['creditCard']
             card = CreditCard.objects.get_or_create(
@@ -141,7 +142,6 @@ def make_card_payment(card_data, user, course, ip_addr):
         else:
             return False
     except Exception as e:
-        print e
         return False
 
 
@@ -191,3 +191,31 @@ def make_course_payment(request, course_id):
         return response
     register_to_course(user.id, course.id)
     return redirect('course_progress', course_id=course_id)
+
+
+@login_required
+def register_with_promo_code(request):
+    user = request.user
+    promo_code = request.POST.get('code', '')
+    course = Course.objects.get(id=course_id)
+    promo_objs = PromoCode.objects.filter(code=promo_code)
+    if promo_objs.filter(used=False).exists():
+        promo_objs.update(
+            used=True,
+            used_by=user,
+           date_used=datetime.now()
+        )
+        register_to_course(user.id, course.id)
+        return redirect('course_progress', course_id=course.id)
+    elif promo_objs.exists():
+        response = redirect('course_page', course_id=course.id)
+        error_msg = 'Esse código promocional já foi utilizado'
+        response['Location'] += '?error_msg=' + quote_plus(error_msg)
+        return response
+    else:
+        response = redirect('course_page', course_id=course.id)
+        error_msg = 'Código promocional inválido'
+        response['Location'] += '?error_msg=' + quote_plus(error_msg)
+        return response
+
+

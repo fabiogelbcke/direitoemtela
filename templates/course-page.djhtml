@@ -24,77 +24,126 @@
             <div class="vertical-separator"></div>
 	    <div class="payment-form ">
               <h1 class="payment-title">Pagamento</h1>
-              <div class="">
-		<form action="{% url 'pay_course' course_id=course.id %}" method="POST" data-name="Email Form 2" id="email-form-2" name="email-form-2">
-		  {% csrf_token %}
-		  <h3 class="payment-form-head">Informações do Cartão</h3>
-		  <div class="inline-input">
-                    <p class="paragraph-3">Nome no Cartão</p>
-                    <input class="round-text-field w-input" data-name="card_name" id="card_name" maxlength="256" name="card_name" placeholder="João Silva" required="required" type="text">
+	      <div data-duration-in="300" data-duration-out="100" class="w-tabs">
+		<div class="w-tab-menu">
+                  <a data-w-tab="Tab 1" class="payment-tab w--current w-inline-block w-tab-link">
+                    <div class="text-block">Cartão de<br>Crédito</div>
+                  </a>
+                  <a data-w-tab="Tab 2" class="payment-tab w-inline-block w-tab-link">
+                    <div class="text-block-2">Boleto<br>Bancário</div>
+                  </a>
+                  <a data-w-tab="Tab 3" class="payment-tab w-inline-block w-tab-link">
+                    <div class="text-block-3">Código<br>Promocional</div>
+                  </a>
+                </div>
+		<div class="w-tab-content">
+                  <div data-w-tab="Tab 1" class="w--tab-active w-tab-pane">
+		    <div class="">
+		      <form action="{% url 'pay_course' course_id=course.id %}" method="POST" data-name="Email Form 2" id="email-form-2" name="email-form-2">
+			{% csrf_token %}
+			<h3 class="payment-form-head">Informações do Cartão</h3>
+			<div class="inline-input">
+			  <p class="paragraph-3">Nome no Cartão</p>
+			  <input class="round-text-field w-input" data-name="card_name" id="card_name" maxlength="256" name="card_name" placeholder="João Silva" required="required" type="text">
+			</div>
+			<div class="inline-input">
+			  <p class="paragraph-3">Número</p>
+			  <input class="round-text-field w-input" data-name="cc_number" autocomplete="on" id="cc_number" maxlength="256" name="cc_number" placeholder="0000000000000000" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+			</div>
+			<p class="hidden-main paragraph-6">Validade</p>
+			<div class="div-block-9">
+			  <div class="date-input inline-input">
+			    <p class="hidden-main paragraph-3">Mês</p>
+			    <p class="hidden-mobile paragraph-3">Mês de Expiração</p>
+			    <input class="round-text-field w-input" data-name="expiration_month" id="expiration_date" maxlength="2" name="expiration_month" placeholder="03" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+			  </div>
+			  <div class="date-input inline-input">
+			    <p class="hidden-main paragraph-3">Ano</p>
+			    <p class="hidden-mobile paragraph-3">Ano de Expiração</p>
+			    <input class="round-text-field w-input" data-name="cvv" id="cvv" maxlength="4" name="expiration_year" placeholder="2021" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+			  </div>
+			</div>
+			<div class="inline-input">
+			  <p class="paragraph-3">Cód. Segurança</p>
+			  <input class="round-text-field w-input" data-name="Cvv 2" id="cvv-2" maxlength="256" name="cvv" placeholder="173" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+			</div>
+			<h3 class="payment-form-head">Informações&nbsp;de Cobrança</h3>
+			<div class="inline-input">
+			  <p class="paragraph-3">Endereço de cobrança (rua)</p>
+			  <input class="round-text-field w-input" data-name="phone" id="phone" maxlength="256" name="address" placeholder="Rua Central" required="required" type="text" value="{{billing_info.address}}">
+			</div>
+			<div class="inline-input">
+			  <p class="paragraph-3">Número do enderenço</p>
+			  <input class="round-text-field w-input" data-name="phone" id="phone" maxlength="256" name="address_no" placeholder="999" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" value="{{billing_info.address_no}}">
+			</div>
+			<div class="inline-input">
+			  <p class="paragraph-3">CEP</p>
+			  <input class="round-text-field w-input" data-name="phone" id="phone" maxlength="256" name="postal_code" placeholder="999" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" value="{{billing_info.postal_code}}">
+			</div>
+			<div class="inline-input">
+			  <p class="paragraph-3">Telefone (Com cód. de área)</p>
+			  <input class="round-text-field w-input" data-name="phone" id="phone" maxlength="256" name="phone" placeholder="47 999778888" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" value="{{billing_info.phone}}">
+			</div>
+			<div class="inline-input">
+			  <p class="hidden-main paragraph-3">CPF (Só números)</p>
+			  <p class="hidden-mobile paragraph-3">CPF (Somente números)</p>
+			  <input class="round-text-field w-input" data-name="cpf" id="cpf" maxlength="256" name="cpf" placeholder="00000000000" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" value="{{billing_info.cpf}}">
+			</div>
+			<input class="button w-button" data-wait="Please wait..." type="submit" value="Confirmar">
+		      </form>
+		    </div>
 		  </div>
-		  <div class="inline-input">
-                    <p class="paragraph-3">Número</p>
-                    <input class="round-text-field w-input" data-name="cc_number" autocomplete="on" id="cc_number" maxlength="256" name="cc_number" placeholder="0000000000000000" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+		  <div data-w-tab="Tab 2" class="w-tab-pane">
+                    <div class="boleto-div">
+                      <div class="loading-gavel"><img src="{% static 'images/gavel2.png'%}" width="80" class="gavel-stand-img"><img src="{% static 'images/gavel.png'%}" width="90" class="gavel-img">
+		      </div>
+		      <h3 class="boleto-form-head">Informações de Cobrança</h3>
+		      <div>
+			<form method="POST" id="boleto-form" class="boleto-form" action="{% url 'generate_boleto' course_id=course.id %}">
+			  {% csrf_token %}
+			  <div class="inline-input">
+			    <p class="hidden-main paragraph-3">CPF (Só números)</p>
+			    <p class="hidden-mobile paragraph-3">CPF (Somente números)</p>
+			    <input class="round-text-field w-input" data-name="cpf" id="cpf" maxlength="256" name="cpf" placeholder="00000000000" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" value="{{billing_info.cpf}}">
+			  </div>
+			  <input type="submit" data-ix="bang-loading-gavel" class="button w-button stupid-margin" value="Gerar Boleto">
+			</form>
+			<a class="button w-button stupid-margin hidden" id="boleto-download-button" download>Baixar Boleto</a>
+		      </div>
+		    </div>
 		  </div>
-		  <p class="hidden-main paragraph-6">Validade</p>
-		  <div class="div-block-9">
-                    <div class="date-input inline-input">
-		      <p class="hidden-main paragraph-3">Mês</p>
-                      <p class="hidden-mobile paragraph-3">Mês de Expiração</p>
-                      <input class="round-text-field w-input" data-name="expiration_month" id="expiration_date" maxlength="2" name="expiration_month" placeholder="03" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                  <div data-w-tab="Tab 3" class="w-tab-pane">
+                    <div class="">
+		      <form method="POST" action="{% url 'register_promo_code' course_id=course.id%}">
+                        {% csrf_token %}
+                        <h3 class="payment-form-head">Digite seu Código Promocional</h3>
+                        <div class="inline-input">
+                          <p class="paragraph-3">Código</p>
+                          <input class="round-text-field w-input" data-name="phone" id="phone" maxlength="12" name="code" placeholder="######" required="required" type="text">
+                        </div>
+                        <input type="submit" value="Confirmar Inscrição" data-wait="Please wait..." class="button w-button">
+                      </form>
                     </div>
-                    <div class="date-input inline-input">
-		      <p class="hidden-main paragraph-3">Ano</p>
-                      <p class="hidden-mobile paragraph-3">Ano de Expiração</p>
-                      <input class="round-text-field w-input" data-name="cvv" id="cvv" maxlength="4" name="expiration_year" placeholder="2021" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
-                    </div>
 		  </div>
-		  <div class="inline-input">
-                    <p class="paragraph-3">Cód. Segurança</p>
-                    <input class="round-text-field w-input" data-name="Cvv 2" id="cvv-2" maxlength="256" name="cvv" placeholder="173" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
-		  </div>
-		  <h3 class="payment-form-head">Informações&nbsp;de Cobrança</h3>
-		  <div class="inline-input">
-                    <p class="paragraph-3">Enderenço de cobrança (rua)</p>
-                    <input class="round-text-field w-input" data-name="phone" id="phone" maxlength="256" name="address" placeholder="Rua Central" required="required" type="text" value="{{billing_info.address}}">
-		  </div>
-		  <div class="inline-input">
-                    <p class="paragraph-3">Número do enderenço</p>
-                    <input class="round-text-field w-input" data-name="phone" id="phone" maxlength="256" name="address_no" placeholder="999" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" value="{{billing_info.address_no}}">
-		  </div>
-		  <div class="inline-input">
-                    <p class="paragraph-3">CEP</p>
-                    <input class="round-text-field w-input" data-name="phone" id="phone" maxlength="256" name="postal_code" placeholder="999" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" value="{{billing_info.postal_code}}">
-		  </div>
-		  <div class="inline-input">
-                    <p class="paragraph-3">Telefone (Com cód. de área)</p>
-                    <input class="round-text-field w-input" data-name="phone" id="phone" maxlength="256" name="phone" placeholder="47 999778888" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" value="{{billing_info.phone}}">
-		  </div>
-		  <div class="inline-input">
-		    <p class="hidden-main paragraph-3">CPF (Só números)</p>
-                    <p class="hidden-mobile paragraph-3">CPF (Somente números)</p>
-                    <input class="round-text-field w-input" data-name="cpf" id="cpf" maxlength="256" name="cpf" placeholder="00000000000" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" value="{{billing_info.cpf}}">
-		  </div>
-		  <input class="button w-button" data-wait="Please wait..." type="submit" value="Confirmar">
-		</form>
+		</div>
 	      </div>
             </div>
           </div>
 	</div>
       </div>
-        </div>
+    </div>
   </div>
-    <div class="trailer-popup">
-      <div class="modal-wrapper">
-	<div class="w-container">
-          <div class="trailer-video"><a class="close-popup-button" data-ix="close-trailer" href="#">Fechar <strong>X</strong></a>
-            <div class="w-embed w-video" style="padding-top: 56.17021276595745%;">
-              <div class="embedly-embed" id="ytvideo"></div>
-            </div>
+  <div class="trailer-popup">
+    <div class="modal-wrapper">
+      <div class="w-container">
+        <div class="trailer-video"><a class="close-popup-button" data-ix="close-trailer" href="#">Fechar <strong>X</strong></a>
+          <div class="w-embed w-video" style="padding-top: 56.17021276595745%;">
+            <div class="embedly-embed" id="ytvideo"></div>
           </div>
-	</div>
+        </div>
       </div>
     </div>
+  </div>
 {% endblock %}
 {% block content %}
   {% block header %}
@@ -219,7 +268,6 @@
 {% endblock %}
 {% block js %}
   {{block.super}}
-  <script type="text/javascript" src="//assets.moip.com.br/v2/moip.min.js"></script>
   <script type="text/javascript">
    var tag = document.createElement('script');
 
@@ -243,5 +291,18 @@
 	   }
        });
    }
+  </script>
+  <script>
+   $("#boleto-form").ajaxForm({
+       success: function(data){
+	   $(".loading-gavel").hide();
+	   $("#boleto-download-button").attr("href", data);
+	   $("#boleto-download-button").show();
+       },
+       error: function(data){
+	   $(".loading-gavel").hide();
+	   $("#boleto-form").show();
+       },
+   });
   </script>
 {% endblock %}

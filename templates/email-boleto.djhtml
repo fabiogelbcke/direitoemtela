@@ -611,9 +611,9 @@
                         
                         <td valign="top" class="mcnTextContent" style="padding: 9px 18px;color: #8D8D8D;line-height: 150%;">
                         
-                            <h1 class="null"><span class="s1">O novo site do Direito em Tela está no ar!</span></h1>
+                            <h1 class="null"><span class="s1">Boleto {{course.name}}!</span></h1>
 
-<p class="p1" style="color: #8D8D8D;line-height: 150%;">Ficamos extremamente felizes de anunciar que está no ar nossa nova plataforma!<br><br>É só acessar https://www.direitoemtela.com.br/ ou clicar no botão abaixo para conferir!<br><br>Agradecemos por todo o seu apoio e por ter inscrito seu email no nosso site. Fique atento, porque a versão 2.0 da plataforma será lançada já no primeiro semestre de 2017 e trará novos modelos de cursos, com materiais de estudo, emissão de certificados e muito mais.<br><br>Buscamos sempre dar o nosso máximo para ajudar tanto quanto possível com os estudos de nossos alunos, portanto quaisquer sugestões e comentários sobre a plataforma são muito bem vindos, basta enviar um email para fabio@direitoemtela.com.br!</p>
+<p class="p1" style="color: #8D8D8D;line-height: 150%;">Obrigado por escolher o Direito em Tela para auxiliar em seus estudos de {{course.name}}!<br>Para baixar o boleto de pagamento do curso é só clicar no botão abaixo.<br>Esse boleto vence em três dias, mas não se preocupe: você pode gerar um novo a partir do site a qualquer momento.</p>
                         </td>
                     </tr>
                 </tbody></table>
@@ -629,7 +629,7 @@
                     <tbody>
                         <tr>
                             <td align="center" valign="middle" class="mcnButtonContent" style="font-family: Arial; font-size: 16px; padding: 15px;">
-                                <a class="mcnButton " title="Visitar Site" href="https://www.direitoemtela.com.br/" target="_blank" style="font-weight: bold;letter-spacing: normal;line-height: 100%;text-align: center;text-decoration: none;color: #666666;">Visitar Site</a>
+                                <a class="mcnButton " title="Visitar Site" href="{{boleto_url}}" target="_blank" style="font-weight: bold;letter-spacing: normal;line-height: 100%;text-align: center;text-decoration: none;color: #666666;">Baixar Boleto</a>
                             </td>
                         </tr>
                     </tbody>

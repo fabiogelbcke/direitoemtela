@@ -1,5 +1,5 @@
 from django import forms
-from .models import Payment, BillingInfo
+from .models import Payment, BillingInfo, PromoCode
 from .validators import (validate_cpf, validate_phone, validate_cvv,
                          validate_expiration_month, validate_expiration_year)
 
@@ -9,7 +9,8 @@ class BillingInfoForm(forms.ModelForm):
     
     class Meta:
         model = BillingInfo
-        fields = ['cpf', 'phone', 'address_no', 'address', 'postal_code']
+        fields = ['cpf', 'phone', 'address_no',
+                  'address', 'postal_code']
 
 class CreditCardForm(forms.Form):
     cc_number = forms.CharField(max_length=19)
@@ -30,3 +31,17 @@ class CreditCardForm(forms.Form):
         if len(exp_year) == 2:
             exp_year = '20' + exp_year
         return exp_year
+
+
+class PromoCodeForm(forms.Form):
+    class Meta:
+        model = PromoCode
+        fields = ['code']
+
+
+class CPFForm(forms.ModelForm):
+    cpf = forms.CharField(validators=[validate_cpf, ])
+    
+    class Meta:
+        model = BillingInfo
+        fields = ['cpf',]
