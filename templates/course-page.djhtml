@@ -137,7 +137,7 @@
       </div>
     </div>
   </div>
-  <div class="trailer-popup">
+  <div class="trailer-popup" id="trailer-popup">
     <div class="modal-wrapper">
       <div class="w-container">
         <div class="trailer-video"><a class="close-popup-button" data-ix="close-trailer" href="#">Fechar <strong>X</strong></a>
@@ -279,6 +279,7 @@
 {% endblock %}
 {% block js %}
   {{block.super}}
+  <script type="text/javascript" src="{% static 'js/jquery.cookie.js' %}"></script>
   <script type="text/javascript">
    var tag = document.createElement('script');
 
@@ -299,8 +300,16 @@
 	   },
 
 	   events: {
+	       'onReady': onPlayerReady,
+	       'onStateChange': onPlayerStateChange
 	   }
        });
+   }
+   function onPlayerReady(event) {
+       event.target.playVideo();
+   }
+   function onPlayerStateChange(event){
+       $("#trailer-popup").hide()
    }
   </script>
   <script>
