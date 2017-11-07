@@ -3,8 +3,4 @@ def validate_password(pwd):
         return False
     if len(pwd) < 8:
         return False
-    if (any(x.isalpha() for x in pwd)
-        and any(x.isdigit() for x in pwd)):
-        return True
-    else:
-        return False
+    return True
