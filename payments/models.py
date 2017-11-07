@@ -18,7 +18,9 @@ def create_promo_code():
 
 class BillingInfo(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL,
-                                related_name='billing_info')
+                                related_name='billing_info',
+                                null=True,
+                                default=None)
     cpf = models.CharField(max_length=20)
     phone = models.CharField(max_length=20,
                              default='',
