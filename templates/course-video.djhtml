@@ -148,7 +148,7 @@
 		      <div>Professor</div>
 		    </a>
 		    <a class="tab-title w-inline-block w-tab-link" data-w-tab="Tab 3">
-		      <div>Materiais de Estudo</div>
+		      <div>Slides/Materiais Extra</div>
 		    </a>
 		  </div>
 		  <div class="w-tab-content">
@@ -233,7 +233,7 @@
 	 });
      }
 
-     function onPlayerReady(event) {
+   function onPlayerReady(event) {
 	 event.target.playVideo();
      }
      function countdownNextVideo(time)
