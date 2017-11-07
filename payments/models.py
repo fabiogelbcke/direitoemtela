@@ -38,6 +38,8 @@ class BillingInfo(models.Model):
 
 class CreditCard(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             null=True,
+                             default=None,
                              related_name='credit_cards')
     brand = models.CharField(max_length=20)
     last_four = models.CharField(max_length=4)
@@ -49,6 +51,8 @@ class CreditCard(models.Model):
 class Payment(models.Model):
     id = models.AutoField(primary_key=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             null=True,
+                             default=None,
                              related_name='payments')
     amount = models.DecimalField(decimal_places=2,
                                  max_digits=6)
