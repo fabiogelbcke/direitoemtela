@@ -58,7 +58,7 @@ class MyUserManager(BaseUserManager):
 
 
 class MyUser(AbstractBaseUser):
-
+    id = models.AutoField(primary_key=True)
     username = models.CharField(
         max_length=255,
         default=generate_username,
