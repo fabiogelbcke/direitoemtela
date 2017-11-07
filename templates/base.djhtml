@@ -48,16 +48,13 @@
   </div>
   <div style="display:none;"><div id="showsuccessblockbutton" data-ix="show-success-block">teste</div><div id="showerrorblockbutton" data-ix="show-error-block">teste</div></div>
   {% block hiddencontent %}
-    {% if not user.is_authenticated and False %}
       <div class="login-popup">
 	<div class="modal-wrapper">
 	  <div class="base-popup"><a class="close-popup-button" data-ix="close-login-popup" href="#">Fechar X</a>
             <div class="social-login-div">
               <a rel="nofollow" class="facebook-login social-login-button w-inline-block" href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}"></a>
               <a rel="nofollow" class="google-login-button social-login-button w-inline-block" href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}"></a>
-	      {% if False %}
               <a rel="nofollow" class="linkedin-login-button social-login-button w-inline-block" href="{% url 'social:begin' 'linkedin-oauth2' %}?next={{ request.path }}"></a>
-	      {% endif %}
             </div>
             <div class="division">
               <div class="left line"></div>
@@ -65,9 +62,10 @@
               <div class="line right"></div>
             </div>
             <div class="login-form-block">
-              <form class="login-form" data-name="Email Form 3" id="email-form-3" name="email-form-3">
-		<input class="form-input w-input" data-name="email" id="email-3" maxlength="256" name="email" placeholder="Email" type="email">
-		<input class="form-input w-input" data-name="password" id="password" maxlength="256" name="password" placeholder="Senha" required="required" type="text">
+              <form class="login-form" method="POST" action="{% url 'email_login' %}">
+		{% csrf_token %}
+		<input class="form-input w-input" data-name="email" id="email-3" maxlength="256" name="email" placeholder="Email" type="email" required="required">
+		<input class="form-input w-input" data-name="password" id="password" maxlength="256" name="password" placeholder="Senha" required="required" type="password">
 		<input rel="nofollow" class="button w-button" data-wait="Please wait..." type="submit" value="Entrar">
               </form>
               <p class="light-grey-text">Ainda não tem uma conta?</p>
@@ -91,7 +89,6 @@
 	  </div>
 	</div>
       </div>
-    {% endif %}
   {% endblock %}
   {% block content %}
     {% block header %}
@@ -113,7 +110,7 @@
 	    <a class="nav-link w-nav-link" href="{% url 'index' %}">INÍCIO</a>
 	    <a class="nav-link w-nav-link" href="{% url 'categories' %}">VÍDEO-AULAS</a>
 	    <a class="nav-link w-nav-link" href="{% url 'about' %}">Quem somos</a>
-	    {% if not user.is_authenticated and False%}
+	    {% if not user.is_authenticated %}
 	      <a class="button login-button w-button" data-ix="show-login-popup" href="#">Entrar</a>
 	    {% endif %}
 	    <a class="close-x w-hidden-main w-hidden-medium w-hidden-small" href="#">×</a>

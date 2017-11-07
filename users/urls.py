@@ -2,13 +2,18 @@ from django.conf.urls import url, include
 from django.views.generic import TemplateView
 from django.views.decorators.cache import cache_page
 
-from .auth_shenanigans import logout_function
+from .auth_shenanigans import logout_function, email_login
 from .registration import register
 from .views import account_page
 from .utils import (update_user_info, change_password,
                     upload_new_photo, save_cropped_photo)
 
 urlpatterns = [
+    url(
+        r'^email_login$',
+        email_login,
+        name='email_login'
+    ),
     url(
         r'^logout$',
         logout_function,

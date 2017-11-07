@@ -26,14 +26,13 @@
               </div>
             </form>
           </div>
-        </div><a class="button w-button" data-ix="hero-button" href="{% url 'categories' %}">Ver todos os Assuntos</a>
+        </div><a class="button w-button" data-ix="hero-button" href="{% url 'categories' %}" style="margin-top:10px">Ver todos os Assuntos</a>
       </div>
     </div>
     <div class="bottom-padding main-section" id="posts">
-      {% if user.is_authenticated and user.is_beta %}
 	<div class="w-container" id="Latest-post">
         <div class="section-heading">
-          <h2 class="section-title">Cursos Completos</h2>
+          <h2 class="section-title">Novos Minicursos de Direito!</h2>
           <div class="med-divider"></div>
 	  <div class="w-dyn-list">
             <div class="w-dyn-items w-row">
@@ -61,7 +60,6 @@
           </div>
         </div>
 	</div>
-      {% endif %}
       <div class="w-container">
         <div class="section-heading">
           <h2 class="section-title">Assuntos mais Procurados</h2>

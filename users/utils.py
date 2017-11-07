@@ -4,8 +4,10 @@ from django.http import HttpResponse, HttpResponseBadRequest
 from django.template import loader
 from django.shortcuts import redirect
 
+
 import string
 import json
+
 
 from .forms import UserForm, ProfilePicForm, CropProfilePicForm
 from .models import MyUser
