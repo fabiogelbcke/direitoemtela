@@ -82,6 +82,7 @@
 		<input class="form-input w-input" data-name="email" id="email-5" maxlength="256" name="email" placeholder="Email" required="required" type="email">
 		<input class="form-input w-input" data-name="password" id="password-2" maxlength="256" name="password" placeholder="Senha" required="required" type="password">
 		<input class="form-input w-input" data-name="password_confirmation" id="password_confirmation" maxlength="256" name="password_confirmation" placeholder="Confirme a Senha" required="required" type="password">
+		<p style="margin-top:-5px; margin-bottom:2px;">*A senha deve ter no mínimo 8 caracteres</p>
 		<input rel="nofollow" class="button w-button" data-wait="Please wait..." type="submit" value="Cadastrar-se">
               </form>
               <p class="light-grey-text">Já tem uma conta?</p><a class="light-blue-link show-login-form" data-ix="show-login-form" href="#">Clique aqui para entrar</a>
