@@ -11,12 +11,10 @@
               <div>
                 <h1 class="payment-title">O que você recebe com o curso?</h1>
                 <ul class="course-features-list">
-                  <li>Acesso a todo o material do curso por tempo ilimitado</li>
-                  <li>Certificado de conclusão de curso (mediante aprovação com 70% ou mais de média nas provas)</li>
+                  <li>Acesso a todo o material do curso por 6 meses</li>
+                  <li>Certificado de conclusão de curso (mediante aprovação com 60% ou mais de média nas provas)</li>
                   <li>Material de estudo em PDF preparado especialmente para estudo independente dos vídeos e revisão para provas</li>
                   <li>Slides das aulas dispibonibilizados para download</li>
-                  <li>Acesso ao grupo de discussão do curso com outros alunos e com o professor</li>
-                  <li>Acesso ao grupo de discussão do curso com outros alunos e com o professor</li>
                 </ul>
               </div>
               <h2>Preço: R${{course.price}}</h2>
