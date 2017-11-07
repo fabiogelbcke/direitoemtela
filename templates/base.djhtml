@@ -62,7 +62,7 @@
               <div class="line right"></div>
             </div>
             <div class="login-form-block">
-              <form class="login-form" method="POST" action="{% url 'email_login' %}">
+              <form class="login-form" method="POST" action="{% url 'email_login' %}?next={{request.path}}">
 		{% csrf_token %}
 		<input class="form-input w-input" data-name="email" id="email-3" maxlength="256" name="email" placeholder="Email" type="email" required="required">
 		<input class="form-input w-input" data-name="password" id="password" maxlength="256" name="password" placeholder="Senha" required="required" type="password">

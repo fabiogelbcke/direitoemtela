@@ -184,7 +184,7 @@
 	    {% elif user.is_authenticated %}
 	      <a class="button course-description-button w-button" data-ix="show-payment-popup" href="#">Inscrever-se</a>
 	    {% else %}
-	      <a class="button course-description-button w-button" data-ix="show-login-form" href="#">Inscrever-se</a>
+	      <a class="button course-description-button w-button" data-ix="show-login-popup" href="#">Inscrever-se</a>
 	    {% endif %}
 	  {% endif %}
         </div>
