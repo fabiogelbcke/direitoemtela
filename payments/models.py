@@ -7,6 +7,7 @@ from random import randint
 import shortuuid
 
 from users.models import MyUser
+from courses.models import Course
 # Create your models here.
 
 def random_address_number():
@@ -66,6 +67,9 @@ class Payment(models.Model):
     credit_card = models.ForeignKey(CreditCard,
                                     null=True,
                                     default=None)
+    course = models.ForeignKey(Course,
+                               null=True,
+                               default=None)
 
 
 class PromoCode(models.Model):

@@ -30,9 +30,11 @@ def send_boleto_email(boleto_url, user, course):
     })
     subject = 'Boleto ' + course.name
     email = user.email
-    msg = EmailMultiAlternatives(subject=subject,
-                                 from_email='Equipe Direito em Tela <contato@direitoemtela.com.br>',
-                                 to=[email,])
+    msg = EmailMultiAlternatives(
+        subject=subject,
+        from_email='Equipe Direito em Tela <contato@direitoemtela.com.br>',
+        to=[email,]
+    )
     msg.attach_alternative(content, 'text/html')
     msg.send()
     return True
@@ -74,7 +76,8 @@ def generate_boleto(request, course_id):
         user=user,
         amount=course.price,
         description=course.name,
-        billing_type='BOLETO'
+        billing_type='BOLETO',
+        course=course
     )
     #updating the CPF in BillingInfo instance
     if update_cpf(request, user) is False:
@@ -115,10 +118,34 @@ def generate_boleto(request, course_id):
     #process response, get boleto url and return it
 
 
-def boleto_update(request):
-    #process if payment worked
-    payment_worked = True
-    if payment_worked is True:
-        #set payment as done
-        register_to_course(user.id, course.id)
+def send_payment_confirmation_email(user, course):
+    template = loader.get_template('email-payment-confirmation.djhtml')
+    content = template.render({
+        'user': user,
+        'course': course
+    })
+    subject = 'Pagamento confirmado!'
+    email = user.email
+    msg = EmailMultiAlternatives(
+        subject=subject,
+        from_email='Equipe Direito em Tela <contato@direitoemtela.com.br>',
+        to=[email,]
+    )
+    msg.attach_alternative(content, 'text/html')
+    msg.send()
+    return True
+    return True
 
+
+def payment_update(request):
+    if request.POST.get('event', '') == 'PAYMENT_RECEIVED':
+        payment_json = request.POST.get('payment', '')
+        payment_data = json.loads(payment_json)
+        payment = Payment.objects.get(id=int(payment_data['external_reference']))
+        payment.done = True
+        payment.save()
+        course = payment.course
+        user = payment.user
+        register_to_course(user.id, course.id)
+        send_boleto_confirmation_email(user, payment)
+        return HttpResponse('')
