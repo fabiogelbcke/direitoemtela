@@ -142,6 +142,7 @@ def send_payment_confirmation_email(user, course):
 
 def payment_update(request):
     if request.POST.get('event', '') == 'PAYMENT_RECEIVED':
+        print request.POST
         payment_json = request.POST.get('payment', '')
         logger.error(payment_json)
         payment_data = json.loads(payment_json)
