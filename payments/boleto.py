@@ -8,6 +8,7 @@ from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from django.core.mail import EmailMessage, EmailMultiAlternatives
 from django.template import loader
+import logging
 
 from urllib2 import Request, urlopen
 from urllib import quote_plus
@@ -20,6 +21,8 @@ from courses.utils import register_to_course
 from .models import Payment, BillingInfo
 from .forms import CPFForm
 from .utils import create_asaas_user, get_client_ip
+
+logger = logging.getLogger(__name__)
 
 def send_boleto_email(boleto_url, user, course):
     template = loader.get_template('email-boleto.djhtml')
@@ -140,6 +143,7 @@ def send_payment_confirmation_email(user, course):
 def payment_update(request):
     if request.POST.get('event', '') == 'PAYMENT_RECEIVED':
         payment_json = request.POST.get('payment', '')
+        logger.error(payment_json)
         payment_data = json.loads(payment_json)
         payment = Payment.objects.get(id=int(payment_data['external_reference']))
         payment.done = True
