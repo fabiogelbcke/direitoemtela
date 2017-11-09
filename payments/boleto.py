@@ -8,6 +8,7 @@ from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from django.core.mail import EmailMessage, EmailMultiAlternatives
 from django.template import loader
+from django.views.decorators.csrf import csrf_exempt
 import logging
 
 from urllib2 import Request, urlopen
@@ -140,6 +141,7 @@ def send_payment_confirmation_email(user, course):
     return True
 
 
+@csrf_exempt
 def payment_update(request):
     if request.POST.get('event', '') == 'PAYMENT_RECEIVED':
         print request.POST
