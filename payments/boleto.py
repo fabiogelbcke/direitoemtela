@@ -156,3 +156,4 @@ def payment_update(request):
         register_to_course(user.id, course.id)
         send_boleto_confirmation_email(user, payment)
         return HttpResponse('')
+    print request.POST
