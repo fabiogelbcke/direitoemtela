@@ -63,10 +63,13 @@ class Payment(models.Model):
                                     default='CREDIT_CARD')
     done = models.BooleanField(default=False)
     failed = models.BooleanField(default=False)
-    description = models.CharField(max_length=80)
+    description = models.CharField(max_length=80,
+                                   blank=True,
+                                   default='')
     credit_card = models.ForeignKey(CreditCard,
                                     null=True,
-                                    default=None)
+                                    default=None,
+                                    blank=True)
     course = models.ForeignKey(Course,
                                null=True,
                                default=None)
