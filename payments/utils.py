@@ -11,11 +11,11 @@ from datetime import timedelta
 import json
 
 from .forms import BillingInfoForm, CreditCardForm, PromoCodeForm
-from .models import Payment, BillingInfo, CreditCard
+from .models import Payment, BillingInfo, CreditCard, PromoCode
 from .asaas_customers import create_customer
 
 
-from courses.models import Course, PromoCode
+from courses.models import Course
 from courses.utils import register_to_course
 
 
