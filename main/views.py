@@ -43,3 +43,9 @@ class AboutView(TemplateView):
         context['subscribers'] = "{:,}".format(int(channel_info['subscriberCount'])).replace(',', '.')
         context['total_videos'] = channel_info['videoCount']
         return context
+
+class LoginView(IndexView):
+    def get_context_data(self, **kwargs):
+        context = super(LoginView, self).get_context_data(**kwargs)
+        context['login'] = True
+        return context

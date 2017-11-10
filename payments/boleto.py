@@ -143,18 +143,15 @@ def send_payment_confirmation_email(user, course):
 
 @csrf_exempt
 def payment_update(request):
-    if request.POST.get('event', '') == 'PAYMENT_RECEIVED':
-        print request.POST
-        payment_json = request.POST.get('payment', '')
-        logger.error(payment_json)
-        payment_data = json.loads(payment_json)
-        payment = Payment.objects.get(id=int(payment_data['external_reference']))
+    request_json = json.loads(request.body)
+    if request_json['event'] == 'PAYMENT_RECEIVED':
+        payment_id = int(request_json['payment']['externalReference'])
+        payment = Payment.objects.get(id=payment_id)
         payment.done = True
         payment.save()
         course = payment.course
         user = payment.user
         register_to_course(user.id, course.id)
-        send_boleto_confirmation_email(user, payment)
-        return HttpResponse('')
-    print request.body
-    print request.POST
+        send_payment_confirmation_email(user, payment)
+        return HttpResponse('Payment Processed')
+    return HttpResponse('Something else')

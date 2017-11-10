@@ -54,6 +54,7 @@ class CourseView(DetailView):
         return context
 
 
+@method_decorator(login_required, 'dispatch')
 @method_decorator(is_registered_to_course, 'dispatch')
 class CourseProgressView(DetailView):
     model = Course
