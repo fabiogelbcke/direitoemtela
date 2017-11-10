@@ -138,7 +138,6 @@ def send_payment_confirmation_email(user, course):
     msg.attach_alternative(content, 'text/html')
     msg.send()
     return True
-    return True
 
 
 @csrf_exempt
@@ -152,6 +151,6 @@ def payment_update(request):
         course = payment.course
         user = payment.user
         register_to_course(user.id, course.id)
-        send_payment_confirmation_email(user, payment)
+        send_payment_confirmation_email(user, course)
         return HttpResponse('Payment Processed')
     return HttpResponse('Something else')
