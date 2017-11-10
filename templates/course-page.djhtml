@@ -117,7 +117,7 @@
                         <h3 class="payment-form-head">Digite seu Código Promocional</h3>
                         <div class="inline-input">
                           <p class="paragraph-3">Código</p>
-                          <input class="round-text-field w-input" data-name="phone" id="phone" maxlength="12" name="code" placeholder="######" required="required" type="text">
+                          <input class="round-text-field w-input" data-name="phone" id="phone" maxlength="20" name="code" placeholder="######" required="required" type="text">
                         </div>
                         <input type="submit" value="Confirmar Inscrição" data-wait="Please wait..." class="button w-button">
                       </form>
