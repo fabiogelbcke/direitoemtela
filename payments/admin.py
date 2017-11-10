@@ -16,5 +16,6 @@ class PaymentAdmin(admin.ModelAdmin):
 
 
 admin.site.register(PromoCode, PromoCodeAdmin)
+admin.site.register(Payment, PaymentAdmin)
 
 # Register your models here.
