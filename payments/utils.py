@@ -194,7 +194,7 @@ def make_course_payment(request, course_id):
 
 
 @login_required
-def register_with_promo_code(request):
+def register_with_promo_code(request, course_id):
     user = request.user
     promo_code = request.POST.get('code', '')
     course = Course.objects.get(id=course_id)
