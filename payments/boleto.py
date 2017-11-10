@@ -125,6 +125,7 @@ def generate_boleto(request, course_id):
 def send_payment_confirmation_email(user, course):
     template = loader.get_template('email-payment-confirmation.djhtml')
     content = template.render({
+        'website_url': settings.WEBSITE_URL[:-1],
         'user': user,
         'course': course
     })
