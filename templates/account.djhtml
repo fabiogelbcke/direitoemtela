@@ -79,10 +79,12 @@
             <form method="POST" action="{% url 'change_password' %}" id="changepasswordform">
 	      {% csrf_token %}
               <div class="inline-input">
-                <p class="paragraph-3">Nova Senha</p><input class="round-text-field w-input" data-name="password" id="password" maxlength="256" name="password" required="required" type="password"></div>
+                <p class="paragraph-3">Nova Senha*</p><input class="round-text-field w-input" data-name="password" id="password" maxlength="256" name="password" required="required" type="password"></div>
               <div class="inline-input">
                 <p class="paragraph-3">Confirmar Senha</p><input class="round-text-field w-input" data-name="password_confirmation" id="password_confirmation" maxlength="256" name="password_confirmation" required="required" type="password">
-	      </div><input class="button w-button" data-wait="Please wait..." type="submit" value="Salvar">
+	      </div>
+	      <p class="light-grey-text" style="margin-top:-5px; margin-bottom:2px;">*A senha deve ter no mínimo 8 caracteres</p>
+	      <input class="button w-button" data-wait="Please wait..." type="submit" value="Salvar">
 	    </form>
           </div>
         </div>
