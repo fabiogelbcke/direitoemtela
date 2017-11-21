@@ -19,6 +19,18 @@ def get_thumbnail_path(instance, filename):
     filename = "%s.%s" % (shortuuid.uuid(), ext)
     return os.path.join('coursethumbnails', str(instance.id), filename)
 
+def get_slides_path(instance, filename):
+    ext = filename.split('.')[-1]
+    shortuuid.set_alphabet("abcdefghijklmnopqrstuvwxyz0123456789")
+    filename = "slides-%s.%s" % (shortuuid.uuid(), ext)
+    return os.path.join('files', str(instance.id), filename)
+
+def get_extra_materials_path(instance, filename):
+    ext = filename.split('.')[-1]
+    shortuuid.set_alphabet("abcdefghijklmnopqrstuvwxyz0123456789")
+    filename = "materiais-leitura-%s.%s" % (shortuuid.uuid(), ext)
+    return os.path.join('files', str(instance.id), filename)
+
 def certificate_identifier():
     shortuuid.set_alphabet("abcdefghijklmnopqrstuvwxyz0123456789")
     return shortuuid.uuid()
@@ -42,6 +54,18 @@ class Course(models.Model):
                                default='logodefault.png')
     thumbnail_ratio = ImageRatioField('thumbnail', '592x300')
     total_questions = models.IntegerField(default=0)
+    slides_file = models.FileField(
+        null=True,
+        blank=True,
+        default=None,
+        upload_to=get_slides_path
+    )
+    readings_file = models.FileField(
+        null=True,
+        blank=True,
+        default=None,
+        upload_to=get_extra_materials_path
+    )
 
 
     def __unicode__(self):

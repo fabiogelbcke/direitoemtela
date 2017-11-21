@@ -83,7 +83,7 @@
 		</div>
 		<div class="course-description-separator"></div>
 		<h3 class="course-description-section-title" style="margin-bottom:10px">Acertos nas questões</h3>
-		<ul style="font-size:17px;"><li>{{course_rel.correct_answers}} questões acertadas de {{course_rel.total_questions}} questões no curso</li><li>{{course_rel.questions_answered}} questões respondidas de {{course_rel.total_questions}} questões no curso</li><ul>
+		<ul style="font-size:17px;"><li>{{course_rel.correct_answers}} questões acertadas de {{course_rel.total_questions}} questões no curso</li><li>{{course_rel.questions_answered}} questões respondidas de {{course_rel.total_questions}} questões no curso</li></ul>
               </div>
             </div>
             <div class="w-col w-col-6">
@@ -101,6 +101,22 @@
                     <p class="course-outline-title">Testes resolvidos: {{tests_done}}/{{tests_total}}</p>
                   </div>
 		</div>
+		{% if course.readings_file or course.slides_file %}
+		<div class="course-description-separator"></div>
+		<h3 class="course-description-section-title">Downloads</h3>
+		<ul style="font-size:17px;">
+		  {% if course.slides_file %}
+		    <li>
+		      <a target="_blank" download="download"  href="{{course.slides_file.url}}" style="color:#4d565d; text-decoration:underline;">Baixar Todos os Slides</a>
+		    </li>
+		  {% endif %}
+		  {% if course.readings_file %}
+		    <li>
+		      <a target="_blank" download="download"  href="{{course.readings_file.url}}"  style="color:#4d565d; text-decoration:underline;">Baixar Todos os Materiais de Leitura</a>
+		    </li>
+		  {% endif %}
+		</ul>
+		{% endif %}
 		<div class="course-description-separator"></div>
 		<h3 class="course-description-section-title">Conteúdo Programático</h3>
 		{% for item_rel in item_rels %}
