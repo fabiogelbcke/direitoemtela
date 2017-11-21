@@ -43,7 +43,7 @@
                       <div class="thumbnail-image" style="background-image: url('{% cropped_thumbnail course 'thumbnail_ratio' max_size='296x150' %}')"></div>
                     </div>
                     <div class="thumbnail-text">
-                      <div class="blog-title">Minicurso {{course.name}}</div>
+                      <div class="blog-title">Minicurso de {{course.name}}</div>
                       <div class="preview-text">{{course.short_description}}</div>
                     </div>
                     <div class="thumb-details">
