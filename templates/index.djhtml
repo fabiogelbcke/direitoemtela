@@ -32,7 +32,7 @@
     <div class="bottom-padding main-section" id="posts">
 	<div class="w-container" id="Latest-post">
         <div class="section-heading">
-          <h2 class="section-title">Novos Minicursos de Direito!</h2>
+          <h2 class="section-title">Novos Minicursos de Direito com Certificados e Materiais Extra de Estudo!</h2>
           <div class="med-divider"></div>
 	  <div class="w-dyn-list">
             <div class="w-dyn-items w-row">
@@ -43,7 +43,7 @@
                       <div class="thumbnail-image" style="background-image: url('{% cropped_thumbnail course 'thumbnail_ratio' max_size='296x150' %}')"></div>
                     </div>
                     <div class="thumbnail-text">
-                      <div class="blog-title">{{course.name}}</div>
+                      <div class="blog-title">Minicurso {{course.name}}</div>
                       <div class="preview-text">{{course.short_description}}</div>
                     </div>
                     <div class="thumb-details">
