@@ -217,6 +217,14 @@
 	 ga('send', 'pageview');
 
 	</script>
+	<script>
+	  {% if user.is_authenticated %}
+	    {% if user.email %}
+	      $crisp.push(["set", "user:email", ["{{user.email}}"]]);
+	    {% endif %}
+	    $crisp.push(["set", "user:nickname", ["{{user.get_full_name}}"]]);
+	  {% endif %}
+	</script>
 	{% endcompress %}
 	
 	<!--[if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
