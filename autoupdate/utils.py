@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.conf import settings
 from django.core import files
+from django.core.mail import mail_admins
 from apiclient.errors import HttpError
 from oauth2client.tools import argparser
 from apiclient.discovery import build
@@ -204,7 +205,11 @@ def get_video_by_id(request):
             category_ids = get_category_ids()
             add_videos_to_categories(category_ids, video_ids)
             return HttpResponse('Video adicionado')
-        except:
+        except Exception as e:
+            mail_admins(
+                subject='error',
+                message=e
+            )
             return HttpResponse('Deu ruim')
     else:
         return HttpResponse('Deu ruim')    
