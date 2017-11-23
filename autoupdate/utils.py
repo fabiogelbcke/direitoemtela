@@ -206,11 +206,13 @@ def get_video_by_id(request):
             add_videos_to_categories(category_ids, video_ids)
             return HttpResponse('Video adicionado')
         except Exception as e:
+            print e
             mail_admins(
                 subject='error',
                 message=e
             )
             return HttpResponse('Deu ruim')
     else:
+        print 'oi'
         return HttpResponse('Deu ruim')    
         
