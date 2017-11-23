@@ -207,10 +207,12 @@ class UserCourseRelationship(models.Model):
     passed = models.BooleanField(default=False)
     start_date = models.DateTimeField(default=timezone.now)
     completion_date = models.DateTimeField(null=True,
-                                           default=None)
+                                           default=None,
+                                           blank=True)
     last_accessed_item = models.ForeignKey(CourseItem,
                                            null=True,
-                                           default=None)
+                                           default=None,
+                                           blank=True)
     certificate = models.OneToOneField('Certificate',
                                        related_name='course_rel',
                                        null=True,
