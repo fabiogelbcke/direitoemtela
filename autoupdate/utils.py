@@ -197,6 +197,8 @@ def get_new_videos():
 @staff_member_required
 def get_video_by_id(request):
     video_id = request.POST.get('video_id', None)
+    if video_id is None:
+        video_id = request.GET.get('video_id', None)
     if video_id:
         try:
             video_ids=[video_id]
