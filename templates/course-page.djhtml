@@ -12,7 +12,7 @@
                 <h1 class="payment-title">O que você recebe com o curso?</h1>
                 <ul class="course-features-list">
                   <li>Acesso a todo o material do curso por 6 meses</li>
-                  <li>Certificado de conclusão de curso (mediante aprovação com 60% ou mais de média nas provas)</li>
+                  <li>Certificado de conclusão de curso (mediante aprovação com 50% ou mais de média nas provas)</li>
                   <li>Material de estudo em PDF preparado especialmente para estudo independente dos vídeos e revisão para provas</li>
                   <li>Slides das aulas dispibonibilizados para download</li>
                 </ul>
@@ -256,7 +256,7 @@
 	    <div class="course-description-separator"></div>
 	    <div>
               <h3 class="course-description-section-title">Nota para Aprovação</h3>
-              <h1 class="course-price">60%</h1>
+              <h1 class="course-price">50%</h1>
             </div>
             <div class="course-description-separator"></div>
             <div>

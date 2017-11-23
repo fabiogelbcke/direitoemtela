@@ -202,7 +202,7 @@ class UserCourseRelationship(models.Model):
     correct_answers = models.IntegerField(default=0)
     questions_answered = models.IntegerField(default=0)
     total_questions = models.IntegerField(default=0)
-    passing_grade = models.IntegerField(default=60)
+    passing_grade = models.IntegerField(default=50)
     completed = models.BooleanField(default=False)
     passed = models.BooleanField(default=False)
     start_date = models.DateTimeField(default=timezone.now)
