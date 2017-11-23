@@ -216,7 +216,8 @@ class UserCourseRelationship(models.Model):
     certificate = models.OneToOneField('Certificate',
                                        related_name='course_rel',
                                        null=True,
-                                       default=None)
+                                       default=None,
+                                       blank=True)
 
     def percentage(self):
         if self.total_questions == 0:
