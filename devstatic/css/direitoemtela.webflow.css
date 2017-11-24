@@ -533,11 +533,21 @@ img {
 }
 
 .submit-button {
-  display: block;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   width: 25%;
   height: 50px;
-  border-top-right-radius: 3px;
-  border-bottom-right-radius: 3px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-radius: 5px;
   background-color: hsla(0, 0%, 100%, .28);
   -webkit-transition: background-color 350ms ease, color 350ms ease;
   transition: background-color 350ms ease, color 350ms ease;
@@ -2305,7 +2315,7 @@ img {
 .base-popup {
   position: relative;
   width: 450px;
-  height: 365px;
+  height: 390px;
   max-width: 100%;
   margin-right: auto;
   margin-left: auto;
@@ -2350,10 +2360,18 @@ img {
   background-size: 60px 60px;
 }
 
-.division {
+.login-popup-division {
   position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   margin-top: 15px;
   margin-bottom: 15px;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
 }
 
 .line {
@@ -2364,7 +2382,7 @@ img {
 }
 
 .line.left {
-  position: absolute;
+  position: static;
   left: 0px;
   top: 0px;
   bottom: 0px;
@@ -2375,6 +2393,7 @@ img {
 }
 
 .line.right {
+  position: static;
   top: 0px;
   right: 0px;
   bottom: 0px;
@@ -2387,6 +2406,10 @@ img {
   margin-bottom: 0px;
   font-family: Gotham, sans-serif;
   color: #81878b;
+}
+
+.light-grey-text.margin-top {
+  margin-top: 3px;
 }
 
 .login-form-block {
@@ -2402,9 +2425,30 @@ img {
   text-decoration: underline;
 }
 
+.light-blue-link.show-signup-form {
+  margin-top: 7px;
+}
+
+.light-blue-link.show-signup-form.grey {
+  margin-top: 7px;
+  color: #4d565d;
+  font-size: 15px;
+}
+
 .login-form {
-  display: block;
-  margin-bottom: 15px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .signup-form-block {
@@ -4202,6 +4246,26 @@ img {
   color: #dbdbdb;
 }
 
+.forgot-password-divisor {
+  height: 1px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-top: 1px solid #bec3c7;
+}
+
+.forgot-password-div {
+  display: none;
+}
+
+.forgot-password-title {
+  margin-top: 5px;
+  line-height: 22px;
+}
+
+.forgotten-password-email-sent-div {
+  display: none;
+}
+
 html.w-mod-js *[data-ix="navbar"] {
   opacity: 0;
 }
@@ -5699,6 +5763,10 @@ html.w-mod-js *[data-ix="zero-opacity-initially"] {
     width: 95%;
     margin-right: auto;
     margin-left: auto;
+  }
+  .forgot-password-title {
+    margin-bottom: 5px;
+    font-size: 15px;
   }
 }
 

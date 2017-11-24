@@ -63,7 +63,7 @@
               <a rel="nofollow" class="linkedin-login-button social-login-button w-inline-block" href="{% url 'social:begin' 'linkedin-oauth2' %}?next={{ request.path }}"></a>
 	      {% endif %}
             </div>
-            <div class="division">
+            <div class="login-popup-division">
               <div class="left line"></div>
               <p class="light-grey-text">ou</p>
               <div class="line right"></div>
@@ -80,7 +80,7 @@
 		<input rel="nofollow" class="button w-button" data-wait="Please wait..." type="submit" value="Entrar">
               </form>
               <p class="light-grey-text">Ainda não tem uma conta?</p>
-	      <a class="light-blue-link show-signup-form" data-ix="show-signup-form" href="#">Clique aqui para cadastrar-se</a>
+	      <a class="light-blue-link show-signup-form" id="sign-up-button" data-ix="show-signup-form" href="#">Clique aqui para cadastrar-se</a>
             </div>
             <div class="signup-form-block">
               <form class="login-form" action="{% url 'register' %}" id="registration-form" method="POST" data-name="Email Form 4" id="email-form-4" name="email-form-4">
@@ -151,17 +151,13 @@
       {% if not user.is_authenticated %}
       <div class="w-container">
         <div class="section-heading">
-          <h2 class="white">Receba as novas aulas diretamente em seu email!</h2>
+          <h2 class="white">Registre-se para acessar os novos minicursos e receber nossas notícias!</h2>
 	  <div class="med-divider"></div>
         </div>
-	<h2 class="hidden white" id="mailing-success-msg">Email cadastrado com sucesso!</h2>
         <div class="form-wrapper">
-          <form action="{% url 'add_to_mailing_list' %}" method="POST" class="w-clearfix mailing-form" data-name="Email Form" id="mailing-form" name="email-form">
-	    {% csrf_token %}
-            <input class="field w-input" data-name="Email" id="mailing-email-input" maxlength="256" name="email" placeholder="Qual é seu endereço de email?" required="required" type="email">
-            <input class="submit-button w-button" data-ix="mailing-spinner" data-wait="Please wait..." type="submit" value="Enviar" id="mailing-submit">
-	    <h3 class="hidden white" id="mailing-error-msg">Email inválido!</h3><img class="spinner" src="{% static 'images/default-2.svg'%}">
-          </form>
+	  <div class="mailing-form">
+            <a class="submit-button w-button" data-ix="show-login-popup" onclick="$('#sign-up-button').click();">Registrar-se</a>
+	  </div>
         </div>
       </div>
       {% endif %}
