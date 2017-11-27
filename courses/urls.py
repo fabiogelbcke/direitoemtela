@@ -2,7 +2,8 @@ from django.conf.urls import url, include
 from django.views.generic import TemplateView
 
 from .views import (CourseView, dashboard_courses, CourseItemView,
-                    CourseProgressView, CertificateView, CertificatePrint)
+                    CourseProgressView, CertificateView, CertificatePrint,
+                    CoursePaymentView)
 from .utils import (set_item_done, admin_register_to_course,
                     admin_unregister_from_course)
 from .generate_certificate import send_pdf_email
@@ -12,6 +13,9 @@ urlpatterns = [
     url(r'^course/(?P<course_id>\d+)$',
         CourseView.as_view(),
         name='course_page'),
+    url(r'^coursepay/(?P<course_id>\d+)$',
+        CoursePaymentView.as_view(),
+        name='course_payment_page'),
     url(r'^course/progress/(?P<course_id>\d+)$',
         CourseProgressView.as_view(),
         name='course_progress'),

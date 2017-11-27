@@ -9,6 +9,7 @@ from django.http import HttpResponse
 from django.template import RequestContext, loader
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.decorators.csrf import requires_csrf_token
+from django.urls import reverse
 
 from coursetests.models import UserQuestionRelationship
 
@@ -49,8 +50,26 @@ class CourseView(DetailView):
                 context['billing_info'] = user.billing_info
             if course.is_registered(user):
                 context['course_rel'] = course.course_rels.get(user=user)
+        else:
+            page_after_login = reverse(
+                'course_payment_page',
+                kwargs={'course_id':str(course.id),}
+            )
+            context['page_after_login'] = page_after_login
+        
         context['course_items'] = course.items.all().order_by('position')
         context['error_msg'] = self.request.GET.get('error_msg', '')
+        return context
+
+    
+class CoursePaymentView(CourseView):
+    
+    def get_context_data(self, **kwargs):
+        context = super(CoursePaymentView, self).get_context_data(**kwargs)
+        user = self.request.user
+        course = self.object
+        if user.is_authenticated() and course.is_registered(user) is False:
+            context['show_payment_div'] = True
         return context
 
 

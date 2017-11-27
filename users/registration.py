@@ -3,6 +3,8 @@ from __future__ import unicode_literals
 
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.contrib.auth import authenticate, login
+from django.conf import settings
+from django.urls import reverse
 
 from .models import MyUser
 from .forms import UserForm
@@ -19,8 +21,7 @@ def register(request):
             return HttpResponseBadRequest('A senha e a confirmação não batem!')
         if validate_password(password) is False:
             return HttpResponseBadRequest(
-                'A senha deve ter ao menos 8 caracteres, '
-                'entre eles uma letra e um número!'
+                'A sua senha deve ter ao menos 8 caracteres!'
             )
         user.username = user.email
         user.set_password(password)
@@ -28,7 +29,9 @@ def register(request):
         user = authenticate(username=user.email,
                             password=password)
         login(request, user)
-        return HttpResponse('Registrado!')
+        next_page_url = request.GET.get('next', '/')
+        next_page_url = settings.WEBSITE_URL[:-1] + next_page_url
+        return HttpResponse(next_page_url)
     else:
         return HttpResponseBadRequest(
             'Não foi possivel concluir o seu registro. '

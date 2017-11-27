@@ -159,17 +159,23 @@ def make_course_payment(request, course_id):
     course = Course.objects.get(id=course_id)
     ip_addr = get_client_ip(request)
     if update_billing_info(request, user) is False:
-        return HttpResponseBadRequest(
+        response = redirect('course_page', course_id=course_id)
+        error_msg =  (
             'Houve um problema. Verifique seu telefone e '
             'cpf e tente novamente.'
         )
+        response['Location'] += '?error_msg=' + quote_plus(error_msg)
+        return response
     if not user.billing_info.asaas_id:
         customer_id = create_asaas_user(user)
         if customer_id is None:
-            return HttpResponseBadRequest(
-                'Houve um problema. Verifique seus dados e '
-                'tente novamente.'
+            response = redirect('course_page', course_id=course_id)
+            error_msg =  (
+                'Houve um problema. Verifique que todos os dados estão '
+                'preenchidos corretamente e tente novamente.'
             )
+            response['Location'] += '?error_msg=' + quote_plus(error_msg)
+            return response
     cc_form = CreditCardForm(request.POST)
     if not cc_form.is_valid():
         response = redirect('course_page', course_id=course_id)
@@ -184,7 +190,7 @@ def make_course_payment(request, course_id):
         ip_addr
     )
     if payment_worked is False:
-        response = redirect('course_page', slug=course_id)
+        response = redirect('course_page', course_id=course_id)
         error_msg =  ('Não foi possível realizar a cobrança. Cheque '
                       'os dados do cartão e tente novamente.')
         response['Location'] += '?error_msg=' + quote_plus(error_msg)

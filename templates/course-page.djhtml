@@ -2,7 +2,7 @@
 {% load staticfiles %}{% load cropping %}
 {% block hiddencontent %}
   {{block.super}}
-  <div class="payment-popup" {% if error_msg %}style="display:block;"{% endif %}>
+  <div class="payment-popup" {% if error_msg or show_payment_div %}style="display:block;"{% endif %}>
     <div class="modal-wrapper">
       <div class="w-container">
         <div class="payment-block"><a class="close-popup-button" data-ix="close-trailer" href="#">Fechar <strong>X</strong></a>
@@ -37,7 +37,7 @@
 		<div class="w-tab-content">
                   <div data-w-tab="Tab 1" class="w--tab-active w-tab-pane">
 		    <div class="">
-		      <form action="{% url 'pay_course' course_id=course.id %}" method="POST" data-name="Email Form 2" id="email-form-2" name="email-form-2">
+		      <form action="{% url 'pay_course' course_id=course.id %}" method="POST" id="cc-form">
 			{% csrf_token %}
 			<h3 class="payment-form-head">Informações do Cartão</h3>
 			<div class="inline-input">
@@ -87,7 +87,10 @@
 			  <p class="hidden-mobile paragraph-3">CPF (Somente números)</p>
 			  <input class="round-text-field w-input" data-name="cpf" id="cpf" maxlength="256" name="cpf" placeholder="00000000000" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" value="{{billing_info.cpf}}">
 			</div>
-			<input class="button w-button" data-wait="Please wait..." type="submit" value="Confirmar">
+			<a class="button w-button" id="cc-form-submit-button" onclick="$('#payment-error-div').hide(); $('.payment-spinner-div').css('display', 'flex');$('#cc-form-submit-button').hide();$('#cc-form').delay(20000).submit()">Confirmar</a>
+			<div class="payment-spinner-div">
+			  <img src="{% static 'images/spinner-loading-to-widget.gif'%}" height="50" width="50">
+			</div>
 		      </form>
 		    </div>
 		  </div>
