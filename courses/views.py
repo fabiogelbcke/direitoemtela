@@ -187,27 +187,27 @@ class CourseItemView(LoginRequiredMixin, DetailView):
         complementary_materials = video.complementary_materials.all()
         context['complementary_links'] = [m for m in complementary_materials if m.is_link()]
         context['complementary_files'] = [m for m in complementary_materials if m.is_file()]
-        print len(context['complementary_links'])
-        print len(context['complementary_files'])
         return context
 
     def get_context_data(self, **kwargs):
         user = self.request.user
         context = super(CourseItemView, self).get_context_data(**kwargs)
         course = Course.objects.get(id=self.kwargs['course_id'])
-        total_items = CourseItem.objects.filter(course=course).count()
         pos = int(self.kwargs['position'])
-        min_pos, max_pos = get_items_range(pos, total_items)
         user_item_rels = UserItemRelationship.objects.filter(
             user=user,
-            course_item__course=course,
-            course_item__position__gte=min_pos,
-            course_item__position__lte=max_pos
+            course_item__course=course
         ).order_by('course_item__position')
+        total_items = user_item_rels.count()
         course_rel = UserCourseRelationship.objects.get(
                     course=course,
                     user=user
         )
+        #initial margin sets the scrollable progress indicator bar to the right position
+        #progress bar initial position represents how many times its been "scrolled"
+        context['progress_bar_initial_position'] = (pos/15)
+        context['initial_margin'] = 100*(pos/15)
+        context['maximum_scrolls'] = total_items/15
         context['user_item_rels'] = user_item_rels
         context['course'] = course
         context['total_steps'] = course.items.all().count()

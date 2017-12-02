@@ -24,29 +24,35 @@
           </div>
           <div class="course-video-div">
             <div class="progress-indicator-div">
+	      <div class="progress-bar-arrow-div"  id="move-items-right">
+		<img src="{% static 'images/arrowleft.png'%}" class="progress-bar-arrow">
+	      </div>
               <div class="progress-indicator">
+		<div class="changeable-margin-div">
+		</div>
+
 		{% for item_rel in user_item_rels %}
 		  {% with item_rel.course_item as item %}
-		    <div>
-		      {% if item_rel.course_item == course_item %}
+		    <div class="course-step-wrapper">
+		      		      {% if item_rel.course_item == course_item %}
 			{% if item_rel.done is True %}
-			  <a class="course-step done-step current" data-ix="new-interaction-3" href="{% url 'course_item' course_id=course.id position=item.position %}"><img class="step-image current" src="{% cropped_thumbnail user 'profile_ratio' height=30 %}" width="30" height="30">
+			  <a class="course-step done-step current" data-ix="new-interaction-3" href="{% url 'course_item' course_id=course.id position=item.position %}"><img class="step-image current" src="{% cropped_thumbnail user 'profile_ratio' height=30 %}">
 			  </a>
 			{% else %}
-			  <a class="course-step current" data-ix="new-interaction-3" href="{% url 'course_item' course_id=course.id position=item.position %}"><img class="step-image current" src="{% cropped_thumbnail user 'profile_ratio' height=30 %}" width="30" height="30">
+			  <a class="course-step current" data-ix="new-interaction-3" href="{% url 'course_item' course_id=course.id position=item.position %}"><img class="step-image current" src="{% cropped_thumbnail user 'profile_ratio' height=30 %}">
 			  </a>
 			{% endif %}
 		      {% elif item_rel.done is True %}
-			<a class="course-step done-step" data-ix="new-interaction-3" href="{% url 'course_item' course_id=course.id position=item.position %}"><img class="step-image" src="{% static 'images/checkicon-white.png'%}" width="35" height="36">
+			<a class="course-step done-step" data-ix="new-interaction-3" href="{% url 'course_item' course_id=course.id position=item.position %}"><img class="step-image" src="{% static 'images/checkicon-white.png'%}">
 			  </a>
 			{% elif item.type == 'video' %}
-			  <a class="course-step" data-ix="new-interaction-3" href="{% url 'course_item' course_id=course.id position=item.position %}"><img class="step-image" src="{% static 'images/playicon-white.png'%}" width="35">
+			  <a class="course-step" data-ix="new-interaction-3" href="{% url 'course_item' course_id=course.id position=item.position %}"><img class="step-image" src="{% static 'images/playicon-white.png'%}">
 			  </a>
 			{% elif item.type == 'reading' %}
-			  <a class="course-step" data-ix="new-interaction-3" href="{% url 'course_item' course_id=course.id position=item.position %}"><img class="step-image" src="{% static 'images/readingicon-white.png'%}" width="35">
+			  <a class="course-step" data-ix="new-interaction-3" href="{% url 'course_item' course_id=course.id position=item.position %}"><img class="step-image" src="{% static 'images/readingicon-white.png'%}">
 			  </a>
 			{% elif item.type == 'test' %}
-			  <a class="course-step" data-ix="new-interaction-3" href="{% url 'course_item' course_id=course.id position=item.position %}"><img class="step-image" src="{% static 'images/testicon-white.png'%}" width="35">
+			  <a class="course-step" data-ix="new-interaction-3" href="{% url 'course_item' course_id=course.id position=item.position %}"><img class="step-image" src="{% static 'images/testicon-white.png'%}">
 			  </a>
 			{% endif %}
 			<div class="item-details-popup">
@@ -57,7 +63,10 @@
 		      </div>
 		  {% endwith %}
 		{% endfor %}
-              </div>
+	      </div>
+	      <div class="progress-bar-arrow-div" id="move-items-left">
+		<img src="{% static 'images/arrowright.png'%}" width="16" class="progress-bar-arrow">
+	      </div>
             </div>
 	    {% if course_item.type == 'test' %}
 	      {% with course_item.test as test %}
@@ -337,8 +346,37 @@
 	       gradient: ["red", "orange"]
 	   }
        });
+       
       </script>
 
     {% endif %}
-  {% endif %}
+   {% endif %}
+   <script>
+    var progressBarCurrentPos = {{progress_bar_initial_position}};
+    var maximumScrolls = {{maximum_scrolls}};
+    $(".changeable-margin-div").animate({
+	"marginRight": "-{{initial_margin}}%",
+    }, 100);
+    
+    $("#move-items-left").click(function(){
+	if (progressBarCurrentPos != maximumScrolls){
+	    var scrollDiv = $(".changeable-margin-div").first();
+	    scrollDiv.animate({
+		"marginRight": "-=100%",
+		
+	    }, 500);
+	    progressBarCurrentPos += 1;
+	}
+    });
+    $("#move-items-right").click(function(){
+	if (progressBarCurrentPos > 0){
+	    var scrollDiv = $(".changeable-margin-div").first();
+	    scrollDiv.animate({
+		"marginRight": "+=100%",
+		
+	    }, 500);
+	    progressBarCurrentPos -= 1;
+	}
+    });
+   </script>
 {% endblock %}
