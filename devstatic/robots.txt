@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /complete/
+Disallow: /email_login
+Disallow: /register
+Disallow: /admin
+Disallow: /resetarsenha
+Disallow: /pwresetemail
+Disallow: /pwresetconfirmed
