@@ -4349,6 +4349,35 @@ img {
   align-items: center;
 }
 
+.login-error-block {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 450px;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 10px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-radius: 5px;
+  background-color: #e07776;
+}
+
+.login-error-msg-text {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  color: #f5f5f5;
+  font-size: 18px;
+  line-height: 24px;
+}
+
 html.w-mod-js *[data-ix="navbar"] {
   opacity: 0;
 }
@@ -5898,6 +5927,12 @@ html.w-mod-js *[data-ix="hide-on-load"] {
   .forgot-password-title {
     margin-bottom: 5px;
     font-size: 15px;
+  }
+  .login-error-block {
+    max-width: 100%;
+  }
+  .login-error-msg-text {
+    font-size: 16px;
   }
 }
 

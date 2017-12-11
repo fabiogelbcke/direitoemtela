@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.template import loader
 from django.shortcuts import redirect
+from django.contrib.auth import update_session_auth_hash
 
 
 import string
@@ -37,9 +38,9 @@ def change_password(request):
             'A senha deve ter ao menos 8 caracteres, '
             'entre eles uma letra e um número!'
         )
-    
     user.set_password(password)
     user.save()
+    update_session_auth_hash(request, request.user)
     return HttpResponse('Senha Alterada!')
 
 

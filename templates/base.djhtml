@@ -48,7 +48,7 @@
     </div>
     <div style="display:none;"><div id="showsuccessblockbutton" data-ix="show-success-block">teste</div><div id="showerrorblockbutton" data-ix="show-error-block">teste</div></div>
     {% block hiddencontent %}
-      <div class="login-popup" {% if login is True %}style="display:block;"{% else %}data-ix="hide-on-load"{% endif %}>
+      <div class="login-popup" {% if login is True or request.GET.login_error%}style="display:block;"{% else %}data-ix="hide-on-load"{% endif %}>
 	<div class="modal-wrapper">
 	  <div class="base-popup"><a class="close-popup-button" data-ix="close-login-popup" href="#">Fechar X</a>
             <div class="social-login-div">
@@ -125,7 +125,12 @@
 		    </form>
 		    <p class="light-grey-text">Já tem uma conta?</p><a class="light-blue-link show-login-form" data-ix="show-login-form" href="#">Clique aqui para entrar</a>
             </div>
+			  </div>
+	  {% if request.GET.login_error %}
+	  <div class="login-error-block">
+            <h2 class="login-error-msg-text">{{request.GET.login_error}}</h2>
 	  </div>
+	  {% endif %}
 	</div>
       </div>
     {% endblock %}
