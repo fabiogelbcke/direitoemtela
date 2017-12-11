@@ -10,6 +10,7 @@ class VideoAdmin(ImageCroppingMixin, admin.ModelAdmin):
     model = Video
     list_display = ('id', 'title', 'description', 'yt_id', 'date_created')
     inlines = [ComplementaryMaterialAdmin,]
+    search_fields = ('title', )
     
 class TagAdmin(admin.ModelAdmin):
     model = Tag
