@@ -93,3 +93,6 @@ def save_cropped_photo(request):
         return HttpResponse('Foto Salva!')
     return HttpResponseBadRequest('Houve um problema ao salvar a foto')
     
+
+def reset_password_confirm(request):
+    return True

@@ -19,9 +19,9 @@
       <link href="{% static 'css/direitoemtela.webflow.css'%}" rel="stylesheet" type="text/css">
       {% endcompress %}
       <style>
-      {% block styles %}
-	
-      {% endblock %}
+       {% block styles %}
+       
+       {% endblock %}
       </style>
       <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
       <script type="text/javascript">
@@ -36,55 +36,73 @@
       <link href="https://daks2k3a4ib2z.cloudfront.net/img/webclip.png" rel="apple-touch-icon">
       <script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="9c1f124a-994e-4da9-aba1-c779b519bd10";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
     </head>
-{% endblock %}
-<body>
-  <div data-ix="zero-opacity-initially" class="success-notification">
-    <p class="success-icon">✔︎</p>
-    <div class="success-block-msg" id="success-block-msg">Senha Alterada!</div>
-  </div>
-  <div data-ix="zero-opacity-initially" class="error-notification" style="z-index:99999999 !important;">
-    <p class="error-logo">!</p>
-    <div class="error-block-msg" id="error-block-msg">A sua senha deve ter no mínimo 8 caracteres.</div>
-  </div>
-  <div style="display:none;"><div id="showsuccessblockbutton" data-ix="show-success-block">teste</div><div id="showerrorblockbutton" data-ix="show-error-block">teste</div></div>
-  {% block hiddencontent %}
-      <div class="login-popup" {% if login is True %}style="display:block;"{% endif %}>
+  {% endblock %}
+  <body>
+    <div data-ix="zero-opacity-initially" class="success-notification">
+      <p class="success-icon">✔︎</p>
+      <div class="success-block-msg" id="success-block-msg">Senha Alterada!</div>
+    </div>
+    <div data-ix="zero-opacity-initially" class="error-notification" style="z-index:99999999 !important;">
+      <p class="error-logo">!</p>
+      <div class="error-block-msg" id="error-block-msg">A sua senha deve ter no mínimo 8 caracteres.</div>
+    </div>
+    <div style="display:none;"><div id="showsuccessblockbutton" data-ix="show-success-block">teste</div><div id="showerrorblockbutton" data-ix="show-error-block">teste</div></div>
+    {% block hiddencontent %}
+      <div class="login-popup" {% if login is True %}style="display:block;"{% else %}data-ix="hide-on-load"{% endif %}>
 	<div class="modal-wrapper">
 	  <div class="base-popup"><a class="close-popup-button" data-ix="close-login-popup" href="#">Fechar X</a>
             <div class="social-login-div">
 	      {% if request.GET.next %}
-              <a rel="nofollow" class="facebook-login social-login-button w-inline-block" href="{% url 'social:begin' 'facebook' %}?next={{ request.GET.next }}"></a>
-              <a rel="nofollow" class="google-login-button social-login-button w-inline-block" href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.GET.next }}"></a>
-              <a rel="nofollow" class="linkedin-login-button social-login-button w-inline-block" href="{% url 'social:begin' 'linkedin-oauth2' %}?next={{ request.GET.next }}"></a>
+		<a rel="nofollow" class="facebook-login social-login-button w-inline-block" href="{% url 'social:begin' 'facebook' %}?next={{ request.GET.next }}"></a>
+		<a rel="nofollow" class="google-login-button social-login-button w-inline-block" href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.GET.next }}"></a>
+		<a rel="nofollow" class="linkedin-login-button social-login-button w-inline-block" href="{% url 'social:begin' 'linkedin-oauth2' %}?next={{ request.GET.next }}"></a>
 	      {% elif page_after_login %}
-	      <a rel="nofollow" class="facebook-login social-login-button w-inline-block" href="{% url 'social:begin' 'facebook' %}?next={{ page_after_login }}"></a>
-              <a rel="nofollow" class="google-login-button social-login-button w-inline-block" href="{% url 'social:begin' 'google-oauth2' %}?next={{ page_after_login }}"></a>
-              <a rel="nofollow" class="linkedin-login-button social-login-button w-inline-block" href="{% url 'social:begin' 'linkedin-oauth2' %}?next={{ page_after_login }}"></a>
+		<a rel="nofollow" class="facebook-login social-login-button w-inline-block" href="{% url 'social:begin' 'facebook' %}?next={{ page_after_login }}"></a>
+		<a rel="nofollow" class="google-login-button social-login-button w-inline-block" href="{% url 'social:begin' 'google-oauth2' %}?next={{ page_after_login }}"></a>
+		<a rel="nofollow" class="linkedin-login-button social-login-button w-inline-block" href="{% url 'social:begin' 'linkedin-oauth2' %}?next={{ page_after_login }}"></a>
 	      {% else %}
-              <a rel="nofollow" class="facebook-login social-login-button w-inline-block" href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}"></a>
-              <a rel="nofollow" class="google-login-button social-login-button w-inline-block" href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}"></a>
-              <a rel="nofollow" class="linkedin-login-button social-login-button w-inline-block" href="{% url 'social:begin' 'linkedin-oauth2' %}?next={{ request.path }}"></a>
+		<a rel="nofollow" class="facebook-login social-login-button w-inline-block" href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}"></a>
+		<a rel="nofollow" class="google-login-button social-login-button w-inline-block" href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}"></a>
+		<a rel="nofollow" class="linkedin-login-button social-login-button w-inline-block" href="{% url 'social:begin' 'linkedin-oauth2' %}?next={{ request.path }}"></a>
 	      {% endif %}
-            </div>
-            <div class="login-popup-division">
-              <div class="left line"></div>
-              <p class="light-grey-text">ou</p>
-              <div class="line right"></div>
-            </div>
+	    </div>
+	    <div class="login-popup-division">
+	      <div class="line left"></div>
+	      <p class="light-grey-text">ou</p>
+	      <div class="line right"></div>
+	    </div>
+
             <div class="login-form-block">
-	      {% if request.GET.next %}
-		<form class="login-form" method="POST" action="{% url 'email_login' %}?next={{request.GET.next}}">
+		      {% if request.GET.next %}
+		  <form class="login-form" method="POST" action="{% url 'email_login' %}?next={{request.GET.next}}">
 	      {% elif page_after_login %}
-		  <form class="login-form" method="POST" action="{% url 'email_login' %}?next={{page_after_login}}">
+		    <form class="login-form" method="POST" action="{% url 'email_login' %}?next={{page_after_login}}">
+	      {% else %}
+		      <form class="login-form" method="POST" action="{% url 'email_login' %}?next={{request.path}}">
 	      {% endif %}
-		{% csrf_token %}
-		<input class="form-input w-input" data-name="email" id="email-3" maxlength="256" name="email" placeholder="Email" type="email" required="required">
-		<input class="form-input w-input" data-name="password" id="password" maxlength="256" name="password" placeholder="Senha" required="required" type="password">
-		<input rel="nofollow" class="button w-button" data-wait="Please wait..." type="submit" value="Entrar">
-              </form>
-              <p class="light-grey-text">Ainda não tem uma conta?</p>
-	      <a class="light-blue-link show-signup-form" id="sign-up-button" data-ix="show-signup-form" href="#">Clique aqui para cadastrar-se</a>
-            </div>
+	      {% csrf_token %}
+	      <input class="form-input w-input" data-name="email" id="email-3" maxlength="256" name="email" placeholder="Email" type="email" required="required">
+	      <input class="form-input w-input" data-name="password" id="password" maxlength="256" name="password" placeholder="Senha" required="required" type="password">
+	      <input rel="nofollow" class="button w-button" data-wait="Please wait..." type="submit" value="Entrar">
+	      <a href="#" data-ix="show-forgotten-passowrd-div" class="light-blue-link show-signup-form">Esqueceu sua senha?</a>
+		  </form>
+		  <div class="forgot-password-divisor">
+		  </div>
+		  <p class="light-grey-text">Ainda não tem uma conta?</p>
+		  <a class="light-blue-link show-signup-form" id="sign-up-button" data-ix="show-signup-form" href="#">Clique aqui para cadastrar-se</a>
+	    </div>
+	    <div class="forgot-password-div" id="forgot-password-div">
+              <h3 class="forgot-password-title" id="forgot-password-form-title">Digite seu email que lhe enviaremos um link para resetar sua senha!</h3>
+              <div class="" id="forgot-password-form-div">
+		<form method="POST" action="{% url 'send_password_reset_email' %}" id="password-reset-email-form">
+		  {% csrf_token %}
+		  <input type="text" class="form-input w-input" maxlength="256" name="email" data-name="email" placeholder="Digite seu email" id="email-7" required="">
+		  <input type="submit" value="Enviar" data-wait="Please wait..." class="button w-button">
+		</form>
+              </div>
+              <div class="forgotten-password-email-sent-div" id="forgotten-password-email-sent-div" data-ix="show-login-hide-lost-password">
+		<h3 class="forgot-password-title">Email enviado!<br>Confira sua caixa de email, e, caso não o tenha recebido, a caixa de spam.</h3><a href="#" class="button w-button" data-ix="show-login-hide-lost-password">Entrar</a></div>
+	    </div>
             <div class="signup-form-block">
 	      {% if request.GET.next %}
 		<form class="login-form" action="{% url 'register' %}?next={{request.GET.next}}" id="registration-form" method="POST" data-name="Email Form 4" id="email-form-4" name="email-form-4">
@@ -93,148 +111,145 @@
 	      {% else %}
 		    <form class="login-form" action="{% url 'register' %}?next={{request.path}}" id="registration-form" method="POST" data-name="Email Form 4" id="email-form-4" name="email-form-4">
 	      {% endif %}
-		{% csrf_token %}
-		<div class="div-block-4">
-		  <input class="form-input name-input w-input" data-name="first_name" id="first_name" maxlength="256" name="first_name" placeholder="Nome" type="text">
-		  <div class="gap"></div>
-		  <input class="form-input name-input w-input" data-name="last_name" id="last_name" maxlength="256" name="last_name" placeholder="Sobrenome" type="text">
-		</div>
-		<input class="form-input w-input" data-name="email" id="email-5" maxlength="256" name="email" placeholder="Email" required="required" type="email">
-		<input class="form-input w-input" data-name="password" id="password-2" maxlength="256" name="password" placeholder="Senha" required="required" type="password">
-		<input class="form-input w-input" data-name="password_confirmation" id="password_confirmation" maxlength="256" name="password_confirmation" placeholder="Confirme a Senha" required="required" type="password">
-		<p class="light-grey-text" style="margin-top:-5px; margin-bottom:2px;">*A senha deve ter no mínimo 8 caracteres</p>
-		<input rel="nofollow" class="button w-button" data-wait="Please wait..." type="submit" value="Cadastrar-se">
-              </form>
-              <p class="light-grey-text">Já tem uma conta?</p><a class="light-blue-link show-login-form" data-ix="show-login-form" href="#">Clique aqui para entrar</a>
+	      {% csrf_token %}
+	      <div class="div-block-4">
+		<input class="form-input name-input w-input" data-name="first_name" id="first_name" maxlength="256" name="first_name" placeholder="Nome" type="text">
+		<div class="gap"></div>
+		<input class="form-input name-input w-input" data-name="last_name" id="last_name" maxlength="256" name="last_name" placeholder="Sobrenome" type="text">
+	      </div>
+	      <input class="form-input w-input" data-name="email" id="email-5" maxlength="256" name="email" placeholder="Email" required="required" type="email">
+	      <input class="form-input w-input" data-name="password" id="password-2" maxlength="256" name="password" placeholder="Senha" required="required" type="password">
+	      <input class="form-input w-input" data-name="password_confirmation" id="password_confirmation" maxlength="256" name="password_confirmation" placeholder="Confirme a Senha" required="required" type="password">
+	      <p class="light-grey-text" style="margin-top:-5px; margin-bottom:2px;">*A senha deve ter no mínimo 8 caracteres</p>
+	      <input rel="nofollow" class="button w-button" data-wait="Please wait..." type="submit" value="Cadastrar-se">
+		    </form>
+		    <p class="light-grey-text">Já tem uma conta?</p><a class="light-blue-link show-login-form" data-ix="show-login-form" href="#">Clique aqui para entrar</a>
             </div>
 	  </div>
 	</div>
-      </div>
-  {% endblock %}
-  {% block content %}
-    {% block header %}
-      <div class="navbar w-nav" data-animation="over-right" data-collapse="tiny" data-duration="400" >
-	<div class="header-content w-container">
-          <a class="logo w-nav-brand" href="{% url 'index' %}"><img class="logo-home" height="44" src="{% static 'images/DETWHITE.png'%}">
-          </a>
-          <nav class="nav-menu w-nav-menu" role="navigation">
-	    {% if user.is_authenticated %}
-	      <div class="account-dropdown w-dropdown" data-delay="0">
-		<div class="account-dropdown-toggle w-dropdown-toggle"><img class="account-image" height="45" src="{% cropped_thumbnail user 'profile_ratio' height=45 %}" width="45">
-		  <div class="account-dropdown-text">{{user.first_name|upper}}</div>
-		  <div class="account-dropdown-icon w-icon-dropdown-toggle"></div>
-		</div>
-		<nav class="account-dropdown-list w-dropdown-list"><a class="account-dropdown-link w-dropdown-link" href="{% url 'dashboard_courses' %}">Meus Cursos</a><a class="account-dropdown-link w-dropdown-link" href="{% url 'account' %}">Conta</a><a class="account-dropdown-link w-dropdown-link" href="{% url 'logout' %}">Sair</a>
-		</nav>
-              </div>
-	    {% endif %}
-	    <a class="nav-link w-nav-link" href="{% url 'index' %}">INÍCIO</a>
-	    <a class="nav-link w-nav-link" href="{% url 'categories' %}">VÍDEO-AULAS</a>
-	    <a class="nav-link w-nav-link" href="{% url 'about' %}">Quem somos</a>
-	    {% if not user.is_authenticated %}
-	      <a class="button login-button w-button" data-ix="show-login-popup" href="#">Entrar</a>
-	    {% endif %}
-	    <a class="close-x w-hidden-main w-hidden-medium w-hidden-small" href="#">×</a>
-          </nav>
-          <div class="menu-button w-clearfix w-hidden-main w-hidden-medium w-hidden-small w-nav-button">
-            <div class="menu-icon w-icon-nav-menu"></div>
-            <div class="menu-link">MENU</div>
-          </div>
-	</div>
-      </div>
-      <div class="navbar w-hidden-main w-hidden-medium w-hidden-small w-hidden-tiny w-nav" data-animation="default" data-collapse="medium" data-contain="1" data-duration="400">
-	<div class="w-container">
-          <a class="logo w-nav-brand" href="#"></a>
-          <nav class="w-nav-menu" role="navigation"><a class="w-nav-link" href="{% url 'index' %}">Início</a><a class="w-nav-link" href="{% url 'categories' %}">Aulas</a><a class="w-nav-link" href="{% url 'about' %}">Quem somos</a>
-          </nav>
-          <div class="w-nav-button">
-            <div class="w-icon-nav-menu"></div>
-          </div>
-	</div>
-      </div>
       </div>
     {% endblock %}
-  {% endblock %}
-  {% block footer %}
-    <div class="dark main-section">
-      {% if not user.is_authenticated %}
-      <div class="w-container">
-        <div class="section-heading">
-          <h2 class="white">Registre-se para acessar os novos minicursos e receber nossas notícias!</h2>
-	  <div class="med-divider"></div>
-        </div>
-        <div class="form-wrapper">
-	  <div class="mailing-form">
-            <a class="submit-button w-button" data-ix="show-login-popup" onclick="$('#sign-up-button').click();">Registrar-se</a>
-	  </div>
-        </div>
-      </div>
-      {% endif %}
-      <div class="footer-section">
-        <div class="w-container">
-          <div class="w-row">
-            <div class="logo-footer w-col w-col-4 w-col-small-4"><img class="logo-home" height="44" src="{% static 'images/DETWHITE.png'%}">
+    {% block content %}
+      {% block header %}
+	<div class="navbar w-nav" data-animation="over-right" data-collapse="tiny" data-duration="400" >
+	  <div class="header-content w-container">
+            <a class="logo w-nav-brand" href="{% url 'index' %}"><img class="logo-home" height="44" src="{% static 'images/DETWHITE.png'%}">
+            </a>
+            <nav class="nav-menu w-nav-menu" role="navigation">
+	      {% if user.is_authenticated %}
+		<div class="account-dropdown w-dropdown" data-delay="0">
+		  <div class="account-dropdown-toggle w-dropdown-toggle"><img class="account-image" height="45" src="{% cropped_thumbnail user 'profile_ratio' height=45 %}" width="45">
+		    <div class="account-dropdown-text">{{user.first_name|upper}}</div>
+		    <div class="account-dropdown-icon w-icon-dropdown-toggle"></div>
+		  </div>
+		  <nav class="account-dropdown-list w-dropdown-list"><a class="account-dropdown-link w-dropdown-link" href="{% url 'dashboard_courses' %}">Meus Cursos</a><a class="account-dropdown-link w-dropdown-link" href="{% url 'account' %}">Conta</a><a class="account-dropdown-link w-dropdown-link" href="{% url 'logout' %}">Sair</a>
+		  </nav>
+		</div>
+	      {% endif %}
+	      <a class="nav-link w-nav-link" href="{% url 'index' %}">INÍCIO</a>
+	      <a class="nav-link w-nav-link" href="{% url 'categories' %}">VÍDEO-AULAS</a>
+	      <a class="nav-link w-nav-link" href="{% url 'about' %}">Quem somos</a>
+	      {% if not user.is_authenticated %}
+		<a class="button login-button w-button" data-ix="show-login-popup" href="#">Entrar</a>
+	      {% endif %}
+	      <a class="close-x w-hidden-main w-hidden-medium w-hidden-small" href="#">×</a>
+            </nav>
+            <div class="menu-button w-clearfix w-hidden-main w-hidden-medium w-hidden-small w-nav-button">
+              <div class="menu-icon w-icon-nav-menu"></div>
+              <div class="menu-link">MENU</div>
             </div>
-            <div class="footer-links w-col w-col-8 w-col-small-8"><a class="footer-link" href="{% url 'index' %}">Início</a><a class="footer-link" href="{% url 'categories' %}">Video-aulas</a><a class="footer-link" href="{% url 'about' %}">Sobre</a>
+	  </div>
+	</div>
+	<div class="navbar w-hidden-main w-hidden-medium w-hidden-small w-hidden-tiny w-nav" data-animation="default" data-collapse="medium" data-contain="1" data-duration="400">
+	  <div class="w-container">
+            <a class="logo w-nav-brand" href="#"></a>
+            <nav class="w-nav-menu" role="navigation"><a class="w-nav-link" href="{% url 'index' %}">Início</a><a class="w-nav-link" href="{% url 'categories' %}">Aulas</a><a class="w-nav-link" href="{% url 'about' %}">Quem somos</a>
+            </nav>
+            <div class="w-nav-button">
+              <div class="w-icon-nav-menu"></div>
+            </div>
+	  </div>
+	</div>
+    </div>
+      {% endblock %}
+    {% endblock %}
+    {% block footer %}
+      <div class="dark main-section">
+	{% if not user.is_authenticated %}
+	  <div class="w-container">
+            <div class="section-heading">
+              <h2 class="white">Registre-se para acessar os novos minicursos e receber nossas notícias!</h2>
+	      <div class="med-divider"></div>
+            </div>
+            <div class="form-wrapper">
+	      <div class="mailing-form">
+		<a class="submit-button w-button" data-ix="show-login-popup" onclick="$('#sign-up-button').click();">Registrar-se</a>
+	      </div>
+            </div>
+	  </div>
+	{% endif %}
+	<div class="footer-section">
+          <div class="w-container">
+            <div class="w-row">
+              <div class="logo-footer w-col w-col-4 w-col-small-4"><img class="logo-home" height="44" src="{% static 'images/DETWHITE.png'%}">
+              </div>
+              <div class="footer-links w-col w-col-8 w-col-small-8"><a class="footer-link" href="{% url 'index' %}">Início</a><a class="footer-link" href="{% url 'categories' %}">Video-aulas</a><a class="footer-link" href="{% url 'about' %}">Sobre</a>
+              </div>
             </div>
           </div>
-        </div>
+	</div>
       </div>
+    {% endblock %}
     </div>
-  {% endblock %}
-      </div>
-      {% block js %}
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js" type="text/javascript"></script>
-	{% compress js %}
-	<script src="{% static 'js/webflow.js'%}" type="text/javascript"></script>
-	<script src="{% static 'js/jquery.form.js' %}"></script>
-	<script>
-	 $("#mailing-form").ajaxForm({
-	     success:function(data){
-		 $("#mailing-success-msg").show();
-		 $("#mailing-email-input").hide();
-		 $("#mailing-submit").hide();
-		 $(".spinner").hide();
-	     },
-	     error:function(data){
-		 $("#mailing-error-msg").show();
-		 $("#mailing-email-input").show();
-		 $("#mailing-submit").show();
-		 $(".spinner").hide();  
-	     }
-	 });
-	 $("#registration-form").ajaxForm({
-	     success:function(data){
-		 window.location.replace(data);
-	     },
-	     error:function(data){
-		 console.log(data);
-		 $("#error-block-msg").text(data.responseText);
-		 $("#showerrorblockbutton").click()
-	     }
-	 });
-	</script>
-	<script>
-	 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-				  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	 })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    {% block js %}
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js" type="text/javascript"></script>
+      {% compress js %}
+      <script src="{% static 'js/webflow.js'%}" type="text/javascript"></script>
+      <script src="{% static 'js/jquery.form.js' %}"></script>
+      <script>
+       $("#registration-form").ajaxForm({
+	   success:function(data){
+	       window.location.replace(data);
+	   },
+	   error:function(data){
+	       console.log(data);
+	       $("#error-block-msg").text(data.responseText);
+	       $("#showerrorblockbutton").click()
+	   }
+       });
+       $("#password-reset-email-form").ajaxForm({
+	   success:function(data){
+	       $("#forgot-password-form-div").hide();
+	       $("#forgot-password-form-title").hide();
+	       $(".forgotten-password-email-sent-div").show();
+	   },
+	   error:function(data){
+	       $("#error-block-msg").text(data.responseText);
+	       $("#showerrorblockbutton").click()
+	   }
+       });
+      </script>
+      <script>
+       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+				m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+       })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-	 ga('create', 'UA-85106412-1', 'auto');
-	 ga('send', 'pageview');
+       ga('create', 'UA-85106412-1', 'auto');
+       ga('send', 'pageview');
 
-	</script>
-	<script>
-	  {% if user.is_authenticated %}
-	    {% if user.email %}
-	      $crisp.push(["set", "user:email", ["{{user.email}}"]]);
-	    {% endif %}
-	    $crisp.push(["set", "user:nickname", ["{{user.get_full_name}}"]]);
-	  {% endif %}
-	</script>
+      </script>
+      <script>
+       {% if user.is_authenticated %}
+       {% if user.email %}
+       $crisp.push(["set", "user:email", ["{{user.email}}"]]);
+       {% endif %}
+       $crisp.push(["set", "user:nickname", ["{{user.get_full_name}}"]]);
+       {% endif %}
+      </script>
 	{% endcompress %}
 	
 	<!--[if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
-      {% endblock %}
-</body>
-  </html>
+    {% endblock %}
+  </body>
+</html>

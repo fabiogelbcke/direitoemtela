@@ -2314,6 +2314,7 @@ img {
 
 .base-popup {
   position: relative;
+  overflow: hidden;
   width: 450px;
   height: 390px;
   max-width: 100%;
@@ -2730,7 +2731,7 @@ img {
 }
 
 .login-popup {
-  display: none;
+  display: block;
   width: 100%;
   height: 100%;
   min-height: 100%;
@@ -3570,6 +3571,7 @@ img {
 
 .inline-input {
   position: relative;
+  width: 100%;
   margin-top: 0px;
   -webkit-box-flex: 1;
   -webkit-flex: 1;
@@ -4313,6 +4315,40 @@ img {
   min-width: 6.66%;
 }
 
+.reset-password-form-div {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  min-height: 70vh;
+  padding-top: 60px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.password-reset-form {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
 html.w-mod-js *[data-ix="navbar"] {
   opacity: 0;
 }
@@ -4347,6 +4383,10 @@ html.w-mod-js *[data-ix="view-more"] {
 
 html.w-mod-js *[data-ix="zero-opacity-initially"] {
   opacity: 0;
+}
+
+html.w-mod-js *[data-ix="hide-on-load"] {
+  display: none;
 }
 
 @media (max-width: 991px) {

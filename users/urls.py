@@ -2,11 +2,13 @@ from django.conf.urls import url, include
 from django.views.generic import TemplateView
 from django.views.decorators.cache import cache_page
 
-from .auth_shenanigans import logout_function, email_login
+from .auth_shenanigans import (logout_function, email_login,
+                               send_password_reset_email)
 from .registration import register
-from .views import account_page
+from .views import account_page, CustomPasswordResetView
 from .utils import (update_user_info, change_password,
-                    upload_new_photo, save_cropped_photo)
+                    upload_new_photo, save_cropped_photo,
+                    reset_password_confirm)
 
 urlpatterns = [
     url(
@@ -25,7 +27,22 @@ urlpatterns = [
         name='register'
     ),
     url(
-        r'^account$',
+        r'^resetarsenha/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})',
+        CustomPasswordResetView.as_view(),
+        name='password_reset_view'
+    ),
+    url(
+        r'^pwresetemail$',
+        send_password_reset_email,
+        name='send_password_reset_email'
+    ),
+    url(
+        r'^pwresetconfirmed$',
+        TemplateView.as_view(template_name='password-reset-done-page.djhtml'),
+        name='password_reset_done'
+    ),
+    url(
+        r'^conta$',
         account_page,
         name='account'
     ),
@@ -48,5 +65,10 @@ urlpatterns = [
         r'^savecroppedphoto$',
         save_cropped_photo,
         name='save_cropped_photo'
+    ),
+    url(
+        r'^rstpasswordconfirm$',
+        reset_password_confirm,
+        name='reset_password_confirm'
     ),
 ]

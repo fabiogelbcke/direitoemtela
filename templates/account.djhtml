@@ -101,7 +101,7 @@
 	   $("#showsuccessblockbutton").click()
        },
        error:function(data){
-	   $("#error-block-msg").text(data.content);
+	   $("#error-block-msg").text(data.responseText);
 	   $("#showerrorblockbutton").click()
        }
    });
@@ -112,7 +112,7 @@
 	   $("#showsuccessblockbutton").click()
        },
        error:function(data){
-	   $("#error-block-msg").text(data.content);
+	   $("#error-block-msg").text(data.responseText);
 	   $("#showerrorblockbutton").click()
        }
    });
@@ -128,7 +128,7 @@
 	   $("#save-cropped-photo-div").show()
        },
        error:function(data){
-	   $("#error-block-msg").text(data.content);
+	   $("#error-block-msg").text(data.responseText);
 	   $("#showerrorblockbutton").click()
        }
    });
@@ -138,7 +138,7 @@
 	   location.reload();
        },
        error:function(data){
-	   $("#error-block-msg").text(data.content);
+	   $("#error-block-msg").text(data.responseText);
 	   $("#showerrorblockbutton").click()
        }
    });
