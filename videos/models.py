@@ -34,7 +34,9 @@ class Video(models.Model):
     yt_lesson_number = models.CharField(max_length=4, blank=True)
     professor = models.ForeignKey('categories.Professor',
                                   related_name='videos',
-                                  null=True)
+                                  null=True,
+                                  blank=True,
+                                  default=None)
 
     def __unicode__(self):
         return self.title
