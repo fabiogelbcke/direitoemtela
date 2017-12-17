@@ -340,7 +340,7 @@
 	   $("#payment-error-msg").html(data.responseText);
        },
    });
-   $("#cc-form").submit(function(e) {
+   $("#cc").submit(function(e) {
        e.preventDefault();
        $('#payment-error-div').hide();
        $('.payment-spinner-div').css('display', 'flex');
