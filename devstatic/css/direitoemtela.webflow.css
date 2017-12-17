@@ -4202,6 +4202,8 @@ img {
 
 .boleto-form-head {
   margin-top: 5px;
+  margin-bottom: 15px;
+  line-height: 22px;
 }
 
 .payment-error-div {
