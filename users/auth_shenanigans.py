@@ -40,6 +40,6 @@ def send_password_reset_email(request):
             request=request
         )
         return HttpResponse('email sent')
-    return HttpResponseBadResponse(
+    return HttpResponseBadRequest(
         'Email Inválido'
     )
