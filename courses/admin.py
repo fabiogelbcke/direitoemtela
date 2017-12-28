@@ -25,7 +25,8 @@ class CourseAdmin(ImageCroppingMixin, admin.ModelAdmin):
 
 class UserCourseRelationshipAdmin(admin.ModelAdmin):
     model = UserCourseRelationship
-    list_display = ('user', 'course', 'start_date', 'completed', 'passed')
+    list_display = ('user', 'course', 'start_date', 'completion_date',
+                    'completed', 'passed')
     
 admin.site.register(Course, CourseAdmin)
 
