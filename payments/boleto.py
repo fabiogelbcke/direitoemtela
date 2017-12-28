@@ -151,6 +151,9 @@ def payment_update(request):
         payment.save()
         course = payment.course
         user = payment.user
+        print payment.id
+        print payment.course.id
+        print payment.user.id
         register_to_course(user.id, course.id)
         send_payment_confirmation_email(user, course)
         return HttpResponse('Payment Processed')
