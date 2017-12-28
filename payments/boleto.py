@@ -110,7 +110,6 @@ def generate_boleto(request, course_id):
         settings.ASAAS_API_KEY
     )
     if response['status_code'] != 200:
-        print response
         return HttpResponseBadRequest(
             'Houve um erro na hora de criar o pagamento. '
             'Verifique se os dados que você digitou estão '
@@ -151,9 +150,6 @@ def payment_update(request):
         payment.save()
         course = payment.course
         user = payment.user
-        print payment.id
-        print payment.course.id
-        print payment.user.id
         register_to_course(user.id, course.id)
         send_payment_confirmation_email(user, course)
         return HttpResponse('Payment Processed')

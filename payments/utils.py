@@ -111,6 +111,7 @@ def make_card_payment(card_data, user, course, ip_addr):
     payment = Payment.objects.create(
         user=user,
         amount=course.price,
+        course=course,
         description=course.name
     )
     values = get_payment_json(
