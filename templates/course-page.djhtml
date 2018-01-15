@@ -109,7 +109,7 @@
 			  </div>
 			  <input type="submit" data-ix="bang-loading-gavel" class="button w-button stupid-margin" value="Gerar Boleto">
 			</form>
-			<h3 class="boleto-form-head hidden" id="boleto-notification">O acesso ao curso será liberado automáticamente quando o pagamento do boleto for confirmado.</h3>
+			<h3 class="boleto-form-head hidden" id="boleto-notification">O acesso ao curso será liberado automaticamente quando o pagamento do boleto for confirmado.</h3>
 			<a class="button w-button stupid-margin hidden" id="boleto-download-button" download>Baixar Boleto</a>
 		      </div>
 		    </div>
