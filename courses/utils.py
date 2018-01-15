@@ -1,7 +1,10 @@
+# -*- coding: utf-8 -*-
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, Http404
 from django.template.loader import get_template
+from django.core.mail import EmailMultiAlternatives
+from django.template import loader
 
 from .models import (Course, UserItemRelationship,
                      UserCourseRelationship, CourseItem,
@@ -11,6 +14,24 @@ from coursetests.models import UserQuestionRelationship
 from users.models import MyUser
 
 from io import BytesIO
+
+
+def send_registration_confirmation_email(user, course):
+    template = loader.get_template('email-registro-curso.djhtml')
+    content = template.render({
+        'user': user,
+        'course': course
+    })
+    subject = 'Inscrição no Minicurso Confirmado!'
+    email = user.email
+    msg = EmailMultiAlternatives(
+        subject=subject,
+        from_email='Equipe Direito em Tela <contato@direitoemtela.com.br>',
+        to=[email,]
+    )
+    msg.attach_alternative(content, 'text/html')
+    msg.send()
+    return True
 
 
 def register_to_course(user_id, course_id):
@@ -37,6 +58,7 @@ def register_to_course(user_id, course_id):
                     user=user,
                     question=question,
                 )
+    send_registration_confirmation_email(user, course)
     return True
 
 def unregister_from_course(user_id, course_id):
