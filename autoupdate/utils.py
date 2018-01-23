@@ -148,9 +148,10 @@ def create_new_videos(videos_info):
             t_ratio = '0,' + str(y_origin) + str(t_width) + ',' + str(y_end)
             video.thumbnail_ratio = t_ratio
             video.save()
-        for video_tag in video_info['tags']:
-            tag = Tag.objects.create(video=video,
-                                     name=video_tag)
+        if 'tags' in video_info:
+            for video_tag in video_info['tags']:
+                tag = Tag.objects.create(video=video,
+                                         name=video_tag)
 
 def add_videos_to_category(pl_id, video_ids, youtube):
     page_token = None
