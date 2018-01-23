@@ -74,7 +74,8 @@ def get_videos_info(video_ids):
             video = item['snippet']
             video_info['title'] = video['title']
             video_info['description'] = video['description']
-            video_info['tags'] = video['tags']
+            if 'tags' in video:
+                video_info['tags'] = video['tags']
             video_info['id'] = item['id']
             if 'maxres' in video['thumbnails']:
                 video_info['thumbnail_url'] = video['thumbnails']['maxres']['url']
@@ -215,6 +216,5 @@ def get_video_by_id(request):
             )
             return HttpResponse('Deu ruim')
     else:
-        print 'oi'
         return HttpResponse('Deu ruim')    
         
