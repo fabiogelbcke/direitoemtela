@@ -5,6 +5,7 @@ from django.http import HttpResponse, Http404
 from django.template.loader import get_template
 from django.core.mail import EmailMultiAlternatives
 from django.template import loader
+from django.utils import timezone
 
 from .models import (Course, UserItemRelationship,
                      UserCourseRelationship, CourseItem,
@@ -17,7 +18,7 @@ from io import BytesIO
 
 
 def send_registration_confirmation_email(user, course):
-    template = loader.get_template('email-registro-curso.djhtml')
+    template = loader.get_template('email-course-registration.djhtml')
     content = template.render({
         'user': user,
         'course': course
@@ -137,3 +138,37 @@ def render_to_pdf(template_src, context={}):
     if not pdf.err:
         return HttpResponse(result.getvalue(), content_type='application/pdf')
     return None
+
+
+def send_course_completed_email(course_rel, user):
+    course = course_rel.course
+    if course_rel.passed == True:
+        template = loader.get_template('email-course-passed.djhtml')
+    else:
+        template = loader.get_template('email-course-failed.djhtml')
+    content = template.render({
+        'user': user,
+        'course': course
+    })
+    subject = 'Curso de ' + course.name + ' Completo!'
+    email = user.email
+    msg = EmailMultiAlternatives(
+        subject=subject,
+        from_email='Equipe Direito em Tela <contato@direitoemtela.com.br>',
+        to=[email,]
+    )
+    msg.attach_alternative(content, 'text/html')
+    msg.send()
+    return True
+
+
+def complete_course(course_rel, user):
+    course_rel.passed = course_rel.percentage() >= course_rel.passing_grade
+    course_rel.completed = True
+    course_rel.completion_date = timezone.now()
+    course_rel.certificate = create_certificate(course_rel)
+    course_rel.save()
+    user.course_hours += course_rel.course.hours
+    user.save()
+    send_course_completed_email(course_rel, user)
+    return course_rel

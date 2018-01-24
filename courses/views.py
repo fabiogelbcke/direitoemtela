@@ -13,7 +13,8 @@ from django.urls import reverse
 
 from coursetests.models import UserQuestionRelationship
 
-from .utils import create_certificate, render_to_pdf
+from .utils import (create_certificate, render_to_pdf,
+                    complete_course )
 from .decorators import is_registered_to_course
 from .models import (Course, CourseItem, UserCourseRelationship,
                      UserItemRelationship, Certificate)
@@ -140,13 +141,7 @@ class CourseItemView(LoginRequiredMixin, DetailView):
         )
         if (course_rel.questions_answered == course_rel.total_questions
             and course_rel.completed == False):
-            course_rel.passed = course_rel.percentage() >= course_rel.passing_grade
-            course_rel.completed = True
-            course_rel.completion_date = timezone.now()
-            course_rel.certificate = create_certificate(course_rel)
-            course_rel.save()
-            user.course_hours += course.hours
-            user.save()
+            course_rel = complete_course(course_rel, user)
             response = redirect('course_progress', course_id=course.id)
             response['Location'] += '?completed=true'
             return response
