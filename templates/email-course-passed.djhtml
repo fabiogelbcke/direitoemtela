@@ -613,7 +613,7 @@
                         
                             <h1 class="null"><span class="s1">Parabéns! Você foi aprovado no minicurso de {{course.name}}!</span></h1>
 
-<p class="p1" style="color: #8D8D8D;line-height: 150%;">Olá! Parabéns pela sua aprovação no minicurso de {{course.name}}! Você pode ver e baixar seu certificado acessando a página Meus Cursos e clicando na aba Cursos Completos.<br><br> Nós estamos sempre tentando melhorar a qualidade de nosso site e nossos cursos. Se você quiser nos ajudar, é só clicar abaixo para responder uma pesquisa totalmente anônima sobre a sua experiência durante o curso. Toma apenas 3 minutinhos e ficaremos muito agradecidos :)</p>
+<p class="p1" style="color: #8D8D8D;line-height: 150%;">Olá! Parabéns pela sua aprovação no minicurso de {{course.name}}! Você pode ver e baixar seu certificado acessando a página Meus Cursos e clicando na aba Cursos Completos.<br><br> Nós estamos sempre tentando melhorar a qualidade de nosso site e nossos cursos. Se você quiser nos ajudar, é só clicar abaixo para responder uma pesquisa totalmente anônima sobre a sua experiência durante o curso. São apenas 3 minutinhos e ficaremos muito agradecidos :)</p>
                         </td>
                     </tr>
                 </tbody></table>

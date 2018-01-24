@@ -1,5 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE>
+<html> xmlns="http://www.w3.org/1999/xhtml">
     <head>
     	<!-- NAME: 1 COLUMN -->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -611,9 +611,9 @@
                         
                         <td valign="top" class="mcnTextContent" style="padding: 9px 18px;color: #8D8D8D;line-height: 150%;">
                         
-                            <h1 class="null"><span class="s1">Cadastro no minicurso de {{course.name}} confirmado!</span></h1>
+                            <h1 class="null"><span class="s1">Infelizmente você não atingiu a nota mínima de aprovação no minicurso de {{course.name}}!</span></h1>
 
-<p class="p1" style="color: #8D8D8D;line-height: 150%;">Olá! Obrigado por escolher o Direito em Tela para auxiliar em seus estudos de {{course.name}}!<br>O seu cadastro no minicurso foi confirmado, e basta clicar no botão abaixo para começá-lo. Bom curso!</p>
+<p class="p1" style="color: #8D8D8D;line-height: 150%;">Olá! Infelizmente você não foi aprovado no minicurso de {{course.name}}, mas queremos lhe dar os parabéns mesmo assim por ter concluído todo o curso, e esperamos que tenha aprendido bastante durante ele! Se você deseja tentar novamente o curso, contate-nos pelo chat no canto inferior direito do nosso site que podemos lhe dar um código de desconto para a segunda tentativa.<br><br> Nós estamos sempre tentando melhorar a qualidade de nosso site e nossos cursos. Se você quiser nos ajudar, é só clicar abaixo para responder uma pesquisa totalmente anônima sobre a sua experiência durante o curso. São apenas 3 minutinhos e ficaremos muito agradecidos :)</p>
                         </td>
                     </tr>
                 </tbody></table>
@@ -629,7 +629,7 @@
                     <tbody>
                         <tr>
                             <td align="center" valign="middle" class="mcnButtonContent" style="font-family: Arial; font-size: 16px; padding: 15px;">
-                                <a class="mcnButton " title="Visitar Site" href="{% url 'course_item' course_id=course.id position=1 %}" target="_blank" style="font-weight: bold;letter-spacing: normal;line-height: 100%;text-align: center;text-decoration: none;color: #666666;">Acessar Curso</a>
+                                <a class="mcnButton " title="Visitar Site" href="https://goo.gl/forms/TvGXClkTUC7RKIej2" target="_blank" style="font-weight: bold;letter-spacing: normal;line-height: 100%;text-align: center;text-decoration: none;color: #666666;">Responder Pesquisa</a>
                             </td>
                         </tr>
                     </tbody>
