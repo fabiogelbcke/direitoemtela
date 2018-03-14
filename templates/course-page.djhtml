@@ -23,7 +23,7 @@
                   <form method="POST" action="{% url 'check_promo_code' course_id=course.id %}" class="promocode-form">
 		    {% csrf_token %}
                     <div class="inline-input">
-                      <p class="paragraph-3">Código Promocional</p><input type="text" class="round-text-field no-margin w-input" maxlength="256" name="code" data-name="Card Name 2" placeholder="##########" id="card_name-2" required="required"></div><input type="submit" value="Aplicar" data-wait="Please wait..." class="button smaller w-button" data-ix="show-payment-spinner"></form>
+                      <p class="paragraph-3">Código</p><input type="text" class="round-text-field no-margin w-input" maxlength="256" name="code" data-name="Card Name 2" placeholder="##########" id="card_name-2" required="required"></div><input type="submit" value="Aplicar" data-wait="Please wait..." class="button smaller w-button" data-ix="show-payment-spinner"></form>
                 </div>
 		{% if request.GET.price %}
                   <h2 class="course-price-on-popup">Preço: R${{request.GET.price}} <span class="striked-price-span">R${{course.price}}</span></h2>
