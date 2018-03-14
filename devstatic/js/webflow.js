@@ -70,5 +70,5 @@ Webflow.require('ix').init([
   {"slug":"show-payment-spinner","name":"show-payment-spinner","value":{"style":{},"triggers":[{"type":"click","selector":".payment-spinner-div","stepsA":[{"display":"flex"}],"stepsB":[]},{"type":"click","stepsA":[{"display":"none"}],"stepsB":[]}]}},
   {"slug":"new-interaction-5","name":"New Interaction 5","value":{"style":{},"triggers":[]}},
   {"slug":"hide-on-load","name":"hide-on-load","value":{"style":{"display":"none"},"triggers":[]}},
-  {"slug":"hide-new-course-popup","name":"hide new course popup","value":{"style":{},"triggers":[{"type":"click","selector":".new-course-popup","stepsA":[{}],"stepsB":[]}]}}
+  {"slug":"hide-new-course-popup","name":"hide new course popup","value":{"style":{},"triggers":[{"type":"click","selector":".new-course-popup","stepsA":[{"display":"none"}],"stepsB":[]}]}}
 ]);
