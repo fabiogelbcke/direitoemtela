@@ -76,7 +76,7 @@ class Payment(models.Model):
 
 
 class PromoCode(models.Model):
-    code = models.CharField(max_length=12,
+    code = models.CharField(max_length=30,
                             default=create_promo_code,
                             unique=True)
     used = models.BooleanField(default=False)
