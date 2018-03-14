@@ -1,6 +1,31 @@
 {% extends 'base.djhtml' %}
 {% load staticfiles %}{% load cropping %}
 {% block content %}
+  {% if show_new_course_popup %}
+    <div class="new-course-popup">
+      <div class="modal-wrapper">
+	<div class="base-popup new-course-popup-base">
+          <div class="horizontal-flex">
+            <div><img src="{% static 'images/mae-corpo-inteiro.png'%}" height="350" class="popup-new-course-image"></div>
+            <div class="popup-new-course-text-div">
+              <h2 class="new-course-popup-title">Novo Minicurso de Negócios Jurídicos!</h2>
+              <div class="div-block-14">
+		<h3 class="heading-13">O novo curso conta com:</h3>
+		<ul class="new-course-feature-list">
+                  <li class="new-course-features">Slides das Aulas disponíveis para download</li>
+                  <li class="new-course-features">Questões para sedimentar o conhecimento adquirido</li>
+                  <li class="new-course-features">Materiais exclusivos preparados pela prof. Séfora especialmente para estudo e revisão para provas</li>
+                  <li class="new-course-features">Certificado de conclusão de curso para contar para suas horas extras na faculdade</li>
+		</ul>
+              </div>
+              <div class="div-block-12"><a href="/course/4" class="button strong-text w-button">Quero conferir o Curso!</a>
+		<div class="div-block-13"></div><a href="#" class="button reverse-colors w-button" data-ix="hide-new-course-popup">Leve-me ao site normal</a></div>
+            </div>
+          </div>
+	</div>
+      </div>
+    </div>
+  {% endif %}
   <div>
     {% block header %}
       {{block.super}}

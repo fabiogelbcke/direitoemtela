@@ -17,6 +17,8 @@ class IndexView(TemplateView):
         context = super(IndexView, self).get_context_data(**kwargs)
         context['featured_categories'] = Category.objects.filter(featured=True)
         context['courses'] = Course.objects.all()
+        context['show_new_course_popup'] = self.request.session.get('show_course_popup', True)
+        self.request.session['show_course_popup'] = False
         return context
 
     #def dispatch(self, request, *args, **kwargs):
