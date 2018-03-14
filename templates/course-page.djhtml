@@ -2,7 +2,7 @@
 {% load staticfiles %}{% load cropping %}
 {% block hiddencontent %}
   {{block.super}}
-  <div class="payment-popup" {% if error_msg or show_payment_div %}style="display:block;"{% endif %}>
+  <div class="payment-popup" {% if request.GET.price or error_msg or show_payment_div %}style="display:block;"{% endif %}>
     <div class="modal-wrapper">
       <div class="w-container">
         <div class="payment-block"><a class="close-popup-button" data-ix="close-trailer" href="#">Fechar <strong>X</strong></a>
@@ -17,21 +17,31 @@
                   <li>Slides das aulas dispibonibilizados para download</li>
                 </ul>
               </div>
-              <h2>Preço: R${{course.price}}</h2>
+	      <div class="popup-price-div">
+                <h3>Tem um código promocional?</h3>
+                <div class="promocode-form-block ">
+                  <form method="POST" action="{% url 'check_promo_code' course_id=course.id %}" class="promocode-form">
+		    {% csrf_token %}
+                    <div class="inline-input">
+                      <p class="paragraph-3">Código Promocional</p><input type="text" class="round-text-field no-margin w-input" maxlength="256" name="code" data-name="Card Name 2" placeholder="##########" id="card_name-2" required="required"></div><input type="submit" value="Aplicar" data-wait="Please wait..." class="button smaller w-button" data-ix="show-payment-spinner"></form>
+                </div>
+		{% if request.GET.price %}
+                  <h2 class="course-price-on-popup">Preço: R${{request.GET.price}} <span class="striked-price-span">R${{course.price}}</span></h2>
+		{% else %}
+		  <h2 class="course-price-on-popup">Preço: R${{course.price}}</h2>
+		{% endif %}
+              </div>
             </div>
             <div class="vertical-separator"></div>
 	    <div class="payment-form ">
               <h1 class="payment-title">Pagamento</h1>
 	      <div data-duration-in="300" data-duration-out="100" class="w-tabs">
-		<div class="w-tab-menu">
+		<div class="w-tab-menu payment-tabs-menu">
                   <a data-w-tab="Tab 1" class="payment-tab w--current w-inline-block w-tab-link">
-                    <div class="text-block">Cartão de<br>Crédito</div>
+                    <div class="text-block">Cartão&nbsp;de&nbsp;Crédito</div>
                   </a>
                   <a data-w-tab="Tab 2" class="payment-tab w-inline-block w-tab-link">
-                    <div class="text-block-2">Boleto<br>Bancário</div>
-                  </a>
-                  <a data-w-tab="Tab 3" class="payment-tab w-inline-block w-tab-link">
-                    <div class="text-block-3">Código<br>Promocional</div>
+                    <div class="text-block-2">Boleto&nbsp;Bancário</div>
                   </a>
                 </div>
 		<div class="w-tab-content">
@@ -87,6 +97,9 @@
 			  <p class="hidden-mobile paragraph-3">CPF (Somente números)</p>
 			  <input class="round-text-field w-input" data-name="cpf" id="cpf" maxlength="256" name="cpf" placeholder="00000000000" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" value="{{billing_info.cpf}}">
 			</div>
+			{% if request.GET.code %}
+			  <input class="hidden promocode-hidden-input" type="text" name="code" value="{{request.GET.code}}">
+			{% endif %}
 			<input type="submit" class="button w-button" id="cc-form-submit-button" value="Confirmar">
 			<div class="payment-spinner-div">
 			  <img src="{% static 'images/spinner-loading-to-widget.gif'%}" height="50" width="50">
@@ -99,7 +112,7 @@
                       <div class="loading-gavel"><img src="{% static 'images/gavel2.png'%}" width="80" class="gavel-stand-img"><img src="{% static 'images/gavel.png'%}" width="90" class="gavel-img">
 		      </div>
 		      <h3 class="boleto-form-head">Informações de Cobrança</h3>
-		      <div>
+		      <div style="width:100%">
 			<form method="POST" id="boleto-form" class="boleto-form" action="{% url 'generate_boleto' course_id=course.id %}">
 			  {% csrf_token %}
 			  <div class="inline-input">
@@ -107,25 +120,17 @@
 			    <p class="hidden-mobile paragraph-3">CPF (Somente números)</p>
 			    <input class="round-text-field w-input" data-name="cpf" id="cpf" maxlength="256" name="cpf" placeholder="00000000000" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" value="{{billing_info.cpf}}">
 			  </div>
+			  {% if request.GET.code %}
+			    <input class="hidden promocode-hidden-input" type="text" name="code" value="{{request.GET.code}}">
+			  {% endif %}
 			  <input type="submit" data-ix="bang-loading-gavel" class="button w-button stupid-margin" value="Gerar Boleto">
+			  <p class="payment-boleto-explanation">*A inscrição será efetuada automaticamente quando o pagamento for confirmado.</p>
 			</form>
+			
 			<h3 class="boleto-form-head hidden" id="boleto-notification">O acesso ao curso será liberado automaticamente quando o pagamento do boleto for confirmado.</h3>
 			<a class="button w-button stupid-margin hidden" id="boleto-download-button" download>Baixar Boleto</a>
 		      </div>
 		    </div>
-		  </div>
-                  <div data-w-tab="Tab 3" class="w-tab-pane">
-                    <div class="">
-		      <form method="POST" action="{% url 'register_promo_code' course_id=course.id%}">
-                        {% csrf_token %}
-                        <h3 class="payment-form-head">Digite seu Código Promocional</h3>
-                        <div class="inline-input">
-                          <p class="paragraph-3">Código</p>
-                          <input class="round-text-field w-input" data-name="phone" id="phone" maxlength="20" name="code" placeholder="######" required="required" type="text">
-                        </div>
-                        <input type="submit" value="Confirmar Inscrição" data-wait="Please wait..." class="button w-button">
-                      </form>
-                    </div>
 		  </div>
 		</div>
 	      </div>

@@ -183,7 +183,7 @@ img {
 .button {
   margin-top: 0px;
   margin-right: 0px;
-  margin-left: 0px;
+  margin-left: 1px;
   padding: 12px 22px;
   border-radius: 3px;
   background-color: #ca8c2e;
@@ -332,6 +332,11 @@ img {
   width: 200px;
   margin-right: auto;
   margin-left: auto;
+}
+
+.button.smaller {
+  margin-left: 10px;
+  padding: 5px 15px;
 }
 
 .main-section {
@@ -3537,6 +3542,10 @@ img {
   min-width: 75%;
 }
 
+.round-text-field.no-margin {
+  margin-bottom: 0px;
+}
+
 .text-field-3 {
   border-radius: 5px;
 }
@@ -3928,6 +3937,7 @@ img {
   display: -ms-flexbox;
   display: flex;
   width: 400px;
+  min-height: 440px;
   min-width: 350px;
   padding-bottom: 0px;
   -webkit-box-orient: vertical;
@@ -3946,8 +3956,8 @@ img {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  padding-right: 45px;
-  padding-left: 45px;
+  padding-right: 40px;
+  padding-left: 40px;
 }
 
 .payment-form {
@@ -3955,7 +3965,7 @@ img {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  width: auto;
+  width: 400px;
   min-width: 350px;
   margin-bottom: 0px;
   -webkit-box-orient: vertical;
@@ -3972,7 +3982,7 @@ img {
 
 .vertical-separator {
   width: 1px;
-  margin: 40px 10px;
+  margin: 40px 30px;
   background-color: #b6b6b6;
 }
 
@@ -4136,12 +4146,29 @@ img {
 }
 
 .payment-tab {
-  padding: 5px 30px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  max-width: 50%;
+  min-width: 49%;
+  padding: 5px 0px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
   border-bottom: 1px solid #b6b6b6;
   background-color: transparent;
 }
 
 .payment-tab.w--current {
+  width: 50%;
+  padding-right: 0px;
+  padding-left: 0px;
   border-bottom-width: 2px;
   border-bottom-color: #ca8c2e;
   background-color: transparent;
@@ -4190,10 +4217,10 @@ img {
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  -webkit-box-align: stretch;
-  -webkit-align-items: stretch;
-  -ms-flex-align: stretch;
-  align-items: stretch;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .boleto-form {
@@ -4201,6 +4228,7 @@ img {
 }
 
 .boleto-form-head {
+  max-width: 320px;
   margin-top: 5px;
   margin-bottom: 15px;
   line-height: 22px;
@@ -4378,6 +4406,94 @@ img {
   color: #f5f5f5;
   font-size: 18px;
   line-height: 24px;
+}
+
+.popup-price-div {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding-bottom: 10px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.promocode-form-block {
+  width: 100%;
+  margin-bottom: 0px;
+}
+
+.course-price-on-popup {
+  font-size: 28px;
+  text-decoration: none;
+}
+
+.promocode-form {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.text-span {
+  text-decoration: line-through;
+}
+
+.striked-price-span {
+  font-size: 20px;
+  text-decoration: line-through;
+}
+
+.payment-tabs-menu {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.payment-boleto-explanation {
+  max-width: 400px;
+  margin-top: 15px;
+  padding-right: 25px;
+  padding-left: 25px;
+  font-size: 13px;
+  line-height: 16px;
+}
+
+.form-block {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: stretch;
+  -webkit-align-items: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
 }
 
 html.w-mod-js *[data-ix="navbar"] {

@@ -1,5 +1,5 @@
 from django.conf.urls import url, include
-from .utils import make_course_payment, register_with_promo_code
+from .utils import (make_course_payment, check_promo_code_discount)
 from .boleto import generate_boleto, payment_update
 
 
@@ -8,10 +8,6 @@ urlpatterns = [
         make_course_payment,
         name='pay_course'
         ),
-    url(r'^promoregister/(?P<course_id>\d+)',
-        register_with_promo_code,
-        name='register_promo_code'
-        ),
     url(r'^generateboleto/(?P<course_id>\d+)',
         generate_boleto,
         name='generate_boleto'
@@ -19,5 +15,9 @@ urlpatterns = [
     url(r'^asaasupdate',
         payment_update,
         name='payment_update'
-        )
+        ),
+    url(r'checkpromocode/(?P<course_id>\d+)',
+        check_promo_code_discount,
+        name='check_promo_code'
+        ),
 ]

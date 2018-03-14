@@ -77,12 +77,22 @@ class Payment(models.Model):
 
 class PromoCode(models.Model):
     code = models.CharField(max_length=12,
-                            default=create_promo_code)
+                            default=create_promo_code,
+                            unique=True)
     used = models.BooleanField(default=False)
     used_by = models.ForeignKey(MyUser,
                                 blank=True,
                                 null=True,
                                 default=None)
+    one_time_use = models.BooleanField(default=True)
     date_used = models.DateTimeField(default=None,
                                      blank=True,
                                      null=True)
+    percentage = models.BooleanField(default=True)
+    discount = models.DecimalField(max_digits=5,
+                                   decimal_places=2,
+                                   default=100)
+    course = models.ForeignKey(Course,
+                               default=None,
+                               null=True,
+                               blank=True)

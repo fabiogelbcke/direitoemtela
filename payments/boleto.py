@@ -19,9 +19,11 @@ import json
 from courses.models import Course
 from courses.utils import register_to_course
 
-from .models import Payment, BillingInfo
+from .models import Payment, BillingInfo, PromoCode
 from .forms import CPFForm
-from .utils import create_asaas_user, get_client_ip
+from .utils import (create_asaas_user, get_client_ip,
+                    calculate_price_with_promo_code,
+                    check_promo_code_validity)
 
 logger = logging.getLogger(__name__)
 
@@ -76,9 +78,21 @@ def get_boleto_json(user, payment, ip_addr):
 def generate_boleto(request, course_id):
     user = request.user
     course = Course.objects.get(id=course_id)
+    code = request.POST.get('code', '')
+    if code:
+        code_valid, error_msg = check_promo_code_validity(code, course)
+        if code_valid is False:
+            return HttpResponseBadRequest(error_msg)
+        promo_code_obj = PromoCode.objects.filter(
+            code=code,
+            used=False
+        ).first()
+        price = calculate_price_with_promo_code(promo_code_obj, course)
+    else:
+        price = course.price
     payment = Payment.objects.create(
         user=user,
-        amount=course.price,
+        amount=price,
         description=course.name,
         billing_type='BOLETO',
         course=course

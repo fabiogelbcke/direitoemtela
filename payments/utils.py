@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from urllib2 import Request, urlopen
 from urllib import quote_plus
 from datetime import timedelta, datetime
+from decimal import Decimal
 import json
 
 from .forms import BillingInfoForm, CreditCardForm, PromoCodeForm
@@ -19,7 +20,37 @@ from courses.models import Course
 from courses.utils import register_to_course
 
 
+
+
+def calculate_price_with_promo_code(promo_code, course):
+    #calculates price based on promo code and course
+    discount = promo_code.discount
+    if promo_code.percentage is True:
+        return max(Decimal(0), course.price * ((100 - discount)/100))
+    else:
+        return max(Decimal(0), course.price - discount)
+
+def check_promo_code_validity(code, course):
+    # returns a tuple with first value saying if code is valid and second the
+    # error msg
+    promo_objs = PromoCode.objects.filter(code=code)
+    if promo_objs.filter(used=False).exists():
+        promo_code = promo_objs.first()
+        if promo_code.course is not None and promo_code.course != course:
+            error_msg = 'Esse código promocional não é válido para esse curso'
+            return (False, error_msg)
+        return (True, '')
+    elif promo_objs.exists():
+        error_msg = 'Esse código promocional já foi utilizado'
+        return (False, error_msg)
+    else:
+        error_msg = 'Código promocional inválido'
+        return (False, error_msg)
+
+
 def get_payment_json(user, card_data, payment, ip_addr):
+    #generates json to make the request to
+    #create a payment for the ASAAS platform
     billing_info = user.billing_info
     tomorrow = timezone.now() + timedelta(days=1)
     values = {
@@ -53,6 +84,8 @@ def get_payment_json(user, card_data, payment, ip_addr):
     
 
 def get_customer_json(user):
+    #generates json to make the request to create a
+    #customer for the asaas platform
     if hasattr(user, 'billing_info') is False:
         return None
     billing_info = user.billing_info
@@ -77,6 +110,7 @@ def get_headers():
 
 
 def update_billing_info(request, user):
+    #returns whether operation was successful
     if hasattr(user, 'billing_info'):
         instance = user.billing_info
     else:
@@ -107,10 +141,10 @@ def create_asaas_user(user):
     return billing_info.asaas_id
     
 
-def make_card_payment(card_data, user, course, ip_addr):
+def make_card_payment(card_data, user, course, price, ip_addr):
     payment = Payment.objects.create(
         user=user,
-        amount=course.price,
+        amount=price,
         course=course,
         description=course.name
     )
@@ -184,10 +218,24 @@ def make_course_payment(request, course_id):
         response['Location'] += '?error_msg=' + quote_plus(error_msg)
         return response
     card_data = cc_form.cleaned_data
+    code = request.POST.get('code', '')
+    if code:
+        code_valid, error_msg = check_promo_code_validity(code, course)
+        if code_valid is False:
+            return HttpResponseBadRequest(error_msg)
+        promo_code_obj = PromoCode.objects.filter(
+            code=code,
+            used=False
+        ).first()
+        price = calculate_price_with_promo_code(promo_code_obj, course)
+    else:
+        price = course.price
+    
     payment_worked = make_card_payment(
         card_data,
         user,
         course,
+        price,
         ip_addr
     )
     if payment_worked is False:
@@ -196,33 +244,35 @@ def make_course_payment(request, course_id):
                       'os dados do cartão e tente novamente.')
         response['Location'] += '?error_msg=' + quote_plus(error_msg)
         return response
+    elif promo_code_obj and promo_code_obj.one_time_use:
+            PromoCode.objects.filter(code=code).update(
+                used=True,
+                used_by=user,
+                date_used=datetime.now()
+            )
     register_to_course(user.id, course.id)
     return redirect('course_progress', course_id=course_id)
-
+    
 
 @login_required
-def register_with_promo_code(request, course_id):
-    user = request.user
-    promo_code = request.POST.get('code', '')
+def check_promo_code_discount(request, course_id):
+    code = request.POST.get('code', '')
     course = Course.objects.get(id=course_id)
-    promo_objs = PromoCode.objects.filter(code=promo_code)
-    if promo_objs.filter(used=False).exists():
-        promo_objs.update(
-            used=True,
-            used_by=user,
-           date_used=datetime.now()
-        )
-        register_to_course(user.id, course.id)
-        return redirect('course_progress', course_id=course.id)
-    elif promo_objs.exists():
+    is_valid, error_msg = check_promo_code_validity(code, course)
+    if is_valid is True:
+        promo_code_obj = PromoCode.objects.filter(code=code, used=False).first()
+        price = calculate_price_with_promo_code(promo_code_obj, course)
+        if price <= 0:
+            return 
+            register_to_course(user.id, course.id)
+            return redirect('course_progress', course_id=course.id)
+        TWOPLACES = Decimal(10) ** -2
+        price_str = str(price.quantize(TWOPLACES)).replace('.', ',')
         response = redirect('course_page', course_id=course.id)
-        error_msg = 'Esse código promocional já foi utilizado'
-        response['Location'] += '?error_msg=' + quote_plus(error_msg)
+        response['Location'] += '?price=' + price_str
+        response['Location'] += '&code=' + code
         return response
     else:
         response = redirect('course_page', course_id=course.id)
-        error_msg = 'Código promocional inválido'
         response['Location'] += '?error_msg=' + quote_plus(error_msg)
         return response
-
-
