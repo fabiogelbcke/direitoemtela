@@ -75,9 +75,10 @@ def get_payment_json(user, card_data, payment, ip_addr):
             "cpfCnpj": billing_info.cpf,
             "postalCode": billing_info.postal_code,
             "addressNumber": billing_info.address_no,
-            "addressComplement": billing_info.address,
+            "addressComplement": None, #billing_info.address,
             "mobilePhone": billing_info.phone,
-            "remoteIp": ip_addr
+            "phone": billing_info.phone,
+            #"remoteIp": ip_addr
         }
     }
     return json.dumps(values)
@@ -219,6 +220,7 @@ def make_course_payment(request, course_id):
         return response
     card_data = cc_form.cleaned_data
     code = request.POST.get('code', '')
+    promo_code_obj = None
     if code:
         code_valid, error_msg = check_promo_code_validity(code, course)
         if code_valid is False:
@@ -244,7 +246,7 @@ def make_course_payment(request, course_id):
                       'os dados do cartão e tente novamente.')
         response['Location'] += '?error_msg=' + quote_plus(error_msg)
         return response
-    elif promo_code_obj and promo_code_obj.one_time_use:
+    elif promo_code_obj is not None and promo_code_obj.one_time_use:
             PromoCode.objects.filter(code=code).update(
                 used=True,
                 used_by=user,

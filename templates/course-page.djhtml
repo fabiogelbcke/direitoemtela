@@ -52,23 +52,23 @@
 			<h3 class="payment-form-head">Informações do Cartão</h3>
 			<div class="inline-input">
 			  <p class="paragraph-3">Nome no Cartão</p>
-			  <input class="round-text-field w-input" data-name="card_name" id="card_name" maxlength="256" name="card_name" placeholder="João Silva" required="required" type="text">
+			  <input class="round-text-field w-input" data-name="card_name" autocomplete="cc-name" id="card_name" maxlength="256" name="card_name" placeholder="João Silva" required="required" type="text">
 			</div>
 			<div class="inline-input">
 			  <p class="paragraph-3">Número</p>
-			  <input class="round-text-field w-input" data-name="cc_number" autocomplete="on" id="cc_number" maxlength="256" name="cc_number" placeholder="0000000000000000" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+			  <input class="round-text-field w-input" data-name="cc_number" autocomplete="cc-number" autocomplete="on" id="cc_number" maxlength="256" name="cc_number" placeholder="0000000000000000" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
 			</div>
 			<p class="hidden-main paragraph-6">Validade</p>
 			<div class="div-block-9">
 			  <div class="date-input inline-input">
 			    <p class="hidden-main paragraph-3">Mês</p>
 			    <p class="hidden-mobile paragraph-3">Mês de Expiração</p>
-			    <input class="round-text-field w-input" data-name="expiration_month" id="expiration_date" maxlength="2" name="expiration_month" placeholder="03" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+			    <input class="round-text-field w-input" data-name="expiration_month" auto_complete="cc-exp-month" id="expiration_date" maxlength="2" name="expiration_month" placeholder="03" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
 			  </div>
 			  <div class="date-input inline-input">
 			    <p class="hidden-main paragraph-3">Ano</p>
 			    <p class="hidden-mobile paragraph-3">Ano de Expiração</p>
-			    <input class="round-text-field w-input" data-name="cvv" id="cvv" maxlength="4" name="expiration_year" placeholder="2021" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+			    <input class="round-text-field w-input" data-name="cvv" id="cvv" maxlength="4" auto_complete="cc-exp-year" name="expiration_year" placeholder="2021" required="required" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
 			  </div>
 			</div>
 			<div class="inline-input">
