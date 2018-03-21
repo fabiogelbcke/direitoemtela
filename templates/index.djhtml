@@ -20,7 +20,7 @@
               </div>
 	      <h3 class="promocode-heading">R$ 20 de desconto apenas nos próximos dias!!<br>Código promocional:&nbsp;NEGOCIOSJURIDICOS</h3>
               <div class="div-block-12"><a href="/course/4" class="button strong-text w-button">Quero conferir o Curso!</a>
-		<div class="div-block-13"></div><a href="#" class="button reverse-colors w-button" data-ix="hide-new-course-popup">Leve-me ao site normal</a></div>
+		<div class="div-block-13"></div><button class="button reverse-colors w-button" data-ix="hide-new-course-popup">Leve-me ao site normal</button></div>
             </div>
           </div>
 	</div>
