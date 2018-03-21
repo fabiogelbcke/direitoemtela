@@ -2358,6 +2358,7 @@ img {
   width: 700px;
   height: 400px;
   min-height: 400px;
+  min-width: 700px;
   padding-top: 15px;
   padding-bottom: 15px;
   -webkit-box-orient: vertical;
@@ -4592,7 +4593,7 @@ img {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  padding-left: 30px;
+  padding-left: 20px;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -webkit-flex-direction: column;
