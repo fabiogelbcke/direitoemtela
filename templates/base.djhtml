@@ -38,11 +38,11 @@
     </head>
   {% endblock %}
   <body>
-    <div data-ix="zero-opacity-initially" class="success-notification">
+    <div data-ix="zero-opacity-initially" class="success-notification" style="display:none">
       <p class="success-icon">✔︎</p>
       <div class="success-block-msg" id="success-block-msg">Senha Alterada!</div>
     </div>
-    <div data-ix="zero-opacity-initially" class="error-notification" style="z-index:99999999 !important;">
+    <div data-ix="zero-opacity-initially" class="error-notification" style="z-index:99999999 !important; display:none;">
       <p class="error-logo">!</p>
       <div class="error-block-msg" id="error-block-msg">A sua senha deve ter no mínimo 8 caracteres.</div>
     </div>
