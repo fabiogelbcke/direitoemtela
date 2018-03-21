@@ -4593,7 +4593,7 @@ img {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  padding-left: 20px;
+  padding-left: 25px;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -webkit-flex-direction: column;
@@ -5173,6 +5173,7 @@ html.w-mod-js *[data-ix="hide-on-load"] {
   .base-popup.new-course-popup-base {
     height: 420px;
     min-height: 420px;
+    min-width: 0px;
   }
   .account-image.large {
     min-width: 130px;
