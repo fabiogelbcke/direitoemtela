@@ -340,12 +340,14 @@ img {
 }
 
 .button.strong-text {
+  min-height: 40px;
   border-style: none;
   font-size: 16px;
   font-weight: 500;
 }
 
 .button.reverse-colors {
+  min-height: 40px;
   padding-top: 10px;
   padding-bottom: 10px;
   border: 2px solid #ca8c2e;
@@ -2317,7 +2319,6 @@ img {
   display: -ms-flexbox;
   display: flex;
   height: 100%;
-  padding-bottom: 100px;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -webkit-flex-direction: column;
@@ -2356,6 +2357,7 @@ img {
   display: flex;
   width: 700px;
   height: 400px;
+  min-height: 400px;
   padding-top: 15px;
   padding-bottom: 15px;
   -webkit-box-orient: vertical;
@@ -5169,6 +5171,7 @@ html.w-mod-js *[data-ix="hide-on-load"] {
   }
   .base-popup.new-course-popup-base {
     height: 420px;
+    min-height: 420px;
   }
   .account-image.large {
     min-width: 130px;
@@ -5908,6 +5911,7 @@ html.w-mod-js *[data-ix="hide-on-load"] {
   .base-popup.new-course-popup-base {
     width: 100vw;
     height: 550px;
+    min-height: 550px;
   }
   .course-description-containter {
     padding-top: 10px;
