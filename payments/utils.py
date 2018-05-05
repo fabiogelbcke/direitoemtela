@@ -261,6 +261,7 @@ def check_promo_code_discount(request, course_id):
     code = request.POST.get('code', '')
     course = Course.objects.get(id=course_id)
     is_valid, error_msg = check_promo_code_validity(code, course)
+    user = request.user
     if is_valid is True:
         promo_code_obj = PromoCode.objects.filter(code=code, used=False).first()
         price = calculate_price_with_promo_code(promo_code_obj, course)
