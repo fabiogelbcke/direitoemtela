@@ -265,7 +265,6 @@ def check_promo_code_discount(request, course_id):
         promo_code_obj = PromoCode.objects.filter(code=code, used=False).first()
         price = calculate_price_with_promo_code(promo_code_obj, course)
         if price <= 0:
-            return 
             register_to_course(user.id, course.id)
             return redirect('course_progress', course_id=course.id)
         TWOPLACES = Decimal(10) ** -2
