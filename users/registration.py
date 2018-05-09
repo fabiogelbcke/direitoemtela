@@ -70,6 +70,7 @@ def register(request):
                             password=password)
         login(request, user)
         send_registration_email(user.email)
+        add_to_mailchimp(user)
         next_page_url = request.GET.get('next', '/')
         next_page_url = settings.WEBSITE_URL[:-1] + next_page_url
         return HttpResponse(next_page_url)
