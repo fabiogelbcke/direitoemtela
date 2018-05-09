@@ -8,6 +8,8 @@ from django.urls import reverse
 from django.core.mail import EmailMessage, EmailMultiAlternatives
 from django.template import loader
 
+import requests
+
 from .models import MyUser
 from .forms import UserForm
 from .validators import validate_password
@@ -25,15 +27,19 @@ def send_registration_email(email):
 
 
 def add_to_mailchimp(user):
-    url = ('https://us12.api.mailchimp.com/3.0/lists/'
-        + settings.MAILCHIMP_USER_LIST_ID + '/members/')
-    json_data = ('{"email_address": "'
-                 + user.email
-                 +'","status": "subscribed","merge_fields":{"FNAME": "'
-                 + user.first_name
-                 + '","LNAME": "'
-                 + user.last_name
-                 + '"}}').encode('utf-8')
+    url = (
+        'https://us12.api.mailchimp.com/3.0/lists/'
+        + settings.MAILCHIMP_USER_LIST_ID + '/members/'
+    )
+    json_data = (
+        '{"email_address": "'
+        + user.email
+        +'","status": "subscribed","merge_fields":{"FNAME": "'
+        + user.first_name
+        + '","LNAME": "'
+        + user.last_name
+        + '"}}').encode('utf-8'
+        )
     r = requests.post(
         url,
         auth=(
