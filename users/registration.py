@@ -23,8 +23,27 @@ def send_registration_email(email):
     msg.attach_alternative(content, 'text/html')
     msg.send()
 
+
 def add_to_mailchimp(user):
-    return True
+    url = ('https://us12.api.mailchimp.com/3.0/lists/'
+        + settings.MAILCHIMP_USER_LIST_ID + '/members/')
+    json_data = ('{"email_address": "'
+                 + user.email
+                 +'","status": "subscribed","merge_fields":{"FNAME": "'
+                 + user.first_name
+                 + '","LNAME": "'
+                 + user.last_name
+                 + '"}}').encode('utf-8')
+    r = requests.post(
+        url,
+        auth=(
+            'ILoveBlowjobs',
+            settings.MAILCHIMP_API_KEY
+        ),
+        data=json_data
+    )
+    return r
+
 
 def register(request):
     form = UserForm(request.POST)
