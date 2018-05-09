@@ -445,7 +445,7 @@
                               <tr>
                                 <td valign="top" class="mcnTextContent" style="padding:0px 18px 9px;text-align:center;mso-line-height-rule:exactly;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;color:#656565;font-family:Helvetica;font-size:12px;line-height:150%;">
                                   
-                                  <a href="*|ARCHIVE|*" target="_blank" style="mso-line-height-rule:exactly;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;color:#656565;font-weight:normal;text-decoration:underline;">Visualizar esse email em seu navegador</a>
+                                  <a href="*|ARCHIVE|*" target="_blank" style="mso-line-height-rule:exactly;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;color:#656565;font-weight:normal;text-decoration:underline;">View this email in your browser</a>
                                 </td>
                               </tr>
                             </tbody>
@@ -505,13 +505,15 @@
                               <tr>
                                 <td valign="top" class="mcnTextContent" style="padding-top:0;padding-right:18px;padding-bottom:9px;padding-left:18px;mso-line-height-rule:exactly;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;color:#202020;font-family:Helvetica;font-size:16px;line-height:150%;text-align:left;">
                                   
-                                  
+                                  <h1 style="text-align:center;display:block;margin:0;padding:0;color:#202020;font-family:Helvetica;font-size:26px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:normal;">
+                                    <br>
+                                    {% if videos.count > 1 %}Novos vídeos no site Direito em Tela!{% else %}Novo vídeo no site Direito em Tela!{% endif %}</h1>
                                     <p style="margin-bottom:0;margin-top:10px;padding:0;mso-line-height-rule:exactly;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;color:#202020;font-family:Helvetica;font-size:16px;line-height:150%;text-align:left;">Olá, *|FNAME|*!<br><br>Tem vídeo fresquinho no site Direito em Tela!<br>
                                        </p>
 				    
 				    <ul>
 				      {% for video in videos %}
-					<li><a style="color:#202020"href="{% url 'video_page' slug=video.id %}" <span style="font-size:15px"><strong>{{video.title}}</strong></span></a>
+					<li><span style="font-size:15px"><strong>{{video.title}}</strong></span>
 
 					  <ul>
 					    <li>{{video.description}}</li>
@@ -572,7 +574,7 @@
 				<td valign="top" class="mcnTextContent" style="padding-top:0;padding-right:18px;padding-bottom:9px;padding-left:18px;mso-line-height-rule:exactly;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;color:#202020;font-family:Helvetica;font-size:16px;line-height:150%;text-align:left;">
                                   
 				  <div style="text-align:left;">
-                                    <br><span style="font-size:16px">Abraços,<br><br><a href="https://www.direitoemtela.com.br/" style="mso-line-height-rule:exactly;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;color:#2BAADF;font-weight:normal;text-decoration:underline;"><img height="79" src="https://gallery.mailchimp.com/c4c04a863f1fd936959766468/images/592e60fa-46ae-4848-8364-9ba81d045e9d.png" style="border: 0px initial;width: 80px;height: 79px;margin: 0px;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;" width="80" alt="592e60fa-46ae-4848-8364-9ba81d045e9d.png"></a>
+                                    <br><span style="font-size:16px">Abraços,<br><a href="https://www.direitoemtela.com.br/" style="mso-line-height-rule:exactly;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;color:#2BAADF;font-weight:normal;text-decoration:underline;"><img height="79" src="https://gallery.mailchimp.com/c4c04a863f1fd936959766468/images/592e60fa-46ae-4848-8364-9ba81d045e9d.png" style="border: 0px initial;width: 80px;height: 79px;margin: 0px;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;" width="80" alt="592e60fa-46ae-4848-8364-9ba81d045e9d.png"></a>
                                       <br>
                                       Equipe Direito em Tela<br><a href="https://www.direitoemtela.com.br/" target="_blank" style="mso-line-height-rule:exactly;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;color:#2BAADF;font-weight:normal;text-decoration:underline;">https://www.direitoemtela.com.br/</a></span>
                                       <br>
@@ -777,10 +779,15 @@
 				<td valign="top" class="mcnTextContent" style="padding-top:0;padding-right:18px;padding-bottom:9px;padding-left:18px;mso-line-height-rule:exactly;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;color:#656565;font-family:Helvetica;font-size:12px;line-height:150%;text-align:center;">
                                   
                                   <em>Copyright © *|CURRENT_YEAR|* *|LIST:COMPANY|*, All rights reserved.</em>
+                                  <br>*|IFNOT:ARCHIVE_PAGE|*
+                                  *|LIST:DESCRIPTION|*
+                                  <br>
+                                  <br><strong>Our mailing address is:</strong>
+                                  <br>*|HTML:LIST_ADDRESS_HTML|* *|END:IF|*
                                   <br>
                                   <br>
-                                  Quer mudar como você recebe esses emails?<br>
-                                  Você pode <a href="*|UPDATE_PROFILE|*" style="mso-line-height-rule:exactly;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;color:#656565;font-weight:normal;text-decoration:underline;">atualizar suas preferências</a> ou <a href="*|UNSUB|*" style="mso-line-height-rule:exactly;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;color:#656565;font-weight:normal;text-decoration:underline;">desinscrever-se desta lista</a>.
+                                  Want to change how you receive these emails?<br>
+                                  You can <a href="*|UPDATE_PROFILE|*" style="mso-line-height-rule:exactly;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;color:#656565;font-weight:normal;text-decoration:underline;">update your preferences</a> or <a href="*|UNSUB|*" style="mso-line-height-rule:exactly;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;color:#656565;font-weight:normal;text-decoration:underline;">unsubscribe from this list</a>.
                                   <br>
                                   <br>*|IF:REWARDS|* *|HTML:REWARDS|*
                                   *|END:IF|*
