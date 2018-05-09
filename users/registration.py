@@ -28,7 +28,7 @@ def send_registration_email(email):
 
 def add_to_mailchimp(user):
     url = (
-        'https://us12.api.mailchimp.com/3.0/lists/'
+        'https://us16.api.mailchimp.com/3.0/lists/'
         + settings.MAILCHIMP_USER_LIST_ID + '/members/'
     )
     json_data = (
