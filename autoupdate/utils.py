@@ -2,18 +2,21 @@
 from django.conf import settings
 from django.core import files
 from django.core.mail import mail_admins
+from django.http import HttpResponse
+from django.contrib.admin.views.decorators import staff_member_required
+from django.utils import timezone
+
 from apiclient.errors import HttpError
 from oauth2client.tools import argparser
 from apiclient.discovery import build
-from videos.models import Video, Tag
-from categories.models import Category, VideoCategory, Professor
 from datetime import datetime
-from django.utils import timezone
 import requests
 import tempfile
 import re
-from django.http import HttpResponse
-from django.contrib.admin.views.decorators import staff_member_required
+
+from videos.models import Video, Tag
+from categories.models import Category, VideoCategory, Professor
+from .auto_email import send_new_videos_campaign
 
 def get_new_video_ids():
     youtube = build(
@@ -121,6 +124,7 @@ def clean_video_description(yt_description):
     return description
 
 def create_new_videos(videos_info):
+    videos = []
     for video_info in videos_info:
         video = Video(
             yt_id=video_info['id'],
@@ -129,6 +133,7 @@ def create_new_videos(videos_info):
         video.title = clean_video_title(video_info['title'])
         video.description = clean_video_description(video_info['description'])
         video.save()
+        videos += video
         request = requests.get(video_info['thumbnail_url'], stream=True)
         if request.status_code == requests.codes.ok:
             tempimg = tempfile.NamedTemporaryFile()
@@ -152,6 +157,7 @@ def create_new_videos(videos_info):
             for video_tag in video_info['tags']:
                 tag = Tag.objects.create(video=video,
                                          name=video_tag)
+    return videos
 
 def add_videos_to_category(pl_id, video_ids, youtube):
     page_token = None
@@ -191,9 +197,11 @@ def get_new_videos():
     video_ids = get_new_video_ids()
     if video_ids:
         videos_info = get_videos_info(video_ids)
-        create_new_videos(videos_info)
+        videos = create_new_videos(videos_info)
         category_ids = get_category_ids()
         add_videos_to_categories(category_ids, video_ids)
+        if send_new_videos_campaign(videos) is False:
+            return -1 * len(video_ids)
     return len(video_ids)
 
 @staff_member_required

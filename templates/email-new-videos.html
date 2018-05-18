@@ -506,12 +506,12 @@
                                 <td valign="top" class="mcnTextContent" style="padding-top:0;padding-right:18px;padding-bottom:9px;padding-left:18px;mso-line-height-rule:exactly;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;color:#202020;font-family:Helvetica;font-size:16px;line-height:150%;text-align:left;">
                                   
                                   
-                                    <p style="margin-bottom:0;margin-top:10px;padding:0;mso-line-height-rule:exactly;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;color:#202020;font-family:Helvetica;font-size:16px;line-height:150%;text-align:left;">Olá, *|FNAME|*!<br><br>Tem vídeo fresquinho no site Direito em Tela!<br>
+                                    <p style="margin-bottom:0;margin-top:10px;padding:0;mso-line-height-rule:exactly;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;color:#202020;font-family:Helvetica;font-size:16px;line-height:150%;text-align:left;">Olá, *|FNAME|*!<br><br>Tem vídeo fresquinho no site Direito em Tela!
                                        </p>
 				    
 				    <ul>
 				      {% for video in videos %}
-					<li><a style="color:#202020"href="{% url 'video_page' slug=video.id %}" <span style="font-size:15px"><strong>{{video.title}}</strong></span></a>
+					<li><a style="color:#202020"href="{{WEBSITE_URL}}{% url 'video_page' slug=video.id %}" <span style="font-size:15px;margin-top:10px;"><strong>{{video.title}}</strong></span></a>
 
 					  <ul>
 					    <li>{{video.description}}</li>
@@ -520,7 +520,7 @@
 				      {% endfor %}
 				    </ul>
 
-                                    <p style="text-align:center;margin:10px 0;padding:0;mso-line-height-rule:exactly;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;color:#202020;font-family:Helvetica;font-size:16px;line-height:150%;"><strong>Clique abaixo para visitar o site e assistir {% if videos.count > 1 %}os novos vídeos{% else %}o novo vídeo{% endif %}:</strong>
+                                    <p style="text-align:center;margin:13px 0;padding:0;padding-top:8px;mso-line-height-rule:exactly;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;color:#202020;font-family:Helvetica;font-size:18px;line-height:150%;"><strong>Clique abaixo para visitar o site e assistir {% if videos.count > 1 %}os novos vídeos{% else %}o novo vídeo{% endif %}:</strong>
                                     </p>
                                 </td>
                               </tr>
@@ -569,10 +569,10 @@
                           <table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:100%;min-width:100%;border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;" width="100%" class="mcnTextContentContainer">
                             <tbody>
                               <tr>
-				<td valign="top" class="mcnTextContent" style="padding-top:0;padding-right:18px;padding-bottom:9px;padding-left:18px;mso-line-height-rule:exactly;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;color:#202020;font-family:Helvetica;font-size:16px;line-height:150%;text-align:left;">
+				<td valign="top" class="mcnTextContent" style="padding-top:12px;padding-right:18px;padding-bottom:9px;padding-left:18px;mso-line-height-rule:exactly;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;color:#202020;font-family:Helvetica;font-size:16px;line-height:150%;text-align:left;">
                                   
 				  <div style="text-align:left;">
-                                    <br><span style="font-size:16px">Abraços,<br><br><a href="https://www.direitoemtela.com.br/" style="mso-line-height-rule:exactly;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;color:#2BAADF;font-weight:normal;text-decoration:underline;"><img height="79" src="https://gallery.mailchimp.com/c4c04a863f1fd936959766468/images/592e60fa-46ae-4848-8364-9ba81d045e9d.png" style="border: 0px initial;width: 80px;height: 79px;margin: 0px;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;" width="80" alt="592e60fa-46ae-4848-8364-9ba81d045e9d.png"></a>
+                                    <span style="font-size:16px">Abraços,<br><br><a href="https://www.direitoemtela.com.br/" style="mso-line-height-rule:exactly;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;color:#2BAADF;font-weight:normal;text-decoration:underline;"><img height="79" src="https://gallery.mailchimp.com/c4c04a863f1fd936959766468/images/592e60fa-46ae-4848-8364-9ba81d045e9d.png" style="border: 0px initial;width: 80px;height: 79px;margin: 0px;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;" width="80" alt="592e60fa-46ae-4848-8364-9ba81d045e9d.png"></a>
                                       <br>
                                       Equipe Direito em Tela<br><a href="https://www.direitoemtela.com.br/" target="_blank" style="mso-line-height-rule:exactly;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;color:#2BAADF;font-weight:normal;text-decoration:underline;">https://www.direitoemtela.com.br/</a></span>
                                       <br>

@@ -44,6 +44,8 @@ EMAIL_USE_TLS = True
 
 DEFAULT_FROM_EMAIL = 'Equipe Direito em Tela <fabio@direitoemtela.com.br>'
 
+DEFAULT_REPLY_TO_EMAIL = 'fabio@direitoemtela.com.br'
+
 AUTH_USER_MODEL = 'users.MyUser'
 
 # Application definition
