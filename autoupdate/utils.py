@@ -133,7 +133,7 @@ def create_new_videos(videos_info):
         video.title = clean_video_title(video_info['title'])
         video.description = clean_video_description(video_info['description'])
         video.save()
-        videos += video
+        videos.append(video)
         request = requests.get(video_info['thumbnail_url'], stream=True)
         if request.status_code == requests.codes.ok:
             tempimg = tempfile.NamedTemporaryFile()
