@@ -36,7 +36,7 @@ def create_new_videos_template(videos):
     if r.status_code / 100 != 2:
         mail_admins(
             subject='problem creating template for auto email',
-            message=str(r)
+            message=str(r.status_code) + " " + str(r.content)
         )
         return None
     r_content =  json.loads(r.content)
@@ -75,7 +75,7 @@ def create_new_videos_campaign(template_id):
     if r.status_code / 100 != 2:
         mail_admins(
             subject='problem creating campaign for auto email',
-            message=str(r)
+            message=str(r.status_code) + " " + str(r.content)
         )
         return None
     r_content =  json.loads(r.content)
@@ -96,7 +96,7 @@ def send_campaign(campaign_id):
     if r.status_code / 100 != 2:
         mail_admins(
             subject='problem sending campaign for auto email',
-            message=str(r)
+            message=str(r.status_code) + " " + str(r.content)
         )
         return False
     return True
