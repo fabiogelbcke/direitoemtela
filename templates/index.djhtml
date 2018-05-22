@@ -53,7 +53,7 @@
             </form>
           </div>
         </div>
-	<a class="button w-button" data-ix="hero-button" href="{% url 'categories' %}" style="margin-top:10px">Ver Catálogo de Vídeos</a>
+	`<a class="button w-button" data-ix="hero-button" href="{% url 'categories' %}" style="margin-top:10px">Ver Catálogo de Vídeos</a>
       </div>
     </div>
     <div class="bottom-padding main-section" id="posts">
@@ -123,7 +123,7 @@
 	    {% endfor %}
           </div>
 	</div>
-	<div class="flex-center">
+	<div class="center-flex">
 	  <a class="button w-button" data-ix="hero-button" href="{% url 'categories' %}" style="margin-top:10px">Ver todos os Assuntos</a>
 	</div>
 
