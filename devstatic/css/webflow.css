@@ -395,6 +395,50 @@ textarea.w-select {
 .w-radio-input {
   margin-top: 3px;
 }
+.w-file-upload {
+  display: block;
+  margin-bottom: 5px;
+}
+.w-file-upload-input {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -100;
+}
+.w-file-upload-default {
+  color: #333333;
+  display: flex;
+  margin: auto;
+}
+.w-file-upload-info {
+  vertical-align: middle;
+  line-height: 38px;
+  padding: 0 12px;
+}
+.w-file-upload-label {
+  font-size: 14px;
+  font-weight: normal;
+  cursor: pointer;
+  margin: 0;
+  padding: 8px 12px 8px 40px;
+  border: 1px solid #cccccc;
+  background-color: #fafafa;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMCAxNCI+PHBhdGggZmlsbD0iY3VycmVudENvbG9yIiBkPSJNMTUuOTIgNS4wMmE0LjUgNC41IDAgMCAxIC4wOCA4Ljk1VjE0SDRhNCA0IDAgMSAxIDAtOCA2IDYgMCAwIDEgMTEuOTItLjk4ek0xMSA5aDNsLTQtNS00IDVoM3YyaDJWOXoiLz48L3N2Zz4=");
+  background-position: 12px 50%;
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+}
+.w-icon-file-upload {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}
+.w-icon-file-upload-svg {
+  width: 100%;
+  height: 100%;
+}
 .w-container {
   margin-left: auto;
   margin-right: auto;

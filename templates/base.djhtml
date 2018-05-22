@@ -155,7 +155,7 @@
 	      <a class="nav-link w-nav-link" href="{% url 'categories' %}">VÍDEO-AULAS</a>
 	      <a class="nav-link w-nav-link" href="{% url 'about' %}">Quem somos</a>
 	      {% if not user.is_authenticated %}
-		<a class="button login-button w-button" data-ix="show-login-popup" href="#">Entrar</a>
+		<a class="button login-button w-button" data-ix="show-login-popup" href="#">Entrar / Cadastrar</a>
 	      {% endif %}
 	      <a class="close-x w-hidden-main w-hidden-medium w-hidden-small" href="#">×</a>
             </nav>
