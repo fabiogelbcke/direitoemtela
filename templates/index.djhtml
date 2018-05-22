@@ -52,47 +52,49 @@
               </div>
             </form>
           </div>
-        </div><a class="button w-button" data-ix="hero-button" href="{% url 'categories' %}" style="margin-top:10px">Ver todos os Assuntos</a>
+        </div>
+	<a class="button w-button" data-ix="hero-button" href="{% url 'categories' %}" style="margin-top:10px">Ver Catálogo de Vídeos</a>
       </div>
     </div>
     <div class="bottom-padding main-section" id="posts">
-	<div class="w-container" id="Latest-post">
+      <div class="w-container" id="Latest-post">
         <div class="section-heading">
           <h2 class="section-title">Novos Minicursos de Direito com Certificados e Materiais Extra de Estudo!</h2>
           <div class="med-divider"></div>
 	  <div class="w-dyn-list">
-            <div class="w-dyn-items w-row">
-	      {% for course in courses %}
-		<div class="blog-thumbnail w-col w-col-4 w-dyn-item">
-		  <a class="thumbnail-wrapper w-inline-block" data-ix="blog-thumbnail" href="{% url 'course_page' course_id=course.id %}">
-                    <div class="image-wrapper">
-                      <div class="thumbnail-image" style="background-image: url('{% cropped_thumbnail course 'thumbnail_ratio' max_size='296x150' %}')"></div>
+	    <div class="w-dyn-items w-row">
+		    {% for course in courses %}
+		  <div class="blog-thumbnail w-col w-col-4 w-dyn-item">
+		    <a class="thumbnail-wrapper w-inline-block" data-ix="blog-thumbnail" href="{% url 'course_page' course_id=course.id %}">
+                      <div class="image-wrapper">
+                        <div class="thumbnail-image" style="background-image: url('{% cropped_thumbnail course 'thumbnail_ratio' max_size='296x150' %}')"></div>
                     </div>
-                    <div class="thumbnail-text">
-                      <div class="blog-title">Minicurso de {{course.name}}</div>
-                      <div class="preview-text">{{course.short_description}}</div>
+                      <div class="thumbnail-text">
+                        <div class="blog-title">Minicurso de {{course.name}}</div>
+                        <div class="preview-text">{{course.short_description}}</div>
                     </div>
-                    <div class="thumb-details">
-		      {% with course.professor as professor %}
-			<img class="author-img" src="{% cropped_thumbnail professor 'profile_ratio' max_size='30x30' %}">
-			<div class="author-title">{{professor.name}}</div>
-			<div class="thumbnail-date">{{course.hours}} horas-aula</div>
+                      <div class="thumb-details">
+		        {% with course.professor as professor %}
+			  <img class="author-img" src="{% cropped_thumbnail professor 'profile_ratio' max_size='30x30' %}">
+			  <div class="author-title">{{professor.name}}</div>
+			  <div class="thumbnail-date">{{course.hours}} horas-aula</div>
 		      {% endwith %}
                     </div>
 		  </a>
 		</div>
 	      {% endfor %}
             </div>
-          </div>
+		  </div>
+
         </div>
-	</div>
+      </div>
       <div class="w-container">
         <div class="section-heading">
-          <h2 class="section-title">Assuntos mais Procurados</h2>
-          <div class="med-divider"></div>
-        </div>
+	  <h2 class="section-title">Assuntos mais Procurados</h2>
+	  <div class="med-divider"></div>
+	</div>
         <div class="w-dyn-list">
-          <div class="w-clearfix w-dyn-items w-row">
+	  <div class="w-clearfix w-dyn-items w-row">
 	    {% for category in featured_categories %}
               <div class="blog-thumbnail w-col w-col-4 w-dyn-item">
 		<a class="thumbnail-wrapper w-inline-block" href="{% url 'category_page' category_id=category.id %}" data-ix="blog-thumbnail">
@@ -120,7 +122,11 @@
               </div>
 	    {% endfor %}
           </div>
-        </div>
+	</div>
+	<div class="flex-center">
+	  <a class="button w-button" data-ix="hero-button" href="{% url 'categories' %}" style="margin-top:10px">Ver todos os Assuntos</a>
+	</div>
+
       </div>
     </div>
 {% endblock %}
