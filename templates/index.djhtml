@@ -47,7 +47,7 @@
                   </div>
                 </div>
                 <div class="search-button-column w-col w-col-1 w-col-small-1">
-                  <input class="button hidden-mobile w-button" data-wait="Please wait..." type="submit" value="Buscar">
+                  <input class="button hidden-mobile search w-button" data-wait="Please wait..." type="submit" value="Buscar">
                 </div>
               </div>
             </form>
