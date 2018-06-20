@@ -48,9 +48,9 @@
     </div>
     <div style="display:none;"><div id="showsuccessblockbutton" data-ix="show-success-block">teste</div><div id="showerrorblockbutton" data-ix="show-error-block">teste</div></div>
     {% block hiddencontent %}
-      <div class="login-popup" {% if login is True or request.GET.login_error%}style="display:block;"{% else %}data-ix="hide-on-load"{% endif %}>
+      <div class="login-popup" {% if login is True or request.GET.login_error %}style="display:block;"{% else %}data-ix="hide-on-load"{% endif %}>
 	<div class="modal-wrapper">
-	  <div class="base-popup"><a class="close-popup-button" data-ix="close-login-popup" href="#">Fechar X</a>
+	  <div class="base-popup" ><a class="close-popup-button" data-ix="close-login-popup" href="#">Fechar X</a>
             <div class="social-login-div">
 	      {% if request.GET.next %}
 		<a rel="nofollow" class="facebook-login social-login-button w-inline-block" href="{% url 'social:begin' 'facebook' %}?next={{ request.GET.next }}"></a>
@@ -113,11 +113,11 @@
 	      {% endif %}
 	      {% csrf_token %}
 	      <div class="div-block-4">
-		<input class="form-input name-input w-input" data-name="first_name" id="first_name" maxlength="256" name="first_name" placeholder="Nome" type="text">
+		<input class="form-input name-input w-input" data-name="first_name" id="first_name" maxlength="256" name="first_name" placeholder="Nome" type="text" value="{{request.GET.first_name}}">
 		<div class="gap"></div>
-		<input class="form-input name-input w-input" data-name="last_name" id="last_name" maxlength="256" name="last_name" placeholder="Sobrenome" type="text">
+		<input class="form-input name-input w-input" data-name="last_name" id="last_name" maxlength="256" name="last_name" placeholder="Sobrenome" type="text" value="{{request.GET.last_name}}">
 	      </div>
-	      <input class="form-input w-input" data-name="email" id="email-5" maxlength="256" name="email" placeholder="Email" required="required" type="email">
+	      <input class="form-input w-input" data-name="email" id="email-5" maxlength="256" name="email" placeholder="Email" required="required" type="email" value="{{request.GET.email}}">
 	      <input class="form-input w-input" data-name="password" id="password-2" maxlength="256" name="password" placeholder="Senha" required="required" type="password">
 	      <input class="form-input w-input" data-name="password_confirmation" id="password_confirmation" maxlength="256" name="password_confirmation" placeholder="Confirme a Senha" required="required" type="password">
 	      <p class="light-grey-text" style="margin-top:-5px; margin-bottom:2px;">*A senha deve ter no mínimo 8 caracteres</p>
@@ -127,8 +127,8 @@
             </div>
 			  </div>
 	  {% if request.GET.login_error %}
-	  <div class="login-error-block">
-            <h2 class="login-error-msg-text">{{request.GET.login_error}}</h2>
+	    <div class="login-error-block">
+	      <h2 class="login-error-msg-text">{{request.GET.login_error}}</h2>
 	  </div>
 	  {% endif %}
 	</div>
@@ -217,7 +217,6 @@
 	       window.location.replace(data);
 	   },
 	   error:function(data){
-	       console.log(data);
 	       $("#error-block-msg").text(data.responseText);
 	       $("#showerrorblockbutton").click()
 	   }

@@ -53,6 +53,11 @@ def add_to_mailchimp(user):
 
 def register(request):
     form = UserForm(request.POST)
+    email = request.POST.get('email', '')
+    if MyUser.objects.filter(email=email).exists():
+            return HttpResponseBadRequest(
+                'Este email já está cadastrado no site'
+            )
     if form.is_valid():
         user = form.save(commit=False)
         password = request.POST.get('password', '')
@@ -75,6 +80,7 @@ def register(request):
         next_page_url = settings.WEBSITE_URL[:-1] + next_page_url
         return HttpResponse(next_page_url)
     else:
+        print form.errors
         return HttpResponseBadRequest(
             'Não foi possivel concluir o seu registro. '
             'Verifique seus dados e tente novamente.'
