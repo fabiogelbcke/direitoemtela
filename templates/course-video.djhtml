@@ -143,7 +143,7 @@
 		<div class="reading-pdf" id="reading-pdf"></div>
               </div>
 	      <div class="continue-course-div">
-		<a class="button w-button button-margin" href="{{course_item.reading.reading_file.url}}" download>Baixar em PDF</a><a class="button button-margin w-button" href="{% url 'course_item' course_id=course.id position=course_item.position|add:1 %}">Próximo Passo</a>
+		<a class="button w-button button-margin" href="{{course_item.reading.reading_file.url}}" target="_blank" download="Leitura {{course_item.title}}.pdf">Baixar em PDF</a><a class="button button-margin w-button" href="{% url 'course_item' course_id=course.id position=course_item.position|add:1 %}">Próximo Passo</a>
 	      </div>
 	    {% endif %}
 	    {% if course_item.type == 'video' or course_item.type == 'reading' %}

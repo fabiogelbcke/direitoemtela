@@ -107,12 +107,12 @@
 		<ul style="font-size:17px;">
 		  {% if course.slides_file %}
 		    <li>
-		      <a target="_blank" download="download"  href="{{course.slides_file.url}}" style="color:#4d565d; text-decoration:underline;">Baixar Todos os Slides</a>
+		      <a target="_blank" download="Slides {{course.name}}.zip"  href="{{course.slides_file.url}}" style="color:#4d565d; text-decoration:underline;">Baixar Todos os Slides</a>
 		    </li>
 		  {% endif %}
 		  {% if course.readings_file %}
 		    <li>
-		      <a target="_blank" download="download"  href="{{course.readings_file.url}}"  style="color:#4d565d; text-decoration:underline;">Baixar Todos os Materiais de Leitura</a>
+		      <a target="_blank" download="Materiais de Leitura {{course.name}}.zip"  href="{{course.readings_file.url}}"  style="color:#4d565d; text-decoration:underline;">Baixar Todos os Materiais de Leitura</a>
 		    </li>
 		  {% endif %}
 		</ul>
