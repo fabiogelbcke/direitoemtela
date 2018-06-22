@@ -21,16 +21,11 @@ def generate_username():
     return shortuuid.uuid()
 
 class MyUserManager(BaseUserManager):
-    def create_user(self, email, password=None, username=None):
+    def create_user(self, email='', password=None, username=None):
         """
         Creates and saves a User with the given email, date of
         birth and password.
         """
-
-        print email
-        print username
-        if not email:
-            raise ValueError('Users must have an email address')
 
         username = username if username is not None else self.normalize_email(email)
         user = self.model(
@@ -68,6 +63,9 @@ class MyUser(AbstractBaseUser):
         verbose_name='email address',
         max_length=255,
         unique=True,
+        null=True,
+        blank=True,
+        default=''
     )
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
