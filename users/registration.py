@@ -55,7 +55,7 @@ def register(request):
     form = UserForm(request.POST)
     email = request.POST.get('email', '')
     if (MyUser.objects.filter(email=email).exists()
-        or MyUser.objects.filter(username=email).exists())
+        or MyUser.objects.filter(username=email).exists()):
             return HttpResponseBadRequest(
                 'Este email já está cadastrado no site'
             )
