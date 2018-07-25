@@ -1,5 +1,6 @@
 User-agent: *
 Disallow: /complete/
+Disallow: /login/
 Disallow: /email_login
 Disallow: /register
 Disallow: /admin
