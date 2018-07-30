@@ -27,7 +27,7 @@ def send_registration_confirmation_email(user, course):
     email = user.email
     msg = EmailMultiAlternatives(
         subject=subject,
-        from_email='Equipe Direito em Tela <contato@direitoemtela.com.br>',
+        from_email=DEFAULT_FROM_EMAIL,
         to=[email,]
     )
     msg.attach_alternative(content, 'text/html')
@@ -59,7 +59,8 @@ def register_to_course(user_id, course_id):
                     user=user,
                     question=question,
                 )
-    send_registration_confirmation_email(user, course)
+    if user.email is not None:
+        send_registration_confirmation_email(user, course)
     return True
 
 def unregister_from_course(user_id, course_id):
