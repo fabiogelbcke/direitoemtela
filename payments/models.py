@@ -71,8 +71,11 @@ class Payment(models.Model):
                                     default=None,
                                     blank=True)
     course = models.ForeignKey(Course,
-                               null=True,
-                               default=None)
+                             null=True,
+                             default=None)
+    item_name = models.CharField(max_length=150,
+                                 blank=True,
+                                 default='')
 
 
 class PromoCode(models.Model):
