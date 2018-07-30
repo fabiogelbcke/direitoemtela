@@ -12,7 +12,7 @@ class PromoCodeAdmin(admin.ModelAdmin):
 
 class PaymentAdmin(admin.ModelAdmin):
     model = Payment
-    list_display = ('id', 'user', 'course', 'amount', 'done', 'billing_type')
+    list_display = ('id', 'user', 'item_name', 'amount', 'done', 'billing_type')
 
 
 class BillingInfoAdmin(admin.ModelAdmin):
