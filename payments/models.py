@@ -53,29 +53,56 @@ class CreditCard(models.Model):
 
 class Payment(models.Model):
     id = models.AutoField(primary_key=True)
+
+    COURSE = 'C'
+    SLIDES = 'S'
+    ITEM_TYPE_CHOICES = (
+        (COURSE, 'Course'),
+        (SLIDES, 'Slide Collection')
+    )
+    
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              null=True,
                              default=None,
                              related_name='payments')
-    amount = models.DecimalField(decimal_places=2,
-                                 max_digits=6)
-    billing_type = models.CharField(max_length=20,
-                                    default='CREDIT_CARD')
+    amount = models.DecimalField(
+        decimal_places=2,
+        max_digits=6
+    )
+    billing_type = models.CharField(
+        max_length=20,
+        default='CREDIT_CARD'
+    )
     done = models.BooleanField(default=False)
     failed = models.BooleanField(default=False)
-    description = models.CharField(max_length=80,
-                                   blank=True,
-                                   default='')
-    credit_card = models.ForeignKey(CreditCard,
-                                    null=True,
-                                    default=None,
-                                    blank=True)
-    course = models.ForeignKey(Course,
-                             null=True,
-                             default=None)
-    item_name = models.CharField(max_length=150,
-                                 blank=True,
-                                 default='')
+    description = models.CharField(
+        max_length=80,
+        blank=True,
+        default=''
+    )
+    credit_card = models.ForeignKey(
+        CreditCard,
+        null=True,
+        default=None,
+        blank=True
+    )
+    course = models.ForeignKey(
+        Course,
+        null=True,
+        default=None
+    )
+    item_name = models.CharField(
+        max_length=150,
+        blank=True,
+        default=''
+    )
+    item_type = models.CharField(
+        max_length=30,
+        choices=ITEM_TYPE_CHOICES,
+        default=COURSE
+    )
+                                 
+                                 
 
 
 class PromoCode(models.Model):
