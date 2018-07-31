@@ -6,6 +6,7 @@ from django.template.loader import get_template
 from django.core.mail import EmailMultiAlternatives
 from django.template import loader
 from django.utils import timezone
+from django.conf import settings
 
 from .models import (Course, UserItemRelationship,
                      UserCourseRelationship, CourseItem,
@@ -27,7 +28,7 @@ def send_registration_confirmation_email(user, course):
     email = user.email
     msg = EmailMultiAlternatives(
         subject=subject,
-        from_email=DEFAULT_FROM_EMAIL,
+        from_email=settings.DEFAULT_FROM_EMAIL,
         to=[email,]
     )
     msg.attach_alternative(content, 'text/html')
