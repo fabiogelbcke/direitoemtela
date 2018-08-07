@@ -9,57 +9,99 @@
     <link href="{% static 'css/direitoemtela.webflow.css'%}" rel="stylesheet" type="text/css">
     <style type="text/css" media="print">
      @media print{
-	 @page {size: landscape; margin: 0;}
-	 body {
-	     margin: 1.6cm;
+	 @page {size: landscape; margin-top: 1.6cm;}
+
+     }
+     @media not all and (min-resolution:.001dpcm)
+     {
+	 @supports (-webkit-appearance:none) {
+	     @media print{
+		 @page{margin-top:0;}
+	     }
 	 }
      }
+		 
     </style>
   </head>
-  <body>
-    {% with certificate.user as student %}
-      <div class="certificate" style="margin-left: auto;
-				      margin-right: auto;
-				      max-width: 940px;">
-	<div class="certificate-left-div">
-	  <div>
-	    <h1 class="certificate-title">CERTIFICADO</h1>
-	    <h1 class="heading-10">de conclusão</h1>
-	    <p class="certificate-text">Certificamos que</p>
-	    <h1 class="certificate-big-text">{{student.get_full_name}}</h1>
-	    <p class="certificate-text">completou com sucesso, e com nota suficiente para aprovação, o curso</p>
-	    <h1 class="certificate-big-text">{{certificate.course_name}}</h1>
-	    <p class="certificate-text">oferecido pelo Direito em Tela Instituto de Educação e equivalente a <strong>{{certificate.course_hours}} </strong>horas-aula.</p>
-          </div>
-	  <div>
-	    <p class="paragraph-5">Emitido em</p>
-	    <h2 class="heading-12">{{certificate.completion_date.date}}</h2>
-	    <p class="paragraph-5">Identificador do Certificado</p><a class="certificate-id" href="{{website_url}}{{request.path}}">{{certificate.identifier}}</a>
-          </div>
-	</div>
-	<div class="certificate-right-div"><img class="image-4" src="{% static 'images/dethorizontal.png'%}" width="248">
-	  <div>
-	    <div class="certificate-signature-div"><img class="assinatura" src="{% static 'images/sefora-assinatura-2.png'%}" width="223">
-	      <h4 class="heading-11">Séfora Cristina Schubert</h4>
-	      <p class="paragraph-4">Diretora de Conteúdo
-		<br>Professora</p>
-            </div>
-	    <div class="certificate-signature-div"><img class="assinatura" src="{% static 'images/ricardo-assinatura.png'%}" width="145">
-	      <h4 class="heading-11">Ricardo Pedro Inácio Schubert</h4>
-	      <p class="paragraph-4">Diretor de Conteúdo
-		<br>Professor</p>
-            </div>
-          </div>
+  <body >
+    <div class="certificate-instructions-div" >
+      <div class="modal-wrapper">
+	<div class="w-container">
+          <div class="payment-block">
+            <div class="print-certificate-popup-block">
+              <h1 class="heading-15">Instruções</h1>
+              <h2 class="print-page-warning" style="margin-bottom:25px"><strong>Imprimir:</strong> Para imprimir o certificado corretamente clique no botão abaixo e selecione o modo paisagem (<img src="{% static 'images/landscapeicon.png' %}" alt="landscape icon" width="26" height="26" align="middle">) {% if show_content %}e o modo frente-e-verso {% endif %}antes de imprimir.<br>‍<br><strong>Salvar em PDF:</strong> Para salvar o certificado como PDF clique no botão abaixo, selecione o modo paisagem (<img src="{% static 'images/landscapeicon.png' %}" alt="landscape icon" width="26" height="26" align="middle">) e selecione a opção &quot;Salvar como PDF.&quot;
+	      </h2>
+
+	      <a onclick="printCertificate();" class="button w-button">Imprimir</a></div><a href="#" data-ix="close-trailer" class="close-popup-button">Fechar <strong>X</strong></a></div>
 	</div>
       </div>
+    </div>
+    {% with certificate.user as student %}
+      {% with certificate.course_rel.course as course %}
+	<div class="certificate" style="margin-left: auto;
+					margin-right: auto;
+					max-width: 940px;
+					page-break-after:always;">
+	  <div class="certificate-left-div">
+	    <div>
+	      <h1 class="certificate-title">CERTIFICADO</h1>
+	      <h1 class="heading-10">de conclusão</h1>
+	      <p class="certificate-text">Certificamos que</p>
+	      <h1 class="certificate-big-text">{{student.get_full_name}}</h1>
+	      <p class="certificate-text">completou com sucesso, e com nota suficiente para aprovação, o curso</p>
+	      <h1 class="certificate-big-text">{{certificate.course_name}}</h1>
+	      <p class="certificate-text">oferecido pelo Direito em Tela Instituto de Educação e equivalente a <strong>{{certificate.course_hours}} </strong>horas-aula.</p>
+            </div>
+	    <div>
+	      <p class="paragraph-5">Emitido em</p>
+	      <h2 class="heading-12">{{certificate.completion_date.date}}</h2>
+	      <p class="paragraph-5">Identificador do Certificado</p><a class="certificate-id" href="{{website_url}}{{request.path}}">{{certificate.identifier}}</a>
+            </div>
+
+	  </div>
+	  <div class="certificate-right-div"><img class="image-4" src="{% static 'images/dethorizontal.png'%}" width="248">
+	    <div>
+	      <div class="certificate-signature-div"><img class="assinatura" src="{% static 'images/sefora-assinatura-2.png'%}" width="223">
+		<h4 class="heading-11">Séfora Cristina Schubert</h4>
+		<p class="paragraph-4">Diretora de Conteúdo
+		  <br>Professora</p>
+              </div>
+	      <div class="certificate-signature-div"><img class="assinatura" src="{% static 'images/ricardo-assinatura.png'%}" width="145">
+		<h4 class="heading-11">Ricardo Pedro Inácio Schubert</h4>
+		<p class="paragraph-4">Diretor de Conteúdo
+		  <br>Professor</p>
+              </div>
+            </div>
+	  </div>
+		</div>
+	{% if show_content %}
+	  <div class="certificate" style="margin-left: auto;
+					  margin-right: auto;
+					  max-width: 940px;">
+	    <div class="certificate-full-div">
+              <div class="certificate-back-top-div">
+		<h1 class="certiicate-back-title">Conteúdo Programático</h1><img src="{% static 'images/dethorizontal.png'%}" width="248" class="image-4"></div>
+              <div>
+		<ul class="subjects-list">
+		  {% for topic in course.topics.all %}
+		    <li class="certificate-subject-line">{{topic.text}}</li>
+		  {% endfor %}
+		</ul>
+              </div>
+              <p class="paragraph-9">Para verificar a autenticidade do certificado acesse https://www.direitoemtela.com.br/certificate/{{certificate.identifier}}</p>
+	    </div>
+	    
+	  </div>
+	{% endif %}
+      {% endwith %}
     {% endwith %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js" type="text/javascript"></script>
     <script>
-     $(document).ready(function() {
-	 window.print();
-      });
-     
-
+     function printCertificate(){
+	 $(".certificate-instructions-div").remove();
+	  window.print();
+     }
     </script>
   </body>
 </html>

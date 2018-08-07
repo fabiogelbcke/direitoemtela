@@ -251,7 +251,9 @@ class CertificatePrint(DetailView):
     context_object_name = 'certificate'
     template_name = 'certificate-for-print.djhtml'
 
-    def get_context_data(self, **kwargs):
-        context = super(CertificatePrint, self).get_context_data(**kwargs)
-        return context
     
+class CertificateWithContentPrint(CertificatePrint):
+    def get_context_data(self, **kwargs):
+        context = super(CertificateWithContentPrint, self).get_context_data(**kwargs)
+        context['show_content'] = True
+        return context

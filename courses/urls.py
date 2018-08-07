@@ -3,7 +3,7 @@ from django.views.generic import TemplateView
 
 from .views import (CourseView, dashboard_courses, CourseItemView,
                     CourseProgressView, CertificateView, CertificatePrint,
-                    CoursePaymentView)
+                    CoursePaymentView, CertificateWithContentPrint)
 from .utils import (set_item_done, admin_register_to_course,
                     admin_unregister_from_course)
 from .generate_certificate import send_pdf_email
@@ -34,6 +34,9 @@ urlpatterns = [
     url(r'^printcertificate/(?P<identifier>\w+)$',
         CertificatePrint.as_view(),
         name='print_certificate'),
+    url(r'^printcertificatewithcontent/(?P<identifier>\w+)$',
+        CertificateWithContentPrint.as_view(),
+        name='print_certificate_with_content'),
     url(r'^setitemdone/(?P<item_id>\d+)$',
         set_item_done,
         name='set_item_done'),

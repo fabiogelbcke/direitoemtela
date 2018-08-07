@@ -52,7 +52,7 @@
         </div>
       </div>
     </div>
-    <div class="print-div"><a class="button print-certificate w-button" href="{% url 'print_certificate' identifier=certificate.identifier%}">Imprimir Cerficado</a><a class="button print-certificate w-button" href="{% url 'print_certificate' identifier=certificate.identifier %}">Imprimir com Conteúdo</a></div>
+    <div class="print-div"><a class="button print-certificate w-button" href="{% url 'print_certificate' identifier=certificate.identifier%}">Imprimir Cerficado</a><a class="button print-certificate w-button" href="{% url 'print_certificate_with_content' identifier=certificate.identifier %}">Imprimir com Conteúdo</a></div>
     <div class="share-certificate-div">
       <p class="certificate-text">Adicione o certificado ao seu LinkedIn para mostrar a todos que você domina esse assunto!
         <br>Basta clicar no botão e preencher as informações como indicado abaixo:</p>

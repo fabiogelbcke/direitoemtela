@@ -3720,8 +3720,8 @@ img {
   font-weight: 500;
 }
 
-.heading-10 {
-  margin-bottom: 30px;
+.certiicate-back-title {
+  margin-bottom: 0px;
   font-size: 55px;
   font-weight: 300;
 }
@@ -4650,6 +4650,165 @@ img {
   font-weight: 900;
 }
 
+.div-block-15 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.bold-text-2 {
+  font-weight: 400;
+}
+
+.paragraph-9 {
+  font-size: 13px;
+}
+
+.certificate-full-div {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.certificate-back-top-div {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.column-right-divider {
+  border-right: 1px solid #000;
+}
+
+.subjects-list {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 370px;
+  margin-bottom: 0px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+}
+
+.certificate-subject-line {
+  width: 50%;
+  font-weight: 500;
+}
+
+.print-certificate-popup-block {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 55vw;
+  height: auto;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.heading-14 {
+  padding-right: 21px;
+  padding-left: 21px;
+  text-align: justify;
+}
+
+.print-page-warning {
+  margin-top: 10px;
+  margin-bottom: 25px;
+  padding-right: 60px;
+  padding-left: 60px;
+  font-family: Gotham, sans-serif;
+  font-size: 17px;
+  line-height: 25px;
+  font-weight: 400;
+  text-align: left;
+}
+
+.heading-15 {
+  margin-bottom: 0px;
+  font-size: 25px;
+}
+
+.certificate-instructions-div {
+  display: block;
+}
+
+.landscape-symbol-text {
+  margin-bottom: 0px;
+  padding-right: 5px;
+  padding-left: 60px;
+}
+
+.landscape-icon-div {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  margin-bottom: 20px;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.landscape-symbol {
+  margin-bottom: 0px;
+}
+
 html.w-mod-js *[data-ix="navbar"] {
   opacity: 0;
 }
@@ -4968,6 +5127,12 @@ html.w-mod-js *[data-ix="hide-on-load"] {
   .progress-bar-arrow {
     width: 18px;
     height: 26px;
+  }
+  .print-certificate-popup-block {
+    width: 80vw;
+  }
+  .print-page-warning {
+    font-size: 17px;
   }
 }
 
@@ -6142,7 +6307,7 @@ html.w-mod-js *[data-ix="hide-on-load"] {
     -ms-flex-align: center;
     align-items: center;
   }
-  .heading-10 {
+  .certiicate-back-title {
     margin-bottom: 15px;
     font-size: 33px;
     text-align: center;
@@ -6249,6 +6414,12 @@ html.w-mod-js *[data-ix="hide-on-load"] {
   }
   .promocode-heading {
     margin-bottom: 5px;
+    font-size: 16px;
+  }
+  .print-certificate-popup-block {
+    width: 90vw;
+  }
+  .print-page-warning {
     font-size: 16px;
   }
 }
