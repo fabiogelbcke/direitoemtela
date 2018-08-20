@@ -47,7 +47,7 @@
 		<div class="w-tab-content">
                   <div data-w-tab="Tab 1" class="w--tab-active w-tab-pane">
 		    <div class="">
-		      <form action="{% url 'pay_course' course_id=course.id %}" method="POST" id="cc-form">
+		      <form action="{% url 'pay_course'  course_id=course.id %}" method="POST" id="cc-form">
 			{% csrf_token %}
 			<h3 class="payment-form-head">Informações do Cartão</h3>
 			<div class="inline-input">
