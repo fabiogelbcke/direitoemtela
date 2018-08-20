@@ -77,7 +77,7 @@
 		  </div>
 		  <h2 class="question-title">{{question.text}}</h2>
 		  <div class="question-buttons-div">
-		    <h3 class="heading-no-margin" id="pre-answer-text">Selecione {% if question.answer_type == 'correct' %}a opção CORRETA abaixo{% elif question.answer_type == 'incorrect' %}a opção INCORRETA abaixo{% elif question.answer_type == 'truthorfalse' %}VERDADEIRO ou FALSO{% endif %}</h3>
+		    <h3 class="heading-no-margin" id="pre-answer-text">Selecione {% if question.answer_type == 'correct' %}a opção CORRETA abaixo{% elif question.answer_type == 'incorrect' %}a opção INCORRETA abaixo{% elif question.answer_type == 'tof' %}VERDADEIRO ou FALSO{% endif %}</h3>
 		    <div class="div-block-2 hidden" id="correct-answer-div">
                       <div class="correct-sign"><img src="{% static 'images/white-checkicon.png'%}">
                       </div>

@@ -30,7 +30,7 @@ class Question(models.Model):
     QUESTION_TYPE_CHOICES = (
         ('correct', 'correta'),
         ('incorrect', 'incorreta'),
-        ('vorf', 'V ou F'),
+        ('tof', 'V ou F'),
     )
     
     id = models.AutoField(primary_key=True)
