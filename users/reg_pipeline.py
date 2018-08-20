@@ -3,6 +3,9 @@ from django.core.files import File
 from django.core.files.temp import NamedTemporaryFile
 import shortuuid
 
+from social_core.pipeline.user import get_username, user_details
+
+
 def generate_filename():
     shortuuid.set_alphabet("aaaaabcdefgh1230123")
     return shortuuid.uuid()
@@ -34,3 +37,7 @@ def generate_username(strategy, details, backend, user=None, *args, **kwargs):
     if details.get('email'):
         return {'username': details['email']}
     return get_username(strategy, details, backend, user, args, kwargs)
+
+def get_details_if_new_user(strategy, details, user=None, *args, **kwargs):
+    if (kwargs['is_new']):
+        user_details(strategy, details, user, args, kwargs)

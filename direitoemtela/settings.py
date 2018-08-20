@@ -110,8 +110,8 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.user.create_user',
     'social_core.pipeline.social_auth.associate_user',
     'social_core.pipeline.social_auth.load_extra_data',
-    'social_core.pipeline.user.user_details',
     'social_core.pipeline.social_auth.associate_by_email',  # <--- enable this one
+    'users.reg_pipeline.get_details_if_new_user',
     'users.reg_pipeline.get_avatar',
 )
 
