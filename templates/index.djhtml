@@ -75,8 +75,8 @@
                     </div>
                       <div class="thumb-details">
 		        {% with course.professor as professor %}
-			  <img class="author-img" src="{% cropped_thumbnail professor 'profile_ratio' max_size='30x30' %}">
-			  <div class="author-title">{{professor.name}}</div>
+			  <img class="author-img" src="{% static  'images/price-tag.png' %}">
+			  <div class="author-title">R${{course.price}}</div>
 			  <div class="thumbnail-date">{{course.hours}} horas-aula</div>
 		      {% endwith %}
                     </div>
