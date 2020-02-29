@@ -75,7 +75,7 @@
                     </div>
                       <div class="thumb-details">
 		        {% with course.professor as professor %}
-			  <img class="author-img" src="{% static  'images/price-tag.png' %}">
+			  <img  src="{% static  'images/price-tag.png' %}">
 			  <div class="author-title">R${{course.price}}</div>
 			  <div class="thumbnail-date">{{course.hours}} horas-aula</div>
 		      {% endwith %}
