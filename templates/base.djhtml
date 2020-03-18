@@ -10,6 +10,7 @@
       <meta charset="utf-8">
       <title>Direito em Tela</title>
       <meta content="width=device-width, initial-scale=1" name="viewport">
+      <script data-ad-client="ca-pub-5140371775297482" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
       <meta name="google-site-verification" content="BDBwvCHLEsJmylLv6uU1SQ_rFYAWqX8Yy17jvTl_V2E" />
       {% block tags %}
       {% endblock %}
