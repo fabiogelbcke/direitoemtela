@@ -42,7 +42,7 @@ ptyprocess==0.5.1
 pyasn1==0.1.9
 pyasn1-modules==0.0.8
 pygeoip==0.3.2
-Pygments==2.2.0
+Pygments==2.7.4
 PyJWT==1.4.2
 PyMySQL==0.6.7
 pyparsing==2.2.0
